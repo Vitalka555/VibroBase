@@ -2314,6 +2314,47 @@ QHash<int, QByteArray> ListModelIzmer::roleNames() const {
     roles[bazaizmer_vmaxRole] = "Bazaizmervmax";
     roles[bazaizmer_sostRole] = "Bazaizmersost";
     roles[bazaizmer_1vRole] = "Bazaizmer1v";
+    roles[bazaizmer_1pRole] = "Bazaizmer1p";
+    roles[bazaizmer_1oRole] = "Bazaizmer1o";
+    roles[bazaizmer_2vRole] = "Bazaizmer2v";
+    roles[bazaizmer_2pRole] = "Bazaizmer2p";
+    roles[bazaizmer_2oRole] = "Bazaizmer2o";
+    roles[bazaizmer_3vRole] = "Bazaizmer3v";
+    roles[bazaizmer_3pRole] = "Bazaizmer3p";
+    roles[bazaizmer_3oRole] = "Bazaizmer3o";
+    roles[bazaizmer_4vRole] = "Bazaizmer4v";
+    roles[bazaizmer_4pRole] = "Bazaizmer4p";
+    roles[bazaizmer_4oRole] = "Bazaizmer4o";
+    roles[bazaizmer_5vRole] = "Bazaizmer5v";
+    roles[bazaizmer_5pRole] = "Bazaizmer5p";
+    roles[bazaizmer_5oRole] = "Bazaizmer5o";
+    roles[bazaizmer_6vRole] = "Bazaizmer6v";
+    roles[bazaizmer_6pRole] = "Bazaizmer6p";
+    roles[bazaizmer_6oRole] = "Bazaizmer6o";
+    roles[bazaizmer_7vRole] = "Bazaizmer7v";
+    roles[bazaizmer_7pRole] = "Bazaizmer7p";
+    roles[bazaizmer_7oRole] = "Bazaizmer7o";
+    roles[bazaizmer_8vRole] = "Bazaizmer8v";
+    roles[bazaizmer_8pRole] = "Bazaizmer8p";
+    roles[bazaizmer_8oRole] = "Bazaizmer8o";
+    roles[bazaizmer_t1Role] = "Bazaizmert1";
+    roles[bazaizmer_t2Role] = "Bazaizmert2";
+    roles[bazaizmer_t3Role] = "Bazaizmert3";
+    roles[bazaizmer_t4Role] = "Bazaizmert4";
+    roles[bazaizmer_t5Role] = "Bazaizmert5";
+    roles[bazaizmer_t6Role] = "Bazaizmert6";
+    roles[bazaizmer_t7Role] = "Bazaizmert7";
+    roles[bazaizmer_t8Role] = "Bazaizmert8";
+    roles[bazaizmer_rezhimRole] = "Bazaizmerrezhim";
+    roles[bazaizmer_tipizmerRole] = "Bazaizmertipizmer";
+    roles[bazaizmer_normedRole] = "Bazaizmernormed";
+    roles[bazaizmer_normRole] = "Bazaizmernorm";
+    roles[bazaizmer_qRole] = "Bazaizmerq";
+    roles[bazaizmer_pRole] = "Bazaizmerp";
+    roles[bazaizmer_laes2Role] = "Bazaizmerlaes2";
+    roles[bazaizmer_ateRole] = "Bazaizmerate";
+    roles[bazaizmer_primRole] = "Bazaizmerprim";
+    roles[bazaizmer_kksRole] = "Bazaizmerkks";
 
     return roles;
 }
@@ -2324,9 +2365,13 @@ void ListModelIzmer::updateModel()
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString kks_id=(stack->property("baza_id")).toString();
     QString rezhim_id=(stack->property("rezhim_id")).toString();
-    QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;    
+    QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;
+    QString kks_filter = " AND BazaIzmereni.id_Baza = " + kks_id;
     if(rezhim_id == ""){
         rezhim_filter = "";
+    }
+    if(kks_id == ""){
+        kks_filter = "";
     }
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), "
@@ -2365,8 +2410,8 @@ void ListModelIzmer::updateModel()
                    "(SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim), "
                    "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia), "
                    "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.'ЛАЭС-2', "
-                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания"
-         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' AND BazaIzmereni.id_Baza = " + kks_id + rezhim_filter +
+                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza)"
+         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
 }
 

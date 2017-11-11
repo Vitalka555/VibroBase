@@ -1016,7 +1016,17 @@ public:
         bazaizmer_t5Role,
         bazaizmer_t6Role,
         bazaizmer_t7Role,
-        bazaizmer_t8Role
+        bazaizmer_t8Role,
+        bazaizmer_rezhimRole,
+        bazaizmer_tipizmerRole,
+        bazaizmer_normedRole,
+        bazaizmer_normRole,
+        bazaizmer_qRole,
+        bazaizmer_pRole,
+        bazaizmer_laes2Role,
+        bazaizmer_ateRole,
+        bazaizmer_primRole,
+        bazaizmer_kksRole
 
     };
 

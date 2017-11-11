@@ -23,7 +23,7 @@ ApplicationWindow {
     signal qmlSignal_rezhim()
     signal qmlSignal_bazaizmer()
     signal qmlFilterBO()
-    property string baza_id
+    property string baza_id: ""
     property int index: 0
     property int newindex: -1
 
@@ -51,6 +51,8 @@ ApplicationWindow {
                 visible: false                
                 onClicked: {
                         stackView.replace(bo)
+                    stackView.baza_id = ""
+                    qmlSignal_baza_id()
                     tool_left.visible = true
                     tool_left1.visible = false
                 }
@@ -117,6 +119,8 @@ ApplicationWindow {
                         stackView.push(bo)
                     }
                     if (listView.currentIndex==1){
+//                        stackView.baza_id = ""
+//                        qmlSignal_bazaizmer()
                         stackView.push(bi)
                     }
                     if (listView.currentIndex==2){
@@ -150,7 +154,7 @@ ApplicationWindow {
         property string zd: ""
         property string id_tipmeh: ""
 
-        property string baza_id
+        property string baza_id: ""
         property string rezhim_id
         property double maxlevel
         property int bazaizm_id

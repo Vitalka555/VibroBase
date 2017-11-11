@@ -1,0 +1,22 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>BO.qml</file>
+        <file>BI.qml</file>
+        <file>Stat.qml</file>
+        <file>CreatBO.qml</file>
+        <file>OpenBO.qml</file>
+        <file>BB.qml</file>
+        <file>Images/back.png</file>
+        <file>Images/drawer.png</file>
+        <file>Images/icon_64-.png</file>
+        <file>Images/icon_64+.png</file>
+        <file>Images/menu.png</file>
+        <file>Images/nophoto.jpg</file>
+        <file>Images/filter.png</file>
+        <file>Images/filter_white.png</file>
+        <file>Images/poisk.png</file>
+        <file>CreatBI.qml</file>
+    </qresource>
+</RCC>

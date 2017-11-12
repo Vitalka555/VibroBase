@@ -18,5 +18,6 @@
         <file>Images/filter_white.png</file>
         <file>Images/poisk.png</file>
         <file>CreatBI.qml</file>
+        <file>OpenBI.qml</file>
     </qresource>
 </RCC>

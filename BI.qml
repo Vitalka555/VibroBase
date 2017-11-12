@@ -30,7 +30,8 @@ Item {
                 onClicked: {
                     stackView.replace(creatBI)
                     tool_left.visible = false
-                    tool_left1.visible = true
+                    tool_left1.visible = false
+                    tool_left2.visible = true
                 }
             }
             ToolButton {
@@ -90,10 +91,29 @@ Item {
                 }
             }
             Rectangle {
-                id: rec_kks
+                id: rec_date
                 anchors.top: parent.top
                 anchors.topMargin: 5
                 anchors.left: rec_number.right
+                anchors.leftMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                width: parent.width*3/20
+                radius: 10
+                color: "#03a9f5"
+                Text {
+                    id: text_date
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 15
+                    text: qsTr("Дата и время")
+                }
+            }
+            Rectangle {
+                id: rec_kks
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.left: rec_date.right
                 anchors.leftMargin: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
@@ -105,33 +125,14 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 15
-                    text: qsTr("Дата и время")
-                }
-            }
-            Rectangle {
-                id: rec_ceh
-                anchors.top: parent.top
-                anchors.topMargin: 5
-                anchors.left: rec_kks.right
-                anchors.leftMargin: 5
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 5
-                width: parent.width*3/20
-                radius: 10
-                color: "#03a9f5"
-                Text {
-                    id: text_ceh
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                    font.pixelSize: 15
                     text: qsTr("KKS")
                 }
             }
             Rectangle {
-                id: rec_zd
+                id: rec_vmax
                 anchors.top: parent.top
                 anchors.topMargin: 5
-                anchors.left: rec_ceh.right
+                anchors.left: rec_kks.right
                 anchors.leftMargin: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
@@ -139,7 +140,7 @@ Item {
                 radius: 10
                 color: "#03a9f5"
                 Text {
-                    id: text_zd
+                    id: text_vmax
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 15
@@ -147,10 +148,48 @@ Item {
                 }
             }
             Rectangle {
-                id: rec_pom
+                id: rec_ved
                 anchors.top: parent.top
                 anchors.topMargin: 5
-                anchors.left: rec_zd.right
+                anchors.left: rec_vmax.right
+                anchors.leftMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                width: parent.width/20
+                radius: 10
+                color: "#03a9f5"
+                Text {
+                    id: text_ved
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 15
+                    text: qsTr("Vэ/д")
+                }
+            }
+            Rectangle {
+                id: rec_vagr
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.left: rec_ved.right
+                anchors.leftMargin: 5
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+                width: parent.width/20
+                radius: 10
+                color: "#03a9f5"
+                Text {
+                    id: text_vagr
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 15
+                    text: qsTr("Vагр")
+                }
+            }
+            Rectangle {
+                id: rec_rezhim
+                anchors.top: parent.top
+                anchors.topMargin: 5
+                anchors.left: rec_vagr.right
                 anchors.leftMargin: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
@@ -158,7 +197,7 @@ Item {
                 radius: 10
                 color: "#03a9f5"
                 Text {
-                    id: text_pom
+                    id: text_rezhim
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 15
@@ -169,7 +208,7 @@ Item {
                 id: rec_name
                 anchors.top: parent.top
                 anchors.topMargin: 5
-                anchors.left: rec_pom.right
+                anchors.left: rec_rezhim.right
                 anchors.leftMargin: 5
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
@@ -231,7 +270,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    currentIndex: window.index
+                    currentIndex: window.index_izmer
                     //highlight: highlightBar
                     //highlightFollowsCurrentItem: false
                     ScrollBar.vertical: ScrollBar { id: vbar;
@@ -291,7 +330,7 @@ Item {
                             anchors.top: parent.top
                             anchors.left: rec1.right
                             anchors.leftMargin: 5
-                            width: rec_kks.width
+                            width: rec_date.width
                             height: flick.h
                             border.color: "#3E65FF"
                             radius: 10
@@ -318,7 +357,7 @@ Item {
                             anchors.top: parent.top
                             anchors.left: rec2.right
                             anchors.leftMargin: 5
-                            width: rec_ceh.width
+                            width: rec_kks.width
                             height: flick.h
                             border.color: "#3E65FF"
                             radius: 10
@@ -344,12 +383,12 @@ Item {
                             anchors.top: parent.top
                             anchors.left: rec3.right
                             anchors.leftMargin: 5
-                            width: rec_zd.width
+                            width: rec_vmax.width
                             height: flick.h
                             border.color: "#3E65FF"
                             radius: 10
                             opacity: 0.8
-                            color: item_table.col
+                            //color: item_table.col
                             RowLayout {
                                 id: lay4
                                 anchors.fill: parent
@@ -370,11 +409,12 @@ Item {
                             anchors.top: parent.top
                             anchors.left: rec4.right
                             anchors.leftMargin: 5
-                            width: rec_pom.width
+                            width: rec_ved.width
                             height: flick.h
                             border.color: "#3E65FF"
                             radius: 10
                             opacity: 0.8
+                            property string sost: Bazaizmersost
                             color: item_table.col
                             RowLayout {
                                 id: lay5
@@ -387,7 +427,31 @@ Item {
                                     wrapMode: Text.WordWrap
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
-                                    text: Bazaizmerrezhim
+                                    text: Bazaizmernormed
+                                }
+                            }
+                            Component.onCompleted: {
+                                if(rec5.sost=="Норма"){
+//                                    rec1.color = "lightgreen"
+//                                    rec2.color = "lightgreen"
+//                                    rec3.color = "lightgreen"
+                                    rec4.color = "lightgreen"
+//                                    rec5.color = "lightgreen"
+//                                    rec6.color = "lightgreen"
+//                                    rec7.color = "lightgreen"
+//                                    rec8.color = "lightgreen"
+//                                    rec9.color = "lightgreen"
+                                }
+                                if(rec5.sost=="Превышение"){
+//                                    rec1.color = "lightcoral"
+//                                    rec2.color = "lightcoral"
+//                                    rec3.color = "lightcoral"
+                                    rec4.color = "lightcoral"
+//                                    rec5.color = "lightcoral"
+//                                    rec6.color = "lightcoral"
+//                                    rec7.color = "lightcoral"
+//                                    rec8.color = "lightcoral"
+//                                    rec9.color = "lightcoral"
                                 }
                             }
                         }
@@ -395,6 +459,58 @@ Item {
                             id: rec6
                             anchors.top: parent.top
                             anchors.left: rec5.right
+                            anchors.leftMargin: 5
+                            width: rec_vagr.width
+                            height: flick.h
+                            border.color: "#3E65FF"
+                            radius: 10
+                            opacity: 0.8
+                            color: item_table.col
+                            RowLayout {
+                                id: lay6
+                                anchors.fill: parent
+                                Text {
+                                    id: text6
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: parent.width
+                                    wrapMode: Text.WordWrap
+                                    font.pixelSize: 15
+                                    color: "#2e2efb"//"#3E65FF"
+                                    text: Bazaizmernorm
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec7
+                            anchors.top: parent.top
+                            anchors.left: rec6.right
+                            anchors.leftMargin: 5
+                            width: rec_rezhim.width
+                            height: flick.h
+                            border.color: "#3E65FF"
+                            radius: 10
+                            opacity: 0.8
+                            color: item_table.col
+                            RowLayout {
+                                id: lay7
+                                anchors.fill: parent
+                                Text {
+                                    id: text7
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: parent.width
+                                    wrapMode: Text.WordWrap
+                                    font.pixelSize: 15
+                                    color: "#2e2efb"//"#3E65FF"
+                                    text: Bazaizmerrezhim
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec8
+                            anchors.top: parent.top
+                            anchors.left: rec7.right
                             anchors.leftMargin: 5
                             width: rec_name.width
                             height: flick.h
@@ -404,7 +520,7 @@ Item {
                             color: item_table.col
 
                                 Text {
-                                    id: text6
+                                    id: text8
 //                                    anchors.horizontalCenter: parent.horizontalCenter
                                     anchors.verticalCenter: parent.verticalCenter
                                     width: rec_name.width-10
@@ -426,9 +542,9 @@ Item {
                             }
                         }
                         Rectangle {
-                            id: rec7
+                            id: rec9
                             anchors.top: parent.top
-                            anchors.left: rec6.right
+                            anchors.left: rec8.right
                             anchors.leftMargin: 5
                             width: rec_name2.width
                             height: flick.h
@@ -438,7 +554,7 @@ Item {
                             color: item_table.col
 
                                 Text {
-                                    id: text7
+                                    id: text9
 //                                    anchors.horizontalCenter: parent.horizontalCenter
                                     anchors.verticalCenter: parent.verticalCenter
                                     width: rec_name2.width-10
@@ -466,13 +582,14 @@ Item {
                             onClicked: list.currentIndex = model.index//model0.index()
                             onDoubleClicked: {
                                 list.currentIndex = model.index
-                                window.index = list.currentIndex
-                                stackView.baza_id = model0.getId(list.currentIndex)
-                                console.log("id= ", stackView.baza_id)
-                                qmlSignal_baza_id()
-                                    stackView.replace(openBO)
+                                window.index_izmer = list.currentIndex
+                                stackView.bazaizm_id = model_izmer.getId(list.currentIndex)
+                                console.log("id= ", stackView.bazaizm_id)
+                                //qmlSignal_baza_id()
+                                    stackView.replace(openBI)
                                     tool_left.visible = false
-                                    tool_left1.visible = true
+                                    tool_left1.visible = false
+                                tool_left2.visible = true
                                 }
                         }
                     }//item_table
@@ -488,10 +605,10 @@ Item {
                         anchors.rightMargin: 5
                         //width: window.width-10
                         height: flick.h
-                        color: "lightgrey"
+                        color: "#03a9f5"
                         border.color: "transparent"
                         radius: 10
-                        x: list.currentItem.x
+                        //x: list.currentItem.x
                         y: list.currentItem.y
                         //Behavior on y { SpringAnimation { spring: 100; damping: 1 } }
 

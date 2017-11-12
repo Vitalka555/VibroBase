@@ -25,6 +25,7 @@ ApplicationWindow {
     signal qmlFilterBO()
     property string baza_id: ""
     property int index: 0
+    property int index_izmer: 0
     property int newindex: -1
 
     header: ToolBar {
@@ -61,6 +62,25 @@ ApplicationWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 30                    
+                    text: qsTr("<")
+                }
+            }
+            ToolButton {
+                id: tool_left2
+                visible: false
+                onClicked: {
+                        stackView.replace(bi)
+                    stackView.bazaizm_id = ""
+                    //qmlSignal_baza_id()
+                    tool_left.visible = true
+                    tool_left1.visible = false
+                    tool_left2.visible = false
+                }
+                Text {
+                    id: tool_text2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 30
                     text: qsTr("<")
                 }
             }
@@ -202,8 +222,14 @@ Component.onCompleted: {
         }
         Component {
             id: creatBI
-            CreatBO {
+            CreatBI {
                 id: creatBI_0
+            }
+        }
+        Component {
+            id: openBI
+            OpenBI {
+                id: openBI_0
             }
         }
     }

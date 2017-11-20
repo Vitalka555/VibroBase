@@ -1,4 +1,4 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QSqlQueryModel>
@@ -9,8 +9,9 @@
 //#include <QtQml/QQmlEngine>
 //#include <QtQuick/QQuickView>
 
-
-
+#include <QSplashScreen>
+#include <QPainter>
+#include <QTime>
 
 #include "database.h"
 #include "listmodel.h"
@@ -18,14 +19,58 @@
 #include "datamapper.h"
 #include "copyfile.h"
 
+static const int LOAD_TIME_MSEC = 5 * 1000;
+static const int PROGRESS_X_PX = 210;
+static const int PROGRESS_Y_PX = 200;
+static const int PROGRESS_WIDTH_PX = 230;
+static const int PROGRESS_HEIGHT_PX = 28;
+
 int main(int argc, char *argv[])
 {
     //QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     QQuickStyle::setStyle("Material");
+
+    QPixmap pix( QDir::currentPath() + "/images/splash.png" );
+        QSplashScreen splashScreen( pix );
+        splashScreen.show();
+        app.processEvents();
+
+        QTime time;
+        time.start();
+        while( time.elapsed() < LOAD_TIME_MSEC ) {
+            const int progress = static_cast< double >( time.elapsed() ) / LOAD_TIME_MSEC * 100.0;
+            splashScreen.showMessage(
+                QObject::trUtf8( "Загружено: %1%" ).arg( progress ),
+                Qt::AlignBottom | Qt::AlignRight
+            );
+
+            QPainter painter;
+            painter.begin( &pix );
+
+            painter.fillRect(
+                PROGRESS_X_PX,
+                PROGRESS_Y_PX,
+                progress / 100.0 * PROGRESS_WIDTH_PX,
+                PROGRESS_HEIGHT_PX, Qt::black
+            );
+
+            painter.end();
+
+            splashScreen.setPixmap( pix );
+            app.processEvents();
+        }
+
+//        QLabel w;
+//        w.resize( 200, 200 );
+//        w.setText( QObject::trUtf8( "Приложение запущено!" ) );
+//        w.setAlignment( Qt::AlignHCenter | Qt::AlignVCenter );
+//        w.show();
+
+        splashScreen.finish( &splashScreen );
 
     QQmlApplicationEngine engine;
     DataBase database;
@@ -64,6 +109,7 @@ int main(int argc, char *argv[])
     DataMapper *mapper_maxlevel = new DataMapper();
     //mapper->setModel(model_openBO);
     DataMapper *mapper_izmer = new DataMapper();
+    DataMapper *mapper_openBI = new DataMapper();
 
     // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
     //engine.rootContext()->setContextProperty("model0", model0);
@@ -96,6 +142,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mapper", mapper);
     engine.rootContext()->setContextProperty("mapper_maxlevel", mapper_maxlevel);
     engine.rootContext()->setContextProperty("mapper_izmer", mapper_izmer);
+    engine.rootContext()->setContextProperty("mapper_openBI", mapper_openBI);
     engine.rootContext()->setContextProperty("database", &database);
     //engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
     //engine.setOfflineStoragePath("D:\\Projects\\build-V3_0-Desktop_Qt_5_10_0_MinGW_32bit4-Debug\\debug\\sqlite.db");
@@ -112,6 +159,8 @@ ListModelOpenBO *model_openBO = new ListModelOpenBO(root);
 ListModel1V *model_1V = new ListModel1V(root);
 ListModelMaxLevel *model_maxlevel = new ListModelMaxLevel(root);
 ListModelIzmer *model_izmer = new ListModelIzmer(root);
+ListModelIzmer *model_openBI = new ListModelIzmer(root);
+
 ListModel *model0 = new ListModel(root);
 
         copyfile *copy= new copyfile(root);
@@ -126,6 +175,7 @@ QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_maxlevel, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer()), model_maxlevel, SLOT(updateModel2()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_izmer, SLOT(updateModel()));
+        QObject::connect(root, SIGNAL(qmlSignal_bazaizmer_id()), model_openBI, SLOT(updateModel()));
 
         //QObject::connect(root, SIGNAL(qmlSignal_rezhim()), model_1V, SLOT(updateModel()));
         engine.rootContext()->setContextProperty("model0", model0);
@@ -134,6 +184,7 @@ QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));
         engine.rootContext()->setContextProperty("model_izmer", model_izmer);
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
+mapper_openBI->setModel(model_openBI);
 //mapper_maxlevel->setModel(model_maxlevel);
 //mapper_1V->setModel(model_1V);
 

@@ -1861,6 +1861,7 @@ Item {
                                 onStopped: {
                                     t_vybor.text = "Любой? >>"
                                     stackView.rezhim_id = combo_rezhim.id
+                                    stackView.bazaizm_id = ""
                                     qmlSignal_baza_id()
                                     list1.currentIndex = -1
                                     station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
@@ -1892,6 +1893,7 @@ Item {
                                 onStopped: {
                                     t_vybor.text = "<< Режим?"
                                     stackView.rezhim_id = ""
+                                    stackView.bazaizm_id = ""
                                     qmlSignal_baza_id()
                                     list1.currentIndex = -1
                                     station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
@@ -1959,6 +1961,7 @@ Item {
                             combo_rezhim.id = model_rezhim.getId(currentIndex)
                             }
                             stackView.rezhim_id = combo_rezhim.id
+                            stackView.bazaizm_id = ""
                             qmlSignal_baza_id()
                             console.log("maxlevel in stack = ", stackView.maxlevel)
                             if(combo_rezhim.currentIndex == 0){                                

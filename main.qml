@@ -23,6 +23,7 @@ ApplicationWindow {
     signal qmlSignal_rezhim()
     signal qmlSignal_bazaizmer()
     signal qmlFilterBO()
+    signal qmlSignal_bazaizmer_id()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -53,6 +54,7 @@ ApplicationWindow {
                 onClicked: {
                         stackView.replace(bo)
                     stackView.baza_id = ""
+                    stackView.bazaizm_id = ""
                     qmlSignal_baza_id()
                     tool_left.visible = true
                     tool_left1.visible = false
@@ -177,7 +179,7 @@ ApplicationWindow {
         property string baza_id: ""
         property string rezhim_id
         property double maxlevel
-        property int bazaizm_id
+        property string bazaizm_id: ""
         property var maxcolizm
 Component.onCompleted: {
     qmlFilterBO()

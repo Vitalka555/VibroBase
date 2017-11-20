@@ -171,38 +171,7 @@ Item {
                     }
                 }
             }
-//            MouseArea {
-//                id: ma_kks
-//                enabled: false
-//                anchors.fill: parent
-//                hoverEnabled: true
-//                NumberAnimation {
-//                    id: anim_kks1
-//                    target: recf1
-//                    property: "width"
-//                    from: 40
-//                    to: 240
-//                    duration: 1000
-//                    onStopped: {
-//                        filter_kks.width = 190
-//                        ma_kks.enabled = false
-//                        //filter_kks.z = 1
-//                    }
-//                }
-//                NumberAnimation {
-//                    id: anim_kks2
-//                    target: recf1
-//                    property: "width"
-//                    from: 240
-//                    to: 40
-//                    duration: 1000
-//                    onStarted: {
-//                        filter_kks.width = 0
-//                    }
-//                }
-//                onEntered: anim_kks1.start()
-//                //onExited: anim_kks2.start()
-//            }
+
         }
         Rectangle {
             id: recf2
@@ -274,28 +243,7 @@ Item {
                     filter_combo_ceh.currentIndex = -1
                 }
             }
-//            MouseArea {
-//                id: ma_ceh
-//                enabled: false
-//                anchors.fill: parent
-//                hoverEnabled: true
-//                NumberAnimation {
-//                    id: anim_ceh1
-//                    target: recf2
-//                    property: "width"
-//                    from: 40
-//                    to: 200
-//                    duration: 1000
-//                    onStopped: {
-//                        filter_combo_ceh.visible = true
-//                        but_filter_combo_ceh.visible = true
-//                        filter_combo_ceh.width = 100
-//                        but_filter_combo_ceh.width = but_filter_combo_ceh.height
-//                        ma_ceh.enabled = false
-//                    }
-//                }
-//                onEntered: anim_ceh1.start()
-//            }
+
         }
         Rectangle {
             id: recf3

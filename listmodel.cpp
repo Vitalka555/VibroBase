@@ -2365,13 +2365,18 @@ void ListModelIzmer::updateModel()
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString kks_id=(stack->property("baza_id")).toString();
     QString rezhim_id=(stack->property("rezhim_id")).toString();
+    QString bazaizm_id=(stack->property("bazaizm_id")).toString();
     QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;
     QString kks_filter = " AND BazaIzmereni.id_Baza = " + kks_id;
+    QString bazaizm_id_filter = " AND BazaIzmereni.id = " + bazaizm_id;
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
     if(kks_id == ""){
         kks_filter = "";
+    }
+    if(bazaizm_id == ""){
+        bazaizm_id_filter = "";
     }
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), "
@@ -2411,7 +2416,7 @@ void ListModelIzmer::updateModel()
                    "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia), "
                    "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.'ЛАЭС-2', "
                    "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza)"
-         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter +
+         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
 }
 

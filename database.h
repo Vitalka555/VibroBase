@@ -309,7 +309,8 @@ public slots:
 //                        const QString &rezhimname, const QString &tipizmname, const QString &tipmehname,
 //                        const QString &tipoporyname, const QString &tippername, const QString &tippermehname,
 //                        const QString &tippodshtip);
-    bool removeRecord(const int id); // Удаление записи из таблицы по её id
+    bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
+    bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id
 };
 
 #endif // DATABASE_H

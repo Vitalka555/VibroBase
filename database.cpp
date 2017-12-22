@@ -318,7 +318,7 @@ bool DataBase::insertIntoTable(const QString &Bazakks, const QString &Cehid, con
         return false;
 }
 
-/* Метод для удаления записи из таблицы
+/* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)
 {
@@ -332,6 +332,28 @@ bool DataBase::removeRecord(const int id)
     // Выполняем удаление
     if(!query.exec()){
         qDebug() << "error delete row " << baza;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "База измерений"
+ * */
+bool DataBase::removeRecordBI(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " bazaizm " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << bazaizm;
         qDebug() << query.lastError().text();
         return false;
     } else {

@@ -348,8 +348,8 @@ Item {
     //            Material.accent: Material.LightBlue
                 text: "Удалить"
                 onClicked: {
-//                    database.removeRecord(model0.getId(list.currentIndex))
-//                    model0.updateModel()
+                    database.removeRecordBI(model_izmer.getId(list.currentIndex))
+                    model_izmer.updateModel()
                 }
             }
         }

@@ -113,13 +113,13 @@ int main(int argc, char *argv[])
 
     // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
     //engine.rootContext()->setContextProperty("model0", model0);
-    engine.rootContext()->setContextProperty("model_ceh", model_ceh);
+    engine.rootContext()->setContextProperty("model_ceh", model_ceh);              //передача данных запроса таблицы имен цехов
     engine.rootContext()->setContextProperty("model_program", model_program);
     engine.rootContext()->setContextProperty("model_fio", model_fio);
     engine.rootContext()->setContextProperty("model_proizved", model_proizved);
     engine.rootContext()->setContextProperty("model_tippermeh", model_tippermeh);
     engine.rootContext()->setContextProperty("model_tipper", model_tipper);
-    engine.rootContext()->setContextProperty("model_tipmeh", model_tipmeh);
+    engine.rootContext()->setContextProperty("model_tipmeh", model_tipmeh);        //передача данных запроса таблицы имен типов исполнительных механизмов
     engine.rootContext()->setContextProperty("model_polozhenie", model_polozhenie);
     engine.rootContext()->setContextProperty("model_tipopory", model_tipopory);
     engine.rootContext()->setContextProperty("model_proizvmeh", model_proizvmeh);
@@ -169,7 +169,7 @@ ListModel *model0 = new ListModel(root);
                          copy, SLOT(cppSlot()));
         QObject::connect(root, SIGNAL(qmlSignal2()),
                          copy, SLOT(cppSlot2()));
-QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));
+QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_1V, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_maxlevel, SLOT(updateModel()));

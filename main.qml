@@ -23,6 +23,7 @@ ApplicationWindow {
     signal qmlSignal_rezhim()
     signal qmlSignal_bazaizmer()
     signal qmlFilterBO()
+    signal qmlFilterBI()
     signal qmlSignal_bazaizmer_id()
     property string baza_id: ""
     property int index: 0

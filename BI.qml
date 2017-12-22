@@ -169,154 +169,12 @@ Item {
                 }
             }
 
-        }
+        }        
         Rectangle {
             id: recf2
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.left: recf1.right
-            anchors.leftMargin: 5
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
-            border.color: "#03a9f5"
-            color: "#03a9f5"
-            radius: 10
-            width: 200//220
-            Text {
-                id: f_ceh
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 5
-                font.pixelSize: 15
-                color: "white"
-                text: "Цех:"
-            }
-            ComboBox {
-                id: filter_combo_ceh
-                //visible: false
-                property string id: ""
-                currentIndex: -1
-                anchors.verticalCenter: parent.verticalCenter
-                Material.foreground: Material.LightBlue
-                anchors.left: f_ceh.right
-                anchors.leftMargin: 5
-                model: model_ceh
-                textRole: 'Cehname'
-                width: 100
-                //textColor: "white"
-                delegate: ItemDelegate {
-                    Material.foreground: Material.LightBlue
-                    Material.background: Material.LightBlue
-                    width: filter_combo_ceh.width
-                    text: filter_combo_ceh.textRole ? (Array.isArray(filter_combo_ceh.model) ? modelData[filter_combo_ceh.textRole] : model[filter_combo_ceh.textRole]) : modelData
-                    highlighted: filter_combo_ceh.highlightedIndex === index
-                }
-                onCurrentTextChanged: {
-                    if(currentIndex==-1){
-                        filter_combo_ceh.id = ""
-                    } else {
-                    filter_combo_ceh.id = model_ceh.getId(currentIndex)
-                    }
-                }
-            }
-            Button {
-                id: but_filter_combo_ceh
-                //visible: false
-                anchors.left: filter_combo_ceh.right
-                anchors.leftMargin: 5
-                anchors.verticalCenter: parent.verticalCenter
-                width: height
-                highlighted: true
-                Material.accent: Material.LightBlue
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: 20
-                    color: "white"
-                    text: "X"
-
-                }
-                onClicked: {
-                    filter_combo_ceh.currentIndex = -1
-                }
-            }
-
-        }
-        Rectangle {
-            id: recf3
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.left: recf2.right
-            anchors.leftMargin: 5
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
-            border.color: "#03a9f5"
-            color: "#03a9f5"
-            radius: 10
-            width: 170
-        Text {
-            id: f_zd
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            font.pixelSize: 15
-            color: "white"
-            text: "Здание:"
-        }
-        TextField {
-            id: filter_zd
-            Material.theme: Material.Dark
-            Material.accent: "white"
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.left: f_zd.right
-            anchors.leftMargin: 5
-            width: 100
-            //highlighted: true
-            //Material.accent: Material.LightBlue
-            //placeholderText: "Введите KKS оборудования"
-            focus: true
-            selectByMouse: true
-            persistentSelection: true
-            text: ""
-            MouseArea {
-                acceptedButtons: Qt.RightButton
-                anchors.fill: parent
-                onClicked: {
-                    contextMenu_filter_zd.x = mouseX
-                    contextMenu_filter_zd.y = mouseY
-                    contextMenu_filter_zd.open()
-                }
-            }
-            Menu {
-                id: contextMenu_filter_zd
-
-                MenuItem {
-                    text: qsTr("Копировать")
-                    enabled: filter_zd.selectedText
-                    onTriggered: filter_zd.copy()
-                }
-                MenuItem {
-                    text: qsTr("Вырезать")
-                    enabled: filter_zd.selectedText
-                    onTriggered: filter_zd.cut()
-                }
-                MenuItem {
-                    text: qsTr("Вставить")
-                    enabled: filter_zd.canPaste
-                    onTriggered: filter_zd.paste()
-                }
-
-               // MenuSeparator {}
-
-            }
-        }
-    }
-        Rectangle {
-            id: recf4
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.left: recf3.right
             anchors.leftMargin: 5
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 5
@@ -387,9 +245,40 @@ Item {
             }
         }
         }
+        Rectangle {
+            id: recf3
+            anchors.top: parent.top
+            anchors.topMargin: 5
+            anchors.left: recf2.right
+            anchors.leftMargin: 5
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 5
+            border.color: "#03a9f5"
+            color: "#03a9f5"
+            radius: 10
+            width: 140//220
+            CheckBox {
+                id: check_problem
+                Material.accent: Material.LightBlue
+                Material.theme: Material.Dark
+                //Material.foreground: Material.LightBlue
+                //Material.background: Material.LightBlue
+                checked: false
+                //text: "Не исправны"
+            }
+            Text {
+                id: text_problem
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: check_problem.right
+                //anchors.leftMargin: 5
+                font.pixelSize: 15
+                color: "white"
+                text: "Не исправны"
+            }
+        }
         Button {
             id: but_poisk
-            anchors.left: recf4.right
+            anchors.left: recf3.right
             anchors.leftMargin: 5
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height
@@ -404,18 +293,18 @@ Item {
             }
             onClicked: {
                 stackView.kks = filter_kks.text
-                stackView.zd = filter_zd.text
-                if(filter_combo_ceh.currentIndex == -1){
-                    stackView.id_ceh = ""
-                } else {
-                    stackView.id_ceh = filter_combo_ceh.id
-                }
+                //stackView.zd = filter_zd.text
+//                if(filter_combo_ceh.currentIndex == -1){
+//                    stackView.id_ceh = ""
+//                } else {
+//                    stackView.id_ceh = filter_combo_ceh.id
+//                }
                 if(filter_combo_tipagr.currentIndex == -1){
                     stackView.id_tipmeh = ""
                 } else {
                     stackView.id_tipmeh = filter_combo_tipagr.id
                 }
-                qmlFilterBO()
+                qmlFilterBI()
             }
         }
 

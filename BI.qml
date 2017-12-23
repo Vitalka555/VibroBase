@@ -33,6 +33,7 @@ Item {
                     source: "file:./Images/filter.png"
                 }
                 MouseArea {
+                    id: ma_rec_01
                     anchors.fill: parent
                     hoverEnabled: true
                     NumberAnimation {
@@ -265,6 +266,9 @@ Item {
                 //Material.background: Material.LightBlue
                 checked: false
                 //text: "Не исправны"
+                onCheckableChanged: {
+
+                }
             }
             Text {
                 id: text_problem
@@ -292,17 +296,17 @@ Item {
                 source: "file:./Images/poisk.png"
             }
             onClicked: {
-                stackView.kks = filter_kks.text
-                //stackView.zd = filter_zd.text
-//                if(filter_combo_ceh.currentIndex == -1){
-//                    stackView.id_ceh = ""
-//                } else {
-//                    stackView.id_ceh = filter_combo_ceh.id
-//                }
+                stackView.kks_filter_BI = filter_kks.text
                 if(filter_combo_tipagr.currentIndex == -1){
-                    stackView.id_tipmeh = ""
+                    stackView.id_tipmeh_filter_BI = ""
                 } else {
-                    stackView.id_tipmeh = filter_combo_tipagr.id
+                    stackView.id_tipmeh_filter_BI = filter_combo_tipagr.id
+                }
+                if(!check_problem.checked){
+                    stackView.neispravnoe = "false"
+                }
+                if(check_problem.checked){
+                    stackView.neispravnoe = "true"
                 }
                 qmlFilterBI()
             }
@@ -671,6 +675,29 @@ Item {
                                     text: Bazaizmerkks
                                 }
                             }
+                            MouseArea {
+                                acceptedButtons: Qt.RightButton
+                                anchors.fill: parent
+                                onClicked: {
+                                    contextMenu_kks_filter.x = mouseX
+                                    contextMenu_kks_filter.y = mouseY
+                                    contextMenu_kks_filter.open()
+                                }
+                            }
+                            Menu {
+                                id: contextMenu_kks_filter
+
+                                MenuItem {
+                                    text: qsTr("Фильтровать")
+                                    onTriggered: {
+                                        if(rec_filter.y == 0){
+                                            anim_01.start()
+                                        }
+                                        filter_kks.text = text3.text
+                                        but_poisk.clicked()
+                                    }
+                                }
+                               }
                         }
                         Rectangle {
                             id: rec4

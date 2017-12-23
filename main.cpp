@@ -170,7 +170,8 @@ ListModel *model0 = new ListModel(root);
         QObject::connect(root, SIGNAL(qmlSignal2()),
                          copy, SLOT(cppSlot2()));
 QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
-        QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
+QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
+QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_1V, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_maxlevel, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer()), model_maxlevel, SLOT(updateModel2()));

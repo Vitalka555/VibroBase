@@ -2369,6 +2369,67 @@ void ListModelIzmer::updateModel()
     QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;
     QString kks_filter = " AND BazaIzmereni.id_Baza = " + kks_id;
     QString bazaizm_id_filter = " AND BazaIzmereni.id = " + bazaizm_id;
+    //фильтр для базы измерений
+    QString kks_text_filter_BI=(stack->property("kks_filter_BI")).toString();
+    QString kks_filter_BI = " and BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.KKS LIKE '%"+kks_text_filter_BI+"%' and Baza.id = BazaIzmereni.id_Baza)" ;
+    QString id_tipmeh_filter_BI = (stack->property("id_tipmeh_filter_BI")).toString();
+    QString tipmeh_filter_BI = " and BazaIzmereni.id_Baza = (select Baza.id from Baza where  Baza.id_TipMehanizma = "+id_tipmeh_filter_BI+" and Baza.id = BazaIzmereni.id_Baza)";
+    QString neispravnoe = (stack->property("neispravnoe")).toString();
+    QString neispravnoe_hh;
+    QString neispravnoe_nom;
+    QString neispravnoe_rd;
+    QString neispravnoe_filter;
+    if(neispravnoe == "false"){
+        neispravnoe_hh = "";
+        neispravnoe_nom = "";
+        neispravnoe_rd = "";
+        neispravnoe_filter = "";
+    }
+    if(neispravnoe == "true"){
+    neispravnoe_hh = "  BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+                          "and BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1)"
+                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
+    neispravnoe_nom = " or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+                          "and BazaIzmereni.id_Rezhim = 2 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2)"
+                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
+    neispravnoe_rd = " or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+                          "and BazaIzmereni.id_Rezhim = 3 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 3)"
+                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
+    neispravnoe_filter = " and (" + neispravnoe_hh + neispravnoe_nom + neispravnoe_rd + ") ";
+    }
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
@@ -2377,6 +2438,12 @@ void ListModelIzmer::updateModel()
     }
     if(bazaizm_id == ""){
         bazaizm_id_filter = "";
+    }
+    if(kks_text_filter_BI == ""){
+        kks_filter_BI = "";
+    }
+    if(id_tipmeh_filter_BI == ""){
+        tipmeh_filter_BI = "";
     }
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), "
@@ -2415,8 +2482,9 @@ void ListModelIzmer::updateModel()
                    "(SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim), "
                    "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia), "
                    "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.'ЛАЭС-2', "
-                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza)"
-         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter +
+                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza )"
+         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI
+                   + neispravnoe_filter +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
 }
 

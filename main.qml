@@ -182,6 +182,10 @@ ApplicationWindow {
         property double maxlevel
         property string bazaizm_id: ""
         property var maxcolizm
+        //данные фильтра базы измерений
+        property string kks_filter_BI: ""
+        property string id_tipmeh_filter_BI: ""
+        property string neispravnoe: "false"
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

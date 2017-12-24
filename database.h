@@ -263,6 +263,8 @@ public slots:
                          const QString &Ogrrdid, const QString &Otkazrdedid, const QString &Otkazrdid,
                          const QString &Bazafoto, const QString &Bazashema, const QString &Bazadoc,
                          const QString &Bazapar);
+    bool editTableBaza(const QVariantList &data);
+    bool editTableBaza(const QString &Baza_id, const QString &Bazakks);
 //    bool inserIntoTable(const QString &atefam,
 //                        const QString &bazakks, const QString &bazazd, const QString &bazaotm,
 //                        const QString &bazapom, const QString &bazaopis, const QString &bazashemafilename,

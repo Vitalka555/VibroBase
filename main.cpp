@@ -180,6 +180,7 @@ QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateMod
 
         //QObject::connect(root, SIGNAL(qmlSignal_rezhim()), model_1V, SLOT(updateModel()));
         engine.rootContext()->setContextProperty("model0", model0);
+        engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);
         engine.rootContext()->setContextProperty("model_maxlevel", model_maxlevel);
         engine.rootContext()->setContextProperty("model_izmer", model_izmer);

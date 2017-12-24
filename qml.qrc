@@ -20,5 +20,6 @@
         <file>CreatBI.qml</file>
         <file>OpenBI.qml</file>
         <file>Images/clean.png</file>
+        <file>AddBO.qml</file>
     </qresource>
 </RCC>

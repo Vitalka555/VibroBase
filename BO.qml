@@ -456,6 +456,16 @@ footer:    ToolBar {
 //            highlighted: true
 //            Material.accent: Material.LightBlue
             text: "Редактировать"
+            onClicked: {
+                //list.currentIndex = model.index
+                window.index = list.currentIndex
+                stackView.baza_id = model0.getId(list.currentIndex)
+                console.log("id= ", stackView.baza_id)
+                qmlSignal_baza_id()
+                    stackView.replace(addBO)
+                    tool_left.visible = false
+                    tool_left1.visible = true
+            }
         }
         ToolButton {
             id: but_delete

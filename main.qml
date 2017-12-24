@@ -239,6 +239,12 @@ Component.onCompleted: {
                 id: openBI_0
             }
         }
+        Component {
+            id: addBO
+            AddBO {
+                id: addBO_0
+            }
+        }
     }
 Component.onCompleted: {
     mapper_maxlevel.addMapping(stackView, (0x0100+2), "maxlevel")

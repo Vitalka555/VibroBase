@@ -318,6 +318,104 @@ bool DataBase::insertIntoTable(const QString &Bazakks, const QString &Cehid, con
         return false;
 }
 
+
+bool DataBase::editTableBaza(const QVariantList &data)
+{
+    /* Запрос SQL формируется из QVariantList,
+     * в который передаются данные для вставки в таблицу.
+     * */
+    QSqlQuery querys;
+    /* В начале SQL запрос формируется с ключами,
+     * которые потом связываются методом bindValue
+     * для подстановки данных из QVariantList
+     * */
+    //!!!!!!!!!!!!!!!!!!!Поле для вставки без указания таблицы, иначе несоответствие параметров!!!!!!!!!!!!!!!!!!!!
+    querys.prepare("update Baza set KKS = :Bazakks where Baza.id = :Baza_id");
+
+    querys.bindValue(":Baza_id", data[0].toString());
+    querys.bindValue(":Bazakks", data[1].toString());
+//    querys.bindValue(":Cehid",         data[1].toString());
+////    if(data[2].toString()==""){
+////        querys.bindValue(":Bazazd", QVariant(QVariant::String));
+////    } else {
+////        querys.bindValue(":Bazazd",        data[2].toString());
+////    }
+//    querys.bindValue(":Bazazd",        data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+//    querys.bindValue(":Bazapom",       data[3].toString()=="" ? QVariant(QVariant::String):data[3].toString());
+//    querys.bindValue(":Bazaopis",      data[4].toString()=="" ? QVariant(QVariant::String):data[4].toString());
+//    querys.bindValue(":Bazaprim",      data[5].toString()=="" ? QVariant(QVariant::String):data[5].toString());
+//    querys.bindValue(":Bazaprogramid", data[6].toString());
+//    querys.bindValue(":Bazafioid",     data[7].toString());
+//    querys.bindValue(":Bazamarkaeldv", data[8].toString()=="" ? QVariant(QVariant::String):data[8].toString());
+//    querys.bindValue(":Bazamosch",     data[9].toString()=="" ? QVariant(QVariant::String):data[9].toString());
+//    querys.bindValue(":Bazachastota1", data[10].toString()=="" ? QVariant(QVariant::String):data[10].toString());
+//    querys.bindValue(":Bazaproizvedid",data[11].toString());
+//    querys.bindValue(":Bazatippermehid",data[12].toString());
+//    querys.bindValue(":Bazatipperid",  data[13].toString());
+//    querys.bindValue(":Bazakolpal",    data[14].toString()=="" ? QVariant(QVariant::String):data[14].toString());
+//    querys.bindValue(":Bazatipmehid",  data[15].toString());
+//    querys.bindValue(":Bazamarkameh",  data[16].toString()=="" ? QVariant(QVariant::String):data[16].toString());
+//    querys.bindValue(":Bazachastota3", data[17].toString()=="" ? QVariant(QVariant::String):data[17].toString());
+//    querys.bindValue(":Bazakollop",    data[18].toString()=="" ? QVariant(QVariant::String):data[18].toString());
+//    querys.bindValue(":Bazapolozhenieid",data[19].toString());
+//    querys.bindValue(":Bazatipoporyid",data[20].toString());
+//    querys.bindValue(":Bazaproizvmehid",data[21].toString());
+//    querys.bindValue(":Bazakb",        data[22].toString()=="" ? QVariant(QVariant::String):data[22].toString());
+//    querys.bindValue(":Bazadavnom",    data[23].toString()=="" ? QVariant(QVariant::String):data[23].toString());
+//    querys.bindValue(":Bazarasnom",    data[24].toString()=="" ? QVariant(QVariant::String):data[24].toString());
+//    querys.bindValue(":Bazadavrd",     data[25].toString()=="" ? QVariant(QVariant::String):data[25].toString());
+//    querys.bindValue(":Bazarasrd",     data[26].toString()=="" ? QVariant(QVariant::String):data[26].toString());
+//    querys.bindValue(":Bazatotkazed",  data[27].toString()=="" ? QVariant(QVariant::String):data[27].toString());
+//    querys.bindValue(":Bazatotkazred", data[28].toString()=="" ? QVariant(QVariant::String):data[28].toString());
+//    querys.bindValue(":Bazatotkazmeh", data[29].toString()=="" ? QVariant(QVariant::String):data[29].toString());
+//    querys.bindValue(":Normhhid",      data[30].toString());
+//    querys.bindValue(":Normnomedid",   data[31].toString());
+//    querys.bindValue(":Normnomid",     data[32].toString());
+//    querys.bindValue(":Ogrnomedid",    data[33].toString());
+//    querys.bindValue(":Ogrnomid",      data[34].toString());
+//    querys.bindValue(":Otkaznomedid",  data[35].toString());
+//    querys.bindValue(":Otkaznomid",    data[36].toString());
+//    querys.bindValue(":Normrdedid",    data[37].toString());
+//    querys.bindValue(":Normrdid",      data[38].toString());
+//    querys.bindValue(":Ogrrdedid",     data[39].toString());
+//    querys.bindValue(":Ogrrdid",       data[40].toString());
+//    querys.bindValue(":Otkazrdedid",   data[41].toString());
+//    querys.bindValue(":Otkazrdid",     data[42].toString());
+//    querys.bindValue(":Bazafoto",      data[43].toString()=="" ? QVariant(QVariant::String):data[43].toString());
+//    querys.bindValue(":Bazashema",     data[44].toString()=="" ? QVariant(QVariant::String):data[44].toString());
+//    querys.bindValue(":Bazadoc",       data[45].toString()=="" ? QVariant(QVariant::String):data[45].toString());
+//    querys.bindValue(":Bazapar",       data[46].toString()=="" ? QVariant(QVariant::String):data[46].toString());
+    qDebug()<<data[0].toString();
+
+
+
+    // После чего выполняется запросом методом exec()
+    if(!querys.exec()){
+        qDebug() << "error update Baza ";
+        qDebug() << querys.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+
+bool DataBase::editTableBaza(const QString &Baza_id, const QString &Bazakks)
+{
+    QVariantList data;
+
+    data.append(Baza_id);
+    data.append(Bazakks);
+
+
+
+    if(editTableBaza(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)

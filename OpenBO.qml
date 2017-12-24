@@ -4507,7 +4507,7 @@ Item {
         mapper.addMapping(text_tempotkaz_red, (0x0100+45), "tex")
         mapper.addMapping(text_tempotkaz_meh, (0x0100+46), "tex")
         mapper.addMapping(text_izmer_kks, (0x0100+2), "tex")
-        //mapper_izmer.addMapping(k2s2, (0x0100+5), "tex")
+        //mapper_izmer.addMapping(k2s2, (0x0100+5), "tex")        
     }
 
 }

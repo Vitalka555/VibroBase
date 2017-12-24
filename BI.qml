@@ -281,8 +281,29 @@ Item {
             }
         }
         Button {
-            id: but_poisk
+            id: but_clean
             anchors.left: recf3.right
+            anchors.leftMargin: 5
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height
+            width: height - 10
+            highlighted: true
+            Material.accent: Material.LightBlue
+            Image {
+                id: im_clean
+                anchors.fill: parent
+                fillMode: Image.PreserveAspectFit
+                source: "file:./Images/clean.png"
+            }
+            onClicked: {
+                filter_kks.clear()
+                filter_combo_tipagr.currentIndex = -1
+                check_problem.checked = false
+            }
+        }
+        Button {
+            id: but_poisk
+            anchors.left: but_clean.right
             anchors.leftMargin: 5
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height

@@ -19,5 +19,6 @@
         <file>Images/poisk.png</file>
         <file>CreatBI.qml</file>
         <file>OpenBI.qml</file>
+        <file>Images/clean.png</file>
     </qresource>
 </RCC>

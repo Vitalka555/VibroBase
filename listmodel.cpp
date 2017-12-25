@@ -1259,7 +1259,8 @@ void ListModelOpenBO::updateModel()
                    "(SELECT OgrRd.Значение FROM OgrRd WHERE OgrRd.id = Baza.id_OgrRd), "
                    "(SELECT OtkazRdED.Значение FROM OtkazRdED WHERE OtkazRdED.id = Baza.id_OtkazRdED), "
                    "(SELECT OtkazRd.Значение FROM OtkazRd WHERE OtkazRd.id = Baza.id_OtkazRd),"
-                   "Baza.TotkazED, Baza.TotkazRed, Baza.TotkazIspMeh FROM Baza WHERE Baza.id = " + kks_id);
+                   "Baza.TotkazED, Baza.TotkazRed, Baza.TotkazIspMeh, Baza.'Документы на нормы', "
+                   "Baza.'Параметры центровки и прилегания' FROM Baza WHERE Baza.id = " + kks_id);
 }
 
 //void ListModelOpenBO::updateModel2()

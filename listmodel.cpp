@@ -109,6 +109,55 @@ int ListModel::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelKKS::ListModelKKS
+/// \param parent
+///
+ListModelKKS::ListModelKKS(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelKKS::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelKKS::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    roles[kks_nameRole] = "kksname";
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelKKS::updateModel()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString combo_kks=(stack->property("combo_kks")).toString();
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.KKS LIKE '%"+combo_kks+"%' ORDER BY Baza.KKS ");
+}
+
+// Получение id из строки в модели представления данных
+int ListModelKKS::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief ListModelCeh::ListModelCeh
 /// \param parent

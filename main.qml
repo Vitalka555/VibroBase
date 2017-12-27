@@ -25,6 +25,7 @@ ApplicationWindow {
     signal qmlFilterBO()
     signal qmlFilterBI()
     signal qmlSignal_bazaizmer_id()
+    signal qmlKKS_filter()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -186,6 +187,8 @@ ApplicationWindow {
         property string kks_filter_BI: ""
         property string id_tipmeh_filter_BI: ""
         property string neispravnoe: "false"
+        //фильтр в комбобоксе создания измерения
+        property string combo_kks: ""
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

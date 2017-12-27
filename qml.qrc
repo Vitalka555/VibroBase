@@ -21,5 +21,7 @@
         <file>OpenBI.qml</file>
         <file>Images/clean.png</file>
         <file>AddBO.qml</file>
+        <file>Images/mouse.png</file>
+        <file>Calendar.qml</file>
     </qresource>
 </RCC>

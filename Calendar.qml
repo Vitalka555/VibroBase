@@ -17,7 +17,7 @@ Item {
     /* Создадим переменную для хранения даты, чтобы не заморачиваться
      * с конвертацией типов
      * */
-    property var tempDate: new Date();
+    //property var tempDate: new Date();
 
 //    Button {
 //        id: button
@@ -33,14 +33,14 @@ Item {
     Item {
         id: dialogCalendar
         // Задаём размеры диалогового окна
-        width: 250
-        height: 300
+        width: 375
+        height: 450
         anchors.centerIn: parent
 
         // Создаем контент диалогового окна
         Rectangle {
             id: dialogRect
-            color: "#f7f7f7"
+            color: "white"
             anchors.fill: parent
 
             // Первым идёт кастомный календарь
@@ -51,6 +51,9 @@ Item {
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.bottom: row.top
+//                Component.onCompleted: {
+//                    dialogCalendar.show(page.tempDate)
+//                }
 
                 // Стилизуем Календарь
                 style: CalendarStyle {
@@ -61,7 +64,7 @@ Item {
                          * в котором будет располагаться две кнопки и label
                          * */
                         height: 48
-                        color: "#f7f7f7"
+                        color: "white"
 
                         /* Горизонтальный разделитель,
                          * который отделяет navigationBar от поля с  числами
@@ -91,13 +94,13 @@ Item {
                             style: ButtonStyle {
                                 background: Rectangle {
                                     // Окрашиваем фон кнопки
-                                    color: "#f7f7f7"
+                                    color: "white"
                                     /* И помещаем изображение, у которго будет
                                      * два источника файлов в зависимости от того
                                      * нажата кнопка или нет
                                      */
                                     Image {
-                                        source: control.pressed ? "left_arrow_disable.png" : "left_arrow.png"
+                                        source: control.pressed ? "file:./Images/left_arrow_disable.png" : "file:./Images/left_arrow.png"
                                         width: parent.height - 8
                                         height: width
                                     }
@@ -113,7 +116,7 @@ Item {
                              * и будет заменён данным label
                              */
                             text: styleData.title
-                            color:  "#34aadc"
+                            color:  "#03a9f5"
                             elide: Text.ElideRight
                             horizontalAlignment: Text.AlignHCenter
                             font.pixelSize: 16
@@ -141,13 +144,13 @@ Item {
                             style: ButtonStyle {
                                 // Окрашиваем фон кнопки
                                 background: Rectangle {
-                                    color: "#f7f7f7"
+                                    color: "white"
                                     /* И помещаем изображение, у которго будет
                                      * два источника файлов в зависимости от того
                                      * нажата кнопка или нет
                                      */
                                     Image {
-                                        source: control.pressed ? "right_arrow_disable.png" : "right_arrow.png"
+                                        source: control.pressed ? "file:./Images/right_arrow_disable.png" : "file:./Images/right_arrow.png"
                                         width: parent.height - 8
                                         height: width
                                     }
@@ -165,8 +168,8 @@ Item {
                         color: styleData.date !== undefined && styleData.selected ? selectedDateColor : "transparent"
 
                         // Задаём предопределённые переменные с цветами, доступные только для чтения
-                        readonly property color sameMonthDateTextColor: "#444"
-                        readonly property color selectedDateColor: "#34aadc"
+                        readonly property color sameMonthDateTextColor: "#3E65FF"
+                        readonly property color selectedDateColor: "#03a9f5"
                         readonly property color selectedDateTextColor: "white"
                         readonly property color differentMonthDateTextColor: "#bbb"
                         readonly property color invalidDateColor: "#dddddd"
@@ -177,7 +180,7 @@ Item {
                             text: styleData.date.getDate() // Устанавливаем число в текущий квадрат
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignRight
-                            font.pixelSize: 10
+                            font.pixelSize: 16
 
                             // Установка цвета
                             color: {
@@ -220,7 +223,7 @@ Item {
                         }
 
                         label: Text {
-                            text: qsTr("Cancel")
+                            text: qsTr("Отмена")
                             font.pixelSize: 14
                             color: "#34aadc"
                             verticalAlignment: Text.AlignVCenter
@@ -228,7 +231,10 @@ Item {
                         }
                     }
                     // По нажатию на кнопку - просто закрываем диалог
-                    onClicked: dialogCalendar.close()
+                    onClicked: {
+                        calendar0.visible = false
+                        page.visible = true
+                    }
                 }
 
                 // Вертикальный разделитель между кнопками
@@ -267,9 +273,12 @@ Item {
                      * после чего закрываем диалог
                      */
                     onClicked: {
-                        tempDate = calendar.selectedDate
-                        button.text = Qt.formatDate(tempDate, "dd.MM.yyyy");
-                        dialogCalendar.close();
+                        page.tempDate = calendar.selectedDate
+                        tf_date.text = Qt.formatDate(page.tempDate, "ddMMyyyy");
+                        //button.text = Qt.formatDate(tempDate, "dd.MM.yyyy");
+                        //dialogCalendar.close();
+                        calendar0.visible = false
+                        page.visible = true
                     }
                 }
             }
@@ -281,7 +290,7 @@ Item {
          */
         function show(x){
             calendar.selectedDate = x
-            dialogCalendar.open()
+            //dialogCalendar.open()
         }
     }
 }

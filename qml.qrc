@@ -23,5 +23,9 @@
         <file>AddBO.qml</file>
         <file>Images/mouse.png</file>
         <file>Calendar.qml</file>
+        <file>Images/left_arrow.png.png</file>
+        <file>Images/left_arrow_disable.png</file>
+        <file>Images/right_arrow.png</file>
+        <file>Images/right_arrow_disable.png</file>
     </qresource>
 </RCC>

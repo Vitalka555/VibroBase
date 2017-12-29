@@ -13,6 +13,7 @@ Item {
     property var tempDate: new Date();
     Page {
         id: page
+        property var tempDate: new Date();
         anchors.fill: parent
 //        Rectangle {
 //            id: root
@@ -189,7 +190,7 @@ Item {
             inputMask: "00-00-0000"
             inputMethodHints: Qt.ImhDate
             //property string dateTimeString: "17-09-2013"
-            text: Qt.formatDateTime(new Date(), "ddMMyyyy")
+            text: Qt.formatDateTime(page.tempDate, "ddMMyyyy")
             MouseArea {
                 acceptedButtons: Qt.RightButton
                 anchors.fill: parent
@@ -235,7 +236,8 @@ Item {
             onClicked: {
                 //console.log(tf_date.text)
                 page.visible = false
-                calendar.visible = true
+                calendar0.visible = true
+                //page.tempDate = tf_date.text
             }
         }
         Text {
@@ -344,21 +346,21 @@ Item {
                         id: t1
                         font.pixelSize: 30
                         font.bold: true
-                        color: "blue"
+                        color: "#3E65FF"
                         text: "00"
                     }
                     Text {
                         //id: t2
                         font.pixelSize: 30
                         font.bold: true
-                        color: "blue"
+                        color: "#3E65FF"
                         text: ":"
                     }
                     Text {
                         id: t2
                         font.pixelSize: 30
                         font.bold: true
-                        color: "blue"
+                        color: "#3E65FF"
                         text: "00"
                     }
                 }
@@ -394,7 +396,7 @@ Item {
                             font.pixelSize: 24
                             font.bold: currentItem
                             text: index
-                            color: "blue"
+                            color: "#3E65FF"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -464,7 +466,7 @@ Item {
                             font.pixelSize: 12
                             font.bold: currentItem
                             text: index+12
-                            color: "blue"
+                            color: "#3E65FF"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -531,7 +533,7 @@ Item {
                             font.pixelSize: 24
                             font.bold: currentItem
                             text: index*5
-                            color: "blue"
+                            color: "#3E65FF"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -581,7 +583,7 @@ Item {
                 }
             }
             Calendar {
-                id: calendar
+                id: calendar0
                 anchors.centerIn: parent
                 visible: false
 

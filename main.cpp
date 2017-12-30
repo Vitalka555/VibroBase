@@ -102,6 +102,8 @@ int main(int argc, char *argv[])
     ListModelOtkazrd *model_otkazrd = new ListModelOtkazrd();
     ListModelRezhim *model_rezhim = new ListModelRezhim();
     ListModelTipIzmer *model_tipizmer = new ListModelTipIzmer();
+    ListModelLAES *model_laes = new ListModelLAES();
+    ListModelATE *model_ate = new ListModelATE();
 
     //ListModel1V *model_1V = new ListModel1V();
 
@@ -141,6 +143,8 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("model_otkazrd", model_otkazrd);
     engine.rootContext()->setContextProperty("model_rezhim", model_rezhim);
     engine.rootContext()->setContextProperty("model_tipizmer", model_tipizmer);
+    engine.rootContext()->setContextProperty("model_laes", model_laes);
+    engine.rootContext()->setContextProperty("model_ate", model_ate);
 
     //engine.rootContext()->setContextProperty("model_openBO", model_openBO);
     //engine.rootContext()->setContextProperty("model01", model0);

@@ -56,7 +56,13 @@ Item {
                 }
             }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+Rectangle{
+    id: rec_1
+    anchors.top: parent.top
+    anchors.left: parent.left
+    height: combo_kks.height+tf_date.height+tf_time.height+combo_rezhim.height+combo_tipizmer.height+text_norm.height+tf_norm_ed.height+tf_norm_meh.height + 40
+    width: text_tipizmer.width+combo_tipizmer.width+but_kks.width + 20
+    //color: "lightgrey"
 
         Text {
             id: text_kks
@@ -72,11 +78,12 @@ Item {
             currentIndex: -1
             anchors.top: parent.top
             anchors.topMargin: 5
-            anchors.left: text_kks.right
-            anchors.leftMargin: 5
+            anchors.right: combo_tipizmer.right
             width: 200
             editable: true
             inputMethodHints: Qt.ImhNone
+            //locale: Qt.locale("de_DE")
+            //validator: RegExpValidator { regExp: /[0-9a-zA-Z]+/ }
             //inputMethodComposing: false
             //count: 10
             //down: true
@@ -105,6 +112,7 @@ Item {
 
         }
         Button {
+            id: but_kks
             anchors.top: combo_kks.top
             anchors.left: combo_kks.right
             anchors.leftMargin: 5
@@ -137,8 +145,7 @@ Item {
             id: tf_date
             anchors.top: combo_kks.bottom
             anchors.topMargin: 5
-            anchors.left: text_date.right
-            anchors.leftMargin: 5
+            anchors.left: combo_tipizmer.left
             height: combo_kks.height
             width: 90
             //highlighted: true
@@ -149,6 +156,7 @@ Item {
             persistentSelection: true
             inputMask: "00-00-0000"
             inputMethodHints: Qt.ImhDate
+            horizontalAlignment: TextInput.AlignHCenter
             property string tex: Qt.formatDateTime(page.tempDate, "yyyy-MM-dd")
             //property string dateTimeString: "17-09-2013"
             text: Qt.formatDateTime(page.tempDate, "ddMMyyyy")
@@ -213,8 +221,7 @@ Item {
             id: tf_time
             anchors.top: tf_date.bottom
             anchors.topMargin: 5
-            anchors.left: text_time.right
-            anchors.leftMargin: 5
+            anchors.left: combo_tipizmer.left
             height: combo_kks.height
             width: 90
             //highlighted: true
@@ -225,6 +232,7 @@ Item {
             persistentSelection: true
             inputMask: "00:00"
             inputMethodHints: Qt.ImhTime
+            horizontalAlignment: TextInput.AlignHCenter
             //property string dateTimeString: "17-09-2013"
             text: Qt.formatDateTime(new Date(), "hhmm")
             MouseArea {
@@ -289,8 +297,7 @@ Item {
             currentIndex: -1
             anchors.top: tf_time.bottom
             anchors.topMargin: 5
-            anchors.left: text_rezhim.right
-            anchors.leftMargin: 5
+            anchors.right: combo_tipizmer.right
             width: 200
             model: model_rezhim
             textRole: 'Rezhimname'
@@ -419,8 +426,7 @@ Item {
             id: tf_norm_ed
             anchors.top: text_norm.bottom
             anchors.topMargin: 5
-            anchors.left: text_norm_ed.right
-            anchors.leftMargin: 5
+            anchors.left: combo_tipizmer.left
             height: combo_kks.height
             width: 40
             //highlighted: true
@@ -429,6 +435,8 @@ Item {
             focus: true
             selectByMouse: true
             persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            //effectiveHorizontalAlignment: TextInput.AlignHCenter
             MouseArea {
                 acceptedButtons: Qt.RightButton
                 anchors.fill: parent
@@ -469,8 +477,7 @@ Item {
             id: tf_norm_meh
             anchors.top: tf_norm_ed.bottom
             anchors.topMargin: 5
-            anchors.left: text_norm_meh.right
-            anchors.leftMargin: 5
+            anchors.left: combo_tipizmer.left
             height: combo_kks.height
             width: 40
             //highlighted: true
@@ -479,6 +486,8 @@ Item {
             focus: true
             selectByMouse: true
             persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            //effectiveHorizontalAlignment: TextInput.AlignHCenter
             MouseArea {
                 acceptedButtons: Qt.RightButton
                 anchors.fill: parent
@@ -507,6 +516,278 @@ Item {
                 }
             }
         }
+}// end rec_1
+Rectangle{
+    id: rec_2
+    anchors.top: rec_1.bottom
+    anchors.left: parent.left
+    width: rec_1.width/2
+    height: (page.height - rec_1.height - rec_button.height)/2
+    Text {
+        id: text_laes
+        text: "Выполнили ЛАЭС-2:"
+        anchors.top: parent.top
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+    }
+    Flickable {
+        id: flick
+        anchors.top: text_laes.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+    ListView {
+             id: listlaes
+             anchors.fill: parent
+             property var array: []
+             //focus: true
+             //headerPositioning: ListView.OverlayHeader
+             clip: true
+             model: model_laes
+             //spacing: 1
+             ScrollBar.vertical: ScrollBar { id: vbar;
+                                         hoverEnabled: true
+                                         active: hovered || pressed
+                                         orientation: Qt.Vertical
+                                         //size: frame.height / content.height
+                                         anchors.top: parent.top
+                                         anchors.right: parent.right
+                                         anchors.bottom: parent.bottom
+                                         width: 10
+                             }
+             delegate: Row{
+                 anchors.topMargin: 0
+                 height: 35
+                 CheckBox{
+                     id: check_fio
+                     Material.accent: Material.LightBlue
+                     onCheckedChanged: {
+                         if(check_fio.checked==true){
+                             listlaes.array.push(text_fio.text)
+                             textArea_laes.text = listlaes.array.join(', ')
+                         } else {
+                             listlaes.array.splice(listlaes.array.indexOf(text_fio.text), 1)
+                             textArea_laes.text = listlaes.array.join(', ')
+                         }
+                     }
+                 }
+                 Text{
+                     id: text_fio
+                     anchors.verticalCenter: check_fio.verticalCenter
+                     text: laes
+                 }
+             }
+         }
+    }
+}// end rec_2
+Rectangle{
+    id: rec_3
+    anchors.top: rec_1.bottom
+    anchors.left: rec_2.right
+    width: rec_1.width/2
+    height: (page.height - rec_1.height - rec_button.height)/2
+    Text {
+        id: text_ate
+        text: "Выполнили АТЭ:"
+        anchors.top: parent.top
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+    }
+    Flickable {
+        id: flick2
+        anchors.top: text_ate.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+    ListView {
+             id: listate
+             anchors.fill: parent
+             property var array: []
+             //focus: true
+             //headerPositioning: ListView.OverlayHeader
+             clip: true
+             model: model_ate
+             //spacing: 1
+             ScrollBar.vertical: ScrollBar { id: vbar2;
+                                         hoverEnabled: true
+                                         active: hovered || pressed
+                                         orientation: Qt.Vertical
+                                         //size: frame.height / content.height
+                                         anchors.top: parent.top
+                                         anchors.right: parent.right
+                                         anchors.bottom: parent.bottom
+                                         width: 10
+                             }
+             delegate: Row{
+                 anchors.topMargin: 0
+                 height: 35
+                 CheckBox{
+                     id: check_fio2
+                     Material.accent: Material.LightBlue
+                     onCheckedChanged: {
+                         if(check_fio2.checked==true){
+                             listate.array.push(text_fio2.text)
+                             textArea_ate.text = listate.array.join(', ')
+                         } else {
+                             listate.array.splice(listate.array.indexOf(text_fio2.text), 1)
+                             textArea_ate.text = listate.array.join(', ')
+                         }
+                     }
+                 }
+                 Text{
+                     id: text_fio2
+                     anchors.verticalCenter: check_fio2.verticalCenter
+                     text: ate
+                 }
+             }
+         }
+    }
+}// end rec_3
+Rectangle {
+    id: rec_4
+    anchors.top: rec_2.bottom
+    //anchors.topMargin: 5
+    anchors.left: parent.left
+    width: rec_1.width/2
+    height: (page.height - rec_1.height - rec_button.height)/2
+    Flickable {
+        id: flickable_laes
+        flickableDirection: Flickable.VerticalFlick
+        anchors.fill: parent
+
+        TextArea.flickable: TextArea {
+            id: textArea_laes
+            //placeholderText: "Перечислите документы"
+            //Material.accent: Material.LightBlue
+            textFormat: Qt.PlainText//RichText
+            wrapMode: TextArea.Wrap
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_laes.x = mouseX
+                    contextMenu_laes.y = mouseY
+                    contextMenu_laes.open()
+                }
+            }
+            Menu {
+                id: contextMenu_laes
+
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: textArea_laes.selectedText
+                    onTriggered: textArea_laes.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: textArea_laes.selectedText
+                    onTriggered: textArea_laes.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: textArea_laes.canPaste
+                    onTriggered: textArea_laes.paste()
+                }
+
+               // MenuSeparator {}
+
+            }
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+//                // Different styles have different padding and background
+//                // decorations, but since this editor is almost taking up the
+//                // entire window, we don't need them.
+//                leftPadding: 6
+//                rightPadding: 6
+//                topPadding: 0
+//                bottomPadding: 0
+//                background: null
+        }
+        ScrollBar.vertical: ScrollBar {
+        width: 10
+        }
+    }
+}// end rec_4
+Rectangle {
+    id: rec_5
+    anchors.top: rec_3.bottom
+    //anchors.topMargin: 5
+    anchors.left: rec_4.right
+    width: rec_1.width/2
+    height: (page.height - rec_1.height - rec_button.height)/2
+    Flickable {
+        id: flickable_ate
+        flickableDirection: Flickable.VerticalFlick
+        anchors.fill: parent
+
+        TextArea.flickable: TextArea {
+            id: textArea_ate
+            //placeholderText: "Перечислите документы"
+            //Material.accent: Material.LightBlue
+            textFormat: Qt.PlainText//RichText
+            wrapMode: TextArea.Wrap
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_ate.x = mouseX
+                    contextMenu_ate.y = mouseY
+                    contextMenu_ate.open()
+                }
+            }
+            Menu {
+                id: contextMenu_ate
+
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: textArea_ate.selectedText
+                    onTriggered: textArea_ate.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: textArea_ate.selectedText
+                    onTriggered: textArea_ate.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: textArea_ate.canPaste
+                    onTriggered: textArea_ate.paste()
+                }
+
+               // MenuSeparator {}
+
+            }
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+//                // Different styles have different padding and background
+//                // decorations, but since this editor is almost taking up the
+//                // entire window, we don't need them.
+//                leftPadding: 6
+//                rightPadding: 6
+//                topPadding: 0
+//                bottomPadding: 0
+//                background: null
+        }
+        ScrollBar.vertical: ScrollBar {
+        width: 10
+        }
+    }
+}// end rec_5
+Rectangle {
+    id: rec_6
+    anchors.top: parent.top
+    anchors.left: rec_1.right
+    anchors.right: parent.right
+    height: page.height/2
+}// end rec_6
     } // end page
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Item {

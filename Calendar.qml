@@ -275,10 +275,12 @@ Item {
                     onClicked: {
                         page.tempDate = calendar.selectedDate
                         tf_date.text = Qt.formatDate(page.tempDate, "ddMMyyyy");
+                        //tf_date.tex = Qt.formatDate(page.tempDate, "yyyy-MM-dd");
                         //button.text = Qt.formatDate(tempDate, "dd.MM.yyyy");
                         //dialogCalendar.close();
                         calendar0.visible = false
                         page.visible = true
+                        //console.log(tf_date.tex)
                     }
                 }
             }

@@ -2544,3 +2544,104 @@ int ListModelIzmer::getId(int row)
     return this->data(this->index(row, 0), IdRole).toInt();
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelTipIzmer::ListModelTipIzmer
+/// \param parent
+///
+ListModelTipIzmer::ListModelTipIzmer(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelTipIzmer::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelTipIzmer::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    roles[tipizmer_nameRole] = "TipIzmername";
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelTipIzmer::updateModel()
+{
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery(" SELECT TipIzmerenia.id, TipIzmerenia.Наименование FROM TipIzmerenia ORDER BY TipIzmerenia.id");
+}
+
+// Получение id из строки в модели представления данных
+int ListModelTipIzmer::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelNormCreatBI::ListModelNormCreatBI
+/// \param parent
+///
+ListModelNormCreatBI::ListModelNormCreatBI(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelNormCreatBI::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelNormCreatBI::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    //roles[tipizmer_nameRole] = "TipIzmername";
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelNormCreatBI::updateModel()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString idbaza=(stack->property("baza_id_for_norm_creatBI")).toString();
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery(" SELECT Baza.id, (SELECT NormHh.Значение FROM NormHh WHERE NormHh.id = Baza.id_NormHh),"
+                   " (SELECT NormNomED.Значение FROM NormNomED WHERE NormNomED.id = Baza.id_NormNomED),"
+                   " (SELECT NormNom.Значение FROM NormNom WHERE NormNom.id = Baza.id_NormNom),"
+                   " (SELECT NormRdED.Значение FROM NormRdED WHERE NormRdED.id = Baza.id_NormRdED),"
+                   " (SELECT NormRd.Значение FROM NormRd WHERE NormRd.id = Baza.id_NormRd) FROM Baza WHERE Baza.id = " + idbaza);
+    qDebug() << "id базы в c++" << idbaza;
+}
+
+// Получение id из строки в модели представления данных
+int ListModelNormCreatBI::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}

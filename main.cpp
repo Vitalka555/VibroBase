@@ -101,6 +101,7 @@ int main(int argc, char *argv[])
     ListModelOtkazrded *model_otkazrded = new ListModelOtkazrded();
     ListModelOtkazrd *model_otkazrd = new ListModelOtkazrd();
     ListModelRezhim *model_rezhim = new ListModelRezhim();
+    ListModelTipIzmer *model_tipizmer = new ListModelTipIzmer();
 
     //ListModel1V *model_1V = new ListModel1V();
 
@@ -111,6 +112,7 @@ int main(int argc, char *argv[])
     //mapper->setModel(model_openBO);
     DataMapper *mapper_izmer = new DataMapper();
     DataMapper *mapper_openBI = new DataMapper();
+    DataMapper *mapper_norm_creatBI = new DataMapper();
 
     // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
     //engine.rootContext()->setContextProperty("model0", model0);
@@ -138,6 +140,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("model_otkazrded", model_otkazrded);
     engine.rootContext()->setContextProperty("model_otkazrd", model_otkazrd);
     engine.rootContext()->setContextProperty("model_rezhim", model_rezhim);
+    engine.rootContext()->setContextProperty("model_tipizmer", model_tipizmer);
 
     //engine.rootContext()->setContextProperty("model_openBO", model_openBO);
     //engine.rootContext()->setContextProperty("model01", model0);
@@ -145,6 +148,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("mapper_maxlevel", mapper_maxlevel);
     engine.rootContext()->setContextProperty("mapper_izmer", mapper_izmer);
     engine.rootContext()->setContextProperty("mapper_openBI", mapper_openBI);
+    engine.rootContext()->setContextProperty("mapper_norm_creatBI", mapper_norm_creatBI);
     engine.rootContext()->setContextProperty("database", &database);
     //engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
     //engine.setOfflineStoragePath("D:\\Projects\\build-V3_0-Desktop_Qt_5_10_0_MinGW_32bit4-Debug\\debug\\sqlite.db");
@@ -163,6 +167,7 @@ ListModelMaxLevel *model_maxlevel = new ListModelMaxLevel(root);
 ListModelIzmer *model_izmer = new ListModelIzmer(root);
 ListModelIzmer *model_openBI = new ListModelIzmer(root);
 ListModelKKS *model_kks = new ListModelKKS(root);
+ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
 
 ListModel *model0 = new ListModel(root);
 
@@ -181,6 +186,7 @@ QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateMod
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_izmer, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer_id()), model_openBI, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlKKS_filter()), model_kks, SLOT(updateModel()));
+QObject::connect(root, SIGNAL(qmlNormCreatBI()), model_norm_creatBI, SLOT(updateModel()));
         //QObject::connect(root, SIGNAL(qmlSignal_rezhim()), model_1V, SLOT(updateModel()));
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
@@ -188,9 +194,11 @@ QObject::connect(root, SIGNAL(qmlKKS_filter()), model_kks, SLOT(updateModel()));
         engine.rootContext()->setContextProperty("model_maxlevel", model_maxlevel);
         engine.rootContext()->setContextProperty("model_izmer", model_izmer);
         engine.rootContext()->setContextProperty("model_kks", model_kks);
+        engine.rootContext()->setContextProperty("model_norm_creatBI", model_norm_creatBI);
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
 mapper_openBI->setModel(model_openBI);
+mapper_norm_creatBI->setModel(model_norm_creatBI);
 //mapper_maxlevel->setModel(model_maxlevel);
 //mapper_1V->setModel(model_1V);
 

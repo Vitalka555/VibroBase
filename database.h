@@ -280,6 +280,9 @@ public slots:
                        const QString &Ogrrdid, const QString &Otkazrdedid, const QString &Otkazrdid,
                        const QString &Bazafoto, const QString &Bazashema, const QString &Bazadoc,
                        const QString &Bazapar, const QString &Baza_id);
+    bool insertIntoBazaIzmereni(const QVariantList &data2);
+    bool insertIntoBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim, const QString &idtipizmer,
+                                const QString &normed, const QString &norm);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id

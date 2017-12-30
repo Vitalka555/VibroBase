@@ -15,90 +15,47 @@ Item {
         id: page
         property var tempDate: new Date();
         anchors.fill: parent
-//        Rectangle {
-//            id: root
-//                width: 600
-//                height: 400
-//                visible: true
+        footer: ToolBar {
+            //Rectangle {
+                id: rec_button
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                //height: 50
+                //color: "lightgreen"
+                ToolButton {
+                    id: but_save
+                    anchors.bottom: parent.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    text: "Сохранить"
+                    onClicked: {
+                        tf_date.tex = tf_date.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000" //меняем формат даты для записи в базу
 
-//                Tumbler {
-//                    id: tumbler
-//                    anchors.centerIn: parent
-
-//                    TextMetrics {
-//                        id: characterMetrics
-//                        font.bold: true
-//                        text: "M"
-//                    }
-
-//                    readonly property real delegateTextMargins: characterMetrics.width * 1.5
-//                    readonly property var days: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-//                    TumblerColumn {
-//                        id: tumblerDayColumn
-
-//                        function updateModel() {
-//                            var previousIndex = tumblerDayColumn.currentIndex;
-//                            var newDays = tumbler.days[monthColumn.currentIndex];
-
-//                            if (!model) {
-//                                var array = [];
-//                                for (var i = 0; i < newDays; ++i) {
-//                                    array.push(i + 1);
-//                                }
-//                                model = array;
-//                            } else {
-//                                // If we've already got days in the model, just add or remove
-//                                // the minimum amount necessary to make spinning the month column fast.
-//                                var difference = model.length - newDays;
-//                                if (model.length > newDays) {
-//                                    model.splice(model.length - 1, difference);
-//                                } else {
-//                                    var lastDay = model[model.length - 1];
-//                                    for (i = lastDay; i < lastDay + difference; ++i) {
-//                                        model.push(i + 1);
-//                                    }
-//                                }
-//                            }
-
-//                            tumbler.setCurrentIndexAt(0, Math.min(newDays - 1, previousIndex));
-//                        }
-//                    }
-//                    TumblerColumn {
-//                        id: monthColumn
-//                        width: characterMetrics.width * 3 + tumbler.delegateTextMargins
-//                        model: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
-//                        onCurrentIndexChanged: tumblerDayColumn.updateModel()
-//                    }
-//                    TumblerColumn {
-//                        id: yearColumn
-//                        width: characterMetrics.width * 4 + tumbler.delegateTextMargins
-//                        model: ListModel {
-//                            Component.onCompleted: {
-//                                for (var i = 2000; i < 2100; ++i) {
-//                                    append({value: i.toString()});
-//                                }
-//                            }
-//                        }
-//                    }
-
-//                    style: TumblerStyle {
-//                        id: tumblerStyle
-
-//                        delegate: Item {
-//                            implicitHeight: (tumbler.height - padding.top - padding.bottom) / tumblerStyle.visibleItemCount
-
-//                            Text {
-//                                id: label
-//                                text: styleData.value
-//                                color: styleData.current ? "red" : "#666666"
-//                                opacity: 0.4 + Math.max(0, 1 - Math.abs(styleData.displacement)) * 0.6
-//                                anchors.centerIn: parent
-//                            }
-//                        }
-//                    }
-//                }
-//        }
+                        database.insertIntoBazaIzmereni(combo_kks.id, tf_date.tex, tf_time.text, combo_rezhim.id, combo_tipizmer.id, tf_norm_ed.text,
+                                                        tf_norm_meh.text)
+//                        console.log(combo_kks.id)
+//                        console.log(tf_date.tex)
+//                        console.log(tf_time.text)
+                        model_izmer.updateModel()
+                        stackView.replace(bi)
+                        tool_left.visible = true
+                        tool_left1.visible = false
+                    }
+                }
+                ToolButton {
+                    id: but_cancel
+                    anchors.bottom: parent.bottom
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    //highlighted: true
+                    //Material.accent: Material.LightBlue
+                    text: "Отмена"
+                    onClicked: {
+                    }
+                }
+            }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
         Text {
@@ -137,9 +94,12 @@ Item {
 
             onCurrentTextChanged: {
                 if(currentIndex==-1){
-                    combo_ceh.id = ""
+                    combo_kks.id = ""
+                    stackView.baza_id_for_norm_creatBI = combo_kks.id
                 } else {
                 combo_kks.id = model_kks.getId(currentIndex)
+                    stackView.baza_id_for_norm_creatBI = combo_kks.id
+                    console.log("id в Baza", stackView.baza_id_for_norm_creatBI)
                 }
             }
 
@@ -189,6 +149,7 @@ Item {
             persistentSelection: true
             inputMask: "00-00-0000"
             inputMethodHints: Qt.ImhDate
+            property string tex: Qt.formatDateTime(page.tempDate, "yyyy-MM-dd")
             //property string dateTimeString: "17-09-2013"
             text: Qt.formatDateTime(page.tempDate, "ddMMyyyy")
             MouseArea {
@@ -314,7 +275,240 @@ Item {
                 win.visible = true
             }
         }
+        Text {
+            id: text_rezhim
+            anchors.verticalCenter: combo_rezhim.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 15
+            text: "Режим:"
+        }
+        ComboBox {
+            id: combo_rezhim
+            property string id: ""
+            currentIndex: -1
+            anchors.top: tf_time.bottom
+            anchors.topMargin: 5
+            anchors.left: text_rezhim.right
+            anchors.leftMargin: 5
+            width: 200
+            model: model_rezhim
+            textRole: 'Rezhimname'
+            delegate: ItemDelegate {
+                //Material.foreground: Material.LightBlue
+                width: combo_rezhim.width
+                text: combo_rezhim.textRole ? (Array.isArray(combo_rezhim.model) ? modelData[combo_rezhim.textRole] : model[combo_rezhim.textRole]) : modelData
+                highlighted: combo_rezhim.highlightedIndex === index
+
+            }
+
+            onCurrentTextChanged: {
+                if(currentIndex==-1){
+                    combo_rezhim.id = ""
+                    tf_norm_ed.clear()
+                    tf_norm_meh.clear()
+                } else {
+                combo_rezhim.id = model_rezhim.getId(currentIndex)
+                }
+                qmlNormCreatBI()
+                if(combo_rezhim.id==1){
+                    mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+2), "text")
+                    mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+2), "text")
+                }
+                if(combo_rezhim.id==2){
+                    mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+3), "text")
+                    mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+4), "text")
+                }
+                if(combo_rezhim.id==3){
+                    mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+5), "text")
+                    mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+6), "text")
+                }
+            }
+
+        }
+        Button {
+            anchors.top: combo_rezhim.top
+            anchors.left: combo_rezhim.right
+            anchors.leftMargin: 5
+            width: height - 10
+            highlighted: true
+            Material.accent: Material.LightBlue
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 20
+                color: "white"
+                text: "X"
+            }
+            onClicked: {
+                combo_rezhim.currentIndex = -1
+            }
+        }
+        Text {
+            id: text_tipizmer
+            anchors.verticalCenter: combo_tipizmer.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 15
+            text: "Тип измерения:"
+        }
+        ComboBox {
+            id: combo_tipizmer
+            property string id: ""
+            currentIndex: -1
+            anchors.top: combo_rezhim.bottom
+            anchors.topMargin: 5
+            anchors.left: text_tipizmer.right
+            anchors.leftMargin: 5
+            width: 200
+            model: model_tipizmer
+            textRole: 'TipIzmername'
+            delegate: ItemDelegate {
+                //Material.foreground: Material.LightBlue
+                width: combo_tipizmer.width
+                text: combo_tipizmer.textRole ? (Array.isArray(combo_tipizmer.model) ? modelData[combo_tipizmer.textRole] : model[combo_tipizmer.textRole]) : modelData
+                highlighted: combo_tipizmer.highlightedIndex === index
+
+            }
+
+            onCurrentTextChanged: {
+                if(currentIndex==-1){
+                    combo_tipizmer.id = ""
+                } else {
+                combo_tipizmer.id = model_tipizmer.getId(currentIndex)
+                }
+            }
+
+        }
+        Button {
+            anchors.top: combo_tipizmer.top
+            anchors.left: combo_tipizmer.right
+            anchors.leftMargin: 5
+            width: height - 10
+            highlighted: true
+            Material.accent: Material.LightBlue
+            Text {
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 20
+                color: "white"
+                text: "X"
+            }
+            onClicked: {
+                combo_tipizmer.currentIndex = -1
+            }
+        }
+        Text {
+            id: text_norm
+            anchors.top: combo_tipizmer.bottom
+            anchors.topMargin: 5
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 15
+            text: "Нормы вибрации:"
+        }
+        Text {
+            id: text_norm_ed
+            anchors.verticalCenter: tf_norm_ed.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 15
+            text: "Эл/дв:"
+        }
+        TextField {
+            id: tf_norm_ed
+            anchors.top: text_norm.bottom
+            anchors.topMargin: 5
+            anchors.left: text_norm_ed.right
+            anchors.leftMargin: 5
+            height: combo_kks.height
+            width: 40
+            //highlighted: true
+            //Material.accent: Material.LightBlue
+            //placeholderText: "Введите KKS оборудования"
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_norm_ed.x = mouseX
+                    contextMenu_norm_ed.y = mouseY
+                    contextMenu_norm_ed.open()
+                }
+            }
+            Menu {
+                id: contextMenu_norm_ed
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_norm_ed.selectedText
+                    onTriggered: tf_norm_ed.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_norm_ed.selectedText
+                    onTriggered: tf_norm_ed.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_norm_ed.canPaste
+                    onTriggered: tf_norm_ed.paste()
+                }
+            }
+        }
+        Text {
+            id: text_norm_meh
+            anchors.verticalCenter: tf_norm_meh.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 5
+            font.pixelSize: 15
+            text: "Механизм:"
+        }
+        TextField {
+            id: tf_norm_meh
+            anchors.top: tf_norm_ed.bottom
+            anchors.topMargin: 5
+            anchors.left: text_norm_meh.right
+            anchors.leftMargin: 5
+            height: combo_kks.height
+            width: 40
+            //highlighted: true
+            //Material.accent: Material.LightBlue
+            //placeholderText: "Введите KKS оборудования"
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_norm_meh.x = mouseX
+                    contextMenu_norm_meh.y = mouseY
+                    contextMenu_norm_meh.open()
+                }
+            }
+            Menu {
+                id: contextMenu_norm_meh
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_norm_meh.selectedText
+                    onTriggered: tf_norm_meh.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_norm_meh.selectedText
+                    onTriggered: tf_norm_meh.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_norm_meh.canPaste
+                    onTriggered: tf_norm_meh.paste()
+                }
+            }
+        }
     } // end page
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Item {
                 id: win
                 anchors.centerIn: parent
@@ -581,6 +775,7 @@ Item {
                         }
                     }
                 }
+
             }
             Calendar {
                 id: calendar0
@@ -588,6 +783,7 @@ Item {
                 visible: false
 
             }
+
 
 
 

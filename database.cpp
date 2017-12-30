@@ -475,6 +475,44 @@ bool DataBase::editTableBaza(const QString &Bazakks, const QString &Cehid, const
         return false;
 }
 
+bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO BazaIzmereni (id_Baza, Дата, Время, id_Rezhim, id_TipIzmerenia, НормаЭлДв, Норма) "
+                 "VALUES (:idbaza, :date, :time, :idrezhim, :idtipizmer, :normed, :norm)");
+   quer.bindValue(":idbaza",       data2[0].toString());
+   quer.bindValue(":date",         data2[1].toString()=="" ? QVariant(QVariant::String):data2[1].toString());
+   quer.bindValue(":time",         data2[2].toString()=="" ? QVariant(QVariant::String):data2[2].toString());
+   quer.bindValue(":idrezhim",     data2[3].toString());
+   quer.bindValue(":idtipizmer",   data2[4].toString());
+   quer.bindValue(":normed",       data2[5].toString()=="" ? QVariant(QVariant::String):data2[5].toString());
+   quer.bindValue(":norm",         data2[6].toString()=="" ? QVariant(QVariant::String):data2[6].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << bazaizm;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim,
+                                      const QString &idtipizmer, const QString &normed, const QString &norm){
+    QVariantList data2;
+    data2.append(idbaza);
+    data2.append(date);
+    data2.append(time);
+    data2.append(idrezhim);
+    data2.append(idtipizmer);
+    data2.append(normed);
+    data2.append(norm);
+    if(insertIntoBazaIzmereni(data2))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)

@@ -787,6 +787,1762 @@ Rectangle {
     anchors.left: rec_1.right
     anchors.right: parent.right
     height: page.height/2
+    Rectangle{
+        id: rec00
+        anchors.top: parent.top
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+    }
+    Rectangle{
+        id: rec01
+        anchors.top: rec00.top
+        anchors.left: rec00.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_01
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "1"
+        }
+    }
+    Rectangle{
+        id: rec02
+        anchors.top: rec00.top
+        anchors.left: rec01.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_02
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "2"
+        }
+    }
+    Rectangle{
+        id: rec03
+        anchors.top: rec00.top
+        anchors.left: rec02.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_03
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "3"
+        }
+    }
+    Rectangle{
+        id: rec04
+        anchors.top: rec00.top
+        anchors.left: rec03.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_04
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "4"
+        }
+    }
+    Rectangle{
+        id: rec05
+        anchors.top: rec00.top
+        anchors.left: rec04.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_05
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "5"
+        }
+    }
+    Rectangle{
+        id: rec06
+        anchors.top: rec00.top
+        anchors.left: rec05.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_06
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "6"
+        }
+    }
+    Rectangle{
+        id: rec07
+        anchors.top: rec00.top
+        anchors.left: rec06.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_07
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "7"
+        }
+    }
+    Rectangle{
+        id: rec08
+        anchors.top: rec00.top
+        anchors.left: rec07.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_08
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "8"
+        }
+    }
+    Rectangle{
+        id: rec10
+        anchors.top: rec00.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_10
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "В"
+        }
+    }
+    Rectangle{
+        id: rec20
+        anchors.top: rec10.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_20
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "П"
+        }
+    }
+    Rectangle{
+        id: rec30
+        anchors.top: rec20.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_30
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "О"
+        }
+    }
+    Rectangle{
+        id: rec11
+        anchors.top: rec10.top
+        anchors.left: rec10.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_11
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_11.x = mouseX
+                    contextMenu_tf_11.y = mouseY
+                    contextMenu_tf_11.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_11
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_11.selectedText
+                    onTriggered: tf_11.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_11.selectedText
+                    onTriggered: tf_11.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_11.canPaste
+                    onTriggered: tf_11.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec21
+        anchors.top: rec20.top
+        anchors.left: rec20.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_21
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_21.x = mouseX
+                    contextMenu_tf_21.y = mouseY
+                    contextMenu_tf_21.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_21
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_21.selectedText
+                    onTriggered: tf_21.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_21.selectedText
+                    onTriggered: tf_21.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_21.canPaste
+                    onTriggered: tf_21.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec31
+        anchors.top: rec30.top
+        anchors.left: rec30.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_31
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_31.x = mouseX
+                    contextMenu_tf_31.y = mouseY
+                    contextMenu_tf_31.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_31
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_31.selectedText
+                    onTriggered: tf_31.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_31.selectedText
+                    onTriggered: tf_31.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_31.canPaste
+                    onTriggered: tf_31.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec12
+        anchors.top: rec10.top
+        anchors.left: rec11.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_12
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_12.x = mouseX
+                    contextMenu_tf_12.y = mouseY
+                    contextMenu_tf_12.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_12
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_12.selectedText
+                    onTriggered: tf_12.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_12.selectedText
+                    onTriggered: tf_12.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_12.canPaste
+                    onTriggered: tf_12.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec22
+        anchors.top: rec20.top
+        anchors.left: rec21.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_22
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_22.x = mouseX
+                    contextMenu_tf_22.y = mouseY
+                    contextMenu_tf_22.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_22
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_22.selectedText
+                    onTriggered: tf_22.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_22.selectedText
+                    onTriggered: tf_22.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_22.canPaste
+                    onTriggered: tf_22.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec32
+        anchors.top: rec30.top
+        anchors.left: rec31.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_32
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_32.x = mouseX
+                    contextMenu_tf_32.y = mouseY
+                    contextMenu_tf_32.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_32
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_32.selectedText
+                    onTriggered: tf_32.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_32.selectedText
+                    onTriggered: tf_32.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_32.canPaste
+                    onTriggered: tf_32.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec13
+        anchors.top: rec10.top
+        anchors.left: rec12.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_13
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_13.x = mouseX
+                    contextMenu_tf_13.y = mouseY
+                    contextMenu_tf_13.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_13
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_13.selectedText
+                    onTriggered: tf_13.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_13.selectedText
+                    onTriggered: tf_13.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_13.canPaste
+                    onTriggered: tf_13.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec23
+        anchors.top: rec20.top
+        anchors.left: rec22.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_23
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_23.x = mouseX
+                    contextMenu_tf_23.y = mouseY
+                    contextMenu_tf_23.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_23
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_23.selectedText
+                    onTriggered: tf_23.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_23.selectedText
+                    onTriggered: tf_23.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_23.canPaste
+                    onTriggered: tf_23.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec33
+        anchors.top: rec30.top
+        anchors.left: rec32.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_33
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_33.x = mouseX
+                    contextMenu_tf_33.y = mouseY
+                    contextMenu_tf_33.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_33
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_33.selectedText
+                    onTriggered: tf_33.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_33.selectedText
+                    onTriggered: tf_33.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_33.canPaste
+                    onTriggered: tf_33.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec14
+        anchors.top: rec10.top
+        anchors.left: rec13.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_14
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_14.x = mouseX
+                    contextMenu_tf_14.y = mouseY
+                    contextMenu_tf_14.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_14
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_14.selectedText
+                    onTriggered: tf_14.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_14.selectedText
+                    onTriggered: tf_14.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_14.canPaste
+                    onTriggered: tf_14.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec24
+        anchors.top: rec20.top
+        anchors.left: rec23.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_24
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_24.x = mouseX
+                    contextMenu_tf_24.y = mouseY
+                    contextMenu_tf_24.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_24
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_24.selectedText
+                    onTriggered: tf_24.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_24.selectedText
+                    onTriggered: tf_24.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_24.canPaste
+                    onTriggered: tf_24.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec34
+        anchors.top: rec30.top
+        anchors.left: rec33.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_34
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_34.x = mouseX
+                    contextMenu_tf_34.y = mouseY
+                    contextMenu_tf_34.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_34
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_34.selectedText
+                    onTriggered: tf_34.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_34.selectedText
+                    onTriggered: tf_34.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_34.canPaste
+                    onTriggered: tf_34.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec15
+        anchors.top: rec10.top
+        anchors.left: rec14.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_15
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_15.x = mouseX
+                    contextMenu_tf_15.y = mouseY
+                    contextMenu_tf_15.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_15
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_15.selectedText
+                    onTriggered: tf_15.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_15.selectedText
+                    onTriggered: tf_15.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_15.canPaste
+                    onTriggered: tf_15.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec25
+        anchors.top: rec20.top
+        anchors.left: rec24.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_25
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_25.x = mouseX
+                    contextMenu_tf_25.y = mouseY
+                    contextMenu_tf_25.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_25
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_25.selectedText
+                    onTriggered: tf_25.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_25.selectedText
+                    onTriggered: tf_25.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_25.canPaste
+                    onTriggered: tf_25.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec35
+        anchors.top: rec30.top
+        anchors.left: rec34.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_35
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_35.x = mouseX
+                    contextMenu_tf_35.y = mouseY
+                    contextMenu_tf_35.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_35
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_35.selectedText
+                    onTriggered: tf_35.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_35.selectedText
+                    onTriggered: tf_35.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_35.canPaste
+                    onTriggered: tf_35.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec16
+        anchors.top: rec10.top
+        anchors.left: rec15.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_16
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_16.x = mouseX
+                    contextMenu_tf_16.y = mouseY
+                    contextMenu_tf_16.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_16
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_16.selectedText
+                    onTriggered: tf_16.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_16.selectedText
+                    onTriggered: tf_16.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_16.canPaste
+                    onTriggered: tf_16.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec26
+        anchors.top: rec20.top
+        anchors.left: rec25.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_26
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_26.x = mouseX
+                    contextMenu_tf_26.y = mouseY
+                    contextMenu_tf_26.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_26
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_26.selectedText
+                    onTriggered: tf_26.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_26.selectedText
+                    onTriggered: tf_26.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_26.canPaste
+                    onTriggered: tf_26.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec36
+        anchors.top: rec30.top
+        anchors.left: rec35.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_36
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_36.x = mouseX
+                    contextMenu_tf_36.y = mouseY
+                    contextMenu_tf_36.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_36
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_36.selectedText
+                    onTriggered: tf_36.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_36.selectedText
+                    onTriggered: tf_36.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_36.canPaste
+                    onTriggered: tf_36.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec17
+        anchors.top: rec10.top
+        anchors.left: rec16.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_17
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_17.x = mouseX
+                    contextMenu_tf_17.y = mouseY
+                    contextMenu_tf_17.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_17
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_17.selectedText
+                    onTriggered: tf_17.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_17.selectedText
+                    onTriggered: tf_17.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_17.canPaste
+                    onTriggered: tf_17.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec27
+        anchors.top: rec20.top
+        anchors.left: rec26.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_27
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_27.x = mouseX
+                    contextMenu_tf_27.y = mouseY
+                    contextMenu_tf_27.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_27
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_27.selectedText
+                    onTriggered: tf_27.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_27.selectedText
+                    onTriggered: tf_27.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_27.canPaste
+                    onTriggered: tf_27.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec37
+        anchors.top: rec30.top
+        anchors.left: rec36.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_37
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_37.x = mouseX
+                    contextMenu_tf_37.y = mouseY
+                    contextMenu_tf_37.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_37
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_37.selectedText
+                    onTriggered: tf_37.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_37.selectedText
+                    onTriggered: tf_37.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_37.canPaste
+                    onTriggered: tf_37.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec18
+        anchors.top: rec10.top
+        anchors.left: rec17.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_18
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_18.x = mouseX
+                    contextMenu_tf_18.y = mouseY
+                    contextMenu_tf_18.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_18
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_18.selectedText
+                    onTriggered: tf_18.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_18.selectedText
+                    onTriggered: tf_18.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_18.canPaste
+                    onTriggered: tf_18.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec28
+        anchors.top: rec20.top
+        anchors.left: rec27.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_28
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_28.x = mouseX
+                    contextMenu_tf_28.y = mouseY
+                    contextMenu_tf_28.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_28
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_28.selectedText
+                    onTriggered: tf_28.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_28.selectedText
+                    onTriggered: tf_28.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_28.canPaste
+                    onTriggered: tf_28.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec38
+        anchors.top: rec30.top
+        anchors.left: rec37.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_38
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_38.x = mouseX
+                    contextMenu_tf_38.y = mouseY
+                    contextMenu_tf_38.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_38
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_38.selectedText
+                    onTriggered: tf_38.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_38.selectedText
+                    onTriggered: tf_38.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_38.canPaste
+                    onTriggered: tf_38.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec40
+        anchors.top: rec30.bottom
+        anchors.topMargin: 15
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        color: "#03a9f5"
+        Text {
+            id: text_40
+            anchors.centerIn: parent
+            font.pixelSize: 15
+            color: "white"
+            text: "Т"
+        }
+    }
+    Rectangle{
+        id: rec41
+        anchors.top: rec40.top
+        anchors.left: rec40.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_41
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_41.x = mouseX
+                    contextMenu_tf_41.y = mouseY
+                    contextMenu_tf_41.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_41
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_41.selectedText
+                    onTriggered: tf_41.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_41.selectedText
+                    onTriggered: tf_41.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_41.canPaste
+                    onTriggered: tf_41.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec42
+        anchors.top: rec40.top
+        anchors.left: rec41.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_42
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_42.x = mouseX
+                    contextMenu_tf_42.y = mouseY
+                    contextMenu_tf_42.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_42
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_42.selectedText
+                    onTriggered: tf_42.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_42.selectedText
+                    onTriggered: tf_42.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_42.canPaste
+                    onTriggered: tf_42.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec43
+        anchors.top: rec40.top
+        anchors.left: rec42.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_43
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_43.x = mouseX
+                    contextMenu_tf_43.y = mouseY
+                    contextMenu_tf_43.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_43
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_43.selectedText
+                    onTriggered: tf_43.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_43.selectedText
+                    onTriggered: tf_43.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_43.canPaste
+                    onTriggered: tf_43.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec44
+        anchors.top: rec40.top
+        anchors.left: rec43.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_44
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_44.x = mouseX
+                    contextMenu_tf_44.y = mouseY
+                    contextMenu_tf_44.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_44
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_44.selectedText
+                    onTriggered: tf_44.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_44.selectedText
+                    onTriggered: tf_44.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_44.canPaste
+                    onTriggered: tf_44.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec45
+        anchors.top: rec40.top
+        anchors.left: rec44.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_45
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_45.x = mouseX
+                    contextMenu_tf_45.y = mouseY
+                    contextMenu_tf_45.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_45
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_45.selectedText
+                    onTriggered: tf_45.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_45.selectedText
+                    onTriggered: tf_45.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_45.canPaste
+                    onTriggered: tf_45.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec46
+        anchors.top: rec40.top
+        anchors.left: rec45.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_46
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_46.x = mouseX
+                    contextMenu_tf_46.y = mouseY
+                    contextMenu_tf_46.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_46
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_46.selectedText
+                    onTriggered: tf_46.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_46.selectedText
+                    onTriggered: tf_46.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_46.canPaste
+                    onTriggered: tf_46.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec47
+        anchors.top: rec40.top
+        anchors.left: rec46.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_47
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_47.x = mouseX
+                    contextMenu_tf_47.y = mouseY
+                    contextMenu_tf_47.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_47
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_47.selectedText
+                    onTriggered: tf_47.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_47.selectedText
+                    onTriggered: tf_47.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_47.canPaste
+                    onTriggered: tf_47.paste()
+                }
+            }
+        }
+    }
+    Rectangle{
+        id: rec48
+        anchors.top: rec40.top
+        anchors.left: rec47.right
+        anchors.leftMargin: 5
+        width: (rec_6.width-50)/9
+        height: combo_kks.height
+        radius: 10
+        //color: "#03a9f5"
+        border.width: 1
+        border.color: "#03a9f5"
+        TextField {
+            id: tf_48
+            anchors.centerIn: parent
+            width: parent.width/2
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+            horizontalAlignment: TextInput.AlignHCenter
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_tf_48.x = mouseX
+                    contextMenu_tf_48.y = mouseY
+                    contextMenu_tf_48.open()
+                }
+            }
+            Menu {
+                id: contextMenu_tf_48
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: tf_48.selectedText
+                    onTriggered: tf_48.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: tf_48.selectedText
+                    onTriggered: tf_48.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: tf_48.canPaste
+                    onTriggered: tf_48.paste()
+                }
+            }
+        }
+    }
+
 }// end rec_6
     } // end page
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

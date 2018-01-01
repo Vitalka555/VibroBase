@@ -786,7 +786,7 @@ Rectangle {
     anchors.top: parent.top
     anchors.left: rec_1.right
     anchors.right: parent.right
-    height: page.height/2
+    height: rec00.height+rec10.height+rec20.height+rec30.height+rec40.height+tf_rashod.height+45
     Rectangle{
         id: rec00
         anchors.top: parent.top
@@ -2542,8 +2542,168 @@ Rectangle {
             }
         }
     }
+    Text {
+        id: text_rashod
+        anchors.verticalCenter: tf_rashod.verticalCenter
+        anchors.left: rec_6.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+        text: "Расход:"
+    }
+    TextField {
+        id: tf_rashod
+        anchors.top: rec40.bottom
+        anchors.topMargin: 5
+        anchors.left: text_rashod.right
+        height: combo_kks.height
+        width: 100
+        //highlighted: true
+        //Material.accent: Material.LightBlue
+        //placeholderText: "Введите KKS оборудования"
+        focus: true
+        selectByMouse: true
+        persistentSelection: true
+        horizontalAlignment: TextInput.AlignHCenter
+        //effectiveHorizontalAlignment: TextInput.AlignHCenter
+        MouseArea {
+            acceptedButtons: Qt.RightButton
+            anchors.fill: parent
+            onClicked: {
+                contextMenu_rashod.x = mouseX
+                contextMenu_rashod.y = mouseY
+                contextMenu_rashod.open()
+            }
+        }
+        Menu {
+            id: contextMenu_rashod
+            MenuItem {
+                text: qsTr("Копировать")
+                enabled: tf_rashod.selectedText
+                onTriggered: tf_rashod.copy()
+            }
+            MenuItem {
+                text: qsTr("Вырезать")
+                enabled: tf_rashod.selectedText
+                onTriggered: tf_rashod.cut()
+            }
+            MenuItem {
+                text: qsTr("Вставить")
+                enabled: tf_rashod.canPaste
+                onTriggered: tf_rashod.paste()
+            }
+        }
+    }
+    Text {
+        id: text_davl
+        anchors.verticalCenter: tf_rashod.verticalCenter
+        anchors.right: tf_davl.left
+        anchors.rightMargin: 5
+        font.pixelSize: 15
+        text: "Давление:"
+    }
+    TextField {
+        id: tf_davl
+        anchors.top: rec40.bottom
+        anchors.topMargin: 5
+        anchors.right: rec_6.right
+        anchors.rightMargin: 5
+        height: combo_kks.height
+        width: 100
+        //highlighted: true
+        //Material.accent: Material.LightBlue
+        //placeholderText: "Введите KKS оборудования"
+        focus: true
+        selectByMouse: true
+        persistentSelection: true
+        horizontalAlignment: TextInput.AlignHCenter
+        //effectiveHorizontalAlignment: TextInput.AlignHCenter
+        MouseArea {
+            acceptedButtons: Qt.RightButton
+            anchors.fill: parent
+            onClicked: {
+                contextMenu_davl.x = mouseX
+                contextMenu_davl.y = mouseY
+                contextMenu_davl.open()
+            }
+        }
+        Menu {
+            id: contextMenu_davl
+            MenuItem {
+                text: qsTr("Копировать")
+                enabled: tf_davl.selectedText
+                onTriggered: tf_davl.copy()
+            }
+            MenuItem {
+                text: qsTr("Вырезать")
+                enabled: tf_davl.selectedText
+                onTriggered: tf_davl.cut()
+            }
+            MenuItem {
+                text: qsTr("Вставить")
+                enabled: tf_davl.canPaste
+                onTriggered: tf_davl.paste()
+            }
+        }
+    }
 
 }// end rec_6
+Rectangle {
+    id: rec_7
+    anchors.top: rec_6.bottom
+    anchors.left: rec_1.right
+    anchors.right: parent.right
+    anchors.bottom: parent.bottom
+    Flickable {
+        id: flickable_prim
+        flickableDirection: Flickable.VerticalFlick
+        anchors.fill: parent
+
+        TextArea.flickable: TextArea {
+            id: textArea_prim
+            placeholderText: "Введите примечания"
+            //Material.accent: Material.LightBlue
+            textFormat: Qt.PlainText//RichText
+            wrapMode: TextArea.Wrap
+            MouseArea {
+                acceptedButtons: Qt.RightButton
+                anchors.fill: parent
+                onClicked: {
+                    contextMenu_prim.x = mouseX
+                    contextMenu_prim.y = mouseY
+                    contextMenu_prim.open()
+                }
+            }
+            Menu {
+                id: contextMenu_prim
+
+                MenuItem {
+                    text: qsTr("Копировать")
+                    enabled: textArea_prim.selectedText
+                    onTriggered: textArea_prim.copy()
+                }
+                MenuItem {
+                    text: qsTr("Вырезать")
+                    enabled: textArea_prim.selectedText
+                    onTriggered: textArea_prim.cut()
+                }
+                MenuItem {
+                    text: qsTr("Вставить")
+                    enabled: textArea_prim.canPaste
+                    onTriggered: textArea_prim.paste()
+                }
+
+               // MenuSeparator {}
+
+            }
+            focus: true
+            selectByMouse: true
+            persistentSelection: true
+        }
+        ScrollBar.vertical: ScrollBar {
+        width: 10
+        }
+    }
+}
     } // end page
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             Item {

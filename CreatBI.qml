@@ -41,6 +41,7 @@ Item {
                         stackView.replace(bi)
                         tool_left.visible = true
                         tool_left1.visible = false
+                        tool_left2.visible = false
                     }
                 }
                 ToolButton {

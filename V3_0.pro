@@ -1,4 +1,4 @@
-QT += gui qml quick quickcontrols2 sql charts datavisualization widgets
+QT += core gui qml quick quickcontrols2 sql charts datavisualization widgets
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use

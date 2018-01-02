@@ -478,15 +478,57 @@ bool DataBase::editTableBaza(const QString &Bazakks, const QString &Cehid, const
 bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
 {
    QSqlQuery quer;
-   quer.prepare("INSERT INTO BazaIzmereni (id_Baza, Дата, Время, id_Rezhim, id_TipIzmerenia, НормаЭлДв, Норма) "
-                 "VALUES (:idbaza, :date, :time, :idrezhim, :idtipizmer, :normed, :norm)");
+   quer.prepare("INSERT INTO BazaIzmereni (id_Baza, Дата, Время, id_Rezhim, id_TipIzmerenia, НормаЭлДв, Норма, 'ЛАЭС-2', АТЭ, "
+                "'1В', '1П', '1О', '2В', '2П', '2О', '3В', '3П', '3О', '4В', '4П', '4О', '5В', '5П', '5О', "
+                "'6В', '6П', '6О', '7В', '7П', '7О', '8В', '8П', '8О', T1, T2, T3, T4, T5, T6, T7, T8, "
+                "Q, P, Примечания) "
+                 "VALUES (:idbaza, :date, :time, :idrezhim, :idtipizmer, :normed, :norm, :flaes, :fate, :v1, :p1, :o1, "
+                ":v2, :p2, :o2, :v3, :p3, :o3, :v4, :p4, :o4, :v5, :p5, :o5, :v6, :p6, :o6, :v7, :p7, :o7, :v8, :p8, :o8, "
+                ":t1, :t2, :t3, :t4, :t5, :t6, :t7, :t8, :q, :p, :prim)");
    quer.bindValue(":idbaza",       data2[0].toString());
    quer.bindValue(":date",         data2[1].toString()=="" ? QVariant(QVariant::String):data2[1].toString());
    quer.bindValue(":time",         data2[2].toString()=="" ? QVariant(QVariant::String):data2[2].toString());
    quer.bindValue(":idrezhim",     data2[3].toString());
    quer.bindValue(":idtipizmer",   data2[4].toString());
-   quer.bindValue(":normed",       data2[5].toString()=="" ? QVariant(QVariant::String):data2[5].toString());
-   quer.bindValue(":norm",         data2[6].toString()=="" ? QVariant(QVariant::String):data2[6].toString());
+   quer.bindValue(":normed",       data2[5].toString()=="" ? QVariant(QVariant::String):data2[5].toReal());
+   quer.bindValue(":norm",         data2[6].toString()=="" ? QVariant(QVariant::String):data2[6].toReal());
+   quer.bindValue(":flaes",        data2[7].toString()=="" ? QVariant(QVariant::String):data2[7].toString());
+   quer.bindValue(":fate",         data2[8].toString()=="" ? QVariant(QVariant::String):data2[8].toString());
+   quer.bindValue(":v1",           data2[9].toString()=="" ? QVariant(QVariant::String):data2[9].toReal());
+   quer.bindValue(":p1",           data2[10].toString()=="" ? QVariant(QVariant::String):data2[10].toString());
+   quer.bindValue(":o1",           data2[11].toString()=="" ? QVariant(QVariant::String):data2[11].toString());
+   quer.bindValue(":v2",           data2[12].toString()=="" ? QVariant(QVariant::String):data2[12].toString());
+   quer.bindValue(":p2",           data2[13].toString()=="" ? QVariant(QVariant::String):data2[13].toString());
+   quer.bindValue(":o2",           data2[14].toString()=="" ? QVariant(QVariant::String):data2[14].toString());
+   quer.bindValue(":v3",           data2[15].toString()=="" ? QVariant(QVariant::String):data2[15].toString());
+   quer.bindValue(":p3",           data2[16].toString()=="" ? QVariant(QVariant::String):data2[16].toString());
+   quer.bindValue(":o3",           data2[17].toString()=="" ? QVariant(QVariant::String):data2[17].toString());
+   quer.bindValue(":v4",           data2[18].toString()=="" ? QVariant(QVariant::String):data2[18].toString());
+   quer.bindValue(":p4",           data2[19].toString()=="" ? QVariant(QVariant::String):data2[19].toString());
+   quer.bindValue(":o4",           data2[20].toString()=="" ? QVariant(QVariant::String):data2[20].toString());
+   quer.bindValue(":v5",           data2[21].toString()=="" ? QVariant(QVariant::String):data2[21].toString());
+   quer.bindValue(":p5",           data2[22].toString()=="" ? QVariant(QVariant::String):data2[22].toString());
+   quer.bindValue(":o5",           data2[23].toString()=="" ? QVariant(QVariant::String):data2[23].toString());
+   quer.bindValue(":v6",           data2[24].toString()=="" ? QVariant(QVariant::String):data2[24].toString());
+   quer.bindValue(":p6",           data2[25].toString()=="" ? QVariant(QVariant::String):data2[25].toString());
+   quer.bindValue(":o6",           data2[26].toString()=="" ? QVariant(QVariant::String):data2[26].toString());
+   quer.bindValue(":v7",           data2[27].toString()=="" ? QVariant(QVariant::String):data2[27].toString());
+   quer.bindValue(":p7",           data2[28].toString()=="" ? QVariant(QVariant::String):data2[28].toString());
+   quer.bindValue(":o7",           data2[29].toString()=="" ? QVariant(QVariant::String):data2[29].toString());
+   quer.bindValue(":v8",           data2[30].toString()=="" ? QVariant(QVariant::String):data2[30].toString());
+   quer.bindValue(":p8",           data2[31].toString()=="" ? QVariant(QVariant::String):data2[31].toString());
+   quer.bindValue(":o8",           data2[32].toString()=="" ? QVariant(QVariant::String):data2[32].toString());
+   quer.bindValue(":t1",           data2[33].toString()=="" ? QVariant(QVariant::String):data2[33].toString());
+   quer.bindValue(":t2",           data2[34].toString()=="" ? QVariant(QVariant::String):data2[34].toString());
+   quer.bindValue(":t3",           data2[35].toString()=="" ? QVariant(QVariant::String):data2[35].toString());
+   quer.bindValue(":t4",           data2[36].toString()=="" ? QVariant(QVariant::String):data2[36].toString());
+   quer.bindValue(":t5",           data2[37].toString()=="" ? QVariant(QVariant::String):data2[37].toString());
+   quer.bindValue(":t6",           data2[38].toString()=="" ? QVariant(QVariant::String):data2[38].toString());
+   quer.bindValue(":t7",           data2[39].toString()=="" ? QVariant(QVariant::String):data2[39].toString());
+   quer.bindValue(":t8",           data2[40].toString()=="" ? QVariant(QVariant::String):data2[40].toString());
+   quer.bindValue(":q",            data2[41].toString()=="" ? QVariant(QVariant::String):data2[41].toString());
+   quer.bindValue(":p",            data2[42].toString()=="" ? QVariant(QVariant::String):data2[42].toString());
+   quer.bindValue(":prim",         data2[43].toString()=="" ? QVariant(QVariant::String):data2[43].toString());
    if(!quer.exec()){
        qDebug() << "error insert into " << bazaizm;
        qDebug() << quer.lastError().text();
@@ -497,8 +539,14 @@ bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
    return false;
 }
 
-bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim,
-                                      const QString &idtipizmer, const QString &normed, const QString &norm){
+bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim, const QString &idtipizmer,
+                                      const QString &normed, const QString &norm, const QString &flaes, const QString &fate, const QString &v1,
+                                      const QString &p1, const QString &o1, const QString &v2, const QString &p2, const QString &o2, const QString &v3,
+                                      const QString &p3, const QString &o3, const QString &v4, const QString &p4, const QString &o4, const QString &v5,
+                                      const QString &p5, const QString &o5, const QString &v6, const QString &p6, const QString &o6, const QString &v7,
+                                      const QString &p7, const QString &o7, const QString &v8, const QString &p8, const QString &o8, const QString &t1,
+                                      const QString &t2, const QString &t3, const QString &t4, const QString &t5, const QString &t6, const QString &t7,
+                                      const QString &t8, const QString &q, const QString &p, const QString &prim){
     QVariantList data2;
     data2.append(idbaza);
     data2.append(date);
@@ -507,6 +555,43 @@ bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date
     data2.append(idtipizmer);
     data2.append(normed);
     data2.append(norm);
+    data2.append(flaes);
+    data2.append(fate);
+    data2.append(v1);
+    data2.append(p1);
+    data2.append(o1);
+    data2.append(v2);
+    data2.append(p2);
+    data2.append(o2);
+    data2.append(v3);
+    data2.append(p3);
+    data2.append(o3);
+    data2.append(v4);
+    data2.append(p4);
+    data2.append(o4);
+    data2.append(v5);
+    data2.append(p5);
+    data2.append(o5);
+    data2.append(v6);
+    data2.append(p6);
+    data2.append(o6);
+    data2.append(v7);
+    data2.append(p7);
+    data2.append(o7);
+    data2.append(v8);
+    data2.append(p8);
+    data2.append(o8);
+    data2.append(t1);
+    data2.append(t2);
+    data2.append(t3);
+    data2.append(t4);
+    data2.append(t5);
+    data2.append(t6);
+    data2.append(t7);
+    data2.append(t8);
+    data2.append(q);
+    data2.append(p);
+    data2.append(prim);
     if(insertIntoBazaIzmereni(data2))
         return true;
     else

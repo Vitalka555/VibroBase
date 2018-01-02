@@ -13,6 +13,8 @@
 #include <QPainter>
 #include <QTime>
 
+
+
 #include "database.h"
 #include "listmodel.h"
 //#include "listmodel0.h"
@@ -25,13 +27,20 @@ static const int PROGRESS_Y_PX = 200;
 static const int PROGRESS_WIDTH_PX = 230;
 static const int PROGRESS_HEIGHT_PX = 28;
 
+
+
 int main(int argc, char *argv[])
 {
     //QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    //QLocale::setDefault(QLocale::C);
+    //QLocale::setDefault(QLocale::C);
+    //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
+
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 
     QApplication app(argc, argv);
+
     QQuickStyle::setStyle("Material");
 
     QPixmap pix( QDir::currentPath() + "/images/splash.png" );
@@ -73,6 +82,7 @@ int main(int argc, char *argv[])
         splashScreen.finish( &splashScreen );
 
     QQmlApplicationEngine engine;
+
     DataBase database;
     database.connectToDataBase();
     // Объявляем и инициализируем модель данных

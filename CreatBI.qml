@@ -33,7 +33,11 @@ Item {
                         tf_date.tex = tf_date.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000" //меняем формат даты для записи в базу
 
                         database.insertIntoBazaIzmereni(combo_kks.id, tf_date.tex, tf_time.text, combo_rezhim.id, combo_tipizmer.id, tf_norm_ed.text,
-                                                        tf_norm_meh.text)
+                                                        tf_norm_meh.text, textArea_laes.text, textArea_ate.text, tf_11.text, tf_21.text, tf_31.text,
+                                                        tf_12.text, tf_22.text, tf_32.text, tf_13.text, tf_23.text, tf_33.text, tf_14.text, tf_24.text,
+                                                        tf_34.text, tf_15.text, tf_25.text, tf_35.text, tf_16.text, tf_26.text, tf_36.text, tf_17.text,
+                                                        tf_27.text, tf_37.text, tf_18.text, tf_28.text, tf_38.text, tf_41.text, tf_42.text, tf_43.text,
+                                                        tf_44.text, tf_45.text, tf_46.text, tf_47.text, tf_48.text, tf_rashod.text, tf_davl.text, textArea_prim.text)
 //                        console.log(combo_kks.id)
 //                        console.log(tf_date.tex)
 //                        console.log(tf_time.text)

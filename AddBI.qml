@@ -67,16 +67,15 @@ Item {
                         tf_46.text = tf_46.text.replace(",",".")
                         tf_47.text = tf_47.text.replace(",",".")
                         tf_48.text = tf_48.text.replace(",",".")
-
-                        database.insertIntoBazaIzmereni(combo_kks.id, tf_date.tex, tf_time.text, combo_rezhim.id, combo_tipizmer.id, tf_norm_ed.text,
+                        console.log("id измерения = ", stackView.bazaizm_id)
+                        database.editTableBazaIzmereni(combo_kks.id, tf_date.tex, tf_time.text, combo_rezhim.id, combo_tipizmer.id, tf_norm_ed.text,
                                                         tf_norm_meh.text, textArea_laes.text, textArea_ate.text, tf_11.text, tf_21.text, tf_31.text,
                                                         tf_12.text, tf_22.text, tf_32.text, tf_13.text, tf_23.text, tf_33.text, tf_14.text, tf_24.text,
                                                         tf_34.text, tf_15.text, tf_25.text, tf_35.text, tf_16.text, tf_26.text, tf_36.text, tf_17.text,
                                                         tf_27.text, tf_37.text, tf_18.text, tf_28.text, tf_38.text, tf_41.text, tf_42.text, tf_43.text,
-                                                        tf_44.text, tf_45.text, tf_46.text, tf_47.text, tf_48.text, tf_rashod.text, tf_davl.text, textArea_prim.text)
-//                        console.log(combo_kks.id)
-//                        console.log(tf_date.tex)
-//                        console.log(tf_time.text)
+                                                        tf_44.text, tf_45.text, tf_46.text, tf_47.text, tf_48.text, tf_rashod.text, tf_davl.text,
+                                                       textArea_prim.text, stackView.bazaizm_id)
+                        stackView.bazaizm_id = ""
                         model_izmer.updateModel()
                         stackView.replace(bi)
                         tool_left.visible = true
@@ -3074,6 +3073,7 @@ Rectangle {
                 mapper_openBI.addMapping(tf_rashod, (0x0100+43), "text")
                 mapper_openBI.addMapping(tf_davl, (0x0100+44), "text")
                 mapper_openBI.addMapping(textArea_prim, (0x0100+45), "text")
+                mapper_openBI.addMapping(combo_kks, (0x0100+46), "id")
                 tf_norm_ed.text = tf_norm_ed.text.replace(".",",")
                 tf_norm_meh.text = tf_norm_meh.text.replace(".",",")
                 tf_11.text = tf_11.text.replace(".",",")

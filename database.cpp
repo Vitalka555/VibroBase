@@ -599,6 +599,135 @@ bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date
         return false;
 }
 
+bool DataBase::editTableBazaIzmereni(const QVariantList &data)
+{
+    qDebug() << "data[44].toString()"<< data[44].toString();
+   QSqlQuery quer;
+   quer.prepare("update BazaIzmereni set id_Baza = :idbaza, Дата = :date, Время = :time, id_Rezhim = :idrezhim, id_TipIzmerenia = :idtipizmer, "
+                "НормаЭлДв = :normed, Норма = :norm, 'ЛАЭС-2' = :flaes, АТЭ = :fate, "
+                "'1В' = :v1, '1П' = :p1, '1О' = :o1, '2В' = :v2, '2П' = :p2, '2О' = :o2, '3В' = :v3, '3П' = :p3, '3О' = :o3, "
+                "'4В' = :v4, '4П' = :p4, '4О' = :o4, '5В' = :v5, '5П' = :p5, '5О' = :o5, "
+                "'6В' = :v6, '6П' = :p6, '6О' = :o6, '7В' = :v7, '7П' = :p7, '7О' = :o7, '8В' = :v8, '8П' = :p8, '8О' = :o8, "
+                "T1 = :t1, T2 = :t2, T3 = :t3, T4 = :t4, T5 = :t5, T6 = :t6, T7 = :t7, T8 = :t8, "
+                "Q = :q, P = :p, Примечания = :prim where BazaIzmereni.id = :bazaIzmereni_id");
+   quer.bindValue(":idbaza",       data[0].toString());
+   quer.bindValue(":date",         data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   quer.bindValue(":time",         data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+   quer.bindValue(":idrezhim",     data[3].toString());
+   quer.bindValue(":idtipizmer",   data[4].toString());
+   quer.bindValue(":normed",       data[5].toString()=="" ? QVariant(QVariant::String):data[5].toReal());
+   quer.bindValue(":norm",         data[6].toString()=="" ? QVariant(QVariant::String):data[6].toReal());
+   quer.bindValue(":flaes",        data[7].toString()=="" ? QVariant(QVariant::String):data[7].toString());
+   quer.bindValue(":fate",         data[8].toString()=="" ? QVariant(QVariant::String):data[8].toString());
+   quer.bindValue(":v1",           data[9].toString()=="" ? QVariant(QVariant::String):data[9].toReal());
+   quer.bindValue(":p1",           data[10].toString()=="" ? QVariant(QVariant::String):data[10].toReal());
+   quer.bindValue(":o1",           data[11].toString()=="" ? QVariant(QVariant::String):data[11].toReal());
+   quer.bindValue(":v2",           data[12].toString()=="" ? QVariant(QVariant::String):data[12].toReal());
+   quer.bindValue(":p2",           data[13].toString()=="" ? QVariant(QVariant::String):data[13].toReal());
+   quer.bindValue(":o2",           data[14].toString()=="" ? QVariant(QVariant::String):data[14].toReal());
+   quer.bindValue(":v3",           data[15].toString()=="" ? QVariant(QVariant::String):data[15].toReal());
+   quer.bindValue(":p3",           data[16].toString()=="" ? QVariant(QVariant::String):data[16].toReal());
+   quer.bindValue(":o3",           data[17].toString()=="" ? QVariant(QVariant::String):data[17].toReal());
+   quer.bindValue(":v4",           data[18].toString()=="" ? QVariant(QVariant::String):data[18].toReal());
+   quer.bindValue(":p4",           data[19].toString()=="" ? QVariant(QVariant::String):data[19].toReal());
+   quer.bindValue(":o4",           data[20].toString()=="" ? QVariant(QVariant::String):data[20].toReal());
+   quer.bindValue(":v5",           data[21].toString()=="" ? QVariant(QVariant::String):data[21].toReal());
+   quer.bindValue(":p5",           data[22].toString()=="" ? QVariant(QVariant::String):data[22].toReal());
+   quer.bindValue(":o5",           data[23].toString()=="" ? QVariant(QVariant::String):data[23].toReal());
+   quer.bindValue(":v6",           data[24].toString()=="" ? QVariant(QVariant::String):data[24].toReal());
+   quer.bindValue(":p6",           data[25].toString()=="" ? QVariant(QVariant::String):data[25].toReal());
+   quer.bindValue(":o6",           data[26].toString()=="" ? QVariant(QVariant::String):data[26].toReal());
+   quer.bindValue(":v7",           data[27].toString()=="" ? QVariant(QVariant::String):data[27].toReal());
+   quer.bindValue(":p7",           data[28].toString()=="" ? QVariant(QVariant::String):data[28].toReal());
+   quer.bindValue(":o7",           data[29].toString()=="" ? QVariant(QVariant::String):data[29].toReal());
+   quer.bindValue(":v8",           data[30].toString()=="" ? QVariant(QVariant::String):data[30].toReal());
+   quer.bindValue(":p8",           data[31].toString()=="" ? QVariant(QVariant::String):data[31].toReal());
+   quer.bindValue(":o8",           data[32].toString()=="" ? QVariant(QVariant::String):data[32].toReal());
+   quer.bindValue(":t1",           data[33].toString()=="" ? QVariant(QVariant::String):data[33].toReal());
+   quer.bindValue(":t2",           data[34].toString()=="" ? QVariant(QVariant::String):data[34].toReal());
+   quer.bindValue(":t3",           data[35].toString()=="" ? QVariant(QVariant::String):data[35].toReal());
+   quer.bindValue(":t4",           data[36].toString()=="" ? QVariant(QVariant::String):data[36].toReal());
+   quer.bindValue(":t5",           data[37].toString()=="" ? QVariant(QVariant::String):data[37].toReal());
+   quer.bindValue(":t6",           data[38].toString()=="" ? QVariant(QVariant::String):data[38].toReal());
+   quer.bindValue(":t7",           data[39].toString()=="" ? QVariant(QVariant::String):data[39].toReal());
+   quer.bindValue(":t8",           data[40].toString()=="" ? QVariant(QVariant::String):data[40].toReal());
+   quer.bindValue(":q",            data[41].toString()=="" ? QVariant(QVariant::String):data[41].toString());
+   quer.bindValue(":p",            data[42].toString()=="" ? QVariant(QVariant::String):data[42].toString());
+   quer.bindValue(":prim",         data[43].toString()=="" ? QVariant(QVariant::String):data[43].toString());
+   quer.bindValue(":bazaIzmereni_id", data[44].toString());
+
+
+
+   if(!quer.exec()){
+       qDebug() << "error insert into " << bazaizm;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::editTableBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim, const QString &idtipizmer,
+                                      const QString &normed, const QString &norm, const QString &flaes, const QString &fate, const QString &v1,
+                                      const QString &p1, const QString &o1, const QString &v2, const QString &p2, const QString &o2, const QString &v3,
+                                      const QString &p3, const QString &o3, const QString &v4, const QString &p4, const QString &o4, const QString &v5,
+                                      const QString &p5, const QString &o5, const QString &v6, const QString &p6, const QString &o6, const QString &v7,
+                                      const QString &p7, const QString &o7, const QString &v8, const QString &p8, const QString &o8, const QString &t1,
+                                      const QString &t2, const QString &t3, const QString &t4, const QString &t5, const QString &t6, const QString &t7,
+                                      const QString &t8, const QString &q, const QString &p, const QString &prim, const QString &bazaIzmereni_id){
+    QVariantList data;
+    data.append(idbaza);
+    data.append(date);
+    data.append(time);
+    data.append(idrezhim);
+    data.append(idtipizmer);
+    data.append(normed);
+    data.append(norm);
+    data.append(flaes);
+    data.append(fate);
+    data.append(v1);
+    data.append(p1);
+    data.append(o1);
+    data.append(v2);
+    data.append(p2);
+    data.append(o2);
+    data.append(v3);
+    data.append(p3);
+    data.append(o3);
+    data.append(v4);
+    data.append(p4);
+    data.append(o4);
+    data.append(v5);
+    data.append(p5);
+    data.append(o5);
+    data.append(v6);
+    data.append(p6);
+    data.append(o6);
+    data.append(v7);
+    data.append(p7);
+    data.append(o7);
+    data.append(v8);
+    data.append(p8);
+    data.append(o8);
+    data.append(t1);
+    data.append(t2);
+    data.append(t3);
+    data.append(t4);
+    data.append(t5);
+    data.append(t6);
+    data.append(t7);
+    data.append(t8);
+    data.append(q);
+    data.append(p);
+    data.append(prim);
+    data.append(bazaIzmereni_id);
+    if(editTableBazaIzmereni(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)

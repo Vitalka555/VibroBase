@@ -2800,7 +2800,7 @@ void ListModelIzmerOpenBI::updateModel()
                    "BazaIzmereni.'8В', BazaIzmereni.'8П', BazaIzmereni.'8О', "
                    "BazaIzmereni.'T1', BazaIzmereni.'T2', BazaIzmereni.'T3', BazaIzmereni.'T4', "
                    "BazaIzmereni.'T5', BazaIzmereni.'T6', BazaIzmereni.'T7', BazaIzmereni.'T8', "
-                   "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания "
+                   "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания, BazaIzmereni.id_Baza "
          " FROM BazaIzmereni " + bazaizm_id_filter);
 }
 

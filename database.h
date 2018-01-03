@@ -289,6 +289,15 @@ public slots:
                                 const QString &p7, const QString &o7, const QString &v8, const QString &p8, const QString &o8, const QString &t1,
                                 const QString &t2, const QString &t3, const QString &t4, const QString &t5, const QString &t6, const QString &t7,
                                 const QString &t8, const QString &q, const QString &p, const QString &prim);
+    bool editTableBazaIzmereni(const QVariantList &data);
+    bool editTableBazaIzmereni(const QString &idbaza, const QString &date, const QString &time, const QString &idrezhim, const QString &idtipizmer,
+                                const QString &normed, const QString &norm, const QString &flaes, const QString &fate, const QString &v1,
+                                const QString &p1, const QString &o1, const QString &v2, const QString &p2, const QString &o2, const QString &v3,
+                                const QString &p3, const QString &o3, const QString &v4, const QString &p4, const QString &o4, const QString &v5,
+                                const QString &p5, const QString &o5, const QString &v6, const QString &p6, const QString &o6, const QString &v7,
+                                const QString &p7, const QString &o7, const QString &v8, const QString &p8, const QString &o8, const QString &t1,
+                                const QString &t2, const QString &t3, const QString &t4, const QString &t5, const QString &t6, const QString &t7,
+                                const QString &t8, const QString &q, const QString &p, const QString &prim, const QString &bazaIzmereni_id);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id

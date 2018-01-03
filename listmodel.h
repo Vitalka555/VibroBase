@@ -97,7 +97,7 @@ class ListModelKKS : public QSqlQueryModel
     Q_OBJECT
 public:
     /* Перечисляем все роли, которые будут использоваться в TableView
-     * Как видите, они должны лежать в памяти выше параметра Qt::UserRole
+     * Каквидите, они должны лежать в памяти выше параметра Qt::UserRole
      * Связано с тем, что информация ниже этого адреса не для кастомизаций
      * */
     enum Roles {
@@ -124,6 +124,9 @@ public slots:
     void updateModel();
     int getId(int row);
 };
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief The ListModelCeh class
 ///
@@ -1197,6 +1200,40 @@ public:
 
     // объявляем конструктор класса
     explicit ListModelATE(QObject *parent = 0);
+
+    // Переопределяем метод, который будет возвращать данные
+    QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;
+
+protected:
+    /* хешированная таблица ролей для колонок.
+     * Метод используется в дебрях базового класса QAbstractItemModel,
+     * от которого наследован класс QSqlQueryModel
+     * */
+    QHash<int, QByteArray> roleNames() const;
+
+signals:
+
+public slots:
+    void updateModel();
+    int getId(int row);
+};
+
+class ListModelIzmerOpenBI : public QSqlQueryModel
+{
+    Q_OBJECT
+public:
+    /* Перечисляем все роли, которые будут использоваться в TableView
+     * Как видите, они должны лежать в памяти выше параметра Qt::UserRole
+     * Связано с тем, что информация ниже этого адреса не для кастомизаций
+     * */
+    enum Roles {
+        IdRole = Qt::UserRole + 1      // id
+
+
+    };
+
+    // объявляем конструктор класса
+    explicit ListModelIzmerOpenBI(QObject *parent = 0);
 
     // Переопределяем метод, который будет возвращать данные
     QVariant data(const QModelIndex & index, int role = Qt::DisplayRole) const;

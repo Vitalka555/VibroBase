@@ -114,6 +114,7 @@ int main(int argc, char *argv[])
     ListModelTipIzmer *model_tipizmer = new ListModelTipIzmer();
     ListModelLAES *model_laes = new ListModelLAES();
     ListModelATE *model_ate = new ListModelATE();
+    //ListModelKKSfull *model_kksfull = new ListModelKKSfull();
 
     //ListModel1V *model_1V = new ListModel1V();
 
@@ -155,6 +156,7 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("model_tipizmer", model_tipizmer);
     engine.rootContext()->setContextProperty("model_laes", model_laes);
     engine.rootContext()->setContextProperty("model_ate", model_ate);
+    //engine.rootContext()->setContextProperty("model_kksfull", model_kksfull);
 
     //engine.rootContext()->setContextProperty("model_openBO", model_openBO);
     //engine.rootContext()->setContextProperty("model01", model0);
@@ -179,7 +181,7 @@ ListModelOpenBO *model_openBO = new ListModelOpenBO(root);
 ListModel1V *model_1V = new ListModel1V(root);
 ListModelMaxLevel *model_maxlevel = new ListModelMaxLevel(root);
 ListModelIzmer *model_izmer = new ListModelIzmer(root);
-ListModelIzmer *model_openBI = new ListModelIzmer(root);
+ListModelIzmerOpenBI *model_openBI = new ListModelIzmerOpenBI(root);
 ListModelKKS *model_kks = new ListModelKKS(root);
 ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
 
@@ -209,6 +211,7 @@ QObject::connect(root, SIGNAL(qmlNormCreatBI()), model_norm_creatBI, SLOT(update
         engine.rootContext()->setContextProperty("model_izmer", model_izmer);
         engine.rootContext()->setContextProperty("model_kks", model_kks);
         engine.rootContext()->setContextProperty("model_norm_creatBI", model_norm_creatBI);
+        engine.rootContext()->setContextProperty("model_openBI", model_openBI);
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
 mapper_openBI->setModel(model_openBI);

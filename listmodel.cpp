@@ -149,8 +149,13 @@ void ListModelKKS::updateModel()
 {
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString combo_kks=(stack->property("combo_kks")).toString();
-    // Обновление производится SQL-запросом к базе данных
-    this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.KKS LIKE '%"+combo_kks+"%' ORDER BY Baza.KKS ");
+    qDebug()<<"combo kks = "<<combo_kks;
+    if(combo_kks == ""){
+        this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza ORDER BY Baza.KKS ");
+    } else {
+        this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.KKS LIKE '%"+combo_kks+"%' ORDER BY Baza.KKS ");
+    }
+
 }
 
 // Получение id из строки в модели представления данных
@@ -158,6 +163,7 @@ int ListModelKKS::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief ListModelCeh::ListModelCeh
 /// \param parent
@@ -2532,7 +2538,8 @@ void ListModelIzmer::updateModel()
                    "(SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim), "
                    "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia), "
                    "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.'ЛАЭС-2', "
-                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza )"
+                   "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza ), BazaIzmereni.id_Baza, "
+                   "BazaIzmereni.'Время'"
          " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI
                    + neispravnoe_filter +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
@@ -2733,6 +2740,72 @@ void ListModelATE::updateModel()
 
 // Получение id из строки в модели представления данных
 int ListModelATE::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelIzmerOpenBI::ListModelIzmerOpenBI
+/// \param parent
+///
+ListModelIzmerOpenBI::ListModelIzmerOpenBI(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelIzmerOpenBI::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelIzmerOpenBI::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelIzmerOpenBI::updateModel()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString bazaizm_id=(stack->property("bazaizm_id")).toString();
+    QString bazaizm_id_filter = " WHERE BazaIzmereni.id = " + bazaizm_id;
+
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery("SELECT BazaIzmereni.id, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza ), "
+                   "strftime('%d-%m-%Y', Дата), IFNULL(BazaIzmereni.'Время', 0), "
+                   "(SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim), "
+                   "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia), "
+         "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.'ЛАЭС-2', "
+                   "BazaIzmereni.АТЭ, BazaIzmereni.'1В', BazaIzmereni.'1П', BazaIzmereni.'1О', "
+                   "BazaIzmereni.'2В', BazaIzmereni.'2П', BazaIzmereni.'2О',"
+                   "BazaIzmereni.'3В', BazaIzmereni.'3П', BazaIzmereni.'3О',"
+                   "BazaIzmereni.'4В', BazaIzmereni.'4П', BazaIzmereni.'4О',"
+                   "BazaIzmereni.'5В', BazaIzmereni.'5П', BazaIzmereni.'5О',"
+                   "BazaIzmereni.'6В', BazaIzmereni.'6П', BazaIzmereni.'6О',"
+                   "BazaIzmereni.'7В', BazaIzmereni.'7П', BazaIzmereni.'7О',"
+                   "BazaIzmereni.'8В', BazaIzmereni.'8П', BazaIzmereni.'8О', "
+                   "BazaIzmereni.'T1', BazaIzmereni.'T2', BazaIzmereni.'T3', BazaIzmereni.'T4', "
+                   "BazaIzmereni.'T5', BazaIzmereni.'T6', BazaIzmereni.'T7', BazaIzmereni.'T8', "
+                   "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания "
+         " FROM BazaIzmereni " + bazaizm_id_filter);
+}
+
+// Получение id из строки в модели представления данных
+int ListModelIzmerOpenBI::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }

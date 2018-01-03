@@ -362,6 +362,17 @@ Item {
     //            highlighted: true
     //            Material.accent: Material.LightBlue
                 text: "Редактировать"
+                onClicked: {
+                    //list.currentIndex = model.index
+                    window.index_izmer = list.currentIndex
+                    stackView.bazaizm_id = model_izmer.getId(list.currentIndex)
+                    console.log("id= ", stackView.bazaizm_id)
+                    qmlSignal_bazaizmer_id()
+                    stackView.replace(addBI)
+                    tool_left.visible = false
+                    tool_left1.visible = false
+                    tool_left2.visible = true
+                }
             }
             ToolButton {
                 id: but_delete

@@ -743,6 +743,7 @@ Item {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: Bazaizmervmax
+                                    Component.onCompleted: text4.text = text4.text.replace(".",",")
                                 }
                             }
                         }
@@ -770,6 +771,7 @@ Item {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: Bazaizmernormed
+                                    Component.onCompleted: text5.text = text5.text.replace(".",",")
                                 }
                             }
                             Component.onCompleted: {
@@ -820,6 +822,7 @@ Item {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: Bazaizmernorm
+                                    Component.onCompleted: text6.text = text6.text.replace(".",",")
                                 }
                             }
                         }

@@ -31,6 +31,40 @@ Item {
                     text: "Сохранить"
                     onClicked: {
                         tf_date.tex = tf_date.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000" //меняем формат даты для записи в базу
+                        tf_norm_ed.text = tf_norm_ed.text.replace(",",".")
+                        tf_norm_meh.text = tf_norm_meh.text.replace(",",".")
+                        tf_11.text = tf_11.text.replace(",",".")
+                        tf_21.text = tf_21.text.replace(",",".")
+                        tf_31.text = tf_31.text.replace(",",".")
+                        tf_12.text = tf_12.text.replace(",",".")
+                        tf_22.text = tf_22.text.replace(",",".")
+                        tf_32.text = tf_32.text.replace(",",".")
+                        tf_13.text = tf_13.text.replace(",",".")
+                        tf_23.text = tf_23.text.replace(",",".")
+                        tf_33.text = tf_33.text.replace(",",".")
+                        tf_14.text = tf_14.text.replace(",",".")
+                        tf_24.text = tf_24.text.replace(",",".")
+                        tf_34.text = tf_34.text.replace(",",".")
+                        tf_15.text = tf_15.text.replace(",",".")
+                        tf_25.text = tf_25.text.replace(",",".")
+                        tf_35.text = tf_35.text.replace(",",".")
+                        tf_16.text = tf_16.text.replace(",",".")
+                        tf_26.text = tf_26.text.replace(",",".")
+                        tf_36.text = tf_36.text.replace(",",".")
+                        tf_17.text = tf_17.text.replace(",",".")
+                        tf_27.text = tf_27.text.replace(",",".")
+                        tf_37.text = tf_37.text.replace(",",".")
+                        tf_18.text = tf_18.text.replace(",",".")
+                        tf_28.text = tf_28.text.replace(",",".")
+                        tf_38.text = tf_38.text.replace(",",".")
+                        tf_41.text = tf_41.text.replace(",",".")
+                        tf_42.text = tf_42.text.replace(",",".")
+                        tf_43.text = tf_43.text.replace(",",".")
+                        tf_44.text = tf_44.text.replace(",",".")
+                        tf_45.text = tf_45.text.replace(",",".")
+                        tf_46.text = tf_46.text.replace(",",".")
+                        tf_47.text = tf_47.text.replace(",",".")
+                        tf_48.text = tf_48.text.replace(",",".")
 
                         database.insertIntoBazaIzmereni(combo_kks.id, tf_date.tex, tf_time.text, combo_rezhim.id, combo_tipizmer.id, tf_norm_ed.text,
                                                         tf_norm_meh.text, textArea_laes.text, textArea_ate.text, tf_11.text, tf_21.text, tf_31.text,
@@ -326,14 +360,20 @@ Rectangle{
                 if(combo_rezhim.id==1){
                     mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+2), "text")
                     mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+2), "text")
+                    tf_norm_ed.text = tf_norm_ed.text.replace(".",",")
+                    tf_norm_meh.text = tf_norm_meh.text.replace(".",",")
                 }
                 if(combo_rezhim.id==2){
                     mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+3), "text")
                     mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+4), "text")
+                    tf_norm_ed.text = tf_norm_ed.text.replace(".",",")
+                    tf_norm_meh.text = tf_norm_meh.text.replace(".",",")
                 }
                 if(combo_rezhim.id==3){
                     mapper_norm_creatBI.addMapping(tf_norm_ed, (0x0100+5), "text")
                     mapper_norm_creatBI.addMapping(tf_norm_meh, (0x0100+6), "text")
+                    tf_norm_ed.text = tf_norm_ed.text.replace(".",",")
+                    tf_norm_meh.text = tf_norm_meh.text.replace(".",",")
                 }
             }
 

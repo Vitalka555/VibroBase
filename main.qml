@@ -129,6 +129,9 @@ ApplicationWindow {
         id: drawer
         width: Math.min(window.width, window.height) / 3
         height: window.height
+//onClosed: {
+//    window.deleteLater(drawer)
+//}
         ListView {
             id: listView
             focus: true
@@ -141,18 +144,18 @@ ApplicationWindow {
                 onClicked: {
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
-                        stackView.push(bo)
+                        stackView.replace(bo)
                     }
                     if (listView.currentIndex==1){
 //                        stackView.baza_id = ""
 //                        qmlSignal_bazaizmer()
-                        stackView.push(bi)
+                        stackView.replace(bi)
                     }
                     if (listView.currentIndex==2){
-                        stackView.push(bb)
+                        stackView.replace(bb)
                     }
                     if (listView.currentIndex==3){
-                        stackView.push(stat)
+                        stackView.replace(stat)
                     }
 
                     drawer.close()

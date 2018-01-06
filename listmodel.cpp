@@ -1388,7 +1388,7 @@ void ListModel1V::updateModel()
     QSqlQuery query1V;
     QString select1V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1В' is not null" + rezhim_filter);
         if (!query1V.exec(select1V))
-        qDebug() << "error: " << query1V.lastError().text();
+        //qDebug() << "error: " << query1V.lastError().text();
             query1V.next();
     if(query1V.value(0)==0){
         select1V = "";
@@ -1398,7 +1398,7 @@ void ListModel1V::updateModel()
     QSqlQuery query1P;
     QString select1P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1П' is not null" + rezhim_filter);
         if (!query1P.exec(select1P))
-        qDebug() << "error: " << query1P.lastError().text();
+        //qDebug() << "error: " << query1P.lastError().text();
             query1P.next();
     if(query1P.value(0)==0){
         select1P = "";
@@ -1408,7 +1408,7 @@ void ListModel1V::updateModel()
     QSqlQuery query1O;
     QString select1O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1О' is not null" + rezhim_filter);
         if (!query1O.exec(select1O))
-        qDebug() << "error: " << query1O.lastError().text();
+        //qDebug() << "error: " << query1O.lastError().text();
             query1O.next();
     if(query1O.value(0)==0){
         select1O = "";
@@ -1418,7 +1418,7 @@ void ListModel1V::updateModel()
     QSqlQuery query2V;
     QString select2V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2В' is not null" + rezhim_filter);
         if (!query2V.exec(select2V))
-        qDebug() << "error: " << query2V.lastError().text();
+        //qDebug() << "error: " << query2V.lastError().text();
             query2V.next();
     if(query2V.value(0)==0){
         select2V = "";
@@ -1428,7 +1428,7 @@ void ListModel1V::updateModel()
     QSqlQuery query2P;
     QString select2P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2П' is not null" + rezhim_filter);
         if (!query2P.exec(select2P))
-        qDebug() << "error: " << query2P.lastError().text();
+        //qDebug() << "error: " << query2P.lastError().text();
             query2P.next();
     if(query2P.value(0)==0){
         select2P = "";
@@ -1438,7 +1438,7 @@ void ListModel1V::updateModel()
     QSqlQuery query2O;
     QString select2O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2О' is not null" + rezhim_filter);
         if (!query2O.exec(select2O))
-        qDebug() << "error: " << query2O.lastError().text();
+        //qDebug() << "error: " << query2O.lastError().text();
             query2O.next();
     if(query2O.value(0)==0){
         select2O = "";
@@ -1448,7 +1448,7 @@ void ListModel1V::updateModel()
     QSqlQuery query3V;
     QString select3V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3В' is not null" + rezhim_filter);
         if (!query3V.exec(select3V))
-        qDebug() << "error: " << query3V.lastError().text();
+        //qDebug() << "error: " << query3V.lastError().text();
             query3V.next();
     if(query3V.value(0)==0){
         select3V = "";
@@ -1458,7 +1458,7 @@ void ListModel1V::updateModel()
     QSqlQuery query3P;
     QString select3P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3П' is not null" + rezhim_filter);
         if (!query3P.exec(select3P))
-        qDebug() << "error: " << query3P.lastError().text();
+        //qDebug() << "error: " << query3P.lastError().text();
             query3P.next();
     if(query3P.value(0)==0){
         select3P = "";
@@ -1468,7 +1468,7 @@ void ListModel1V::updateModel()
     QSqlQuery query3O;
     QString select3O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3О' is not null" + rezhim_filter);
         if (!query3O.exec(select3O))
-        qDebug() << "error: " << query3O.lastError().text();
+        //qDebug() << "error: " << query3O.lastError().text();
             query3O.next();
     if(query3O.value(0)==0){
         select3O = "";
@@ -1478,7 +1478,7 @@ void ListModel1V::updateModel()
     QSqlQuery query4V;
     QString select4V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4В' is not null" + rezhim_filter);
         if (!query4V.exec(select4V))
-        qDebug() << "error: " << query4V.lastError().text();
+        //qDebug() << "error: " << query4V.lastError().text();
             query4V.next();
     if(query4V.value(0)==0){
         select4V = "";
@@ -1488,7 +1488,7 @@ void ListModel1V::updateModel()
     QSqlQuery query4P;
     QString select4P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4П' is not null" + rezhim_filter);
         if (!query4P.exec(select4P))
-        qDebug() << "error: " << query4P.lastError().text();
+        //qDebug() << "error: " << query4P.lastError().text();
             query4P.next();
     if(query4P.value(0)==0){
         select4P = "";
@@ -1498,7 +1498,7 @@ void ListModel1V::updateModel()
     QSqlQuery query4O;
     QString select4O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4О' is not null" + rezhim_filter);
         if (!query4O.exec(select4O))
-        qDebug() << "error: " << query4O.lastError().text();
+        //qDebug() << "error: " << query4O.lastError().text();
             query4O.next();
     if(query4O.value(0)==0){
         select4O = "";
@@ -1508,7 +1508,7 @@ void ListModel1V::updateModel()
     QSqlQuery query5V;
     QString select5V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5В' is not null" + rezhim_filter);
         if (!query5V.exec(select5V))
-        qDebug() << "error: " << query5V.lastError().text();
+        //qDebug() << "error: " << query5V.lastError().text();
             query5V.next();
     if(query5V.value(0)==0){
         select5V = "";
@@ -1518,7 +1518,7 @@ void ListModel1V::updateModel()
     QSqlQuery query5P;
     QString select5P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5П' is not null" + rezhim_filter);
         if (!query5P.exec(select5P))
-        qDebug() << "error: " << query5P.lastError().text();
+        //qDebug() << "error: " << query5P.lastError().text();
             query5P.next();
     if(query5P.value(0)==0){
         select5P = "";
@@ -1528,7 +1528,7 @@ void ListModel1V::updateModel()
     QSqlQuery query5O;
     QString select5O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5О' is not null" + rezhim_filter);
         if (!query5O.exec(select5O))
-        qDebug() << "error: " << query5O.lastError().text();
+        //qDebug() << "error: " << query5O.lastError().text();
             query5O.next();
     if(query5O.value(0)==0){
         select5O = "";
@@ -1538,7 +1538,7 @@ void ListModel1V::updateModel()
     QSqlQuery query6V;
     QString select6V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6В' is not null" + rezhim_filter);
         if (!query6V.exec(select6V))
-        qDebug() << "error: " << query6V.lastError().text();
+        //qDebug() << "error: " << query6V.lastError().text();
             query6V.next();
     if(query6V.value(0)==0){
         select6V = "";
@@ -1548,7 +1548,7 @@ void ListModel1V::updateModel()
     QSqlQuery query6P;
     QString select6P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6П' is not null" + rezhim_filter);
         if (!query6P.exec(select6P))
-        qDebug() << "error: " << query6P.lastError().text();
+        //qDebug() << "error: " << query6P.lastError().text();
             query6P.next();
     if(query6P.value(0)==0){
         select6P = "";
@@ -1558,7 +1558,7 @@ void ListModel1V::updateModel()
     QSqlQuery query6O;
     QString select6O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6О' is not null" + rezhim_filter);
         if (!query6O.exec(select6O))
-        qDebug() << "error: " << query6O.lastError().text();
+        //qDebug() << "error: " << query6O.lastError().text();
             query6O.next();
     if(query6O.value(0)==0){
         select6O = "";
@@ -1568,7 +1568,7 @@ void ListModel1V::updateModel()
     QSqlQuery query7V;
     QString select7V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7В' is not null" + rezhim_filter);
         if (!query7V.exec(select7V))
-        qDebug() << "error: " << query7V.lastError().text();
+        //qDebug() << "error: " << query7V.lastError().text();
             query7V.next();
     if(query7V.value(0)==0){
         select7V = "";
@@ -1578,7 +1578,7 @@ void ListModel1V::updateModel()
     QSqlQuery query7P;
     QString select7P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7П' is not null" + rezhim_filter);
         if (!query7P.exec(select7P))
-        qDebug() << "error: " << query7P.lastError().text();
+        //qDebug() << "error: " << query7P.lastError().text();
             query7P.next();
     if(query7P.value(0)==0){
         select7P = "";
@@ -1588,7 +1588,7 @@ void ListModel1V::updateModel()
     QSqlQuery query7O;
     QString select7O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7О' is not null" + rezhim_filter);
         if (!query7O.exec(select7O))
-        qDebug() << "error: " << query7O.lastError().text();
+        //qDebug() << "error: " << query7O.lastError().text();
             query7O.next();
     if(query7O.value(0)==0){
         select7O = "";
@@ -1598,7 +1598,7 @@ void ListModel1V::updateModel()
     QSqlQuery query8V;
     QString select8V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8В' is not null" + rezhim_filter);
         if (!query8V.exec(select8V))
-        qDebug() << "error: " << query8V.lastError().text();
+        //qDebug() << "error: " << query8V.lastError().text();
             query8V.next();
     if(query8V.value(0)==0){
         select8V = "";
@@ -1608,7 +1608,7 @@ void ListModel1V::updateModel()
     QSqlQuery query8P;
     QString select8P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8П' is not null" + rezhim_filter);
         if (!query8P.exec(select8P))
-        qDebug() << "error: " << query8P.lastError().text();
+        //qDebug() << "error: " << query8P.lastError().text();
             query8P.next();
     if(query8P.value(0)==0){
         select8P = "";
@@ -1618,7 +1618,7 @@ void ListModel1V::updateModel()
     QSqlQuery query8O;
     QString select8O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8О' is not null" + rezhim_filter);
         if (!query8O.exec(select8O))
-        qDebug() << "error: " << query8O.lastError().text();
+        //qDebug() << "error: " << query8O.lastError().text();
             query8O.next();
     if(query8O.value(0)==0){
         select8O = "";
@@ -1626,8 +1626,8 @@ void ListModel1V::updateModel()
         select8O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
 
-    qDebug() << query1P.value(0);
-    qDebug() << query1O.value(0);
+    //qDebug() << query1P.value(0);
+    //qDebug() << query1O.value(0);
     //// Обновление производится SQL-запросом к базе данных
     //this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.id = "+kks_id+" ");
     this->setQuery(select1V + select1P

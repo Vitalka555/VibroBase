@@ -10,6 +10,17 @@ import QtQml.Models 2.2
 
 Item {
     id: item
+    Component.onDestruction: {
+        im_foto.source=""
+        im_shema.source=""
+//        im_foto.deleteLater()
+//        im_shema.deleteLater()
+        //mapper.updateData()
+        //mapper.
+        //stackView. (openBO)
+        //openBO.deleteLater()
+    }
+
     Page {
         id: open
         anchors.fill: parent

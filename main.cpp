@@ -31,12 +31,12 @@ static const int PROGRESS_HEIGHT_PX = 28;
 
 int main(int argc, char *argv[])
 {
-    //QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     //QLocale::setDefault(QLocale::C);
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 
     QApplication app(argc, argv);

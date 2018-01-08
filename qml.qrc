@@ -28,5 +28,6 @@
         <file>Images/right_arrow.png</file>
         <file>Images/right_arrow_disable.png</file>
         <file>AddBI.qml</file>
+        <file>SettingsProgramm.qml</file>
     </qresource>
 </RCC>

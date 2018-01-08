@@ -203,7 +203,9 @@ QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateMod
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer_id()), model_openBI, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlKKS_filter()), model_kks, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlNormCreatBI()), model_norm_creatBI, SLOT(updateModel()));
-        //QObject::connect(root, SIGNAL(qmlSignal_rezhim()), model_1V, SLOT(updateModel()));
+DataBase *datab = new DataBase(root);
+        QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));
+        QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);
@@ -216,6 +218,7 @@ mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
 mapper_openBI->setModel(model_openBI);
 mapper_norm_creatBI->setModel(model_norm_creatBI);
+
 //mapper_maxlevel->setModel(model_maxlevel);
 //mapper_1V->setModel(model_1V);
 

@@ -27,6 +27,8 @@ ApplicationWindow {
     signal qmlSignal_bazaizmer_id()
     signal qmlKKS_filter()
     signal qmlNormCreatBI()
+    signal qmlSignalWritePath()//сигнал записи настроек в ini
+    signal qmlSignalReadPath()//сигнал чтения настроек из ini
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -116,7 +118,13 @@ ApplicationWindow {
                     transformOrigin: Menu.TopRight
 
                     MenuItem {
-                        text: "Настройки"
+                        text: "Настройки программы"
+                        onClicked: {
+                            stackView.replace(settingsProgramm)
+                        }
+                    }
+                    MenuItem {
+                        text: "Настройки базы"
                     }
                     MenuItem {
                         text: "О программе"
@@ -195,6 +203,9 @@ ApplicationWindow {
         property string combo_kks: ""
         //для страницы создания измерения
         property string baza_id_for_norm_creatBI: ""
+        //настройки
+        property string pathToBase
+        property string pathToBaseRead
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)
@@ -258,6 +269,12 @@ Component.onCompleted: {
             id: addBI
             AddBI {
                 id: addBI_0
+            }
+        }
+        Component {
+            id: settingsProgramm
+            SettingsProgramm {
+                id: settingsProgramm_0
             }
         }
     }

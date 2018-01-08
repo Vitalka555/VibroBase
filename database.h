@@ -9,6 +9,9 @@
 #include <QFile>
 #include <QDate>
 #include <QDebug>
+#include <QDir>
+#include <QSettings>
+//#include <QApplication>
 
 
 /* Директивы имен таблицы, полей таблицы и базы данных */
@@ -235,6 +238,9 @@ private:
     // Сам объект базы данных, с которым будет производиться работа
     QSqlDatabase    db;
 
+    QString path = QDir::currentPath()+"/settings.ini"; //путь хранения ini файла
+    QString pathToBase; //путь хранения файла базы
+
 private:
     /* Внутренние методы для работы с базой данных
      * */
@@ -244,6 +250,9 @@ private:
     //bool createTable();         // Создание базы таблицы в базе данных
 
 public slots:
+    void writeSettings();
+    void readSettings();//чтение для открытия базы
+    void readSettings2();//чтение для интерфейса qml
     bool insertIntoTable0(const QVariantList &data);
     bool insertIntoTable0(const QString &bazakks);
     bool insertIntoTable(const QVariantList &data);      // Добавление записей в таблицу

@@ -1,5 +1,4 @@
 #include <QDebug>
-#include <QDir>
 #include "database.h"
 
 DataBase::DataBase(QObject *parent) : QObject(parent)
@@ -11,11 +10,41 @@ DataBase::~DataBase()
 {
 
 }
-
+//запись настроек
+void DataBase::writeSettings()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString pathToBas=(stack->property("pathToBase")).toString();
+    qDebug()<<"pathToBas"<<pathToBas;
+    QSettings settings(path, QSettings::IniFormat);
+    settings.beginGroup("PathToFiles");
+    //settings.setValue("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db")));
+    settings.setValue("PathToBase", pathToBas);
+    settings.endGroup();
+    openDataBase();
+}
+//чтение настроек
+void DataBase::readSettings()
+{
+    QSettings settings(path, QSettings::IniFormat);
+    settings.beginGroup("PathToFiles");
+    pathToBase = settings.value("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db"))).toString();
+    settings.endGroup();
+}
+void DataBase::readSettings2()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QSettings settings(path, QSettings::IniFormat);
+    settings.beginGroup("PathToFiles");
+    pathToBase = settings.value("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db"))).toString();
+    settings.endGroup();
+    stack->setProperty("pathToBaseRead", pathToBase);
+}
 /* Методы для подключения к базе данных
  * */
 void DataBase::connectToDataBase()
 {
+
     /* Перед подключением к базе данных производим проверку на её существование.
      * В зависимости от результата производим открытие базы данных или её восстановление
      * */
@@ -50,9 +79,15 @@ bool DataBase::openDataBase()
      * */
 //    QString pathToDB = QDir::currentPath()+QString("/Accounts.sqlite");
 //        myDB.setDatabaseName(pathToDB);
+    //Считываем путь к файлу базы
+    //path = QDir::currentPath()+"/settings.ini";
+    //qDebug()<<path;
+    //QSettings* settings = new QSettings(QDir::currentPath() + QString("/settings.ini"), QSettings::IniFormat);
+    readSettings();
     db = QSqlDatabase::addDatabase("QSQLITE");
     //db.setHostName(DATABASE_HOSTNAME);
-    db.setDatabaseName(QDir::currentPath() + QString("/base/sqlite.db"));
+    //db.setDatabaseName(QDir::currentPath() + QString("/base/sqlite.db"));
+    db.setDatabaseName(pathToBase);
     if(db.open()){
         return true;
     } else {

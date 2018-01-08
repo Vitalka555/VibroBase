@@ -240,6 +240,8 @@ private:
 
     QString path = QDir::currentPath()+"/settings.ini"; //путь хранения ini файла
     QString pathToBase; //путь хранения файла базы
+    QString pathToPhoto;//путь хранения фотографий
+    QString pathToShema;//путь хранения схем
 
 private:
     /* Внутренние методы для работы с базой данных

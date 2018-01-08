@@ -8,6 +8,8 @@ Item {
     Component.onCompleted: {
         qmlSignalReadPath()
         pathToFile.text = stackView.pathToBaseRead
+        pathToPhoto.text = stackView.pathToPhotoRead
+        pathToShema.text = stackView.pathToShemaRead
     }
     Page {
     anchors.fill: parent
@@ -60,15 +62,117 @@ Item {
             loadPath.open()
         }
     }
+    Text {
+        id: text_path1
+        anchors.verticalCenter: pathToPhoto.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+        text: "Путь к папке с фото:"
+    }
+    TextField{
+        id: pathToPhoto
+        anchors.top: pathToFile.bottom
+        anchors.topMargin: 5
+        anchors.left: text_path1.right
+        anchors.leftMargin: 5
+        anchors.right: but_path1.left
+        anchors.rightMargin: 5
+    }
+    Button {
+        id: but_path1
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.top: pathToPhoto.top
+        width: height
+        highlighted: true
+        Material.accent: Material.LightBlue
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 20
+            color: "white"
+            text: "..."
+        }
+        FileDialog {
+                id: loadPath1
+                objectName: "loadPath1"
+                property string path: ""
+                folder: "."
+                title: "Выберите папку"
+                selectMultiple: false
+                selectFolder: true
+                //nameFilters: [ "Database files (*.db)", "All files (*)" ]
+                onAccepted: { console.log("Accepted: " + fileUrl)
+                    loadPath1.path = fileUrl
+                    pathToPhoto.text = loadPath1.path.replace("file:///","")
+                }
+            }
+        onClicked: {
+            loadPath1.open()
+        }
+    }
+    Text {
+        id: text_path2
+        anchors.verticalCenter: pathToShema.verticalCenter
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+        text: "Путь к папке со схемами:"
+    }
+    TextField{
+        id: pathToShema
+        anchors.top: pathToPhoto.bottom
+        anchors.topMargin: 5
+        anchors.left: text_path2.right
+        anchors.leftMargin: 5
+        anchors.right: but_path2.left
+        anchors.rightMargin: 5
+    }
+    Button {
+        id: but_path2
+        anchors.right: parent.right
+        anchors.rightMargin: 5
+        anchors.top: pathToShema.top
+        width: height
+        highlighted: true
+        Material.accent: Material.LightBlue
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 20
+            color: "white"
+            text: "..."
+        }
+        FileDialog {
+                id: loadPath2
+                objectName: "loadPath2"
+                property string path: ""
+                folder: "."
+                title: "Выберите папку"
+                selectMultiple: false
+                selectFolder: true
+                //nameFilters: [ "Database files (*.db)", "All files (*)" ]
+                onAccepted: { console.log("Accepted: " + fileUrl)
+                    loadPath2.path = fileUrl
+                    pathToShema.text = loadPath2.path.replace("file:///","")
+                }
+            }
+        onClicked: {
+            loadPath2.open()
+        }
+    }
     Button {
         id: but_save
-        anchors.top: text_path.bottom
+        anchors.top: text_path2.bottom
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
         text: "Сохранить"
         onClicked: {
             stackView.pathToBase = pathToFile.text
+            stackView.pathToPhoto = pathToPhoto.text
+            stackView.pathToShema = pathToShema.text
             qmlSignalWritePath()
             model0.updateModel()
             model_1V.updateModel()

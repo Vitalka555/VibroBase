@@ -206,6 +206,10 @@ ApplicationWindow {
         //настройки
         property string pathToBase
         property string pathToBaseRead
+        property string pathToPhoto
+        property string pathToPhotoRead
+        property string pathToShema
+        property string pathToShemaRead
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

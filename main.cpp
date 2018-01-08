@@ -31,12 +31,12 @@ static const int PROGRESS_HEIGHT_PX = 28;
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    //QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     //QLocale::setDefault(QLocale::C);
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
 
-    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 
     QApplication app(argc, argv);
@@ -204,8 +204,8 @@ QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateMod
 QObject::connect(root, SIGNAL(qmlKKS_filter()), model_kks, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlNormCreatBI()), model_norm_creatBI, SLOT(updateModel()));
 DataBase *datab = new DataBase(root);
-        QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));
-        QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));
+        QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));//запись в settings.ini
+        QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));//чтение из settings.ini
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);

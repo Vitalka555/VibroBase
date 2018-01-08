@@ -15,11 +15,14 @@ void DataBase::writeSettings()
 {
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString pathToBas=(stack->property("pathToBase")).toString();
+    QString pathToPhot=(stack->property("pathToPhoto")).toString();
+    QString pathToShem=(stack->property("pathToShema")).toString();
     qDebug()<<"pathToBas"<<pathToBas;
     QSettings settings(path, QSettings::IniFormat);
     settings.beginGroup("PathToFiles");
-    //settings.setValue("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db")));
     settings.setValue("PathToBase", pathToBas);
+    settings.setValue("PathToPhoto", pathToPhot);
+    settings.setValue("PathToShema", pathToShem);
     settings.endGroup();
     openDataBase();
 }
@@ -37,8 +40,12 @@ void DataBase::readSettings2()
     QSettings settings(path, QSettings::IniFormat);
     settings.beginGroup("PathToFiles");
     pathToBase = settings.value("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db"))).toString();
+    pathToPhoto = settings.value("PathToPhoto", (QDir::currentPath() + QString("/photo/"))).toString();
+    pathToShema = settings.value("PathToShema", (QDir::currentPath() + QString("/shema/"))).toString();
     settings.endGroup();
     stack->setProperty("pathToBaseRead", pathToBase);
+    stack->setProperty("pathToPhotoRead", pathToPhoto);
+    stack->setProperty("pathToShemaRead", pathToShema);
 }
 /* Методы для подключения к базе данных
  * */

@@ -327,9 +327,18 @@ Item {
      height: parent.height
      fillMode: Image.PreserveAspectFit
      property string tex: ""
-     property string tex1: "file:." + im_foto.tex.replace(/\\/g, "/")
-     property string tex2: tex1 !== "file:." ? tex1: "file:./Images/nophoto.jpg"
+     property string tex1
+     property string tex2: tex1
      source: tex2
+     Component.onCompleted: {
+         if(!im_foto.tex==""){
+         qmlSignalReadPath()
+         im_foto.tex1 = "file:///"+stackView.pathToPhotoRead+"/"+im_foto.tex.replace("\\foto\\", "")
+         }
+         if(im_foto.tex==""){
+             im_foto.tex1 = "file:./Images/nophoto.jpg"
+         }
+     }
     }
 
      MouseArea {
@@ -416,9 +425,18 @@ Item {
      height: parent.height
      fillMode: Image.PreserveAspectFit
      property string tex: ""
-     property string tex1: "file:." + im_shema.tex.replace(/\\/g, "/")
-     property string tex2: tex1 !== "file:." ? tex1: "file:./Images/nophoto.jpg"
+     property string tex1
+     property string tex2: tex1
      source: tex2
+     Component.onCompleted: {
+         if(!im_shema.tex==""){
+         qmlSignalReadPath()
+         im_shema.tex1 = "file:///"+stackView.pathToShemaRead+"/"+im_shema.tex.replace("\\Shema\\", "")
+         }
+         if(im_shema.tex==""){
+             im_shema.tex1 = "file:./Images/nophoto.jpg"
+         }
+     }
     }
 
      MouseArea {

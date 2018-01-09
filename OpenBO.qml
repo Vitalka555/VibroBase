@@ -2253,6 +2253,7 @@ Item {
                                             font.pixelSize: 15
                                             color: "#2e2efb"//"#3E65FF"
                                             text: Bazaizmervmax
+                                            Component.onCompleted: text3.text = text3.text.replace(".", ",")
                                         }
                                     }
                                 }
@@ -4052,6 +4053,40 @@ Item {
                     mapper_izmer.addMapping(text_laes2, (0x0100+43), "text")
                     mapper_izmer.addMapping(text_ate, (0x0100+44), "text")
                     mapper_izmer.addMapping(textArea_prim_izmer, (0x0100+45), "text")
+                    k2s2.tex = k2s2.tex.replace(".", ",")
+                    k3s2.tex = k3s2.tex.replace(".", ",")
+                    k4s2.tex = k4s2.tex.replace(".", ",")
+                    k2s3.tex = k2s3.tex.replace(".", ",")
+                    k3s3.tex = k3s3.tex.replace(".", ",")
+                    k4s3.tex = k4s3.tex.replace(".", ",")
+                    k2s4.tex = k2s4.tex.replace(".", ",")
+                    k3s4.tex = k3s4.tex.replace(".", ",")
+                    k4s4.tex = k4s4.tex.replace(".", ",")
+                    k2s5.tex = k2s5.tex.replace(".", ",")
+                    k3s5.tex = k3s5.tex.replace(".", ",")
+                    k4s5.tex = k4s5.tex.replace(".", ",")
+                    k2s6.tex = k2s6.tex.replace(".", ",")
+                    k3s6.tex = k3s6.tex.replace(".", ",")
+                    k4s6.tex = k4s6.tex.replace(".", ",")
+                    k2s7.tex = k2s7.tex.replace(".", ",")
+                    k3s7.tex = k3s7.tex.replace(".", ",")
+                    k4s7.tex = k4s7.tex.replace(".", ",")
+                    k2s8.tex = k2s8.tex.replace(".", ",")
+                    k3s8.tex = k3s8.tex.replace(".", ",")
+                    k4s8.tex = k4s8.tex.replace(".", ",")
+                    k2s9.tex = k2s9.tex.replace(".", ",")
+                    k3s9.tex = k3s9.tex.replace(".", ",")
+                    k4s9.tex = k4s9.tex.replace(".", ",")
+                    k5s2.tex = k5s2.tex.replace(".", ",")
+                    k5s3.tex = k5s3.tex.replace(".", ",")
+                    k5s4.tex = k5s4.tex.replace(".", ",")
+                    k5s5.tex = k5s5.tex.replace(".", ",")
+                    k5s6.tex = k5s6.tex.replace(".", ",")
+                    k5s7.tex = k5s7.tex.replace(".", ",")
+                    k5s8.tex = k5s8.tex.replace(".", ",")
+                    k5s9.tex = k5s9.tex.replace(".", ",")
+                    text_normed.text = text_normed.text.replace(".", ",")
+                    text_normagr.text = text_normagr.text.replace(".", ",")
                     // если нет данных виброизмерений
                     if(k2s2.tex=="" && k2s3.tex=="" && k2s4.tex=="" && k2s5.tex=="" && k2s6.tex=="" && k2s7.tex=="" &&
                             k2s8.tex=="" && k2s9.tex=="" && k3s2.tex=="" && k3s3.tex=="" && k3s4.tex=="" && k3s5.tex=="" && k3s6.tex=="" && k3s7.tex=="" &&
@@ -4536,6 +4571,23 @@ Item {
         mapper.addMapping(text_tempotkaz_red, (0x0100+45), "tex")
         mapper.addMapping(text_tempotkaz_meh, (0x0100+46), "tex")
         mapper.addMapping(text_izmer_kks, (0x0100+2), "tex")
+        text_mosch.tex = text_mosch.tex.replace(".", ",")
+        text_norm_hh.tex = text_norm_hh.tex.replace(".", ",")
+        text_normed_nom.tex = text_normed_nom.tex.replace(".", ",")
+        text_normagr_nom.tex = text_normagr_nom.tex.replace(".", ",")
+        text_ogred_nom.tex = text_ogred_nom.tex.replace(".", ",")
+        text_ogragr_nom.tex = text_ogragr_nom.tex.replace(".", ",")
+        text_otkazed_nom.tex = text_otkazed_nom.tex.replace(".", ",")
+        text_otkazagr_nom.tex = text_otkazagr_nom.tex.replace(".", ",")
+        text_normed_rd.tex = text_normed_rd.tex.replace(".", ",")
+        text_normagr_rd.tex = text_normagr_rd.tex.replace(".", ",")
+        text_ogred_rd.tex = text_ogred_rd.tex.replace(".", ",")
+        text_ogragr_rd.tex = text_ogragr_rd.tex.replace(".", ",")
+        text_otkazed_rd.tex = text_otkazed_rd.tex.replace(".", ",")
+        text_otkazagr_rd.tex = text_otkazagr_rd.tex.replace(".", ",")
+        text_tempotkaz_ed.tex = text_tempotkaz_ed.tex.replace(".", ",")
+        text_tempotkaz_red.tex = text_tempotkaz_red.tex.replace(".", ",")
+        text_tempotkaz_meh.tex = text_tempotkaz_meh.tex.replace(".", ",")
         //mapper_izmer.addMapping(k2s2, (0x0100+5), "tex")        
     }
 

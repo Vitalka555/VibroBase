@@ -121,6 +121,7 @@ ApplicationWindow {
                         text: "Настройки программы"
                         onClicked: {
                             stackView.replace(settingsProgramm)
+                            //titleLabel.text = "Настройки программы"
                         }
                     }
                     MenuItem {
@@ -149,7 +150,7 @@ ApplicationWindow {
                 width: parent.width
                 text: model.title
                 highlighted: ListView.isCurrentItem
-                onClicked: {
+                onClicked: {                    
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
                         stackView.replace(bo)

@@ -201,7 +201,8 @@ ApplicationWindow {
         //данные фильтра базы измерений
         property string kks_filter_BI: ""
         property string id_tipmeh_filter_BI: ""
-        property string neispravnoe: "false"
+        property bool neispravnoe: false
+        property string tipmehBI_index: "-1"
         //фильтр в комбобоксе создания измерения
         property string combo_kks: ""
         //для страницы создания измерения

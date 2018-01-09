@@ -105,6 +105,20 @@ Item {
         anchors.right: parent.right
         height: 55
         //color: "lightblue"
+        Component.onCompleted: {
+            filter_kks.text = stackView.kks_filter_BI
+            filter_combo_tipagr.currentIndex = stackView.tipmehBI_index
+            check_problem.checked = stackView.neispravnoe
+            if(filter_kks.text!==""){
+                rec_filter.y = 50
+            }
+            if(filter_combo_tipagr.currentIndex!==-1){
+                rec_filter.y = 50
+            }
+            if(check_problem.checked!==false){
+                rec_filter.y = 50
+            }
+        }
         Rectangle {
             id: recf1
             anchors.top: parent.top
@@ -140,6 +154,14 @@ Item {
                 selectByMouse: true
                 persistentSelection: true
                 text: ""
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Enter){
+                                            but_poisk.clicked()
+                                        }
+                    if(event.key === Qt.Key_Return){
+                                            but_poisk.clicked()
+                                        }
+                }
                 MouseArea {
                     acceptedButtons: Qt.RightButton
                     anchors.fill: parent
@@ -216,13 +238,14 @@ Item {
                 highlighted: filter_combo_tipagr.highlightedIndex === index
 
             }
-
             onCurrentTextChanged: {
+                stackView.tipmehBI_index = filter_combo_tipagr.currentIndex
                 if(currentIndex==-1){
                     filter_combo_tipagr.id = ""
                 } else {
                 filter_combo_tipagr.id = model_tipmeh.getId(currentIndex)
                 }
+                but_poisk.clicked()
             }
         }
         Button {
@@ -243,6 +266,8 @@ Item {
             }
             onClicked: {
                 filter_combo_tipagr.currentIndex = -1
+                stackView.tipmehBI_index = -1
+                but_poisk.clicked()
             }
         }
         }
@@ -266,8 +291,15 @@ Item {
                 //Material.background: Material.LightBlue
                 checked: false
                 //text: "Не исправны"
-                onCheckableChanged: {
-
+                onCheckStateChanged: {
+                    if(check_problem.checkState==Qt.Unchecked){
+                        stackView.neispravnoe = check_problem.checked
+                        but_poisk.clicked()
+                    }
+                    if(check_problem.checkState==Qt.Checked){
+                        stackView.neispravnoe = check_problem.checked
+                        but_poisk.clicked()
+                    }
                 }
             }
             Text {
@@ -299,6 +331,10 @@ Item {
                 filter_kks.clear()
                 filter_combo_tipagr.currentIndex = -1
                 check_problem.checked = false
+                stackView.kks_filter_BI = filter_kks.text
+                stackView.tipmehBI_index = filter_combo_tipagr.currentIndex
+                stackView.neispravnoe = check_problem.checked
+                but_poisk.clicked()
             }
         }
         Button {
@@ -318,16 +354,18 @@ Item {
             }
             onClicked: {
                 stackView.kks_filter_BI = filter_kks.text
+                stackView.tipmehBI_index = filter_combo_tipagr.currentIndex
+                stackView.neispravnoe = check_problem.checked
                 if(filter_combo_tipagr.currentIndex == -1){
                     stackView.id_tipmeh_filter_BI = ""
                 } else {
                     stackView.id_tipmeh_filter_BI = filter_combo_tipagr.id
                 }
                 if(!check_problem.checked){
-                    stackView.neispravnoe = "false"
+                    stackView.neispravnoe = false
                 }
                 if(check_problem.checked){
-                    stackView.neispravnoe = "true"
+                    stackView.neispravnoe = true
                 }
                 qmlFilterBI()
             }

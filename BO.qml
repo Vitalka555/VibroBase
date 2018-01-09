@@ -271,6 +271,7 @@ Item {
                 onClicked: {
                     filter_combo_ceh.currentIndex = -1
                     stackView.ceh_index = -1
+                    but_poisk.clicked()
                 }
             }
 
@@ -396,9 +397,7 @@ Item {
                 width: filter_combo_tipagr.width
                 text: filter_combo_tipagr.textRole ? (Array.isArray(filter_combo_tipagr.model) ? modelData[filter_combo_tipagr.textRole] : model[filter_combo_tipagr.textRole]) : modelData
                 highlighted: filter_combo_tipagr.highlightedIndex === index
-
             }
-
             onCurrentTextChanged: {
                 stackView.tipmeh_index = filter_combo_tipagr.currentIndex
                 if(currentIndex==-1){
@@ -428,6 +427,7 @@ Item {
             onClicked: {
                 filter_combo_tipagr.currentIndex = -1
                 stackView.tipmeh_index = -1
+                but_poisk.clicked()
             }
         }
         }

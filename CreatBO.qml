@@ -2801,7 +2801,7 @@ footer: ToolBar {
             anchors.leftMargin: 5            
             text: "Сохранить"
             onClicked: {
-
+                tf_mosch.text = tf_mosch.text.replace(",", ".")
                 database.insertIntoTable(tf_kks.text, combo_ceh.id, tf_zd.text, tf_pom.text, textArea.text,
                                          textArea_prim.text, combo_program.id, combo_fio.id, tf_marka_eldv.text,
                                          tf_mosch.text, tf_chastota.text, combo_proizv_eldv.id, combo_tip_permeh.id,

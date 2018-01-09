@@ -190,6 +190,8 @@ ApplicationWindow {
         property string id_ceh: ""
         property string zd: ""
         property string id_tipmeh: ""
+        property string ceh_index: "-1"
+        property string tipmeh_index: "-1"
 
         property string baza_id: ""
         property string rezhim_id

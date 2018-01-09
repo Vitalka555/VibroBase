@@ -106,6 +106,25 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         height: 55
+        Component.onCompleted: {
+            filter_kks.text = stackView.kks
+            filter_combo_ceh.currentIndex = stackView.ceh_index
+            filter_zd.text = stackView.zd
+            filter_combo_tipagr.currentIndex = stackView.tipmeh_index
+            if(filter_kks.text!==""){
+                rec_filter.y = 50
+            }
+            if(filter_combo_ceh.currentIndex!==-1){
+                rec_filter.y = 50
+            }
+            if(filter_zd.text!==""){
+                rec_filter.y = 50
+            }
+            if(filter_combo_tipagr.currentIndex!==-1){
+                rec_filter.y = 50
+            }
+        }
+
         //color: "lightblue"
         Rectangle {
             id: recf1
@@ -142,6 +161,14 @@ Item {
                 selectByMouse: true
                 persistentSelection: true
                 text: ""
+                Keys.onPressed: {
+                    if(event.key === Qt.Key_Enter){
+                                            but_poisk.clicked()
+                                        }
+                    if(event.key === Qt.Key_Return){
+                                            but_poisk.clicked()
+                                        }
+                }
                 MouseArea {
                     acceptedButtons: Qt.RightButton
                     anchors.fill: parent
@@ -215,11 +242,13 @@ Item {
                     highlighted: filter_combo_ceh.highlightedIndex === index
                 }
                 onCurrentTextChanged: {
+                    stackView.ceh_index = filter_combo_ceh.currentIndex
                     if(currentIndex==-1){
                         filter_combo_ceh.id = ""
                     } else {
                     filter_combo_ceh.id = model_ceh.getId(currentIndex)
                     }
+                    but_poisk.clicked()
                 }
             }
             Button {
@@ -241,6 +270,7 @@ Item {
                 }
                 onClicked: {
                     filter_combo_ceh.currentIndex = -1
+                    stackView.ceh_index = -1
                 }
             }
 
@@ -282,6 +312,14 @@ Item {
             selectByMouse: true
             persistentSelection: true
             text: ""
+            Keys.onPressed: {
+                if(event.key === Qt.Key_Enter){
+                                        but_poisk.clicked()
+                                    }
+                if(event.key === Qt.Key_Return){
+                                        but_poisk.clicked()
+                                    }
+            }
             MouseArea {
                 acceptedButtons: Qt.RightButton
                 anchors.fill: parent
@@ -362,11 +400,13 @@ Item {
             }
 
             onCurrentTextChanged: {
+                stackView.tipmeh_index = filter_combo_tipagr.currentIndex
                 if(currentIndex==-1){
                     filter_combo_tipagr.id = ""
                 } else {
                 filter_combo_tipagr.id = model_tipmeh.getId(currentIndex)
                 }
+                but_poisk.clicked()
             }
         }
         Button {
@@ -387,6 +427,7 @@ Item {
             }
             onClicked: {
                 filter_combo_tipagr.currentIndex = -1
+                stackView.tipmeh_index = -1
             }
         }
         }

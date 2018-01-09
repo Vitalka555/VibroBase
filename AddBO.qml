@@ -2880,6 +2880,7 @@ footer: ToolBar {
 
     }
     Component.onCompleted: {
+        tf_mosch.text = tf_mosch.text.replace(",", ".")
         qmlSignal_baza_id()
         mapper.addMapping(tf_kks, (0x0100+2), "text")
         mapper.addMapping(combo_ceh, (0x0100+3), "currentIndex0")

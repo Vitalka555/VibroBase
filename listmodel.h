@@ -173,7 +173,8 @@ public:
      * */
     enum Roles {
         IdRole = Qt::UserRole + 1,      // id
-        bazaprogram_nomerRole
+        bazaprogram_nomerRole,
+        bazaprogram_nameRole
     };
 
     // объявляем конструктор класса

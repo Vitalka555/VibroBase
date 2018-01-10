@@ -30,5 +30,6 @@
         <file>AddBI.qml</file>
         <file>SettingsProgramm.qml</file>
         <file>SettingsBase.qml</file>
+        <file>CommonSettings.qml</file>
     </qresource>
 </RCC>

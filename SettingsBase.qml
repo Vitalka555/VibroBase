@@ -24,6 +24,9 @@ Item {
                 color: "white"
                 text: "Общие таблицы списков"
             }
+            onClicked: {
+                stackView.replace(commonSettings)
+            }
         }
         Button {
             id: but_manufacturers

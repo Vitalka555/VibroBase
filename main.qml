@@ -314,6 +314,12 @@ Component.onCompleted: {
                 id: settingsBase_0
             }
         }
+        Component {
+            id: commonSettings
+            CommonSettings {
+                id: commonSettings_0
+            }
+        }
     }
 
 Component.onCompleted: {

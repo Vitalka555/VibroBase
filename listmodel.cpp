@@ -243,6 +243,7 @@ QHash<int, QByteArray> ListModelProgram::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
     roles[bazaprogram_nomerRole] = "Programnomer";
+    roles[bazaprogram_nameRole] = "Programname";
     return roles;
 }
 
@@ -250,7 +251,7 @@ QHash<int, QByteArray> ListModelProgram::roleNames() const {
 void ListModelProgram::updateModel()
 {
     // Обновление производится SQL-запросом к базе данных
-    this->setQuery(" SELECT BazaProgram.id, " bazaprogram_nomer " FROM " bazaprogram " ORDER BY " bazaprogram_nomer );
+    this->setQuery(" SELECT BazaProgram.id, " bazaprogram_nomer ", BazaProgram.'Название_программы' FROM " bazaprogram " ORDER BY " bazaprogram_nomer );
 }
 
 // Получение id из строки в модели представления данных

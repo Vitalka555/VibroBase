@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QSqlQueryModel>
 #include <QQuickStyle>
-//#include <QtQuick>
+#include <QSettings>
 //#include <QtQml>
 //#include <QtQuickControls2>
 //#include <QtQml/QQmlEngine>
@@ -174,7 +174,20 @@ int main(int argc, char *argv[])
 
 
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
-    //engine.addImageProvider(QLatin1String("imageprovider"), new MyImageProvider);
+//применяем настройки окна из ini
+    QString path = QDir::currentPath()+"/settings.ini"; //путь хранения ini файла
+        QSettings settings(path, QSettings::IniFormat);
+        settings.beginGroup("WindowGeometry");
+        int wwidth = settings.value("width", 1024).toInt();
+        int hheight = settings.value("height", 768).toInt();
+        int x = settings.value("x", 30).toInt();
+        int y = settings.value("y", 30).toInt();
+        settings.endGroup();
+    QObject *rootObject = engine.rootObjects().first();
+        rootObject->setProperty("width", wwidth);
+        rootObject->setProperty("height", hheight);
+        rootObject->setProperty("x", x);
+        rootObject->setProperty("y", y);
 
     QObject* root = engine.rootObjects()[0];
 ListModelOpenBO *model_openBO = new ListModelOpenBO(root);
@@ -206,6 +219,7 @@ QObject::connect(root, SIGNAL(qmlNormCreatBI()), model_norm_creatBI, SLOT(update
 DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));//запись в settings.ini
         QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));//чтение из settings.ini
+        QObject::connect(root, SIGNAL(qmlSignalWriteWindow()), datab, SLOT(writeSettingsWindow()));//запись геометрии окна в ini
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);

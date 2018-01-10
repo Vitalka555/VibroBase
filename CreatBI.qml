@@ -121,14 +121,7 @@ Rectangle{
             width: 200
             editable: true
             inputMethodHints: Qt.ImhNone
-            //locale: Qt.locale("de_DE")
-            //validator: RegExpValidator { regExp: /[0-9a-zA-Z]+/ }
-            //inputMethodComposing: false
-            //count: 10
-            //down: true
-            //popup.visible: true
-            //Material.background: Material.LightBlue
-            //model: model_kks
+
             textRole: 'kksname'
             delegate: ItemDelegate {
                 //Material.foreground: Material.LightBlue
@@ -137,7 +130,6 @@ Rectangle{
                 highlighted: combo_kks.highlightedIndex === index
 
             }
-
             onCurrentTextChanged: {
                 if(currentIndex==-1){
                     combo_kks.id = ""

@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.0
+import Qt.labs.settings 1.0
 //import QtQuick.LocalStorage 2.0 as SQL
 //import "Database.js" as Data
 
@@ -11,6 +12,10 @@ ApplicationWindow {
     visible: true
     width: 1024
     height: 768
+
+
+    minimumWidth: 1024
+    minimumHeight: 768
     title: qsTr("База ЛДРО ОТД ЛАЭС-2")
     Material.theme: Material.Light
     Material.accent: "black"//Material.LightBlue
@@ -27,12 +32,22 @@ ApplicationWindow {
     signal qmlSignal_bazaizmer_id()
     signal qmlKKS_filter()
     signal qmlNormCreatBI()
-    signal qmlSignalWritePath()//сигнал записи настроек в ini
-    signal qmlSignalReadPath()//сигнал чтения настроек из ini
+    signal qmlSignalWritePath()//сигнал записи настроек путей в ini
+    signal qmlSignalReadPath()//сигнал чтения настроек путей из ini
+    signal qmlSignalWriteWindow()
+    signal qmlSignalReadWindow()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
     property int newindex: -1
+
+    onClosing: {
+        stackView.wwidth = window.width
+        stackView.hheight = window.height
+        stackView.xx = window.x
+        stackView.yy = window.y
+        qmlSignalWriteWindow()
+    }
 
     header: ToolBar {
         id: toolBar
@@ -214,6 +229,11 @@ ApplicationWindow {
         property string pathToPhotoRead
         property string pathToShema
         property string pathToShemaRead
+        //для ini
+        property string wwidth
+        property string hheight
+        property string xx
+        property string yy
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)
@@ -286,7 +306,9 @@ Component.onCompleted: {
             }
         }
     }
+
 Component.onCompleted: {
     mapper_maxlevel.addMapping(stackView, (0x0100+2), "maxlevel")
 }
+
 }

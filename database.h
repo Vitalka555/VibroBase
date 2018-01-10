@@ -255,6 +255,7 @@ public slots:
     void writeSettings();
     void readSettings();//чтение для открытия базы
     void readSettings2();//чтение для интерфейса qml
+    void writeSettingsWindow();
     bool insertIntoTable0(const QVariantList &data);
     bool insertIntoTable0(const QString &bazakks);
     bool insertIntoTable(const QVariantList &data);      // Добавление записей в таблицу

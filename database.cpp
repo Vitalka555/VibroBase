@@ -47,6 +47,23 @@ void DataBase::readSettings2()
     stack->setProperty("pathToPhotoRead", pathToPhoto);
     stack->setProperty("pathToShemaRead", pathToShema);
 }
+
+void DataBase::writeSettingsWindow()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString w=(stack->property("wwidth")).toString();
+    QString h=(stack->property("hheight")).toString();
+    QString x=(stack->property("xx")).toString();
+    QString y=(stack->property("yy")).toString();
+    QSettings settings(path, QSettings::IniFormat);
+    settings.beginGroup("WindowGeometry");
+    settings.setValue("width", w);
+    settings.setValue("height", h);
+    settings.setValue("x", x);
+    settings.setValue("y", y);
+    settings.endGroup();
+}
+
 /* Методы для подключения к базе данных
  * */
 void DataBase::connectToDataBase()

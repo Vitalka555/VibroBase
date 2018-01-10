@@ -141,6 +141,9 @@ ApplicationWindow {
                     }
                     MenuItem {
                         text: "Настройки базы"
+                        onClicked: {
+                            stackView.replace(settingsBase)
+                        }
                     }
                     MenuItem {
                         text: "О программе"
@@ -303,6 +306,12 @@ Component.onCompleted: {
             id: settingsProgramm
             SettingsProgramm {
                 id: settingsProgramm_0
+            }
+        }
+        Component {
+            id: settingsBase
+            SettingsBase {
+                id: settingsBase_0
             }
         }
     }

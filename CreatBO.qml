@@ -133,7 +133,6 @@ Item {
                     font.pixelSize: 20
                     color: "white"
                     text: "X"
-
                 }
                 onClicked: {
                     combo_ceh.currentIndex = -1

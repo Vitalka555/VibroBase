@@ -25,8 +25,7 @@ Item {
         id: pathToFile
         anchors.top: parent.top
         anchors.topMargin: 5
-        anchors.left: text_path.right
-        anchors.leftMargin: 5
+        anchors.left: pathToShema.left
         anchors.right: but_path.left
         anchors.rightMargin: 5
     }
@@ -74,8 +73,7 @@ Item {
         id: pathToPhoto
         anchors.top: pathToFile.bottom
         anchors.topMargin: 5
-        anchors.left: text_path1.right
-        anchors.leftMargin: 5
+        anchors.left: pathToShema.left
         anchors.right: but_path1.left
         anchors.rightMargin: 5
     }
@@ -168,7 +166,17 @@ Item {
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
-        text: "Сохранить"
+        width: text_save.width+10
+        highlighted: true
+        Material.accent: Material.LightBlue
+        Text {
+            id: text_save
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 20
+            color: "white"
+            text: "Сохранить"
+        }
         onClicked: {
             stackView.pathToBase = pathToFile.text
             stackView.pathToPhoto = pathToPhoto.text

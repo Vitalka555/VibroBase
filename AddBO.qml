@@ -2843,7 +2843,7 @@ footer: ToolBar {
             anchors.leftMargin: 5
             text: "Сохранить"
             onClicked: {
-
+                tf_mosch.text = tf_mosch.text.replace(",", ".")
                 database.editTableBaza(tf_kks.text, combo_ceh.id, tf_zd.text, tf_pom.text, textArea.text,
                                          textArea_prim.text, combo_program.id, combo_fio.id, tf_marka_eldv.text,
                                          tf_mosch.text, tf_chastota.text, combo_proizv_eldv.id, combo_tip_permeh.id,
@@ -2879,8 +2879,7 @@ footer: ToolBar {
     }
 
     }
-    Component.onCompleted: {
-        tf_mosch.text = tf_mosch.text.replace(",", ".")
+    Component.onCompleted: {        
         qmlSignal_baza_id()
         mapper.addMapping(tf_kks, (0x0100+2), "text")
         mapper.addMapping(combo_ceh, (0x0100+3), "currentIndex0")
@@ -2929,6 +2928,7 @@ footer: ToolBar {
         mapper.addMapping(combo_otkaz_rd, (0x0100+43), "currentIndex0")
         mapper.addMapping(textArea_doc, (0x0100+47), "text")
         mapper.addMapping(textArea_par, (0x0100+48), "text")
+        tf_mosch.text = tf_mosch.text.replace(".", ",")
     }
 
 }

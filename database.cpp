@@ -787,6 +787,136 @@ bool DataBase::editTableBazaIzmereni(const QString &idbaza, const QString &date,
         return false;
 }
 
+bool DataBase::insertIntoCeh(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO Ceh (Наименование) "
+                 "VALUES (:cehname)");
+   quer.bindValue(":cehname",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+qDebug()<<"data[0]"<<data[0];
+qDebug()<<"data[0].toString()"<<data[0].toString();
+
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ceh;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoCeh(const QString &cehname){
+    QVariantList data;
+    data.append(cehname);
+    if(insertIntoCeh(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoTipMehanizma(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO TipMehanizma (Наименование) "
+                 "VALUES (:tipmehname)");
+   quer.bindValue(":tipmehname",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << tipmeh;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoTipMehanizma(const QString &tipmehname){
+    QVariantList data;
+    data.append(tipmehname);
+    if(insertIntoTipMehanizma(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO TipPeredatochnogoMehanizma (Наименование) "
+                 "VALUES (:tippermehname)");
+   quer.bindValue(":tippermehname",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << tippermeh;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QString &tippermehname){
+    QVariantList data;
+    data.append(tippermehname);
+    if(insertIntoTipPeredatochnogoMehanizma(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoTipPeredachi(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO TipPeredachi (Наименование) "
+                 "VALUES (:tippername)");
+   quer.bindValue(":tippername",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << tipper;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoTipPeredachi(const QString &tippername){
+    QVariantList data;
+    data.append(tippername);
+    if(insertIntoTipPeredachi(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoBazaProgram(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO BazaProgram (№КАТЭ, Название_программы) "
+                 "VALUES (:programmnumber, :programmname)");
+   quer.bindValue(":programmnumber",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   quer.bindValue(":programmname",     data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << bazaprogram;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoBazaProgram(const QString &programmnumber, const QString &programmname){
+    QVariantList data;
+    data.append(programmnumber);
+    data.append(programmname);
+    if(insertIntoBazaProgram(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)
@@ -823,6 +953,116 @@ bool DataBase::removeRecordBI(const int id)
     // Выполняем удаление
     if(!query.exec()){
         qDebug() << "error delete row " << bazaizm;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Цех"
+ * */
+bool DataBase::removeRecordCeh(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ceh " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ceh;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Тип механизма"
+ * */
+bool DataBase::removeRecordTipMehanizma(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " tipmeh " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << tipmeh;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Тип передаточного механизма"
+ * */
+bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " tippermeh " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << tippermeh;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Тип передачи"
+ * */
+bool DataBase::removeRecordTipPeredachi(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " tipper " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << tipper;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "База программ ПНР"
+ * */
+bool DataBase::removeRecordBazaProgram(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " bazaprogram " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << bazaprogram;
         qDebug() << query.lastError().text();
         return false;
     } else {

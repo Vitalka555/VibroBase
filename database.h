@@ -310,9 +310,24 @@ public slots:
                                 const QString &p7, const QString &o7, const QString &v8, const QString &p8, const QString &o8, const QString &t1,
                                 const QString &t2, const QString &t3, const QString &t4, const QString &t5, const QString &t6, const QString &t7,
                                 const QString &t8, const QString &q, const QString &p, const QString &prim, const QString &bazaIzmereni_id);
+    bool insertIntoCeh(const QVariantList &data);
+    bool insertIntoCeh(const QString &cehname);
+    bool insertIntoTipMehanizma(const QVariantList &data);
+    bool insertIntoTipMehanizma(const QString &tipmehname);
+    bool insertIntoTipPeredatochnogoMehanizma(const QVariantList &data);
+    bool insertIntoTipPeredatochnogoMehanizma(const QString &tippermehname);
+    bool insertIntoTipPeredachi(const QVariantList &data);
+    bool insertIntoTipPeredachi(const QString &tippername);
+    bool insertIntoBazaProgram(const QVariantList &data);
+    bool insertIntoBazaProgram(const QString &programmnumber, const QString &programmname);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id
+    bool removeRecordCeh(const int id); // Удаление записи из таблицы "Цех" по её id
+    bool removeRecordTipMehanizma(const int id); // Удаление записи из таблицы "Тип механизма" по её id
+    bool removeRecordTipPeredatochnogoMehanizma(const int id); // Удаление записи из таблицы "Тип передаточного механизма" по её id
+    bool removeRecordTipPeredachi(const int id); // Удаление записи из таблицы "Тип передачи" по её id
+    bool removeRecordBazaProgram(const int id); // Удаление записи из таблицы "База программ ПНР" по её id
 };
 
 #endif // DATABASE_H

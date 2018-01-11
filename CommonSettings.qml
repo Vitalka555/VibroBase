@@ -78,6 +78,11 @@ Item {
                 color: "white"
                 text: "+"
             }
+            onClicked: {
+                database.insertIntoCeh(tf_ceh.text)
+                model_ceh.updateModel()
+                tf_ceh.clear()
+            }
         }
         Rectangle {
             id: rec_number_ceh
@@ -253,6 +258,10 @@ Item {
                 color: "white"
                 text: "Удалить"
             }
+            onClicked: {
+                database.removeRecordCeh(model_ceh.getId(list_ceh.currentIndex))
+                model_ceh.updateModel()
+            }
         }
     }//end rec1
     Rectangle {
@@ -328,6 +337,11 @@ Item {
                 font.pixelSize: 20
                 color: "white"
                 text: "+"
+            }
+            onClicked: {
+                database.insertIntoTipMehanizma(tf_tipmeh.text)
+                model_tipmeh.updateModel()
+                tf_tipmeh.clear()
             }
         }
         Rectangle {
@@ -504,6 +518,10 @@ Item {
                 color: "white"
                 text: "Удалить"
             }
+            onClicked: {
+                database.removeRecordTipMehanizma(model_tipmeh.getId(list_tipmeh.currentIndex))
+                model_tipmeh.updateModel()
+            }
         }
     }//end rec2
     Rectangle {
@@ -579,6 +597,11 @@ Item {
                 font.pixelSize: 20
                 color: "white"
                 text: "+"
+            }
+            onClicked: {
+                database.insertIntoTipPeredatochnogoMehanizma(tf_tippermeh.text)
+                model_tippermeh.updateModel()
+                tf_tippermeh.clear()
             }
         }
         Rectangle {
@@ -755,6 +778,10 @@ Item {
                 color: "white"
                 text: "Удалить"
             }
+            onClicked: {
+                database.removeRecordTipPeredatochnogoMehanizma(model_tippermeh.getId(list_tippermeh.currentIndex))
+                model_tippermeh.updateModel()
+            }
         }
     }//end rec3
     Rectangle {
@@ -830,6 +857,11 @@ Item {
                 font.pixelSize: 20
                 color: "white"
                 text: "+"
+            }
+            onClicked: {
+                database.insertIntoTipPeredachi(tf_tipper.text)
+                model_tipper.updateModel()
+                tf_tipper.clear()
             }
         }
         Rectangle {
@@ -1006,6 +1038,10 @@ Item {
                 color: "white"
                 text: "Удалить"
             }
+            onClicked: {
+                database.removeRecordTipPeredachi(model_tipper.getId(list_tipper.currentIndex))
+                model_tipper.updateModel()
+            }
         }
     }//end rec4
     Rectangle {
@@ -1132,6 +1168,12 @@ Item {
                 font.pixelSize: 20
                 color: "white"
                 text: "+"
+            }
+            onClicked: {
+                database.insertIntoBazaProgram(tf_programm_number.text, tf_programm_name.text)
+                model_program.updateModel()
+                tf_programm_number.clear()
+                tf_programm_name.clear()
             }
         }
         Rectangle {
@@ -1357,6 +1399,10 @@ Item {
                 font.pixelSize: 15
                 color: "white"
                 text: "Удалить"
+            }
+            onClicked: {
+                database.removeRecordBazaProgram(model_program.getId(list_programm.currentIndex))
+                model_program.updateModel()
             }
         }
     }

@@ -967,6 +967,81 @@ bool DataBase::insertIntoProizvodIspMeh(const QString &proizvname){
         return false;
 }
 
+bool DataBase::insertIntoLAES(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO LAES (Фамилия) "
+                 "VALUES (:laesfam)");
+   quer.bindValue(":laesfam",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << laes;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoLAES(const QString &laesfam){
+    QVariantList data;
+    data.append(laesfam);
+    if(insertIntoLAES(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoATE(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO ATE (Фамилия) "
+                 "VALUES (:atefam)");
+   quer.bindValue(":atefam",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ate;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoATE(const QString &atefam){
+    QVariantList data;
+    data.append(atefam);
+    if(insertIntoATE(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoFIO(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO FIO (ФИО) "
+                 "VALUES (:fiofio)");
+   quer.bindValue(":fiofio",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << fio;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoFIO(const QString &fiofio){
+    QVariantList data;
+    data.append(fiofio);
+    if(insertIntoFIO(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)
@@ -1157,6 +1232,72 @@ bool DataBase::removeRecordProizvodIspMeh(const int id)
     // Выполняем удаление
     if(!query.exec()){
         qDebug() << "error delete row " << proizvmeh;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Персонал ЛАЭС"
+ * */
+bool DataBase::removeRecordLAES(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " laes " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << laes;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Персонал АТЭ"
+ * */
+bool DataBase::removeRecordATE(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ate " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ate;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Заполняющие базу"
+ * */
+bool DataBase::removeRecordFIO(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " fio " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << fio;
         qDebug() << query.lastError().text();
         return false;
     } else {

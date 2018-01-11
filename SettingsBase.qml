@@ -74,6 +74,13 @@ Item {
                 color: "white"
                 text: "Персонал"
             }
+            onClicked: {
+                stackView.replace(personalSettings)
+                tool_left.visible = false
+                tool_left1.visible = false
+                tool_left2.visible = false
+                tool_left3.visible = true
+            }
         }
         Button {
             id: but_norms

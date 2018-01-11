@@ -324,6 +324,12 @@ public slots:
     bool insertIntoProizvodElPriv(const QString &proizvedname);
     bool insertIntoProizvodIspMeh(const QVariantList &data);
     bool insertIntoProizvodIspMeh(const QString &proizvname);
+    bool insertIntoLAES(const QVariantList &data);
+    bool insertIntoLAES(const QString &laesfam);
+    bool insertIntoATE(const QVariantList &data);
+    bool insertIntoATE(const QString &atefam);
+    bool insertIntoFIO(const QVariantList &data);
+    bool insertIntoFIO(const QString &fiofio);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id
@@ -334,6 +340,9 @@ public slots:
     bool removeRecordBazaProgram(const int id); // Удаление записи из таблицы "База программ ПНР" по её id
     bool removeRecordProizvodElPriv(const int id); // Удаление записи из таблицы "Производители электродвигателей" по её id
     bool removeRecordProizvodIspMeh(const int id); // Удаление записи из таблицы "Производители исполнительных механизмов" по её id
+    bool removeRecordLAES(const int id); // Удаление записи из таблицы "Персонал ЛАЭС" по её id
+    bool removeRecordATE(const int id); // Удаление записи из таблицы "Персонал АТЭ" по её id
+    bool removeRecordFIO(const int id); // Удаление записи из таблицы "Заполняющие" по её id
 };
 
 #endif // DATABASE_H

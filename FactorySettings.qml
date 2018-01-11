@@ -142,7 +142,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_fac_ed;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -261,6 +261,7 @@ Item {
             onClicked: {
                 database.removeRecordProizvodElPriv(model_proizved.getId(list_fac_ed.currentIndex))
                 model_proizved.updateModel()
+                list_fac_ed.currentIndex = -1
             }
         }
     }//end rec1
@@ -402,7 +403,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_fac;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -521,6 +522,7 @@ Item {
             onClicked: {
                 database.removeRecordProizvodIspMeh(model_proizvmeh.getId(list_fac.currentIndex))
                 model_proizvmeh.updateModel()
+                list_fac.currentIndex = -1
             }
         }
     }//end rec2

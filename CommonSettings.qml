@@ -142,7 +142,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_ceh;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -261,6 +261,7 @@ Item {
             onClicked: {
                 database.removeRecordCeh(model_ceh.getId(list_ceh.currentIndex))
                 model_ceh.updateModel()
+                list_ceh.currentIndex = -1
             }
         }
     }//end rec1
@@ -402,7 +403,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_tipmeh;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -521,6 +522,7 @@ Item {
             onClicked: {
                 database.removeRecordTipMehanizma(model_tipmeh.getId(list_tipmeh.currentIndex))
                 model_tipmeh.updateModel()
+                list_tipmeh.currentIndex = -1
             }
         }
     }//end rec2
@@ -662,7 +664,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_tippermeh;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -781,6 +783,7 @@ Item {
             onClicked: {
                 database.removeRecordTipPeredatochnogoMehanizma(model_tippermeh.getId(list_tippermeh.currentIndex))
                 model_tippermeh.updateModel()
+                list_tippermeh.currentIndex = -1
             }
         }
     }//end rec3
@@ -922,7 +925,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_tipper;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -1041,6 +1044,7 @@ Item {
             onClicked: {
                 database.removeRecordTipPeredachi(model_tipper.getId(list_tipper.currentIndex))
                 model_tipper.updateModel()
+                list_tipper.currentIndex = -1
             }
         }
     }//end rec4
@@ -1252,7 +1256,7 @@ Item {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentIndex: window.index
+                    currentIndex: -1
                     ScrollBar.vertical: ScrollBar { id: vbar_programm;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -1403,6 +1407,7 @@ Item {
             onClicked: {
                 database.removeRecordBazaProgram(model_program.getId(list_programm.currentIndex))
                 model_program.updateModel()
+                list_programm.currentIndex = -1
             }
         }
     }

@@ -32,5 +32,6 @@
         <file>SettingsBase.qml</file>
         <file>CommonSettings.qml</file>
         <file>FactorySettings.qml</file>
+        <file>PersonalSettings.qml</file>
     </qresource>
 </RCC>

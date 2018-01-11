@@ -355,6 +355,12 @@ Component.onCompleted: {
                 id: factorySettings_0
             }
         }
+        Component {
+            id: personalSettings
+            PersonalSettings {
+                id: personalSettings_0
+            }
+        }
     }
 
 Component.onCompleted: {

@@ -31,5 +31,6 @@
         <file>SettingsProgramm.qml</file>
         <file>SettingsBase.qml</file>
         <file>CommonSettings.qml</file>
+        <file>FactorySettings.qml</file>
     </qresource>
 </RCC>

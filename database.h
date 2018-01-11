@@ -320,6 +320,10 @@ public slots:
     bool insertIntoTipPeredachi(const QString &tippername);
     bool insertIntoBazaProgram(const QVariantList &data);
     bool insertIntoBazaProgram(const QString &programmnumber, const QString &programmname);
+    bool insertIntoProizvodElPriv(const QVariantList &data);
+    bool insertIntoProizvodElPriv(const QString &proizvedname);
+    bool insertIntoProizvodIspMeh(const QVariantList &data);
+    bool insertIntoProizvodIspMeh(const QString &proizvname);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id
@@ -328,6 +332,8 @@ public slots:
     bool removeRecordTipPeredatochnogoMehanizma(const int id); // Удаление записи из таблицы "Тип передаточного механизма" по её id
     bool removeRecordTipPeredachi(const int id); // Удаление записи из таблицы "Тип передачи" по её id
     bool removeRecordBazaProgram(const int id); // Удаление записи из таблицы "База программ ПНР" по её id
+    bool removeRecordProizvodElPriv(const int id); // Удаление записи из таблицы "Производители электродвигателей" по её id
+    bool removeRecordProizvodIspMeh(const int id); // Удаление записи из таблицы "Производители исполнительных механизмов" по её id
 };
 
 #endif // DATABASE_H

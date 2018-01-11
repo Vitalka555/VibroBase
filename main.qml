@@ -78,6 +78,8 @@ ApplicationWindow {
                     qmlSignal_baza_id()
                     tool_left.visible = true
                     tool_left1.visible = false
+                    tool_left2.visible = false
+                    tool_left3.visible = false
                 }
                 Text {
                     id: tool_text
@@ -97,9 +99,28 @@ ApplicationWindow {
                     tool_left.visible = true
                     tool_left1.visible = false
                     tool_left2.visible = false
+                    tool_left3.visible = false
                 }
                 Text {
                     id: tool_text2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 30
+                    text: qsTr("<")
+                }
+            }
+            ToolButton {
+                id: tool_left3
+                visible: false
+                onClicked: {
+                        stackView.replace(settingsBase)
+                    tool_left.visible = false
+                    tool_left1.visible = true
+                    tool_left2.visible = false
+                    tool_left3.visible = false
+                }
+                Text {
+                    id: tool_text3
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 30
@@ -136,6 +157,10 @@ ApplicationWindow {
                         text: "Настройки программы"
                         onClicked: {
                             stackView.replace(settingsProgramm)
+                            tool_left.visible = false
+                            tool_left1.visible = true
+                            tool_left2.visible = false
+                            tool_left3.visible = false
                             //titleLabel.text = "Настройки программы"
                         }
                     }
@@ -143,6 +168,10 @@ ApplicationWindow {
                         text: "Настройки базы"
                         onClicked: {
                             stackView.replace(settingsBase)
+                            tool_left.visible = false
+                            tool_left1.visible = true
+                            tool_left2.visible = false
+                            tool_left3.visible = false
                         }
                     }
                     MenuItem {
@@ -318,6 +347,12 @@ Component.onCompleted: {
             id: commonSettings
             CommonSettings {
                 id: commonSettings_0
+            }
+        }
+        Component {
+            id: factorySettings
+            FactorySettings {
+                id: factorySettings_0
             }
         }
     }

@@ -917,6 +917,56 @@ bool DataBase::insertIntoBazaProgram(const QString &programmnumber, const QStrin
         return false;
 }
 
+bool DataBase::insertIntoProizvodElPriv(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO ProizvodElPriv (Наименование) "
+                 "VALUES (:proizvedname)");
+   quer.bindValue(":proizvedname",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << proizved;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoProizvodElPriv(const QString &proizvedname){
+    QVariantList data;
+    data.append(proizvedname);
+    if(insertIntoProizvodElPriv(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoProizvodIspMeh(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO ProizvodIspMeh (Наименование) "
+                 "VALUES (:proizvname)");
+   quer.bindValue(":proizvname",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << proizvmeh;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoProizvodIspMeh(const QString &proizvname){
+    QVariantList data;
+    data.append(proizvname);
+    if(insertIntoProizvodIspMeh(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)
@@ -1063,6 +1113,50 @@ bool DataBase::removeRecordBazaProgram(const int id)
     // Выполняем удаление
     if(!query.exec()){
         qDebug() << "error delete row " << bazaprogram;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Производители электродвигателей"
+ * */
+bool DataBase::removeRecordProizvodElPriv(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " proizved " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << proizved;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+/* Метод для удаления записи из таблицы "Производители исполнительных механизмов"
+ * */
+bool DataBase::removeRecordProizvodIspMeh(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " proizvmeh " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << proizvmeh;
         qDebug() << query.lastError().text();
         return false;
     } else {

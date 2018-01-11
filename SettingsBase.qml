@@ -26,6 +26,10 @@ Item {
             }
             onClicked: {
                 stackView.replace(commonSettings)
+                tool_left.visible = false
+                tool_left1.visible = false
+                tool_left2.visible = false
+                tool_left3.visible = true
             }
         }
         Button {
@@ -44,6 +48,13 @@ Item {
                 font.pixelSize: 20
                 color: "white"
                 text: "Производители"
+            }
+            onClicked: {
+                stackView.replace(factorySettings)
+                tool_left.visible = false
+                tool_left1.visible = false
+                tool_left2.visible = false
+                tool_left3.visible = true
             }
         }
         Button {

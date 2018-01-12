@@ -1042,6 +1042,331 @@ bool DataBase::insertIntoFIO(const QString &fiofio){
         return false;
 }
 
+bool DataBase::insertIntoNormHh(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO NormHh (Значение) "
+                 "VALUES (:norm_hh)");
+   quer.bindValue(":norm_hh",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << normhh;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoNormHh(const QString &norm_hh){
+    QVariantList data;
+    data.append(norm_hh);
+    if(insertIntoNormHh(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoNormNomED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO NormNomED (Значение) "
+                 "VALUES (:norm_nomed)");
+   quer.bindValue(":norm_nomed",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << normnomed;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoNormNomED(const QString &norm_nomed){
+    QVariantList data;
+    data.append(norm_nomed);
+    if(insertIntoNormNomED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoNormNom(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO NormNom (Значение) "
+                 "VALUES (:norm_nom)");
+   quer.bindValue(":norm_nom",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << normnom;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoNormNom(const QString &norm_nom){
+    QVariantList data;
+    data.append(norm_nom);
+    if(insertIntoNormNom(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoNormRdED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO NormRdED (Значение) "
+                 "VALUES (:norm_rded)");
+   quer.bindValue(":norm_rded",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << normrded;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoNormRdED(const QString &norm_rded){
+    QVariantList data;
+    data.append(norm_rded);
+    if(insertIntoNormRdED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoNormRd(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO NormRd (Значение) "
+                 "VALUES (:norm_rd)");
+   quer.bindValue(":norm_rd",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << normrd;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoNormRd(const QString &norm_rd){
+    QVariantList data;
+    data.append(norm_rd);
+    if(insertIntoNormRd(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOgrNomED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OgrNomED (Значение) "
+                 "VALUES (:ogr_nomed)");
+   quer.bindValue(":ogr_nomed",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ogrnomed;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOgrNomED(const QString &ogr_nomed){
+    QVariantList data;
+    data.append(ogr_nomed);
+    if(insertIntoOgrNomED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOgrNom(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OgrNom (Значение) "
+                 "VALUES (:ogr_nom)");
+   quer.bindValue(":ogr_nom",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ogrnom;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOgrNom(const QString &ogr_nom){
+    QVariantList data;
+    data.append(ogr_nom);
+    if(insertIntoOgrNom(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOgrRdED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OgrRdED (Значение) "
+                 "VALUES (:ogr_rded)");
+   quer.bindValue(":ogr_rded",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ogrrded;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOgrRdED(const QString &ogr_rded){
+    QVariantList data;
+    data.append(ogr_rded);
+    if(insertIntoOgrRdED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOgrRd(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OgrRd (Значение) "
+                 "VALUES (:ogr_rd)");
+   quer.bindValue(":ogr_rd",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << ogrrd;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOgrRd(const QString &ogr_rd){
+    QVariantList data;
+    data.append(ogr_rd);
+    if(insertIntoOgrRd(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOtkazNomED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OtkazNomED (Значение) "
+                 "VALUES (:otkaz_nomed)");
+   quer.bindValue(":otkaz_nomed",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << otkaznomed;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOtkazNomED(const QString &otkaz_nomed){
+    QVariantList data;
+    data.append(otkaz_nomed);
+    if(insertIntoOtkazNomED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOtkazNom(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OtkazNom (Значение) "
+                 "VALUES (:otkaz_nom)");
+   quer.bindValue(":otkaz_nom",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << otkaznom;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOtkazNom(const QString &otkaz_nom){
+    QVariantList data;
+    data.append(otkaz_nom);
+    if(insertIntoOtkazNom(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOtkazRdED(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OtkazRdED (Значение) "
+                 "VALUES (:otkaz_rded)");
+   quer.bindValue(":otkaz_rded",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << otkazrded;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOtkazRdED(const QString &otkaz_rded){
+    QVariantList data;
+    data.append(otkaz_rded);
+    if(insertIntoOtkazRdED(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::insertIntoOtkazRd(const QVariantList &data)
+{
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO OtkazRd (Значение) "
+                 "VALUES (:otkaz_rd)");
+   quer.bindValue(":otkaz_rd",     data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << otkazrd;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+   return false;
+}
+
+bool DataBase::insertIntoOtkazRd(const QString &otkaz_rd){
+    QVariantList data;
+    data.append(otkaz_rd);
+    if(insertIntoOtkazRd(data))
+        return true;
+    else
+        return false;
+}
+
 /* Метод для удаления записи из таблицы "База оборудования"
  * */
 bool DataBase::removeRecord(const int id)
@@ -1298,6 +1623,266 @@ bool DataBase::removeRecordFIO(const int id)
     // Выполняем удаление
     if(!query.exec()){
         qDebug() << "error delete row " << fio;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordNormHh(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " normhh " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << normhh;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordNormNomED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " normnomed " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << normnomed;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordNormNom(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " normnom " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << normnom;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordNormRdED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " normrded " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << normrded;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordNormRd(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " normrd " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << normrd;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOgrNomED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ogrnomed " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ogrnomed;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOgrNom(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ogrnom " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ogrnom;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOgrRdED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ogrrded " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ogrrded;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOgrRd(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " ogrrd " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << ogrrd;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOtkazNomED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " otkaznomed " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << otkaznomed;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOtkazNom(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " otkaznom " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << otkaznom;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOtkazRdED(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " otkazrded " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << otkazrded;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+    return false;
+}
+
+bool DataBase::removeRecordOtkazRd(const int id)
+{
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM " otkazrd " WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << otkazrd;
         qDebug() << query.lastError().text();
         return false;
     } else {

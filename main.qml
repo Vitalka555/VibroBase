@@ -96,6 +96,7 @@ ApplicationWindow {
                         stackView.replace(bi)
                     stackView.bazaizm_id = ""
                     //qmlSignal_baza_id()
+                    qmlFilterBI()
                     tool_left.visible = true
                     tool_left1.visible = false
                     tool_left2.visible = false
@@ -359,6 +360,12 @@ Component.onCompleted: {
             id: personalSettings
             PersonalSettings {
                 id: personalSettings_0
+            }
+        }
+        Component {
+            id: vibrationSettings
+            VibrationSettings {
+                id: vibrationSettings_0
             }
         }
     }

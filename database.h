@@ -330,6 +330,32 @@ public slots:
     bool insertIntoATE(const QString &atefam);
     bool insertIntoFIO(const QVariantList &data);
     bool insertIntoFIO(const QString &fiofio);
+    bool insertIntoNormHh(const QVariantList &data);
+    bool insertIntoNormHh(const QString &norm_hh);
+    bool insertIntoNormNomED(const QVariantList &data);
+    bool insertIntoNormNomED(const QString &norm_nomed);
+    bool insertIntoNormNom(const QVariantList &data);
+    bool insertIntoNormNom(const QString &norm_nom);
+    bool insertIntoNormRdED(const QVariantList &data);
+    bool insertIntoNormRdED(const QString &norm_rded);
+    bool insertIntoNormRd(const QVariantList &data);
+    bool insertIntoNormRd(const QString &norm_rd);
+    bool insertIntoOgrNomED(const QVariantList &data);
+    bool insertIntoOgrNomED(const QString &ogr_nomed);
+    bool insertIntoOgrNom(const QVariantList &data);
+    bool insertIntoOgrNom(const QString &ogr_nom);
+    bool insertIntoOgrRdED(const QVariantList &data);
+    bool insertIntoOgrRdED(const QString &ogr_rded);
+    bool insertIntoOgrRd(const QVariantList &data);
+    bool insertIntoOgrRd(const QString &ogr_rd);
+    bool insertIntoOtkazNomED(const QVariantList &data);
+    bool insertIntoOtkazNomED(const QString &otkaz_nomed);
+    bool insertIntoOtkazNom(const QVariantList &data);
+    bool insertIntoOtkazNom(const QString &otkaz_nom);
+    bool insertIntoOtkazRdED(const QVariantList &data);
+    bool insertIntoOtkazRdED(const QString &otkaz_rded);
+    bool insertIntoOtkazRd(const QVariantList &data);
+    bool insertIntoOtkazRd(const QString &otkaz_rd);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id
@@ -343,6 +369,19 @@ public slots:
     bool removeRecordLAES(const int id); // Удаление записи из таблицы "Персонал ЛАЭС" по её id
     bool removeRecordATE(const int id); // Удаление записи из таблицы "Персонал АТЭ" по её id
     bool removeRecordFIO(const int id); // Удаление записи из таблицы "Заполняющие" по её id
+    bool removeRecordNormHh(const int id);
+    bool removeRecordNormNomED(const int id);
+    bool removeRecordNormNom(const int id);
+    bool removeRecordNormRdED(const int id);
+    bool removeRecordNormRd(const int id);
+    bool removeRecordOgrNomED(const int id);
+    bool removeRecordOgrNom(const int id);
+    bool removeRecordOgrRdED(const int id);
+    bool removeRecordOgrRd(const int id);
+    bool removeRecordOtkazNomED(const int id);
+    bool removeRecordOtkazNom(const int id);
+    bool removeRecordOtkazRdED(const int id);
+    bool removeRecordOtkazRd(const int id);
 };
 
 #endif // DATABASE_H

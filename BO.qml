@@ -5,13 +5,14 @@ import QtQuick.LocalStorage 2.0
 import QtQuick.Controls.Material 2.2
 import QtQuick.Controls.Styles 1.4
 
+
 Item {
     id: item
 //    Component.onCompleted: {
 //        mapper.updateData(list.currentIndex)
 //    }
     Page {
-        anchors.fill: parent
+        anchors.fill: parent        
         Rectangle {
             id: rec_0
             anchors.top: parent.top
@@ -465,6 +466,7 @@ Item {
 
 
     }
+
 footer:    ToolBar {
         id: rec_button
         anchors.bottom: parent.bottom

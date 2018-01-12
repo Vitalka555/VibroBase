@@ -99,6 +99,13 @@ Item {
                 color: "white"
                 text: "Нормы вибрации"
             }
+            onClicked: {
+                stackView.replace(vibrationSettings)
+                tool_left.visible = false
+                tool_left1.visible = false
+                tool_left2.visible = false
+                tool_left3.visible = true
+            }
         }
     }
 

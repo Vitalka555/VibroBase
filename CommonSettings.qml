@@ -27,6 +27,7 @@ Item {
             anchors.top: text_ceh.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_ceh.left
             anchors.rightMargin: 5
             height: but_ceh.height
@@ -288,6 +289,7 @@ Item {
             anchors.top: text_tipmeh.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_tipmeh.left
             anchors.rightMargin: 5
             height: but_tipmeh.height
@@ -549,6 +551,7 @@ Item {
             anchors.top: text_tippermeh.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_tippermeh.left
             anchors.rightMargin: 5
             height: but_tippermeh.height
@@ -810,6 +813,7 @@ Item {
             anchors.top: text_tipper.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_tipper.left
             anchors.rightMargin: 5
             height: but_tipper.height
@@ -1080,6 +1084,7 @@ Item {
             anchors.top: text_programm_number.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: parent.right
             anchors.rightMargin: parent.width/2+5
             height: but_programm.height

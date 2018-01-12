@@ -27,6 +27,7 @@ Item {
             anchors.top: text_laes.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_laes.left
             anchors.rightMargin: 5
             height: but_laes.height
@@ -288,6 +289,7 @@ Item {
             anchors.top: text_ate.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_ate.left
             anchors.rightMargin: 5
             height: but_ate.height
@@ -549,6 +551,7 @@ Item {
             anchors.top: text_fio.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_fio.left
             anchors.rightMargin: 5
             height: but_fio.height

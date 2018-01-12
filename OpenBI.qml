@@ -38,7 +38,7 @@ Rectangle{
             id: tf_kks
             anchors.top: parent.top
             anchors.topMargin: 5
-            anchors.right: tf_tipizmer.right
+            anchors.right: tf_date.right
             font.pixelSize: 20
             font.italic: true
             color: "#3E65FF"

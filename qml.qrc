@@ -33,5 +33,6 @@
         <file>CommonSettings.qml</file>
         <file>FactorySettings.qml</file>
         <file>PersonalSettings.qml</file>
+        <file>VibrationSettings.qml</file>
     </qresource>
 </RCC>

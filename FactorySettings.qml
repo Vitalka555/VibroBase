@@ -27,6 +27,7 @@ Item {
             anchors.top: text_fac_ed.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_fac_ed.left
             anchors.rightMargin: 5
             height: but_fac_ed.height
@@ -288,6 +289,7 @@ Item {
             anchors.top: text_fac.bottom
             anchors.topMargin: 5
             anchors.left: parent.left
+            anchors.leftMargin: 5
             anchors.right: but_fac.left
             anchors.rightMargin: 5
             height: but_fac.height

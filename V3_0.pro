@@ -16,7 +16,8 @@ SOURCES += main.cpp \
     database.cpp \
     listmodel.cpp \
     datamapper.cpp \
-    copyfile.cpp
+    copyfile.cpp \
+    stat.cpp
 
 RESOURCES += qml.qrc
 
@@ -35,6 +36,7 @@ HEADERS += \
     database.h \
     listmodel.h \
     datamapper.h \
-    copyfile.h
+    copyfile.h \
+    stat.h
 QT_QUICK_CONTROLS_STYLE=material ./app
 

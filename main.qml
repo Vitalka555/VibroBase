@@ -36,6 +36,7 @@ ApplicationWindow {
     signal qmlSignalReadPath()//сигнал чтения настроек путей из ini
     signal qmlSignalWriteWindow()
     signal qmlSignalReadWindow()
+    signal qmlKolAgr()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -212,6 +213,7 @@ ApplicationWindow {
                         stackView.replace(bb)
                     }
                     if (listView.currentIndex==3){
+                        //qmlKolAgr()
                         stackView.replace(stat)
                     }
 

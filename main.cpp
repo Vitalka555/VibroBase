@@ -20,6 +20,7 @@
 //#include "listmodel0.h"
 #include "datamapper.h"
 #include "copyfile.h"
+#include "stat.h"
 
 static const int LOAD_TIME_MSEC = 5 * 1000;
 static const int PROGRESS_X_PX = 210;
@@ -206,6 +207,8 @@ ListModel *model0 = new ListModel(root);
                          copy, SLOT(cppSlot()));
         QObject::connect(root, SIGNAL(qmlSignal2()),
                          copy, SLOT(cppSlot2()));
+        Stat *statist = new Stat(root);
+        QObject::connect(root, SIGNAL(qmlKolAgr()), statist, SLOT(kolagr()));
 QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
 QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
@@ -228,6 +231,7 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_kks", model_kks);
         engine.rootContext()->setContextProperty("model_norm_creatBI", model_norm_creatBI);
         engine.rootContext()->setContextProperty("model_openBI", model_openBI);
+
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
 mapper_openBI->setModel(model_openBI);

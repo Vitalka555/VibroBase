@@ -12,6 +12,7 @@ class copyfile : public QObject
     Q_OBJECT
     public:
     explicit copyfile(QObject *parent = 0);
+    //~copyfile();
     //bool HQt_CopyFile(QString filename, QString dir);
 signals:
 

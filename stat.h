@@ -13,10 +13,17 @@ class Stat : public QObject
     public:
     explicit Stat(QObject *parent = 0);
     //~Stat();
+
+    QString date_begin;
+    QString date_end;
+    QString personal_select = "";
 signals:
 
 public slots:
     void kolagr();
+    void getdate();
+    void getdate2();
+    void getpersonal();
 };
 
 #endif // STAT_H

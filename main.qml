@@ -37,6 +37,9 @@ ApplicationWindow {
     signal qmlSignalWriteWindow()
     signal qmlSignalReadWindow()
     signal qmlKolAgr()
+    signal qmlGetDate()
+    signal qmlGetDate2()
+    signal qmlGetPersonal()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -199,7 +202,8 @@ ApplicationWindow {
                 width: parent.width
                 text: model.title
                 highlighted: ListView.isCurrentItem
-                onClicked: {                    
+                onClicked: {
+
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
                         stackView.replace(bo)
@@ -216,6 +220,7 @@ ApplicationWindow {
                         //qmlKolAgr()
                         stackView.replace(stat)
                     }
+
 
                     drawer.close()
                 }

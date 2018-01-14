@@ -2,9 +2,16 @@ import QtQuick 2.0
 import QtQuick.Controls 2.3
 import QtCharts 2.2
 import QtQml.Models 2.3
+import QtQuick.Controls.Material 2.2
+import QtQuick.Controls.Styles 1.4
 
 Item {
     id: item
+    Component.onCompleted: {
+        qmlGetDate()
+        qmlGetPersonal()
+    }
+
     Page {
         id: page
         anchors.fill: parent
@@ -14,7 +21,218 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height*4/5
-            //color: "lightblue"
+            Rectangle {
+                id: rec_filter
+                objectName: "filter_izmer"
+                visible: true
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+                height: 50
+                property string date_begin
+                property string date_end
+                property int razmer
+                property var personal: []
+                property string personal_select: ""
+                Text {
+                    id: text_date_begin
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    font.pixelSize: 15
+                    text: "Дата c:"
+                }
+                TextField {
+                    id: tf_date_begin
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.left: text_date_begin.right
+                    anchors.leftMargin: 5
+                    width: 90
+                    focus: true
+                    selectByMouse: true
+                    persistentSelection: true
+                    inputMask: "00-00-0000"
+                    inputMethodHints: Qt.ImhDate
+                    horizontalAlignment: TextInput.AlignHCenter
+                    text: Qt.formatDateTime(rec_filter.date_begin, "ddMMyyyy")
+                    Keys.onPressed: {
+                        if(event.key === Qt.Key_Enter){
+                            rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            rec_filter.date_end = tf_date_end.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            qmlGetDate2()
+                                                qmlKolAgr()
+                            chartIzmerMes.series_add()
+                            chartIzmerMes1.series_add()
+                                            }
+                        if(event.key === Qt.Key_Return){
+                            rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            rec_filter.date_end = tf_date_end.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            qmlGetDate2()
+                                                qmlKolAgr()
+                            chartIzmerMes.series_add()
+                            chartIzmerMes1.series_add()
+                                            }
+                    }
+                    MouseArea {
+                        acceptedButtons: Qt.RightButton
+                        anchors.fill: parent
+                        onClicked: {
+                            contextMenu_date_begin.x = mouseX
+                            contextMenu_date_begin.y = mouseY
+                            contextMenu_date_begin.open()
+                        }
+                    }
+                    Menu {
+                        id: contextMenu_date_begin
+                        MenuItem {
+                            text: qsTr("Копировать")
+                            enabled: tf_date_begin.selectedText
+                            onTriggered: tf_date_begin.copy()
+                        }
+                        MenuItem {
+                            text: qsTr("Вырезать")
+                            enabled: tf_date_begin.selectedText
+                            onTriggered: tf_date_begin.cut()
+                        }
+                        MenuItem {
+                            text: qsTr("Вставить")
+                            enabled: tf_date_begin.canPaste
+                            onTriggered: tf_date_begin.paste()
+                        }
+                    }
+                }
+                Text {
+                    id: text_date_end
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.left: tf_date_begin.right
+                    anchors.leftMargin: 5
+                    font.pixelSize: 15
+                    text: "по:"
+                }
+                TextField {
+                    id: tf_date_end
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.left: text_date_end.right
+                    anchors.leftMargin: 5
+                    width: 90
+                    focus: true
+                    selectByMouse: true
+                    persistentSelection: true
+                    inputMask: "00-00-0000"
+                    inputMethodHints: Qt.ImhDate
+                    horizontalAlignment: TextInput.AlignHCenter
+                    text: Qt.formatDateTime(rec_filter.date_end, "ddMMyyyy")
+                    Keys.onPressed: {
+                        if(event.key === Qt.Key_Enter){
+                            rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            rec_filter.date_end = tf_date_end.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            qmlGetDate2()
+                                                qmlKolAgr()
+                            chartIzmerMes.series_add()
+                            chartIzmerMes1.series_add()
+                                            }
+                        if(event.key === Qt.Key_Return){
+                            rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            rec_filter.date_end = tf_date_end.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
+                            qmlGetDate2()
+                                                qmlKolAgr()
+                            chartIzmerMes.series_add()
+                            chartIzmerMes1.series_add()
+                                            }
+                    }
+                    MouseArea {
+                        acceptedButtons: Qt.RightButton
+                        anchors.fill: parent
+                        onClicked: {
+                            contextMenu_date_end.x = mouseX
+                            contextMenu_date_end.y = mouseY
+                            contextMenu_date_end.open()
+                        }
+                    }
+                    Menu {
+                        id: contextMenu_date_end
+                        MenuItem {
+                            text: qsTr("Копировать")
+                            enabled: tf_date_end.selectedText
+                            onTriggered: tf_date_end.copy()
+                        }
+                        MenuItem {
+                            text: qsTr("Вырезать")
+                            enabled: tf_date_end.selectedText
+                            onTriggered: tf_date_end.cut()
+                        }
+                        MenuItem {
+                            text: qsTr("Вставить")
+                            enabled: tf_date_end.canPaste
+                            onTriggered: tf_date_end.paste()
+                        }
+                    }
+                }
+                Text {
+                    id: text_personal
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: combo_personal.left
+                    anchors.rightMargin: 5
+                    font.pixelSize: 15
+                    text: "Персонал:"
+                }
+                ComboBox {
+                    id: combo_personal
+                    visible: rec_filter.visible
+                    currentIndex: -1
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: but_personal.left
+                    anchors.rightMargin: 5
+                    width: 200
+                    model: ListModel{
+                        id: model_personal
+                    }
+                    Component.onCompleted: {
+                        for(var i=0;i<rec_filter.razmer;i++){
+                            model_personal.append({text: rec_filter.personal[i]})
+                        }
+                    }
+                    onCurrentTextChanged: {
+                        rec_filter.personal_select = combo_personal.currentText
+                        qmlGetDate2()
+                                            qmlKolAgr()
+                        chartIzmerMes.series_add()
+                        chartIzmerMes1.series_add()
+                    }
+
+                }
+                Button {
+                    id: but_personal
+                    visible: rec_filter.visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    width: height
+                    highlighted: true
+                    Material.accent: Material.LightBlue
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        text: "X"
+                    }
+                    onClicked: {
+                        combo_personal.currentIndex = -1
+                        rec_filter.personal_select = combo_personal.currentText
+                        qmlGetDate2()
+                                            qmlKolAgr()
+                        chartIzmerMes.series_add()
+                        chartIzmerMes1.series_add()
+                    }
+                }
+            }//end rec_filter
+
             ChartView {
                 id: chartKolAgr
                 objectName: "chartKolAgr"
@@ -57,7 +275,10 @@ Item {
                 property var array_kolmes
                 property int razmer
                 visible: false
-                anchors.fill: parent
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
                 antialiasing: true
                 legend.visible: false
 //dropShadowEnabled: true
@@ -80,9 +301,21 @@ Item {
                     for(var i=0;i<razmer;i++){
                         kol[i] = parseInt(array_kolmes[i], 10)
                     }
-                    yAxisMes.max = Math.round(Math.max.apply(null, kol)*1.1)
+                    yAxisMes.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                     var bar = pie_seriesMes.append("label", kol)
                     bar.labelColor = "black"
+                }
+                function series_add(){
+                    pie_seriesMes.clear()
+                    chartIzmerMes.update()
+                    var kol = []
+                    for(var i=0;i<razmer;i++){
+                        kol[i] = parseInt(array_kolmes[i], 10)
+                    }
+                    yAxisMes.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                    var bar = pie_seriesMes.append("label", kol)
+                    bar.labelColor = "black"
+                    console.log("kol = ", kol)
                 }
             }
             ChartView {
@@ -194,6 +427,7 @@ Item {
                     preferredHighlightEnd: 0.5
                     delegate: flipCardDelegate
                     model: objmodel
+                    maximumFlickVelocity: 500
                     focus: true
                         Keys.onLeftPressed: decrementCurrentIndex()
                         Keys.onRightPressed: incrementCurrentIndex()
@@ -373,6 +607,18 @@ Item {
                             yAxisMes1.max = Math.round(Math.max.apply(null, kol)*1.1)
                             var bar = pie_seriesMes1.append("label", kol)
                             bar.labelColor = "black"
+                        }
+                        function series_add(){
+                            pie_seriesMes1.clear()
+                            chartIzmerMes1.update()
+                            var kol = []
+                            for(var i=0;i<chartIzmerMes.razmer;i++){
+                                kol[i] = parseInt(chartIzmerMes.array_kolmes[i], 10)
+                            }
+                            yAxisMes1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                            var bar = pie_seriesMes1.append("label", kol)
+                            bar.labelColor = "black"
+                            console.log("kol = ", kol)
                         }
                     }
                 }

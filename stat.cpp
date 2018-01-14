@@ -4,6 +4,38 @@ Stat::Stat(QObject *parent) : QObject(parent)
 {
 
 }
+void Stat::getdate()
+{
+    QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    QSqlQuery querydate1("SELECT min(Дата) FROM BazaIzmereni where Дата is not null");
+    while (querydate1.next()) {
+        date_begin =  querydate1.value(0).toString();
+        //qDebug()<<"date_begin"<<date_begin;
+    }
+    QSqlQuery querydate2("SELECT max(Дата) FROM BazaIzmereni where Дата is not null");
+    while (querydate2.next()) {
+        date_end =  querydate2.value(0).toString();
+        //qDebug()<<"date_end"<<date_end;
+    }
+    personal_select = "";
+    filter_izmer->setProperty("date_begin", date_begin);
+    filter_izmer->setProperty("date_end", date_end);
+}
+void Stat::getpersonal()
+{
+    QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    QStringList personal;
+    int razmer;
+    int i = 0;
+    QSqlQuery querypers("SELECT Фамилия FROM LAES ORDER BY Фамилия");
+    while (querypers.next()) {
+        personal.append(querypers.value(0).toString());
+        i++;
+    }
+    razmer = i;
+    filter_izmer->setProperty("personal", personal);
+    filter_izmer->setProperty("razmer", razmer);
+}
 
 void Stat::kolagr()
 {
@@ -32,10 +64,25 @@ for(k = 0; k<i; k++){
 chartKolAgr->setProperty("array_nameagr", list1);
 chartKolAgr->setProperty("array_kolagr", list2);
 chartKolAgr->setProperty("razmer", razmer);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerMes = this->parent()->findChild<QObject*>("chartIzmerMes");
+//QString date_begin_=(filter_izmer->property("date_begin")).toString();
+//QString date_end_=(filter_izmer->property("date_end")).toString();
+//qDebug()<<"date_end из QML"<<date_end_;
 int razmer1;
-QSqlQuery query1("SELECT strftime('%m-%Y', Дата), COUNT(1) FROM BazaIzmereni where Дата is not null GROUP BY strftime('%Y-%m', Дата)");
+qDebug()<<"date_begin"<<date_begin;
+qDebug()<<"date_end"<<date_end;
+qDebug()<<"personal_select"<<personal_select;
+QString pers;
+if(personal_select == ""){
+    pers = "";
+} else {
+    pers = " and BazaIzmereni.'ЛАЭС-2' LIKE '%" + personal_select + "%' ";
+}
+QSqlQuery query1("SELECT strftime('%m-%Y', Дата), COUNT(1) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
+                "' and Дата <='" + date_end + "' " + pers + " GROUP BY strftime('%Y-%m', Дата)");
 QStringList list3;
 QStringList list4;
 //QSqlQuery query("SELECT TipMehanizma.Наименование FROM TipMehanizma");
@@ -43,6 +90,8 @@ i = 0;
 while (query1.next()) {
     list3.append(query1.value(0).toString());
     list4.append(query1.value(1).toString());
+    qDebug()<<"list3"<<list3[i];
+    qDebug()<<"list4"<<list4[i];
     i++;
 }
 razmer1 = i;
@@ -62,9 +111,6 @@ i = 0;
 while (query2.next()) {
     list5.append(query2.value(0).toString());
     list6.append(query2.value(1).toString());
-    qDebug()<<i;
-    qDebug()<<"list5"<<list5[i];
-    qDebug()<<"list6"<<list6[i];
     i++;
 }
 razmer2 = i;
@@ -172,3 +218,12 @@ while (query26.next()) {
 }
 chartIzmerTime->setProperty("array_koltime", list7);
 }
+
+void Stat::getdate2()
+{
+    QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    date_begin =(filter_izmer->property("date_begin")).toString();
+    date_end =(filter_izmer->property("date_end")).toString();
+    personal_select = (filter_izmer->property("personal_select")).toString();
+}
+

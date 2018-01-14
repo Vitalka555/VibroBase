@@ -36,8 +36,11 @@ int main(int argc, char *argv[])
     //QLocale::setDefault(QLocale::C);
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
-
+#if defined(Q_OS_WIN)
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+#endif
+
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 
     QApplication app(argc, argv);
@@ -209,6 +212,9 @@ ListModel *model0 = new ListModel(root);
                          copy, SLOT(cppSlot2()));
         Stat *statist = new Stat(root);
         QObject::connect(root, SIGNAL(qmlKolAgr()), statist, SLOT(kolagr()));
+        QObject::connect(root, SIGNAL(qmlGetDate()), statist, SLOT(getdate()));
+        QObject::connect(root, SIGNAL(qmlGetDate2()), statist, SLOT(getdate2()));
+        QObject::connect(root, SIGNAL(qmlGetPersonal()), statist, SLOT(getpersonal()));
 QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
 QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));

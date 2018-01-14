@@ -72,9 +72,9 @@ QObject* chartIzmerMes = this->parent()->findChild<QObject*>("chartIzmerMes");
 //QString date_end_=(filter_izmer->property("date_end")).toString();
 //qDebug()<<"date_end из QML"<<date_end_;
 int razmer1;
-qDebug()<<"date_begin"<<date_begin;
-qDebug()<<"date_end"<<date_end;
-qDebug()<<"personal_select"<<personal_select;
+//qDebug()<<"date_begin"<<date_begin;
+//qDebug()<<"date_end"<<date_end;
+
 QString pers;
 if(personal_select == ""){
     pers = "";
@@ -90,8 +90,6 @@ i = 0;
 while (query1.next()) {
     list3.append(query1.value(0).toString());
     list4.append(query1.value(1).toString());
-    qDebug()<<"list3"<<list3[i];
-    qDebug()<<"list4"<<list4[i];
     i++;
 }
 razmer1 = i;
@@ -102,8 +100,9 @@ chartIzmerMes->setProperty("razmer", razmer1);
 QObject* chartIzmerDay = this->parent()->findChild<QObject*>("chartIzmerDay");
 int razmer2;
 QSqlQuery query2("select case cast (strftime('%w', Дата) as integer) when 0 then 'Вс' when 1 then 'Пн' when 2 then 'Вт' "
-                 "when 3 then 'Ср' when 4 then 'Чт' when 5 then 'Пт' else 'Сб' end as servdayofweek, COUNT(1) "
-                 "from BazaIzmereni where Дата is not null GROUP BY strftime('%w', Дата)");
+                 "when 3 then 'Ср' when 4 then 'Чт' when 5 then 'Пт' else 'Сб' end as servdayofweek, (CASE WHEN COUNT(1) > 0 THEN COUNT(1) ELSE 0 END) "
+                 "from BazaIzmereni where Дата is not null and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + " GROUP BY strftime('%w', Дата)");
 QStringList list5;
 QStringList list6;
 //QSqlQuery query("SELECT TipMehanizma.Наименование FROM TipMehanizma");
@@ -120,102 +119,128 @@ chartIzmerDay->setProperty("razmer", razmer2);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerTime = this->parent()->findChild<QObject*>("chartIzmerTime");
 QStringList list7;
-QSqlQuery query3("select count(Время) from BazaIzmereni where Время like '%00:%'");
+QSqlQuery query3("select count(Время) from BazaIzmereni where Время like '%00:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query3.next()) {
     list7.append(query3.value(0).toString());
 }
-QSqlQuery query4("select count(Время) from BazaIzmereni where Время like '%01:%'");
+QSqlQuery query4("select count(Время) from BazaIzmereni where Время like '%01:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query4.next()) {
     list7.append(query4.value(0).toString());
 }
-QSqlQuery query5("select count(Время) from BazaIzmereni where Время like '%02:%'");
+QSqlQuery query5("select count(Время) from BazaIzmereni where Время like '%02:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query5.next()) {
     list7.append(query5.value(0).toString());
 }
-QSqlQuery query6("select count(Время) from BazaIzmereni where Время like '%03:%'");
+QSqlQuery query6("select count(Время) from BazaIzmereni where Время like '%03:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query6.next()) {
     list7.append(query6.value(0).toString());
 }
-QSqlQuery query7("select count(Время) from BazaIzmereni where Время like '%04:%'");
+QSqlQuery query7("select count(Время) from BazaIzmereni where Время like '%04:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query7.next()) {
     list7.append(query7.value(0).toString());
 }
-QSqlQuery query8("select count(Время) from BazaIzmereni where Время like '%05:%'");
+QSqlQuery query8("select count(Время) from BazaIzmereni where Время like '%05:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query8.next()) {
     list7.append(query8.value(0).toString());
 }
-QSqlQuery query9("select count(Время) from BazaIzmereni where Время like '%06:%'");
+QSqlQuery query9("select count(Время) from BazaIzmereni where Время like '%06:%' and Дата >='" + date_begin +
+                 "' and Дата <='" + date_end + "' " + pers + "");
 while (query9.next()) {
     list7.append(query9.value(0).toString());
 }
-QSqlQuery query10("select count(Время) from BazaIzmereni where Время like '%07:%'");
+QSqlQuery query10("select count(Время) from BazaIzmereni where Время like '%07:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query10.next()) {
     list7.append(query10.value(0).toString());
 }
-QSqlQuery query11("select count(Время) from BazaIzmereni where Время like '%08:%'");
+QSqlQuery query11("select count(Время) from BazaIzmereni where Время like '%08:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query11.next()) {
     list7.append(query11.value(0).toString());
 }
-QSqlQuery query12("select count(Время) from BazaIzmereni where Время like '%09:%'");
+QSqlQuery query12("select count(Время) from BazaIzmereni where Время like '%09:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query12.next()) {
     list7.append(query12.value(0).toString());
 }
-QSqlQuery query13("select count(Время) from BazaIzmereni where Время like '%10:%'");
+QSqlQuery query13("select count(Время) from BazaIzmereni where Время like '%10:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query13.next()) {
     list7.append(query13.value(0).toString());
 }
-QSqlQuery query14("select count(Время) from BazaIzmereni where Время like '%11:%'");
+QSqlQuery query14("select count(Время) from BazaIzmereni where Время like '%11:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query14.next()) {
     list7.append(query14.value(0).toString());
 }
-QSqlQuery query15("select count(Время) from BazaIzmereni where Время like '%12:%'");
+QSqlQuery query15("select count(Время) from BazaIzmereni where Время like '%12:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query15.next()) {
     list7.append(query15.value(0).toString());
 }
-QSqlQuery query16("select count(Время) from BazaIzmereni where Время like '%13:%'");
+QSqlQuery query16("select count(Время) from BazaIzmereni where Время like '%13:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query16.next()) {
     list7.append(query16.value(0).toString());
 }
-QSqlQuery query17("select count(Время) from BazaIzmereni where Время like '%14:%'");
+QSqlQuery query17("select count(Время) from BazaIzmereni where Время like '%14:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query17.next()) {
     list7.append(query17.value(0).toString());
 }
-QSqlQuery query18("select count(Время) from BazaIzmereni where Время like '%15:%'");
+QSqlQuery query18("select count(Время) from BazaIzmereni where Время like '%15:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query18.next()) {
     list7.append(query18.value(0).toString());
 }
-QSqlQuery query19("select count(Время) from BazaIzmereni where Время like '%16:%'");
+QSqlQuery query19("select count(Время) from BazaIzmereni where Время like '%16:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query19.next()) {
     list7.append(query19.value(0).toString());
 }
-QSqlQuery query20("select count(Время) from BazaIzmereni where Время like '%17:%'");
+QSqlQuery query20("select count(Время) from BazaIzmereni where Время like '%17:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query20.next()) {
     list7.append(query20.value(0).toString());
 }
-QSqlQuery query21("select count(Время) from BazaIzmereni where Время like '%18:%'");
+QSqlQuery query21("select count(Время) from BazaIzmereni where Время like '%18:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query21.next()) {
     list7.append(query21.value(0).toString());
 }
-QSqlQuery query22("select count(Время) from BazaIzmereni where Время like '%19:%'");
+QSqlQuery query22("select count(Время) from BazaIzmereni where Время like '%19:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query22.next()) {
     list7.append(query22.value(0).toString());
 }
-QSqlQuery query23("select count(Время) from BazaIzmereni where Время like '%20:%'");
+QSqlQuery query23("select count(Время) from BazaIzmereni where Время like '%20:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query23.next()) {
     list7.append(query23.value(0).toString());
 }
-QSqlQuery query24("select count(Время) from BazaIzmereni where Время like '%21:%'");
+QSqlQuery query24("select count(Время) from BazaIzmereni where Время like '%21:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query24.next()) {
     list7.append(query24.value(0).toString());
 }
-QSqlQuery query25("select count(Время) from BazaIzmereni where Время like '%22:%'");
+QSqlQuery query25("select count(Время) from BazaIzmereni where Время like '%22:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query25.next()) {
     list7.append(query25.value(0).toString());
 }
-QSqlQuery query26("select count(Время) from BazaIzmereni where Время like '%23:%'");
+QSqlQuery query26("select count(Время) from BazaIzmereni where Время like '%23:%' and Дата >='" + date_begin +
+                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query26.next()) {
     list7.append(query26.value(0).toString());
 }
+qDebug()<<"list7"<<list7;
+qDebug()<<"personal_select"<<personal_select;
 chartIzmerTime->setProperty("array_koltime", list7);
 }
 

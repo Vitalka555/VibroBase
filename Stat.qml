@@ -8,8 +8,10 @@ import QtQuick.Controls.Styles 1.4
 Item {
     id: item
     Component.onCompleted: {
+
         qmlGetDate()
         qmlGetPersonal()
+        qmlKolAgr()
     }
 
     Page {
@@ -24,7 +26,7 @@ Item {
             Rectangle {
                 id: rec_filter
                 objectName: "filter_izmer"
-                visible: true
+                visible: false
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -65,6 +67,10 @@ Item {
                                                 qmlKolAgr()
                             chartIzmerMes.series_add()
                             chartIzmerMes1.series_add()
+                            chartIzmerDay.series_add()
+                            chartIzmerDay1.series_add()
+                            chartIzmerTime.series_add()
+                            chartIzmerTime1.series_add()
                                             }
                         if(event.key === Qt.Key_Return){
                             rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
@@ -73,6 +79,10 @@ Item {
                                                 qmlKolAgr()
                             chartIzmerMes.series_add()
                             chartIzmerMes1.series_add()
+                            chartIzmerDay.series_add()
+                            chartIzmerDay1.series_add()
+                            chartIzmerTime.series_add()
+                            chartIzmerTime1.series_add()
                                             }
                     }
                     MouseArea {
@@ -134,6 +144,10 @@ Item {
                                                 qmlKolAgr()
                             chartIzmerMes.series_add()
                             chartIzmerMes1.series_add()
+                            chartIzmerDay.series_add()
+                            chartIzmerDay1.series_add()
+                            chartIzmerTime.series_add()
+                            chartIzmerTime1.series_add()
                                             }
                         if(event.key === Qt.Key_Return){
                             rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
@@ -142,6 +156,10 @@ Item {
                                                 qmlKolAgr()
                             chartIzmerMes.series_add()
                             chartIzmerMes1.series_add()
+                            chartIzmerDay.series_add()
+                            chartIzmerDay1.series_add()
+                            chartIzmerTime.series_add()
+                            chartIzmerTime1.series_add()
                                             }
                     }
                     MouseArea {
@@ -203,6 +221,10 @@ Item {
                                             qmlKolAgr()
                         chartIzmerMes.series_add()
                         chartIzmerMes1.series_add()
+                        chartIzmerDay.series_add()
+                        chartIzmerDay1.series_add()
+                        chartIzmerTime.series_add()
+                        chartIzmerTime1.series_add()
                     }
 
                 }
@@ -229,6 +251,10 @@ Item {
                                             qmlKolAgr()
                         chartIzmerMes.series_add()
                         chartIzmerMes1.series_add()
+                        chartIzmerDay.series_add()
+                        chartIzmerDay1.series_add()
+                        chartIzmerTime.series_add()
+                        chartIzmerTime1.series_add()
                     }
                 }
             }//end rec_filter
@@ -258,12 +284,12 @@ Item {
                     axisX: BarCategoryAxis { categories: chartKolAgr.array_nameagr }
                 }
                 Component.onCompleted: {
-                    qmlKolAgr()
+                    //qmlKolAgr()
                     var kol = []
                     for(var i=0;i<razmer;i++){
                         kol[i] = parseInt(array_kolagr[i], 10)
                     }
-                    yAxis.max = Math.max.apply(null, kol)*1.1
+                    yAxis.max = Math.max.apply(null, kol)*1.1+1
                     var bar = pie_series.append("label", kol)
                     bar.labelColor = "black"
                 }
@@ -315,7 +341,6 @@ Item {
                     yAxisMes.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                     var bar = pie_seriesMes.append("label", kol)
                     bar.labelColor = "black"
-                    console.log("kol = ", kol)
                 }
             }
             ChartView {
@@ -327,7 +352,10 @@ Item {
                 property var kolday: [7]
                 property int razmer
                 visible: false
-                anchors.fill: parent
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
                 antialiasing: true
                 legend.visible: false
 //dropShadowEnabled: true
@@ -366,9 +394,44 @@ Item {
                     for(var i=0;i<razmer;i++){
                         kol[i] = parseInt(kolday[i], 10)
                     }
-                    yAxisDay.max = Math.round(Math.max.apply(null, kol)*1.1)
+                    yAxisDay.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                     var bar = pie_seriesDay.append("label", kol)
                     category.categories = nameday
+                    bar.labelColor = "black"
+                }
+                function series_add(){
+                    pie_seriesDay.clear()
+                    chartIzmerDay.update()
+                    kolday = [0,0,0,0,0,0,0]
+                    for(var i=0;i<7;i++){
+                        if(array_nameday[i] === "Пн"){
+                            kolday[0] = array_kolday[i]
+                        }
+                        if(array_nameday[i] === "Вт"){
+                            kolday[1] = array_kolday[i]
+                        }
+                            if(array_nameday[i] === "Ср"){
+                                kolday[2] = array_kolday[i]
+                            }
+                                if(array_nameday[i] === "Чт"){
+                                    kolday[3] = array_kolday[i]
+                                }
+                                    if(array_nameday[i] === "Пт"){
+                                        kolday[4] = array_kolday[i]
+                                    }
+                                        if(array_nameday[i] === "Сб"){
+                                            kolday[5] = array_kolday[i]
+                                        }
+                                            if(array_nameday[i] === "Вс"){
+                                                kolday[6] = array_kolday[i]
+                                            }
+                    }
+                    var kol = []
+                    for(var i=0;i<7;i++){
+                        kol[i] = parseInt(kolday[i], 10)
+                    }
+                    yAxisDay.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                    var bar = pie_seriesDay.append("label", kol)
                     bar.labelColor = "black"
                 }
             }
@@ -377,7 +440,10 @@ Item {
                 objectName: "chartIzmerTime"
                 property var array_koltime
                 visible: false
-                anchors.fill: parent
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
                 antialiasing: true
                 legend.visible: false
 //dropShadowEnabled: true
@@ -400,15 +466,25 @@ Item {
                     }
                 }
                 Component.onCompleted: {
-                    console.log(array_koltime)
                     var kol = []
                     for(var i=0;i<24;i++){
                         kol[i] = parseInt(array_koltime[i], 10)
                     }
-                    yAxisTime.max = Math.round(Math.max.apply(null, kol)*1.1)
+                    yAxisTime.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                     var bar = pie_seriesTime.append("label", kol)
                     bar.labelColor = "black"
-                    console.log(yAxisTime.max)
+                }
+                function series_add(){
+                    pie_seriesTime.clear()
+                    chartIzmerTime.update()
+                    var kol = []
+                    for(var i=0;i<24;i++){
+                        kol[i] = parseInt(array_koltime[i], 10)
+                    }
+                    console.log("koltime = ", kol)
+                    yAxisTime.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                    var bar = pie_seriesTime.append("label", kol)
+                    bar.labelColor = "black"
                 }
             }
         }//end rec1
@@ -433,6 +509,7 @@ Item {
                         Keys.onRightPressed: incrementCurrentIndex()
                     onMovementEnded: {
                         if(path.indexAt(path.width/2, path.height/2) === 0){
+                            rec_filter.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerDay.visible = false
                             chartIzmerMes.visible = false
@@ -443,18 +520,21 @@ Item {
                             chartIzmerDay.visible = false
                             chartKolAgr.visible = false
                             chartIzmerMes.visible = true
+                            rec_filter.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 2){
                             chartIzmerTime.visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = true
+                            rec_filter.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 3){
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = false
                             chartIzmerTime.visible = true
+                            rec_filter.visible = true
                         }
                     }
 
@@ -539,12 +619,12 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
                             }
-                            yAxis1.max = Math.max.apply(null, kol)*1.1
+                            yAxis1.max = Math.max.apply(null, kol)*1.1+1
                             var bar1 = pie_series1.append("label", kol)
                             //pie_series1.axisX.
                             //bar1.labelColor = "black"
@@ -604,7 +684,7 @@ Item {
                             for(var i=0;i<chartIzmerMes.razmer;i++){
                                 kol[i] = parseInt(chartIzmerMes.array_kolmes[i], 10)
                             }
-                            yAxisMes1.max = Math.round(Math.max.apply(null, kol)*1.1)
+                            yAxisMes1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                             var bar = pie_seriesMes1.append("label", kol)
                             bar.labelColor = "black"
                         }
@@ -692,9 +772,44 @@ Item {
                             for(var i=0;i<chartIzmerDay.razmer;i++){
                                 kol[i] = parseInt(kolday[i], 10)
                             }
-                            yAxisDay1.max = Math.round(Math.max.apply(null, kol)*1.1)
+                            yAxisDay1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                             var bar = pie_seriesDay1.append("label", kol)
                             category1.categories = nameday
+                        }
+                        function series_add(){
+                            pie_seriesDay1.clear()
+                            chartIzmerDay1.update()
+                            kolday = [0,0,0,0,0,0,0]
+                            for(var i=0;i<7;i++){
+                                if(chartIzmerDay.array_nameday[i] === "Пн"){
+                                    kolday[0] = chartIzmerDay.array_kolday[i]
+                                }
+                                if(chartIzmerDay.array_nameday[i] === "Вт"){
+                                    kolday[1] = chartIzmerDay.array_kolday[i]
+                                }
+                                    if(chartIzmerDay.array_nameday[i] === "Ср"){
+                                        kolday[2] = chartIzmerDay.array_kolday[i]
+                                    }
+                                        if(chartIzmerDay.array_nameday[i] === "Чт"){
+                                            kolday[3] = chartIzmerDay.array_kolday[i]
+                                        }
+                                            if(chartIzmerDay.array_nameday[i] === "Пт"){
+                                                kolday[4] = chartIzmerDay.array_kolday[i]
+                                            }
+                                                if(chartIzmerDay.array_nameday[i] === "Сб"){
+                                                    kolday[5] = chartIzmerDay.array_kolday[i]
+                                                }
+                                                    if(chartIzmerDay.array_nameday[i] === "Вс"){
+                                                        kolday[6] = chartIzmerDay.array_kolday[i]
+                                                    }
+                            }
+                            var kol = []
+                            for(var i=0;i<7;i++){
+                                kol[i] = parseInt(kolday[i], 10)
+                            }
+                            yAxisDay1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                            var bar = pie_seriesDay1.append("label", kol)
+                            bar.labelColor = "black"
                         }
                     }
                 }
@@ -753,8 +868,19 @@ Item {
                             for(var i=0;i<24;i++){
                                 kol[i] = parseInt(chartIzmerTime.array_koltime[i], 10)
                             }
-                            yAxisTime1.max = Math.round(Math.max.apply(null, kol)*1.1)
+                            yAxisTime1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                             var bar = pie_seriesTime1.append("label", kol)
+                        }
+                        function series_add(){
+                            pie_seriesTime1.clear()
+                            chartIzmerTime1.update()
+                            var kol = []
+                            for(var i=0;i<24;i++){
+                                kol[i] = parseInt(chartIzmerTime.array_koltime[i], 10)
+                            }
+                            yAxisTime1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                            var bar = pie_seriesTime1.append("label", kol)
+                            bar.labelColor = "black"
                         }
                     }
                 }
@@ -806,7 +932,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
@@ -866,7 +992,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
@@ -926,7 +1052,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
@@ -986,7 +1112,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
@@ -1046,7 +1172,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
@@ -1106,7 +1232,7 @@ Item {
                             labelsVisible: false}
                         }
                         Component.onCompleted: {
-                            qmlKolAgr()
+                            //qmlKolAgr()
                             var kol = []
                             for(var i=0;i<chartKolAgr.razmer;i++){
                                 kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)

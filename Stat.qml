@@ -71,6 +71,8 @@ Item {
                             chartIzmerDay1.series_add()
                             chartIzmerTime.series_add()
                             chartIzmerTime1.series_add()
+                            chartIzmerPersonal.series_add()
+                            chartIzmerPersonal1.series_add()
                                             }
                         if(event.key === Qt.Key_Return){
                             rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
@@ -83,6 +85,8 @@ Item {
                             chartIzmerDay1.series_add()
                             chartIzmerTime.series_add()
                             chartIzmerTime1.series_add()
+                            chartIzmerPersonal.series_add()
+                            chartIzmerPersonal1.series_add()
                                             }
                     }
                     MouseArea {
@@ -148,6 +152,8 @@ Item {
                             chartIzmerDay1.series_add()
                             chartIzmerTime.series_add()
                             chartIzmerTime1.series_add()
+                            chartIzmerPersonal.series_add()
+                            chartIzmerPersonal1.series_add()
                                             }
                         if(event.key === Qt.Key_Return){
                             rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
@@ -160,6 +166,8 @@ Item {
                             chartIzmerDay1.series_add()
                             chartIzmerTime.series_add()
                             chartIzmerTime1.series_add()
+                            chartIzmerPersonal.series_add()
+                            chartIzmerPersonal1.series_add()
                                             }
                     }
                     MouseArea {
@@ -487,6 +495,57 @@ Item {
                     bar.labelColor = "black"
                 }
             }
+            ChartView {
+                id: chartIzmerPersonal
+                objectName: "chartIzmerPersonal"
+                property var array_kolpersonal
+                visible: false
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                antialiasing: true
+                legend.visible: false
+//dropShadowEnabled: true
+                title: "Количество измерений персоналом"
+                BarSeries {
+                    id: pie_seriesPersonal
+                    labelsVisible: true
+                    labelsPosition: AbstractBarSeries.LabelsOutsideEnd
+                    axisY: ValueAxis {
+                        id: yAxisPersonal
+                                min: 0
+                                max: 10
+                                labelsVisible: false
+                    }
+                    axisX: BarCategoryAxis {id: categorypersonal
+                        categories: rec_filter.personal
+                    //labelsAngle: -90
+                    //labelsVisible: false
+                    }
+                }
+                Component.onCompleted: {
+                    var kol = []
+                    for(var i=0;i<rec_filter.razmer;i++){
+                        kol[i] = parseInt(array_kolpersonal[i], 10)
+                    }
+                    yAxisPersonal.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                    var bar = pie_seriesPersonal.append("label", kol)
+                    bar.labelColor = "black"
+                }
+                function series_add(){
+                    pie_seriesPersonal.clear()
+                    chartIzmerPersonal.update()
+                    var kol = []
+                    for(var i=0;i<rec_filter.razmer;i++){
+                        kol[i] = parseInt(array_kolpersonal[i], 10)
+                    }
+                    console.log("koltime = ", kol)
+                    yAxisPersonal.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                    var bar = pie_seriesPersonal.append("label", kol)
+                    bar.labelColor = "black"
+                }
+            }
         }//end rec1
         Rectangle {
             id: rec2
@@ -509,32 +568,59 @@ Item {
                         Keys.onRightPressed: incrementCurrentIndex()
                     onMovementEnded: {
                         if(path.indexAt(path.width/2, path.height/2) === 0){
+                            chartIzmerPersonal.visible = false
                             rec_filter.visible = false
+                            text_personal.visible = false
+                            combo_personal.visible = false
+                            but_personal.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerDay.visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 1){
+                            chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerDay.visible = false
                             chartKolAgr.visible = false
                             chartIzmerMes.visible = true
                             rec_filter.visible = true
+                            text_personal.visible = true
+                            combo_personal.visible = true
+                            but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 2){
+                            chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = true
                             rec_filter.visible = true
+                            text_personal.visible = true
+                            combo_personal.visible = true
+                            but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 3){
+                            chartIzmerPersonal.visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = false
                             chartIzmerTime.visible = true
                             rec_filter.visible = true
+                            text_personal.visible = true
+                            combo_personal.visible = true
+                            but_personal.visible = true
+                        }
+                        if(path.indexAt(path.width/2, path.height/2) === 4){
+                            chartIzmerMes.visible = false
+                            chartKolAgr.visible = false
+                            chartIzmerDay.visible = false
+                            chartIzmerTime.visible = false
+                            chartIzmerPersonal.visible = true
+                            rec_filter.visible = true
+                            text_personal.visible = false
+                            combo_personal.visible = false
+                            but_personal.visible = false
                         }
                     }
 
@@ -885,7 +971,7 @@ Item {
                     }
                 }
                 Rectangle {
-                    id:rec05
+                    id:rec04
                     width: rec2.height*1.5
                     height: rec2.height*0.9
                     visible: PathView.onPath
@@ -894,20 +980,20 @@ Item {
                     property variant rotY: PathView.itemAngle
                     transform: Rotation {
                         axis { x: 1; y: -1; z: 1 }
-                        angle: rec05.rotY;
+                        angle: rec04.rotY;
                         origin { x: rec2.height/2; y: rec2.height/2; }
                     }
                     Text {
-                        id: text05
+                        id: text04
                         z:1
-                        anchors.top: parent.top
+                        anchors.bottom: chartIzmerPersonal1.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: parent.height/5
-                        text: "Количество агрегатов"
+                        color: "#03a9f5"
+                        text: "Измерения персоналом"
                     }
                     ChartView {
-                        id: chartKolAgr5
-                        //objectName: "chartKolAgr1"
+                        id: chartIzmerPersonal1
                         anchors.fill: parent
                         antialiasing: true
                         legend.visible: false
@@ -916,31 +1002,43 @@ Item {
                         margins.right: 0
                         margins.top: 0
                         anchors.centerIn: parent
-
         dropShadowEnabled: true
                         BarSeries {
-                            id: pie_series5
+                            id: pie_seriesPersonal1
                             labelsVisible: false
                             labelsPosition: AbstractBarSeries.LabelsOutsideEnd
                             axisY: ValueAxis {
-                                id: yAxis5
+                                id: yAxisPersonal1
                                         min: 0
                                         max: 10
                                         labelsVisible: false
                             }
-                            axisX: BarCategoryAxis { categories: chartKolAgr.array_nameagr
-                            labelsVisible: false}
+                            axisX: BarCategoryAxis {id: categorypersonal1
+                                categories: rec_filter.personal
+                            //labelsAngle: -90
+                            labelsVisible: false
+                            }
                         }
                         Component.onCompleted: {
-                            //qmlKolAgr()
                             var kol = []
-                            for(var i=0;i<chartKolAgr.razmer;i++){
-                                kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
+                            for(var i=0;i<rec_filter.razmer;i++){
+                                kol[i] = parseInt(chartIzmerPersonal.array_kolpersonal[i], 10)
                             }
-                            yAxis5.max = Math.max.apply(null, kol)*1.1
-                            var bar5 = pie_series5.append("label", kol)
-                            //pie_series1.axisX.
-                            //bar1.labelColor = "black"
+                            yAxisPersonal1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                            var bar = pie_seriesPersonal1.append("label", kol)
+                            bar.labelColor = "black"
+                        }
+                        function series_add(){
+                            pie_seriesPersonal1.clear()
+                            chartIzmerPersonal1.update()
+                            var kol = []
+                            for(var i=0;i<rec_filter.razmer;i++){
+                                kol[i] = parseInt(chartIzmerPersonal.array_kolpersonal[i], 10)
+                            }
+                            console.log("koltime = ", kol)
+                            yAxisPersonal1.max = Math.round(Math.max.apply(null, kol)*1.1)+1
+                            var bar = pie_seriesPersonal1.append("label", kol)
+                            bar.labelColor = "black"
                         }
                     }
                 }

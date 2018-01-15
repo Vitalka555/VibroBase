@@ -24,17 +24,15 @@ void Stat::getdate()
 void Stat::getpersonal()
 {
     QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
-    QStringList personal;
-    int razmer;
     int i = 0;
     QSqlQuery querypers("SELECT Фамилия FROM LAES ORDER BY Фамилия");
     while (querypers.next()) {
         personal.append(querypers.value(0).toString());
         i++;
     }
-    razmer = i;
+    razmer_personal = i;
     filter_izmer->setProperty("personal", personal);
-    filter_izmer->setProperty("razmer", razmer);
+    filter_izmer->setProperty("razmer", razmer_personal);
 }
 
 void Stat::kolagr()
@@ -65,7 +63,25 @@ chartKolAgr->setProperty("array_nameagr", list1);
 chartKolAgr->setProperty("array_kolagr", list2);
 chartKolAgr->setProperty("razmer", razmer);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+QString pers;
+if(personal_select == ""){
+    pers = "";
+} else {
+    pers = " and BazaIzmereni.'ЛАЭС-2' LIKE '%" + personal_select + "%' ";
+}
+QObject* chartIzmerPersonal = this->parent()->findChild<QObject*>("chartIzmerPersonal");
+QStringList personal2;
+int kol_k;
+for(kol_k = 0; kol_k<razmer_personal; kol_k++){
+QSqlQuery querypersonal_kol("SELECT COUNT(Дата) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
+                            "' and Дата <='" + date_end + "' and BazaIzmereni.'ЛАЭС-2' LIKE '%" + personal[kol_k] + "%' ");
+while (querypersonal_kol.next()) {
+    personal2.append(querypersonal_kol.value(0).toString());
+}
+}
+qDebug()<<"personal"<<personal;
+qDebug()<<"personal2"<<personal2;
+chartIzmerPersonal->setProperty("array_kolpersonal", personal2);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerMes = this->parent()->findChild<QObject*>("chartIzmerMes");
 //QString date_begin_=(filter_izmer->property("date_begin")).toString();
@@ -75,12 +91,7 @@ int razmer1;
 //qDebug()<<"date_begin"<<date_begin;
 //qDebug()<<"date_end"<<date_end;
 
-QString pers;
-if(personal_select == ""){
-    pers = "";
-} else {
-    pers = " and BazaIzmereni.'ЛАЭС-2' LIKE '%" + personal_select + "%' ";
-}
+
 QSqlQuery query1("SELECT strftime('%m-%Y', Дата), COUNT(1) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
                 "' and Дата <='" + date_end + "' " + pers + " GROUP BY strftime('%Y-%m', Дата)");
 QStringList list3;
@@ -239,8 +250,7 @@ QSqlQuery query26("select count(Время) from BazaIzmereni where Время l
 while (query26.next()) {
     list7.append(query26.value(0).toString());
 }
-qDebug()<<"list7"<<list7;
-qDebug()<<"personal_select"<<personal_select;
+
 chartIzmerTime->setProperty("array_koltime", list7);
 }
 

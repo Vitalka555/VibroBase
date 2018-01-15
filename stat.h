@@ -17,6 +17,8 @@ class Stat : public QObject
     QString date_begin;
     QString date_end;
     QString personal_select = "";
+    int razmer_personal;
+    QStringList personal;
 signals:
 
 public slots:

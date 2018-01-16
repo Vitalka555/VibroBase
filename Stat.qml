@@ -506,7 +506,6 @@ Item {
                 anchors.bottom: parent.bottom
                 antialiasing: true
                 legend.visible: false
-//dropShadowEnabled: true
                 title: "Количество измерений персоналом"
                 BarSeries {
                     id: pie_seriesPersonal
@@ -520,8 +519,6 @@ Item {
                     }
                     axisX: BarCategoryAxis {id: categorypersonal
                         categories: rec_filter.personal
-                    //labelsAngle: -90
-                    //labelsVisible: false
                     }
                 }
                 Component.onCompleted: {
@@ -544,6 +541,196 @@ Item {
                     yAxisPersonal.max = Math.round(Math.max.apply(null, kol)*1.1)+1
                     var bar = pie_seriesPersonal.append("label", kol)
                     bar.labelColor = "black"
+                }
+            }
+            ChartView {
+                id: chartIzmerHh
+                objectName: "chartIzmerHh"
+                property int count
+                property var array_dateX
+                property var array_valueY
+                property var array_valueY1
+                property var array_valueY2
+                property real oldX1
+                property real oldY1
+                property real oldX2
+                property real oldY2
+                property real oldX
+                property real oldY
+                visible: false
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                antialiasing: true
+                legend.visible: true
+                title: "Средняя вибрация на холостом ходу"
+                ValueAxis {
+                    id: axiY
+                    min: 0
+                }
+                DateTimeAxis {
+                    id: axiX
+                    format: "dd-MM-yyyy"
+                    min: rec_filter.date_begin
+                    max: rec_filter.date_end
+                }
+                LineSeries {
+                    id: line1
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    name: "Среднее значение нормы"
+                    color: "lightgreen"
+                    axisY: axiY
+                    axisX: axiX
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatter1.replace(chartIzmerHh.oldX1, chartIzmerHh.oldY1, point.x, point.y)
+                        chartIzmerHh.oldX1 = point.x
+                        chartIzmerHh.oldY1 = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatter1
+                    visible: line1.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + line1.value_y +" ; "+ line1.date_x + ""
+                    color: "lightgreen"
+                    borderColor: "black"
+                    axisY: axiY
+                    axisX: axiX
+                    onClicked: line1.state = false
+                }
+                LineSeries {
+                    id: line2
+                    name: "Среднее значение первых пусков"
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    color: "tomato"
+                    axisY: axiY
+                    axisX: axiX
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatter2.replace(chartIzmerHh.oldX2, chartIzmerHh.oldY2, point.x, point.y)
+                        chartIzmerHh.oldX2 = point.x
+                        chartIzmerHh.oldY2 = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatter2
+                    visible: line2.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + line2.value_y +" ; "+ line2.date_x + ""
+                    color: "tomato"
+                    borderColor: "black"
+                    axisY: axiY
+                    axisX: axiX
+                    onClicked: line2.state = false
+                }
+                LineSeries {
+                    id: line
+                    name: "Среднее значение на дату"
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    color: "#03a9f5"
+                    axisY: axiY
+                    axisX: axiX
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatter.replace(chartIzmerHh.oldX, chartIzmerHh.oldY, point.x, point.y)
+                        chartIzmerHh.oldX = point.x
+                        chartIzmerHh.oldY = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatter
+                    visible: line.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + line.value_y +" ; "+ line.date_x + ""
+                    color: "#03a9f5"
+                    borderColor: "black"
+                    axisY: axiY
+                    axisX: axiX
+                    onClicked: line.state = false
+                }
+                Component.onCompleted: {
+                    var xx = []
+                    var yy = []
+                    var yy1 = []
+                    var yy2 = []
+                    var max = 0
+                    for(var i=0;i<count;i++){
+                        xx[i] = Date.parse(array_dateX[i])
+                        yy[i] = Number(array_valueY[i])
+                        yy1[i] = Number(array_valueY1[i])
+                        yy2[i] = Number(array_valueY2[i])
+                        if(yy[i]>max){
+                            max = yy[i]
+                        }
+                        if(yy1[i]>max){
+                            max = yy1[i]
+                        }
+                        if(yy2[i]>max){
+                            max = yy2[i]
+                        }
+                        line.append(xx[i], yy[i])
+                        line1.append(xx[i], yy1[i])
+                        line2.append(xx[i], yy2[i])                        
+                    }
+                    oldX1 = xx[count-1]
+                    oldY1 = yy1[count-1]
+                    oldX2 = xx[count-1]
+                    oldY2 = yy2[count-1]
+                    oldX = xx[count-1]
+                    oldY = yy[count-1]
+                    scatter1.append(xx[count-1], yy1[count-1])
+                    scatter2.append(xx[count-1], yy2[count-1])
+                    scatter.append(xx[count-1], yy[count-1])
+                    max = Math.round(max) + 1
+                    axiY.max = max
+                    //console.log(oldX,oldY)
                 }
             }
         }//end rec1
@@ -576,9 +763,11 @@ Item {
                             chartIzmerTime.visible = false
                             chartIzmerDay.visible = false
                             chartIzmerMes.visible = false
+                            chartIzmerHh.visible = false
                             chartKolAgr.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 1){
+                            chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerDay.visible = false
@@ -590,6 +779,7 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 2){
+                            chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
                             chartIzmerMes.visible = false
@@ -601,6 +791,7 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 3){
+                            chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
@@ -621,6 +812,19 @@ Item {
                             text_personal.visible = false
                             combo_personal.visible = false
                             but_personal.visible = false
+                            chartIzmerHh.visible = false
+                        }
+                        if(path.indexAt(path.width/2, path.height/2) === 5){
+                            chartIzmerMes.visible = false
+                            chartKolAgr.visible = false
+                            chartIzmerDay.visible = false
+                            chartIzmerTime.visible = false
+                            chartIzmerPersonal.visible = false
+                            rec_filter.visible = true
+                            text_personal.visible = false
+                            combo_personal.visible = false
+                            but_personal.visible = false
+                            chartIzmerHh.visible = true
                         }
                     }
 
@@ -1043,7 +1247,7 @@ Item {
                     }
                 }
                 Rectangle {
-                    id:rec06
+                    id:rec05
                     width: rec2.height*1.5
                     height: rec2.height*0.9
                     visible: PathView.onPath
@@ -1052,20 +1256,20 @@ Item {
                     property variant rotY: PathView.itemAngle
                     transform: Rotation {
                         axis { x: 1; y: -1; z: 1 }
-                        angle: rec06.rotY;
+                        angle: rec05.rotY;
                         origin { x: rec2.height/2; y: rec2.height/2; }
                     }
                     Text {
-                        id: text06
+                        id: text05
                         z:1
-                        anchors.top: parent.top
+                        anchors.bottom: chartIzmerHh1.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: parent.height/5
-                        text: "Количество агрегатов"
+                        color: "#03a9f5"
+                        text: "Измерения на х/х"
                     }
                     ChartView {
-                        id: chartKolAgr6
-                        //objectName: "chartKolAgr1"
+                        id: chartIzmerHh1
                         anchors.fill: parent
                         antialiasing: true
                         legend.visible: false
@@ -1074,31 +1278,67 @@ Item {
                         margins.right: 0
                         margins.top: 0
                         anchors.centerIn: parent
-
         dropShadowEnabled: true
-                        BarSeries {
-                            id: pie_series6
+                        ValueAxis {
+                            id: axiY1
+                            min: 0
                             labelsVisible: false
-                            labelsPosition: AbstractBarSeries.LabelsOutsideEnd
-                            axisY: ValueAxis {
-                                id: yAxis6
-                                        min: 0
-                                        max: 10
-                                        labelsVisible: false
-                            }
-                            axisX: BarCategoryAxis { categories: chartKolAgr.array_nameagr
-                            labelsVisible: false}
+                        }
+                        DateTimeAxis {
+                            id: axiX1
+                            format: "dd-MM-yyyy"
+                            min: rec_filter.date_begin
+                            max: rec_filter.date_end
+                            labelsVisible: false
+                        }
+                        LineSeries {
+                            id: line11
+                            color: "lightgreen"
+                            axisY: axiY1
+                            axisX: axiX1
+                            width: 2
+                        }
+                        LineSeries {
+                            id: line21
+                            color: "tomato"
+                            axisY: axiY1
+                            axisX: axiX1
+                            //opacity: 0.5
+                            width: 2
+                        }
+                        LineSeries {
+                            id: line01
+                            color: "#03a9f5"
+                            axisY: axiY1
+                            axisX: axiX1
+                            width: 2
                         }
                         Component.onCompleted: {
-                            //qmlKolAgr()
-                            var kol = []
-                            for(var i=0;i<chartKolAgr.razmer;i++){
-                                kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
+                            var xx = []
+                            var yy = []
+                            var yy1 = []
+                            var yy2 = []
+                            var max = 0
+                            for(var i=0;i<chartIzmerHh.count;i++){
+                                xx[i] = Date.parse(chartIzmerHh.array_dateX[i])
+                                yy[i] = Number(chartIzmerHh.array_valueY[i])
+                                yy1[i] = Number(chartIzmerHh.array_valueY1[i])
+                                yy2[i] = Number(chartIzmerHh.array_valueY2[i])
+                                if(yy[i]>max){
+                                    max = yy[i]
+                                }
+                                if(yy1[i]>max){
+                                    max = yy1[i]
+                                }
+                                if(yy2[i]>max){
+                                    max = yy2[i]
+                                }
+                                line01.append(xx[i], yy[i])
+                                line11.append(xx[i], yy1[i])
+                                line21.append(xx[i], yy2[i])
                             }
-                            yAxis6.max = Math.max.apply(null, kol)*1.1
-                            var bar6 = pie_series6.append("label", kol)
-                            //pie_series1.axisX.
-                            //bar1.labelColor = "black"
+                            max = Math.round(max) + 1
+                            axiY1.max = max
                         }
                     }
                 }

@@ -19,6 +19,9 @@ class Stat : public QObject
     QString personal_select = "";
     int razmer_personal;
     QStringList personal;
+    QString tipmeh_select = "";
+    int razmer_tipmeh;
+    QStringList tipmehanizmov;
 signals:
 
 public slots:
@@ -26,6 +29,7 @@ public slots:
     void getdate();
     void getdate2();
     void getpersonal();
+    void gettipmeh();
 };
 
 #endif // STAT_H

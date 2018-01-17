@@ -40,6 +40,7 @@ ApplicationWindow {
     signal qmlGetDate()
     signal qmlGetDate2()
     signal qmlGetPersonal()
+    signal qmlGetTipMeh()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0

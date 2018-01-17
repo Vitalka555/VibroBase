@@ -215,6 +215,7 @@ ListModel *model0 = new ListModel(root);
         QObject::connect(root, SIGNAL(qmlGetDate()), statist, SLOT(getdate()));
         QObject::connect(root, SIGNAL(qmlGetDate2()), statist, SLOT(getdate2()));
         QObject::connect(root, SIGNAL(qmlGetPersonal()), statist, SLOT(getpersonal()));
+        QObject::connect(root, SIGNAL(qmlGetTipMeh()), statist, SLOT(gettipmeh()));
 QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
 QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));

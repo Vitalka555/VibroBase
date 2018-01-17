@@ -10,6 +10,7 @@ Item {
     Component.onCompleted: {
 
         qmlGetDate()
+        qmlGetTipMeh()
         qmlGetPersonal()
         qmlKolAgr()
     }
@@ -36,6 +37,10 @@ Item {
                 property int razmer
                 property var personal: []
                 property string personal_select: ""
+                property int razmer_tipmeh
+                property var tipmeh: []
+                property string tipmeh_select: ""
+                property bool tipmeh_visible: true
                 Text {
                     id: text_date_begin
                     visible: rec_filter.visible
@@ -234,7 +239,6 @@ Item {
                         chartIzmerTime.series_add()
                         chartIzmerTime1.series_add()
                     }
-
                 }
                 Button {
                     id: but_personal
@@ -263,6 +267,72 @@ Item {
                         chartIzmerDay1.series_add()
                         chartIzmerTime.series_add()
                         chartIzmerTime1.series_add()
+                    }
+                }
+                Text {
+                    id: text_tipmeh
+                    visible: rec_filter.tipmeh_visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: combo_tipmeh.left
+                    anchors.rightMargin: 5
+                    font.pixelSize: 15
+                    text: "Тип агрегата:"
+                }
+                ComboBox {
+                    id: combo_tipmeh
+                    visible: rec_filter.tipmeh_visible
+                    currentIndex: -1
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: but_tipmeh.left
+                    anchors.rightMargin: 5
+                    width: 200
+                    model: ListModel{
+                        id: model_tipmeh_combo
+                    }
+                    Component.onCompleted: {
+                        for(var i=0;i<rec_filter.razmer_tipmeh;i++){
+                            model_tipmeh_combo.append({text: rec_filter.tipmeh[i]})
+                        }
+                    }
+                    onCurrentTextChanged: {
+                        rec_filter.tipmeh_select = combo_tipmeh.currentText
+                        qmlGetDate2()
+                                            qmlKolAgr()
+//                        chartIzmerMes.series_add()
+//                        chartIzmerMes1.series_add()
+//                        chartIzmerDay.series_add()
+//                        chartIzmerDay1.series_add()
+//                        chartIzmerTime.series_add()
+//                        chartIzmerTime1.series_add()
+                    }
+                }
+                Button {
+                    id: but_tipmeh
+                    visible: rec_filter.tipmeh_visible
+                    anchors.verticalCenter: rec_filter.verticalCenter
+                    anchors.right: parent.right
+                    anchors.rightMargin: 5
+                    width: height
+                    highlighted: true
+                    Material.accent: Material.LightBlue
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        text: "X"
+                    }
+                    onClicked: {
+                        combo_tipmeh.currentIndex = -1
+                        rec_filter.tipmeh_select = combo_tipmeh.currentText
+                        qmlGetDate2()
+                                            qmlKolAgr()
+//                        chartIzmerMes.series_add()
+//                        chartIzmerMes1.series_add()
+//                        chartIzmerDay.series_add()
+//                        chartIzmerDay1.series_add()
+//                        chartIzmerTime.series_add()
+//                        chartIzmerTime1.series_add()
                     }
                 }
             }//end rec_filter
@@ -733,6 +803,196 @@ Item {
                     //console.log(oldX,oldY)
                 }
             }
+            ChartView {
+                id: chartIzmerAgr
+                objectName: "chartIzmerAgr"
+                property int count
+                property var array_dateX
+                property var array_valueY
+                property var array_valueY1
+                property var array_valueY2
+                property real oldX1
+                property real oldY1
+                property real oldX2
+                property real oldY2
+                property real oldX
+                property real oldY
+                visible: false
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                antialiasing: true
+                legend.visible: true
+                title: "Средняя вибрация агрегатов"
+                ValueAxis {
+                    id: axiYagr
+                    min: 0
+                }
+                DateTimeAxis {
+                    id: axiXagr
+                    format: "dd-MM-yyyy"
+                    min: rec_filter.date_begin
+                    max: rec_filter.date_end
+                }
+                LineSeries {
+                    id: line1agr
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    name: "Среднее значение нормы"
+                    color: "lightgreen"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatter1agr.replace(chartIzmerAgr.oldX1, chartIzmerAgr.oldY1, point.x, point.y)
+                        chartIzmerAgr.oldX1 = point.x
+                        chartIzmerAgr.oldY1 = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatter1agr
+                    visible: line1agr.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + line1agr.value_y +" ; "+ line1agr.date_x + ""
+                    color: "lightgreen"
+                    borderColor: "black"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    onClicked: line1agr.state = false
+                }
+                LineSeries {
+                    id: line2agr
+                    name: "Среднее значение первых пусков"
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    color: "tomato"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatter2agr.replace(chartIzmerAgr.oldX2, chartIzmerAgr.oldY2, point.x, point.y)
+                        chartIzmerAgr.oldX2 = point.x
+                        chartIzmerAgr.oldY2 = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatter2agr
+                    visible: line2agr.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + line2agr.value_y +" ; "+ line2agr.date_x + ""
+                    color: "tomato"
+                    borderColor: "black"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    onClicked: line2agr.state = false
+                }
+                LineSeries {
+                    id: lineagr
+                    name: "Среднее значение на дату"
+                    property string date_x
+                    property string value_y
+                    property bool state: false
+                    color: "#03a9f5"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    width: 5
+                    onClicked: {
+                            state = true
+                    }
+                    onHovered: {
+                        var d = new Date(point.x),
+                        month = '' + (d.getMonth() + 1),
+                        day = '' + d.getDate(),
+                        year = d.getFullYear();
+                        if (month.length < 2) month = '0' + month;
+                        if (day.length < 2) day = '0' + day;
+                        date_x = ([day, month, year].join('-')).toString()
+                        value_y = ((point.y).toFixed(2)).toString()
+                        scatteragr.replace(chartIzmerAgr.oldX, chartIzmerAgr.oldY, point.x, point.y)
+                        chartIzmerAgr.oldX = point.x
+                        chartIzmerAgr.oldY = point.y
+                    }
+                }
+                ScatterSeries {
+                    id: scatteragr
+                    visible: lineagr.state
+                    pointLabelsVisible: true
+                    pointLabelsClipping: false
+                    //pointLabelsFont: bold
+                    pointLabelsFormat: "" + lineagr.value_y +" ; "+ lineagr.date_x + ""
+                    color: "#03a9f5"
+                    borderColor: "black"
+                    axisY: axiYagr
+                    axisX: axiXagr
+                    onClicked: lineagr.state = false
+                }
+                Component.onCompleted: {
+                    var xx = []
+                    var yy = []
+                    var yy1 = []
+                    var yy2 = []
+                    var max = 0
+                    for(var i=0;i<count;i++){
+                        xx[i] = Date.parse(array_dateX[i])
+                        yy[i] = Number(array_valueY[i])
+                        yy1[i] = Number(array_valueY1[i])
+                        yy2[i] = Number(array_valueY2[i])
+                        if(yy[i]>max){
+                            max = yy[i]
+                        }
+                        if(yy1[i]>max){
+                            max = yy1[i]
+                        }
+                        if(yy2[i]>max){
+                            max = yy2[i]
+                        }
+                        lineagr.append(xx[i], yy[i])
+                        line1agr.append(xx[i], yy1[i])
+                        line2agr.append(xx[i], yy2[i])
+                    }
+                    oldX1 = xx[count-1]
+                    oldY1 = yy1[count-1]
+                    oldX2 = xx[count-1]
+                    oldY2 = yy2[count-1]
+                    oldX = xx[count-1]
+                    oldY = yy[count-1]
+                    scatter1agr.append(xx[count-1], yy1[count-1])
+                    scatter2agr.append(xx[count-1], yy2[count-1])
+                    scatteragr.append(xx[count-1], yy[count-1])
+                    max = Math.round(max) + 1
+                    axiYagr.max = max
+                    //console.log(oldX,oldY)
+                }
+            }
         }//end rec1
         Rectangle {
             id: rec2
@@ -755,6 +1015,8 @@ Item {
                         Keys.onRightPressed: incrementCurrentIndex()
                     onMovementEnded: {
                         if(path.indexAt(path.width/2, path.height/2) === 0){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerPersonal.visible = false
                             rec_filter.visible = false
                             text_personal.visible = false
@@ -767,6 +1029,8 @@ Item {
                             chartKolAgr.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 1){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
@@ -779,6 +1043,8 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 2){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerTime.visible = false
@@ -791,6 +1057,8 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 3){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
                             chartIzmerPersonal.visible = false
                             chartIzmerMes.visible = false
@@ -803,6 +1071,8 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 4){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = false
@@ -815,6 +1085,8 @@ Item {
                             chartIzmerHh.visible = false
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 5){
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = false
@@ -825,6 +1097,20 @@ Item {
                             combo_personal.visible = false
                             but_personal.visible = false
                             chartIzmerHh.visible = true
+                        }
+                        if(path.indexAt(path.width/2, path.height/2) === 6){
+                            chartIzmerAgr.visible = true
+                            rec_filter.tipmeh_visible = true
+                            chartIzmerMes.visible = false
+                            chartKolAgr.visible = false
+                            chartIzmerDay.visible = false
+                            chartIzmerTime.visible = false
+                            chartIzmerPersonal.visible = false
+                            rec_filter.visible = true
+                            text_personal.visible = false
+                            combo_personal.visible = false
+                            but_personal.visible = false
+                            chartIzmerHh.visible = false
                         }
                     }
 

@@ -35,6 +35,20 @@ void Stat::getpersonal()
     filter_izmer->setProperty("razmer", razmer_personal);
 }
 
+void Stat::gettipmeh()
+{
+    QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    int i = 0;
+    QSqlQuery querytipmeh("SELECT Наименование FROM TipMehanizma ORDER BY Наименование");
+    while (querytipmeh.next()) {
+        tipmehanizmov.append(querytipmeh.value(0).toString());
+        i++;
+    }
+    razmer_tipmeh = i;
+    filter_izmer->setProperty("tipmeh", tipmehanizmov);
+    filter_izmer->setProperty("razmer_tipmeh", razmer_tipmeh);
+}
+
 void Stat::kolagr()
 {
     QObject* chartKolAgr = this->parent()->findChild<QObject*>("chartKolAgr");
@@ -84,14 +98,7 @@ qDebug()<<"personal2"<<personal2;
 chartIzmerPersonal->setProperty("array_kolpersonal", personal2);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerMes = this->parent()->findChild<QObject*>("chartIzmerMes");
-//QString date_begin_=(filter_izmer->property("date_begin")).toString();
-//QString date_end_=(filter_izmer->property("date_end")).toString();
-//qDebug()<<"date_end из QML"<<date_end_;
 int razmer1;
-//qDebug()<<"date_begin"<<date_begin;
-//qDebug()<<"date_end"<<date_end;
-
-
 QSqlQuery query1("SELECT strftime('%m-%Y', Дата), COUNT(1) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
                 "' and Дата <='" + date_end + "' " + pers + " GROUP BY strftime('%Y-%m', Дата)");
 QStringList list3;
@@ -253,6 +260,7 @@ while (query26.next()) {
 
 chartIzmerTime->setProperty("array_koltime", list7);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+QObject* chartIzmerHh = this->parent()->findChild<QObject*>("chartIzmerHh");
 QSqlQuery querycount("select count(Дата) from BazaIzmereni where BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.НормаЭлДв is not null and BazaIzmereni.НормаЭлДв < 12"
                      " and BazaIzmereni.id_TipIzmerenia <> 2 and "
                   "BazaIzmereni.id_TipIzmerenia <> 4 ORDER BY Дата, Время, id");
@@ -260,26 +268,7 @@ int count;
 while (querycount.next()) {
     count = querycount.value(0).toInt();
 }
-//QStringList perv_kks;
-//QStringList perv_date;
-//QStringList perv_value;
-//QSqlQuery queryperv("select distinct(BazaIzmereni.id_Baza), Дата, "
-//                     "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-//                     "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
-//                     "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) "
-//                     "from BazaIzmereni where BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.НормаЭлДв is not null and BazaIzmereni.НормаЭлДв < 12"
-//                     " and BazaIzmereni.id_TipIzmerenia <> 2 and "
-//                  "BazaIzmereni.id_TipIzmerenia <> 4 ORDER BY Дата, Время, id");
-//while (queryperv.next()) {
-//    perv_kks.append(queryperv.value(0).toString());
-//    perv_date.append(queryperv.value(1).toString());
-//    perv_value.append(queryperv.value(2).toString());
-//}
-//qDebug()<<"perv_kks = "<<perv_kks;
-//qDebug()<<"perv_date = "<<perv_date;
-//qDebug()<<"perv_value = "<<perv_value;
-
-qDebug()<<"Количество измерений на х/х = "<<count;
+//qDebug()<<"Количество измерений на х/х = "<<count;
 QSqlQuery querydatas("select Дата, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza), "
                      "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
                      "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
@@ -305,10 +294,10 @@ while (querydatas.next()) {
     hh_value.append(querydatas.value(2).toString());
     hh_norm_ed.append(querydatas.value(3).toString());
 }
-qDebug()<<"Массив дат на х/х = "<<hh_date;
-qDebug()<<"Массив kks на х/х = "<<hh_kks;
-qDebug()<<"Массив значений на х/х = "<<hh_value;
-qDebug()<<"Массив значений норм на х/х = "<<hh_norm_ed;
+//qDebug()<<"Массив дат на х/х = "<<hh_date;
+//qDebug()<<"Массив kks на х/х = "<<hh_kks;
+//qDebug()<<"Массив значений на х/х = "<<hh_value;
+//qDebug()<<"Массив значений норм на х/х = "<<hh_norm_ed;
 double sum = 0;
 double sum_norm = 0;
 double sum_perv = 0;
@@ -348,7 +337,7 @@ for(ix=0;ix<count;ix++){
                 hh_norm_ed_new.replace(kx,"0");
                 povtor = true;
                 //distinct = distinct - 1;
-                qDebug()<<"hh_kks[ix]"<<hh_kks[ix];
+//                qDebug()<<"hh_kks[ix]"<<hh_kks[ix];
             }
         }
         if(povtor == true){
@@ -363,12 +352,12 @@ for(ix=0;ix<count;ix++){
             sum = sum + hh_value_new[lx].toDouble();
             sum_norm = sum_norm + hh_norm_ed_new[lx].toDouble();
         }
-        qDebug()<<"hh_perv.value(ix) = "<<hh_perv[ix];
-        qDebug()<<"ix = "<<ix;
-        qDebug()<<"sum_perv = "<<sum_perv;
-        qDebug()<<"distinct = "<<distinct;
+//        qDebug()<<"hh_perv.value(ix) = "<<hh_perv[ix];
+//        qDebug()<<"ix = "<<ix;
+//        qDebug()<<"sum_perv = "<<sum_perv;
+//        qDebug()<<"distinct = "<<distinct;
         sr = sum_perv/distinct;
-        qDebug()<<"sr = "<<sr;
+//        qDebug()<<"sr = "<<sr;
 
         hh_middle.replace(ix, QString::number(sum/distinct));
         hh_middle_norm_ed.replace(ix, QString::number(sum_norm/distinct));
@@ -376,15 +365,145 @@ for(ix=0;ix<count;ix++){
         sum_norm = 0;
     }
 }
-qDebug()<<"Массив новых значений на х/х = "<<hh_norm_ed_new;
-qDebug()<<"Массив средних значений на х/х = "<<hh_middle_norm_ed;
-qDebug()<<"Массив первых значений на х/х = "<<hh_perv;
-QObject* chartIzmerHh = this->parent()->findChild<QObject*>("chartIzmerHh");
+//qDebug()<<"Массив новых значений на х/х = "<<hh_norm_ed_new;
+//qDebug()<<"Массив средних значений на х/х = "<<hh_middle_norm_ed;
+//qDebug()<<"Массив первых значений на х/х = "<<hh_perv;
+
 chartIzmerHh->setProperty("array_dateX", hh_date);
 chartIzmerHh->setProperty("array_valueY", hh_middle);
 chartIzmerHh->setProperty("array_valueY1", hh_middle_norm_ed);
 chartIzmerHh->setProperty("array_valueY2", hh_middle_perv);
 chartIzmerHh->setProperty("count", count);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+QObject* chartIzmerAgr = this->parent()->findChild<QObject*>("chartIzmerAgr");
+QString filter_tipmeh;
+qDebug()<<"Тип механизма = "<<tipmeh_select;
+if(tipmeh_select == ""){
+    filter_tipmeh = "";
+} else {
+    filter_tipmeh = "and BazaIzmereni.id_TipMehanizma = (select TipMehanizma.id from TipMehanizma where TipMehanizma.Наименование = " + tipmeh_select + ")";
+}
+QSqlQuery querycountizm("select count(Дата) from BazaIzmereni where BazaIzmereni.id_Rezhim <> 1 and BazaIzmereni.НормаЭлДв is not null "
+                        "and BazaIzmereni.Норма is not null and BazaIzmereni.НормаЭлДв <> 57"
+                     " and BazaIzmereni.id_TipIzmerenia <> 2 and "
+                  "BazaIzmereni.id_TipIzmerenia <> 4 " + filter_tipmeh + " ORDER BY Дата, Время, id");
+int countizm;
+while (querycountizm.next()) {
+    countizm = querycountizm.value(0).toInt();
+}
+qDebug()<<"Количество измерений в сборе = "<<countizm;
+QSqlQuery queryagr("select Дата, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza), "
+                     "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                     "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+                   "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+                   "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+                   "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                   "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+                   "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+                   "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+                     "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id), IFNULL(Норма,0) "
+                     "from BazaIzmereni where BazaIzmereni.id_Rezhim <> 1 and BazaIzmereni.НормаЭлДв is not null "
+                   "and BazaIzmereni.Норма is not null and BazaIzmereni.НормаЭлДв <> 57"
+                " and BazaIzmereni.id_TipIzmerenia <> 2 and "
+             "BazaIzmereni.id_TipIzmerenia <> 4 " + filter_tipmeh + " ORDER BY Дата, Время, id");
+QStringList agr_date;
+QStringList agr_kks;
+QStringList agr_value;
+QStringList agr_norm;
+QStringList agr_norm_new;
+//QStringList hh_date_new;
+//QStringList hh_kks_new;
+QStringList agr_value_new;
+QStringList agr_middle;
+QStringList agr_middle_norm;
+QStringList agr_perv;
+QStringList agr_middle_perv;
+while (queryagr.next()) {
+    agr_date.append(queryagr.value(0).toString());
+    agr_kks.append(queryagr.value(1).toString());
+    agr_value.append(queryagr.value(2).toString());
+    agr_norm.append(queryagr.value(3).toString());
+}
+qDebug()<<"Массив дат в сборе = "<<agr_date;
+qDebug()<<"Массив kks в сборе = "<<agr_kks;
+qDebug()<<"Массив значений в сборе = "<<agr_value;
+qDebug()<<"Массив значений норм в сборе = "<<agr_norm;
+double sumagr = 0;
+double sum_normagr = 0;
+double sum_pervagr = 0;
+int ixagr;
+int kxagr;
+int lxagr;
+int distinctagr;
+int distinct_pervagr;
+double sragr;
+bool povtoragr;
+agr_value_new = agr_value;
+agr_middle = agr_value;
+agr_norm_new = agr_norm;
+agr_middle_norm = agr_norm;
+agr_perv = agr_value;
+agr_middle_perv = agr_value;
+//hh_perv_new = hh_value;
+for(ixagr=0;ixagr<countizm;ixagr++){
+    if(ixagr==0){
+        agr_value_new.replace(0,agr_value.value(0));
+        agr_middle.replace(0, agr_value_new.value(0));
+        agr_norm_new.replace(0,agr_norm.value(0));
+        agr_middle_norm.replace(0, agr_norm_new.value(0));
+        agr_perv.replace(0,agr_value.value(0));
+        agr_middle_perv.replace(0,agr_value.value(0));
+        distinctagr = 1;
+        distinct_pervagr = 1;
+        sum_pervagr = agr_perv[0].toDouble();
+    }
+    if(ixagr>0){
+        povtoragr = false;
+        distinctagr = distinctagr + 1;
+        distinct_pervagr = distinct_pervagr + 1;
+        for(kxagr=0;kxagr<ixagr;kxagr++){
+            if(agr_kks[ixagr]==agr_kks[kxagr]){
+                agr_value_new.replace(kxagr,"0");
+                agr_norm_new.replace(kxagr,"0");
+                povtoragr = true;
+                //distinct = distinct - 1;
+                qDebug()<<"agr_kks[ixagr]"<<agr_kks[ixagr];
+            }
+        }
+        if(povtoragr == true){
+            distinctagr = distinctagr - 1;
+            agr_perv.replace(ixagr, "0");
+        }
+        sum_pervagr = sum_pervagr + agr_perv[ixagr].toDouble();
+        agr_middle_perv.replace(ixagr, QString::number(sum_pervagr/distinctagr));
+        agr_value_new.replace(ixagr,agr_value.value(ixagr));
+        agr_norm_new.replace(ixagr,agr_norm.value(ixagr));
+        for(lxagr=0;lxagr<(ixagr+1);lxagr++){
+            sumagr = sumagr + agr_value_new[lxagr].toDouble();
+            sum_normagr = sum_normagr + agr_norm_new[lxagr].toDouble();
+        }
+        qDebug()<<"agr_perv.value(ixagr) = "<<agr_perv[ixagr];
+        qDebug()<<"ixagr = "<<ixagr;
+        qDebug()<<"sum_pervagr = "<<sum_pervagr;
+        qDebug()<<"distinctagr = "<<distinctagr;
+        sragr = sum_pervagr/distinctagr;
+        qDebug()<<"sragr = "<<sragr;
+
+        agr_middle.replace(ixagr, QString::number(sumagr/distinctagr));
+        agr_middle_norm.replace(ixagr, QString::number(sum_normagr/distinctagr));
+        sumagr = 0;
+        sum_normagr = 0;
+    }
+}
+qDebug()<<"Массив новых значений в сборе = "<<agr_norm_new;
+qDebug()<<"Массив средних значений в сборе = "<<agr_middle_norm;
+qDebug()<<"Массив первых значений в сборе = "<<agr_perv;
+
+chartIzmerAgr->setProperty("array_dateX", agr_date);
+chartIzmerAgr->setProperty("array_valueY", agr_middle);
+chartIzmerAgr->setProperty("array_valueY1", agr_middle_norm);
+chartIzmerAgr->setProperty("array_valueY2", agr_middle_perv);
+chartIzmerAgr->setProperty("count", countizm);
 }
 
 void Stat::getdate2()
@@ -393,5 +512,6 @@ void Stat::getdate2()
     date_begin =(filter_izmer->property("date_begin")).toString();
     date_end =(filter_izmer->property("date_end")).toString();
     personal_select = (filter_izmer->property("personal_select")).toString();
+    tipmeh_select = (filter_izmer->property("tipmeh_select")).toString();
 }
 

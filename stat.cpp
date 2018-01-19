@@ -381,7 +381,9 @@ qDebug()<<"Тип механизма = "<<tipmeh_select;
 if(tipmeh_select == ""){
     filter_tipmeh = "";
 } else {
-    filter_tipmeh = "and BazaIzmereni.id_TipMehanizma = (select TipMehanizma.id from TipMehanizma where TipMehanizma.Наименование = " + tipmeh_select + ")";
+    filter_tipmeh = "and BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza and Baza.id_TipMehanizma = "
+                    "(select TipMehanizma.id from TipMehanizma where TipMehanizma.Наименование = '" + tipmeh_select + "'))";
+    qDebug()<<"filter_tipmeh = "<<filter_tipmeh;
 }
 QSqlQuery querycountizm("select count(Дата) from BazaIzmereni where BazaIzmereni.id_Rezhim <> 1 and BazaIzmereni.НормаЭлДв is not null "
                         "and BazaIzmereni.Норма is not null and BazaIzmereni.НормаЭлДв <> 57"

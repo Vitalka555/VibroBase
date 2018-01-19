@@ -77,7 +77,7 @@ Item {
                             chartIzmerTime.series_add()
                             chartIzmerTime1.series_add()
                             chartIzmerPersonal.series_add()
-                            chartIzmerPersonal1.series_add()
+                            chartIzmerPersonal1.series_add()                            
                                             }
                         if(event.key === Qt.Key_Return){
                             rec_filter.date_begin = tf_date_begin.text.replace(/(\d+)-(\d+)-(\d+)/,'$3-$2-$1') + " 00:00:00.000"
@@ -298,6 +298,8 @@ Item {
                         rec_filter.tipmeh_select = combo_tipmeh.currentText
                         qmlGetDate2()
                                             qmlKolAgr()
+                        chartIzmerAgr.series_add()
+                        chartIzmerAgr1.series_add()
 //                        chartIzmerMes.series_add()
 //                        chartIzmerMes1.series_add()
 //                        chartIzmerDay.series_add()
@@ -327,6 +329,8 @@ Item {
                         rec_filter.tipmeh_select = combo_tipmeh.currentText
                         qmlGetDate2()
                                             qmlKolAgr()
+                        chartIzmerAgr.series_add()
+                        chartIzmerAgr1.series_add()
 //                        chartIzmerMes.series_add()
 //                        chartIzmerMes1.series_add()
 //                        chartIzmerDay.series_add()
@@ -992,6 +996,49 @@ Item {
                     axiYagr.max = max
                     //console.log(oldX,oldY)
                 }
+                function series_add(){
+                    lineagr.clear()
+                    line1agr.clear()
+                    line2agr.clear()
+                    scatteragr.clear()
+                    scatter1agr.clear()
+                    scatter2agr.clear()
+                    chartIzmerAgr.update()
+                    var xx = []
+                    var yy = []
+                    var yy1 = []
+                    var yy2 = []
+                    var max = 0
+                    for(var i=0;i<count;i++){
+                        xx[i] = Date.parse(array_dateX[i])
+                        yy[i] = Number(array_valueY[i])
+                        yy1[i] = Number(array_valueY1[i])
+                        yy2[i] = Number(array_valueY2[i])
+                        if(yy[i]>max){
+                            max = yy[i]
+                        }
+                        if(yy1[i]>max){
+                            max = yy1[i]
+                        }
+                        if(yy2[i]>max){
+                            max = yy2[i]
+                        }
+                        lineagr.append(xx[i], yy[i])
+                        line1agr.append(xx[i], yy1[i])
+                        line2agr.append(xx[i], yy2[i])
+                    }
+                    oldX1 = xx[count-1]
+                    oldY1 = yy1[count-1]
+                    oldX2 = xx[count-1]
+                    oldY2 = yy2[count-1]
+                    oldX = xx[count-1]
+                    oldY = yy[count-1]
+                    scatter1agr.append(xx[count-1], yy1[count-1])
+                    scatter2agr.append(xx[count-1], yy2[count-1])
+                    scatteragr.append(xx[count-1], yy[count-1])
+                    max = Math.round(max) + 1
+                    axiYagr.max = max
+                }
             }
         }//end rec1
         Rectangle {
@@ -1629,7 +1676,7 @@ Item {
                     }
                 }
                 Rectangle {
-                    id:rec07
+                    id:rec06
                     width: rec2.height*1.5
                     height: rec2.height*0.9
                     visible: PathView.onPath
@@ -1638,20 +1685,20 @@ Item {
                     property variant rotY: PathView.itemAngle
                     transform: Rotation {
                         axis { x: 1; y: -1; z: 1 }
-                        angle: rec07.rotY;
+                        angle: rec06.rotY;
                         origin { x: rec2.height/2; y: rec2.height/2; }
                     }
                     Text {
-                        id: text07
+                        id: text06
                         z:1
-                        anchors.top: parent.top
+                        anchors.bottom: chartIzmerAgr1.bottom
                         anchors.horizontalCenter: parent.horizontalCenter
                         height: parent.height/5
-                        text: "Количество агрегатов"
+                        color: "#03a9f5"
+                        text: "Измерения в сборе"
                     }
                     ChartView {
-                        id: chartKolAgr7
-                        //objectName: "chartKolAgr1"
+                        id: chartIzmerAgr1
                         anchors.fill: parent
                         antialiasing: true
                         legend.visible: false
@@ -1660,31 +1707,98 @@ Item {
                         margins.right: 0
                         margins.top: 0
                         anchors.centerIn: parent
-
         dropShadowEnabled: true
-                        BarSeries {
-                            id: pie_series7
+                        ValueAxis {
+                            id: axiYagr1
+                            min: 0
                             labelsVisible: false
-                            labelsPosition: AbstractBarSeries.LabelsOutsideEnd
-                            axisY: ValueAxis {
-                                id: yAxis7
-                                        min: 0
-                                        max: 10
-                                        labelsVisible: false
-                            }
-                            axisX: BarCategoryAxis { categories: chartKolAgr.array_nameagr
-                            labelsVisible: false}
+                        }
+                        DateTimeAxis {
+                            id: axiXagr1
+                            format: "dd-MM-yyyy"
+                            min: rec_filter.date_begin
+                            max: rec_filter.date_end
+                            labelsVisible: false
+                        }
+                        LineSeries {
+                            id: line1agr1
+                            color: "lightgreen"
+                            axisY: axiYagr1
+                            axisX: axiXagr1
+                            width: 2
+                        }
+                        LineSeries {
+                            id: line2agr1
+                            color: "tomato"
+                            axisY: axiYagr1
+                            axisX: axiXagr1
+                            width: 2
+                        }
+                        LineSeries {
+                            id: lineagr1
+                            color: "#03a9f5"
+                            axisY: axiYagr1
+                            axisX: axiXagr1
+                            width: 2
                         }
                         Component.onCompleted: {
-                            //qmlKolAgr()
-                            var kol = []
-                            for(var i=0;i<chartKolAgr.razmer;i++){
-                                kol[i] = parseInt(chartKolAgr.array_kolagr[i], 10)
+                            var xx = []
+                            var yy = []
+                            var yy1 = []
+                            var yy2 = []
+                            var max = 0
+                            for(var i=0;i<chartIzmerAgr.count;i++){
+                                xx[i] = Date.parse(chartIzmerAgr.array_dateX[i])
+                                yy[i] = Number(chartIzmerAgr.array_valueY[i])
+                                yy1[i] = Number(chartIzmerAgr.array_valueY1[i])
+                                yy2[i] = Number(chartIzmerAgr.array_valueY2[i])
+                                if(yy[i]>max){
+                                    max = yy[i]
+                                }
+                                if(yy1[i]>max){
+                                    max = yy1[i]
+                                }
+                                if(yy2[i]>max){
+                                    max = yy2[i]
+                                }
+                                lineagr1.append(xx[i], yy[i])
+                                line1agr1.append(xx[i], yy1[i])
+                                line2agr1.append(xx[i], yy2[i])
                             }
-                            yAxis7.max = Math.max.apply(null, kol)*1.1
-                            var bar7 = pie_series7.append("label", kol)
-                            //pie_series1.axisX.
-                            //bar1.labelColor = "black"
+                            max = Math.round(max) + 1
+                            axiYagr1.max = max
+                            //console.log(oldX,oldY)
+                        }
+                        function series_add(){
+                            lineagr1.clear()
+                            line1agr1.clear()
+                            line2agr1.clear()
+                            chartIzmerAgr1.update()
+                            var xx = []
+                            var yy = []
+                            var yy1 = []
+                            var yy2 = []
+                            var max = 0
+                            for(var i=0;i<chartIzmerAgr.count;i++){
+                                xx[i] = Date.parse(chartIzmerAgr.array_dateX[i])
+                                yy[i] = Number(chartIzmerAgr.array_valueY[i])
+                                yy1[i] = Number(chartIzmerAgr.array_valueY1[i])
+                                yy2[i] = Number(chartIzmerAgr.array_valueY2[i])
+                                if(yy[i]>max){
+                                    max = yy[i]
+                                }
+                                if(yy1[i]>max){
+                                    max = yy1[i]
+                                }
+                                if(yy2[i]>max){
+                                    max = yy2[i]
+                                }
+                                lineagr1.append(xx[i], yy[i])
+                                line1agr1.append(xx[i], yy1[i])
+                                line2agr1.append(xx[i], yy2[i])
+                            }
+                            max = Math.round(max) + 1
+                            axiYagr1.max = max
                         }
                     }
                 }

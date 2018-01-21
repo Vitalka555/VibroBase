@@ -2432,61 +2432,80 @@ void ListModelIzmer::updateModel()
     QString id_tipmeh_filter_BI = (stack->property("id_tipmeh_filter_BI")).toString();
     QString tipmeh_filter_BI = " and BazaIzmereni.id_Baza = (select Baza.id from Baza where  Baza.id_TipMehanizma = "+id_tipmeh_filter_BI+" and Baza.id = BazaIzmereni.id_Baza)";
     QString neispravnoe = (stack->property("neispravnoe")).toString();
-    QString neispravnoe_hh;
-    QString neispravnoe_nom;
-    QString neispravnoe_rd;
-    QString neispravnoe_filter;
-    if(neispravnoe == "false"){
-        neispravnoe_hh = "";
-        neispravnoe_nom = "";
-        neispravnoe_rd = "";
-        neispravnoe_filter = "";
-    }
-    if(neispravnoe == "true"){
-    neispravnoe_hh = "  BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
-                          "and BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1)"
-                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
-                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
-                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
-                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
-                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
-                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
-                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
-                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
-    neispravnoe_nom = " or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
-                          "and BazaIzmereni.id_Rezhim = 2 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2)"
-                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
-                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
-                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
-                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
-                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
-                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
-                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
-                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
-    neispravnoe_rd = " or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
-                          "and BazaIzmereni.id_Rezhim = 3 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 3)"
-                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
-                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
-                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
-                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
-                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
-                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
-                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
-                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
-                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
-    neispravnoe_filter = " and (" + neispravnoe_hh + neispravnoe_nom + neispravnoe_rd + ") ";
-    }
+//    QString neispravnoe_hh;
+//    QString neispravnoe_nom;
+//    QString neispravnoe_rd;
+//    QString neispravnoe_filter;
+//    if(neispravnoe == "false"){
+//        neispravnoe_hh = "";
+//        neispravnoe_nom = "";
+//        neispravnoe_rd = "";
+//        neispravnoe_filter = "";
+//    }
+//    if(neispravnoe == "true"){
+
+//    neispravnoe_hh = " BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+//                                      "and BazaIzmereni.id_Rezhim = 1 and strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0) = (select max(strftime('%s', Дата))||' '||max(IFNULL(BazaIzmereni.'Время', 0)) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1)"
+////                     "and BazaIzmereni.Время = (select max(IFNULL(BazaIzmereni.Время,0)) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1) "
+////                     "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                                               "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+////                                               "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+////                                               "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+////                                               "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+////                                               "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+////                                               "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+////                                               "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+////                                               "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма and "
+////                                               "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                                               "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+////                                               "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв"
+//                     ")";
+////            "  BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+////                          "and BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1)"
+////                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+////                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+////                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+////                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+////                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+////                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+////                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+////                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+////                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+////                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
+//    neispravnoe_nom = "";
+//    /*" or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+//                          "and BazaIzmereni.id_Rezhim = 2 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2)"
+//                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+//                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+//                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+//                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+//                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+//                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+//                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+//                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+//                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+//                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+//                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+//                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";*/
+//    neispravnoe_rd = "";
+////            " or BazaIzmereni.id_Baza = (select Baza.id from Baza where Baza.id = BazaIzmereni.id_Baza "
+////                          "and BazaIzmereni.id_Rezhim = 3 and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 3)"
+////                          "and (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+////                          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+////                          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+////                          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+////                          "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+////                          "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+////                          "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+////                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.Норма AND "
+////                          "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+////                          "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+////                          "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) > BazaIzmereni.НормаЭлДв) ";
+//    neispravnoe_filter = " and (" + neispravnoe_hh + neispravnoe_nom + neispravnoe_rd + ") ";
+//    }
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
@@ -2502,6 +2521,151 @@ void ListModelIzmer::updateModel()
     if(id_tipmeh_filter_BI == ""){
         tipmeh_filter_BI = "";
     }
+    if(neispravnoe == "true"){ //если включена опция "Не испраны", то переопределяем запрос
+        this->setQuery("select * from (select bi_id, date_time, max_value, sost, v1, p1, o1, v2, p2, o2, v3, p3, o3, v4, p4, o4, v5, p5, o5, "
+                       "v6, p6, o6, v7, p7, o7, v8, p8, o8, t1, t2, t3, t4, t5, t6, t7, t8, rezhim, tip_izmer, norm_ed, norm, q, p, laes2, ate, "
+                       "prim, kks, bi_id_baza, time_, date_, biidrezhim from (select BazaIzmereni.id as bi_id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0) as date_time, "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В', 0), IFNULL(BazaIzmereni.'1П', 0), IFNULL(BazaIzmereni.'1О', 0), "
+                       "IFNULL(BazaIzmereni.'2В', 0), IFNULL(BazaIzmereni.'2П', 0), IFNULL(BazaIzmereni.'2О', 0), "
+                       "IFNULL(BazaIzmereni.'3В', 0), IFNULL(BazaIzmereni.'3П', 0), IFNULL(BazaIzmereni.'3О', 0), "
+                       "IFNULL(BazaIzmereni.'4В', 0), IFNULL(BazaIzmereni.'4П', 0), IFNULL(BazaIzmereni.'4О', 0), "
+                       "IFNULL(BazaIzmereni.'5В', 0), IFNULL(BazaIzmereni.'5П', 0), IFNULL(BazaIzmereni.'5О', 0), "
+                       "IFNULL(BazaIzmereni.'6В', 0), IFNULL(BazaIzmereni.'6П', 0), IFNULL(BazaIzmereni.'6О', 0), "
+                       "IFNULL(BazaIzmereni.'7В', 0), IFNULL(BazaIzmereni.'7П', 0), IFNULL(BazaIzmereni.'7О', 0), "
+                       "IFNULL(BazaIzmereni.'8В', 0), IFNULL(BazaIzmereni.'8П', 0), IFNULL(BazaIzmereni.'8О', 0)) "
+                       "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) as max_value, "
+                       "(SELECT (CASE WHEN (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+                       "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
+                       "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
+                       "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                       "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), "
+                       "IFNULL(BazaIzmereni.'7В',0), IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), "
+                       "IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), IFNULL(BazaIzmereni.'8О',0)) "
+                       "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.Норма AND "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
+                       "FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.НормаЭлДв THEN 'Норма' ELSE 'Превышение' end) FROM "
+                       "BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) as sost, BazaIzmereni.'1В' as v1, BazaIzmereni.'1П' as p1, "
+                       "BazaIzmereni.'1О' as o1, BazaIzmereni.'2В' as v2, BazaIzmereni.'2П' as p2, BazaIzmereni.'2О' as o2, "
+                       "BazaIzmereni.'3В' as v3, BazaIzmereni.'3П' as p3, BazaIzmereni.'3О' as o3, BazaIzmereni.'4В' as v4, "
+                       "BazaIzmereni.'4П' as p4, BazaIzmereni.'4О' as o4, BazaIzmereni.'5В' as v5, BazaIzmereni.'5П' as p5, "
+                       "BazaIzmereni.'5О' as o5, BazaIzmereni.'6В' as v6, BazaIzmereni.'6П' as p6, BazaIzmereni.'6О' as o6, "
+                       "BazaIzmereni.'7В' as v7, BazaIzmereni.'7П' as p7, BazaIzmereni.'7О' as o7, BazaIzmereni.'8В' as v8, "
+                       "BazaIzmereni.'8П' as p8, BazaIzmereni.'8О' as o8, BazaIzmereni.'T1' as t1, BazaIzmereni.'T2' as t2, "
+                       "BazaIzmereni.'T3' as t3, BazaIzmereni.'T4' as t4, BazaIzmereni.'T5' as t5, BazaIzmereni.'T6' as t6, "
+                       "BazaIzmereni.'T7' as t7, BazaIzmereni.'T8' as t8, "
+                       "(SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim) as rezhim, "
+                       "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia) as tip_izmer, "
+                       "BazaIzmereni.НормаЭлДв as norm_ed, BazaIzmereni.Норма as norm, BazaIzmereni.Q as q, BazaIzmereni.P as p, "
+                       "BazaIzmereni.'ЛАЭС-2' as laes2, BazaIzmereni.АТЭ as ate, BazaIzmereni.Примечания as prim, Baza.KKS as kks, "
+                       "BazaIzmereni.id_Baza as bi_id_baza, BazaIzmereni.'Время' as time_, BazaIzmereni.Дата as date_, "
+                       "BazaIzmereni.id_Rezhim as biidrezhim "
+                       "from Baza, BazaIzmereni where Baza.id = BazaIzmereni.id_Baza and BazaIzmereni.id_Rezhim = 1 and "
+                       "BazaIzmereni.id_TipIzmerenia <> 2 and BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +"and "
+                       "BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and "
+                       "BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.id_TipIzmerenia <> 2 and BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +") "
+                       "group by Baza.KKS order by Baza.KKS, BazaIzmereni.Дата DESC, BazaIzmereni.Время DESC) as base_hh where "
+                       "((SELECT MAX(IFNULL(base_hh.v3,0), IFNULL(base_hh.p3,0), IFNULL(base_hh.o3,0), IFNULL(base_hh.v4,0), "
+                       "IFNULL(base_hh.p4,0), IFNULL(base_hh.o4,0), IFNULL(base_hh.v5,0), IFNULL(base_hh.p5,0), IFNULL(base_hh.o5,0), "
+                       "IFNULL(base_hh.v6,0), IFNULL(base_hh.p6,0), IFNULL(base_hh.o6,0), IFNULL(base_hh.v7,0), IFNULL(base_hh.p7,0), "
+                       "IFNULL(base_hh.o7,0), IFNULL(base_hh.v8,0), IFNULL(base_hh.p8,0), IFNULL(base_hh.o8,0))) > base_hh.norm or "
+                       "(SELECT MAX(IFNULL(base_hh.v1,0), IFNULL(base_hh.p1,0), IFNULL(base_hh.o1,0), IFNULL(base_hh.v2,0), IFNULL(base_hh.p2,0), "
+                       "IFNULL(base_hh.o2,0))) > base_hh.norm_ed) order by base_hh.date_ DESC, base_hh.time_ DESC) "
+                       "UNION "
+                       "select * from (select bi_id, date_time, max_value, sost, v1, p1, o1, v2, p2, o2, v3, p3, o3, v4, p4, o4, v5, p5, o5, v6, "
+                       "p6, o6, v7, p7, o7, v8, p8, o8, t1, t2, t3, t4, t5, t6, t7, t8, rezhim, tip_izmer, norm_ed, norm, q, p, laes2, ate, prim, "
+                       "kks, bi_id_baza, time_, date_, biidrezhim from (select BazaIzmereni.id as bi_id, "
+                       "strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0) as date_time, "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В', 0), IFNULL(BazaIzmereni.'1П', 0), IFNULL(BazaIzmereni.'1О', 0), "
+                       "IFNULL(BazaIzmereni.'2В', 0), IFNULL(BazaIzmereni.'2П', 0), IFNULL(BazaIzmereni.'2О', 0), IFNULL(BazaIzmereni.'3В', 0), "
+                       "IFNULL(BazaIzmereni.'3П', 0), IFNULL(BazaIzmereni.'3О', 0), IFNULL(BazaIzmereni.'4В', 0), IFNULL(BazaIzmereni.'4П', 0), "
+                       "IFNULL(BazaIzmereni.'4О', 0), IFNULL(BazaIzmereni.'5В', 0), IFNULL(BazaIzmereni.'5П', 0), IFNULL(BazaIzmereni.'5О', 0), "
+                       "IFNULL(BazaIzmereni.'6В', 0), IFNULL(BazaIzmereni.'6П', 0), IFNULL(BazaIzmereni.'6О', 0), IFNULL(BazaIzmereni.'7В', 0), "
+                       "IFNULL(BazaIzmereni.'7П', 0), IFNULL(BazaIzmereni.'7О', 0), IFNULL(BazaIzmereni.'8В', 0), IFNULL(BazaIzmereni.'8П', 0), "
+                       "IFNULL(BazaIzmereni.'8О', 0)) FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) as max_value, "
+                       "(SELECT (CASE WHEN (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), IFNULL(BazaIzmereni.'3В',0), "
+                       "IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), "
+                       "IFNULL(BazaIzmereni.'4О',0), IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                       "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), IFNULL(BazaIzmereni.'7В',0), "
+                       "IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), "
+                       "IFNULL(BazaIzmereni.'8О',0)) FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.Норма AND "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) FROM BazaIzmereni Bz "
+                       "WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.НормаЭлДв THEN 'Норма' ELSE 'Превышение' end) FROM BazaIzmereni Bz "
+                       "WHERE Bz.id= BazaIzmereni.id) as sost, BazaIzmereni.'1В' as v1, BazaIzmereni.'1П' as p1, BazaIzmereni.'1О' as o1, "
+                       "BazaIzmereni.'2В' as v2, BazaIzmereni.'2П' as p2, BazaIzmereni.'2О' as o2, BazaIzmereni.'3В' as v3, "
+                       "BazaIzmereni.'3П' as p3, BazaIzmereni.'3О' as o3, BazaIzmereni.'4В' as v4, BazaIzmereni.'4П' as p4, "
+                       "BazaIzmereni.'4О' as o4, BazaIzmereni.'5В' as v5, BazaIzmereni.'5П' as p5, BazaIzmereni.'5О' as o5, "
+                       "BazaIzmereni.'6В' as v6, BazaIzmereni.'6П' as p6, BazaIzmereni.'6О' as o6, BazaIzmereni.'7В' as v7, "
+                       "BazaIzmereni.'7П' as p7, BazaIzmereni.'7О' as o7, BazaIzmereni.'8В' as v8, BazaIzmereni.'8П' as p8, "
+                       "BazaIzmereni.'8О' as o8, BazaIzmereni.'T1' as t1, BazaIzmereni.'T2' as t2, BazaIzmereni.'T3' as t3, "
+                       "BazaIzmereni.'T4' as t4, BazaIzmereni.'T5' as t5, BazaIzmereni.'T6' as t6, BazaIzmereni.'T7' as t7, "
+                       "BazaIzmereni.'T8' as t8, (SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim) as rezhim, "
+                       "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia) as tip_izmer, "
+                       "BazaIzmereni.НормаЭлДв as norm_ed, BazaIzmereni.Норма as norm, BazaIzmereni.Q as q, BazaIzmereni.P as p, "
+                       "BazaIzmereni.'ЛАЭС-2' as laes2, BazaIzmereni.АТЭ as ate, BazaIzmereni.Примечания as prim, Baza.KKS as kks, "
+                       "BazaIzmereni.id_Baza as bi_id_baza, BazaIzmereni.'Время' as time_, BazaIzmereni.Дата as date_, "
+                       "BazaIzmereni.id_Rezhim as biidrezhim from Baza, BazaIzmereni "
+                       "where Baza.id = BazaIzmereni.id_Baza and BazaIzmereni.id_Rezhim = 2 and BazaIzmereni.id_TipIzmerenia <> 2 and "
+                       "BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +" and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where "
+                       "BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2 and BazaIzmereni.id_TipIzmerenia <> 2 and "
+                       "BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +") group by Baza.KKS order by Baza.KKS, BazaIzmereni.Дата DESC, BazaIzmereni.Время DESC) as base_nom where "
+                       "((SELECT MAX(IFNULL(base_nom.v3,0), IFNULL(base_nom.p3,0), IFNULL(base_nom.o3,0), "
+                       "IFNULL(base_nom.v4,0), IFNULL(base_nom.p4,0), IFNULL(base_nom.o4,0), IFNULL(base_nom.v5,0), IFNULL(base_nom.p5,0), "
+                       "IFNULL(base_nom.o5,0), IFNULL(base_nom.v6,0), IFNULL(base_nom.p6,0), IFNULL(base_nom.o6,0), IFNULL(base_nom.v7,0), "
+                       "IFNULL(base_nom.p7,0), IFNULL(base_nom.o7,0), IFNULL(base_nom.v8,0), IFNULL(base_nom.p8,0), "
+                       "IFNULL(base_nom.o8,0))) > base_nom.norm or (SELECT MAX(IFNULL(base_nom.v1,0), IFNULL(base_nom.p1,0), "
+                       "IFNULL(base_nom.o1,0), IFNULL(base_nom.v2,0), IFNULL(base_nom.p2,0), IFNULL(base_nom.o2,0))) > base_nom.norm_ed) "
+                       "order by base_nom.date_ DESC, base_nom.time_ DESC) "
+                       "UNION "
+                       "select * from (select bi_id, date_time, max_value, sost, v1, p1, o1, v2, p2, o2, v3, p3, o3, v4, p4, o4, v5, p5, o5, v6, "
+                       "p6, o6, v7, p7, o7, v8, p8, o8, t1, t2, t3, t4, t5, t6, t7, t8, rezhim, tip_izmer, norm_ed, norm, q, p, laes2, ate, prim, "
+                       "kks, bi_id_baza, time_, date_, biidrezhim from (select BazaIzmereni.id as bi_id, "
+                       "strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0) as date_time, "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В', 0), IFNULL(BazaIzmereni.'1П', 0), IFNULL(BazaIzmereni.'1О', 0), "
+                       "IFNULL(BazaIzmereni.'2В', 0), IFNULL(BazaIzmereni.'2П', 0), IFNULL(BazaIzmereni.'2О', 0), IFNULL(BazaIzmereni.'3В', 0), "
+                       "IFNULL(BazaIzmereni.'3П', 0), IFNULL(BazaIzmereni.'3О', 0), IFNULL(BazaIzmereni.'4В', 0), IFNULL(BazaIzmereni.'4П', 0), "
+                       "IFNULL(BazaIzmereni.'4О', 0), IFNULL(BazaIzmereni.'5В', 0), IFNULL(BazaIzmereni.'5П', 0), IFNULL(BazaIzmereni.'5О', 0), "
+                       "IFNULL(BazaIzmereni.'6В', 0), IFNULL(BazaIzmereni.'6П', 0), IFNULL(BazaIzmereni.'6О', 0), IFNULL(BazaIzmereni.'7В', 0), "
+                       "IFNULL(BazaIzmereni.'7П', 0), IFNULL(BazaIzmereni.'7О', 0), IFNULL(BazaIzmereni.'8В', 0), IFNULL(BazaIzmereni.'8П', 0), "
+                       "IFNULL(BazaIzmereni.'8О', 0)) FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) as max_value, "
+                       "(SELECT (CASE WHEN (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), IFNULL(BazaIzmereni.'3В',0), "
+                       "IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), "
+                       "IFNULL(BazaIzmereni.'4О',0), IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
+                       "IFNULL(BazaIzmereni.'6В',0), IFNULL(BazaIzmereni.'6П',0), IFNULL(BazaIzmereni.'6О',0), IFNULL(BazaIzmereni.'7В',0), "
+                       "IFNULL(BazaIzmereni.'7П',0), IFNULL(BazaIzmereni.'7О',0), IFNULL(BazaIzmereni.'8В',0), IFNULL(BazaIzmereni.'8П',0), "
+                       "IFNULL(BazaIzmereni.'8О',0)) FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.Норма AND "
+                       "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+                       "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) FROM BazaIzmereni Bz "
+                       "WHERE Bz.id= BazaIzmereni.id) <= BazaIzmereni.НормаЭлДв THEN 'Норма' ELSE 'Превышение' end) FROM BazaIzmereni Bz "
+                       "WHERE Bz.id= BazaIzmereni.id) as sost, BazaIzmereni.'1В' as v1, BazaIzmereni.'1П' as p1, BazaIzmereni.'1О' as o1, "
+                       "BazaIzmereni.'2В' as v2, BazaIzmereni.'2П' as p2, BazaIzmereni.'2О' as o2, BazaIzmereni.'3В' as v3, "
+                       "BazaIzmereni.'3П' as p3, BazaIzmereni.'3О' as o3, BazaIzmereni.'4В' as v4, BazaIzmereni.'4П' as p4, "
+                       "BazaIzmereni.'4О' as o4, BazaIzmereni.'5В' as v5, BazaIzmereni.'5П' as p5, BazaIzmereni.'5О' as o5, "
+                       "BazaIzmereni.'6В' as v6, BazaIzmereni.'6П' as p6, BazaIzmereni.'6О' as o6, BazaIzmereni.'7В' as v7, "
+                       "BazaIzmereni.'7П' as p7, BazaIzmereni.'7О' as o7, BazaIzmereni.'8В' as v8, BazaIzmereni.'8П' as p8, "
+                       "BazaIzmereni.'8О' as o8, BazaIzmereni.'T1' as t1, BazaIzmereni.'T2' as t2, BazaIzmereni.'T3' as t3, "
+                       "BazaIzmereni.'T4' as t4, BazaIzmereni.'T5' as t5, BazaIzmereni.'T6' as t6, BazaIzmereni.'T7' as t7, "
+                       "BazaIzmereni.'T8' as t8, (SELECT Rezhim.Наименование FROM Rezhim WHERE Rezhim.id = BazaIzmereni.id_Rezhim) as rezhim, "
+                       "(SELECT TipIzmerenia.Наименование FROM TipIzmerenia WHERE TipIzmerenia.id = BazaIzmereni.id_TipIzmerenia) as tip_izmer, "
+                       "BazaIzmereni.НормаЭлДв as norm_ed, BazaIzmereni.Норма as norm, BazaIzmereni.Q as q, BazaIzmereni.P as p, "
+                       "BazaIzmereni.'ЛАЭС-2' as laes2, BazaIzmereni.АТЭ as ate, BazaIzmereni.Примечания as prim, Baza.KKS as kks, "
+                       "BazaIzmereni.id_Baza as bi_id_baza, BazaIzmereni.'Время' as time_, BazaIzmereni.Дата as date_, "
+                       "BazaIzmereni.id_Rezhim as biidrezhim from Baza, BazaIzmereni "
+                       "where Baza.id = BazaIzmereni.id_Baza and BazaIzmereni.id_Rezhim = 3 and BazaIzmereni.id_TipIzmerenia <> 2 and "
+                       "BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +" and BazaIzmereni.Дата = (select max(BazaIzmereni.Дата) from BazaIzmereni where "
+                       "BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 3 and BazaIzmereni.id_TipIzmerenia <> 2 and "
+                       "BazaIzmereni.id_TipIzmerenia <> 4 " + kks_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +") group by Baza.KKS order by Baza.KKS, BazaIzmereni.Дата DESC, BazaIzmereni.Время DESC) as base_rd where "
+                       "((SELECT MAX(IFNULL(base_rd.v3,0), IFNULL(base_rd.p3,0), IFNULL(base_rd.o3,0), "
+                       "IFNULL(base_rd.v4,0), IFNULL(base_rd.p4,0), IFNULL(base_rd.o4,0), IFNULL(base_rd.v5,0), IFNULL(base_rd.p5,0), "
+                       "IFNULL(base_rd.o5,0), IFNULL(base_rd.v6,0), IFNULL(base_rd.p6,0), IFNULL(base_rd.o6,0), IFNULL(base_rd.v7,0), "
+                       "IFNULL(base_rd.p7,0), IFNULL(base_rd.o7,0), IFNULL(base_rd.v8,0), IFNULL(base_rd.p8,0), IFNULL(base_rd.o8,0))) > base_rd.norm or "
+                       "(SELECT MAX(IFNULL(base_rd.v1,0), IFNULL(base_rd.p1,0), IFNULL(base_rd.o1,0), IFNULL(base_rd.v2,0), IFNULL(base_rd.p2,0), "
+                       "IFNULL(base_rd.o2,0))) > base_rd.norm_ed) order by base_rd.date_ DESC, base_rd.time_ DESC) order by 49 DESC, 48 DESC");
+    } else {
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), "
          "(SELECT MAX(IFNULL(BazaIzmereni.'1В', 0), IFNULL(BazaIzmereni.'1П', 0), IFNULL(BazaIzmereni.'1О', 0),"
@@ -2541,9 +2705,9 @@ void ListModelIzmer::updateModel()
                    "BazaIzmereni.НормаЭлДв, BazaIzmereni.Норма, BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.'ЛАЭС-2', "
                    "BazaIzmereni.АТЭ, BazaIzmereni.Примечания, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza ), BazaIzmereni.id_Baza, "
                    "BazaIzmereni.'Время'"
-         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI
-                   + neispravnoe_filter +
+         " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
+    }
 }
 
 // Получение id из строки в модели представления данных

@@ -2296,7 +2296,7 @@ Item {
                                         qmlSignal_bazaizmer()
                                         console.log("stackView.bazaizm_id ", stackView.bazaizm_id)
                                         console.log("stackView.maxcolizm ",stackView.maxcolizm)
-                                        station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
+                                        station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count - 1 - list1.currentIndex)
                                         barGraph.selectionMode = AbstractGraph3D.SelectionItemAndColumn | AbstractGraph3D.SelectionSlice
                                         if(text_rezh.text == "Холостой ход"){
                                             text_normagr.visible = false
@@ -2414,25 +2414,21 @@ Item {
                         ColorGradientStop { id: startGradient; position: 0.0; color: "green" }
                         ColorGradientStop { id: middleGradient; position: 0.75; color: "yellow" }
                         ColorGradientStop { id: finishGradient; position: 1.0; color: "red" }
-                        Component.onCompleted: {
-
-                        }
                     }
-
                     Bars3D {
                         id: barGraph
                         Material.theme: Material.Light
                         anchors.fill: parent
-//                        selectionMode: AbstractGraph3D.SelectionItemAndRow
-//                        scene.activeCamera.cameraPreset: Camera3D.CameraPresetIsometricLeftHigh
-                        barThickness: 2
+                        barThickness: 1
+//                        barSpacing: Qt.size(2.0, 2.0)
+//                        barSpacingRelative: true
                         antialiasing: true
                         reflection: true
-                        //shadowQuality: AbstractGraph3D.ShadowQualitySoftHigh
                         theme: Theme3D {
-                            //type: Theme3D.ThemeQt
-                            font.family: "STCaiyun"
-                            font.pointSize: 25
+                            id: them
+                            type: Theme3D.ThemeQt
+                            font.family: "STCaiyun"                            
+                            font.pointSize: barGraph.width/1000
                             colorStyle: Theme3D.ColorStyleRangeGradient
                             baseGradients: [surfaceGradient]
                             windowColor: "white"
@@ -2444,34 +2440,26 @@ Item {
                             labelTextColor: "blue"
                             multiHighlightColor: "red"
                             singleHighlightColor: "white"
-                            //labelBorderEnabled: false
-                            //labelBackgroundEnabled: false
-                            //singleHighlightColor: "grey"
-
                         }
                         selectionMode: AbstractGraph3D.SelectionItemAndRow | AbstractGraph3D.SelectionSlice
                         scene.activeCamera.cameraPreset: Camera3D.CameraPresetIsometricLeftHigh
                         Bar3DSeries {
                             id: station1
                             name: "Station 1"
-
-                            //itemLabelFormat: "@colLabel: %.0f единиц"
                             ItemModelBarDataProxy {
                                 id: proxy
                                 itemModel: model_1V
-                                //multiMatchBehavior: ItemModelBarDataProxy.MultiMatchBehavior
-                                //useModelCategories: true
                                 rowRole: "bazaizmnapr"
                                 columnRole: "bazaizmdata"
                                 valueRole: "bazaizm1v"
                             }
+
                             onSelectedBarChanged: {
                                 rec_prim_izmer.visible = true
                                 list1.currentIndex = list1.count -1 - parseInt([position.y])
                                 newindex = list1.currentIndex
                                 item4.editEntry(newindex)
-                                barGraph.selectionMode = AbstractGraph3D.SelectionItemAndRow | AbstractGraph3D.SelectionSlice
-                                console.log(list1.currentIndex)
+                                barGraph.selectionMode = AbstractGraph3D.SelectionItemAndRow | AbstractGraph3D.SelectionSlice                                
                             }
                         }
                         Component.onCompleted: {
@@ -2520,7 +2508,6 @@ Item {
                             console.log("middle = ", middleGradient.position)
                             }
                         }
-
                 }
 
                 } //rec_5

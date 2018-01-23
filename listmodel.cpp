@@ -1374,268 +1374,272 @@ QHash<int, QByteArray> ListModel1V::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModel1V::updateModel()
 {
-    //QObject* combo_rezhim = this->parent()->findChild<QObject*>("combo_rezhim");
-    //QString rezhim_id=(combo_rezhim->property("id")).toString();
-    //qDebug() << rezhim_id;
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString kks_id=(stack->property("baza_id")).toString();
     QString rezhim_id=(stack->property("rezhim_id")).toString();
     QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;
+
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
     qDebug() << rezhim_id;
-    //QString select1O = "SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id;
     QSqlQuery query1V;
     QString select1V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1В' is not null" + rezhim_filter);
-        if (!query1V.exec(select1V))
-        //qDebug() << "error: " << query1V.lastError().text();
+    if (!query1V.exec(select1V)){
+        qDebug() << "ошибка: " << query1V.lastError().text();
+    }
             query1V.next();
     if(query1V.value(0)==0){
         select1V = "";
     } else {
-        select1V = " SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select1V = " SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query1P;
     QString select1P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1П' is not null" + rezhim_filter);
         if (!query1P.exec(select1P))
-        //qDebug() << "error: " << query1P.lastError().text();
+        qDebug() << "error: " << query1P.lastError().text();
             query1P.next();
     if(query1P.value(0)==0){
         select1P = "";
     } else {
-        select1P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select1P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query1O;
     QString select1O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1О' is not null" + rezhim_filter);
         if (!query1O.exec(select1O))
-        //qDebug() << "error: " << query1O.lastError().text();
+        qDebug() << "error: " << query1O.lastError().text();
             query1O.next();
     if(query1O.value(0)==0){
         select1O = "";
     } else {
-        select1O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select1O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query2V;
     QString select2V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2В' is not null" + rezhim_filter);
         if (!query2V.exec(select2V))
-        //qDebug() << "error: " << query2V.lastError().text();
+        qDebug() << "error: " << query2V.lastError().text();
             query2V.next();
     if(query2V.value(0)==0){
         select2V = "";
     } else {
-        select2V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select2V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query2P;
     QString select2P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2П' is not null" + rezhim_filter);
         if (!query2P.exec(select2P))
-        //qDebug() << "error: " << query2P.lastError().text();
+        qDebug() << "error: " << query2P.lastError().text();
             query2P.next();
     if(query2P.value(0)==0){
         select2P = "";
     } else {
-        select2P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select2P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query2O;
     QString select2O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2О' is not null" + rezhim_filter);
         if (!query2O.exec(select2O))
-        //qDebug() << "error: " << query2O.lastError().text();
+        qDebug() << "error: " << query2O.lastError().text();
             query2O.next();
     if(query2O.value(0)==0){
         select2O = "";
     } else {
-        select2O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select2O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query3V;
     QString select3V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3В' is not null" + rezhim_filter);
         if (!query3V.exec(select3V))
-        //qDebug() << "error: " << query3V.lastError().text();
+        qDebug() << "error: " << query3V.lastError().text();
             query3V.next();
     if(query3V.value(0)==0){
         select3V = "";
     } else {
-        select3V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select3V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query3P;
     QString select3P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3П' is not null" + rezhim_filter);
         if (!query3P.exec(select3P))
-        //qDebug() << "error: " << query3P.lastError().text();
+        qDebug() << "error: " << query3P.lastError().text();
             query3P.next();
     if(query3P.value(0)==0){
         select3P = "";
     } else {
-        select3P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select3P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query3O;
     QString select3O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3О' is not null" + rezhim_filter);
         if (!query3O.exec(select3O))
-        //qDebug() << "error: " << query3O.lastError().text();
+        qDebug() << "error: " << query3O.lastError().text();
             query3O.next();
     if(query3O.value(0)==0){
         select3O = "";
     } else {
-        select3O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select3O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query4V;
     QString select4V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4В' is not null" + rezhim_filter);
         if (!query4V.exec(select4V))
-        //qDebug() << "error: " << query4V.lastError().text();
+        qDebug() << "error: " << query4V.lastError().text();
             query4V.next();
     if(query4V.value(0)==0){
         select4V = "";
     } else {
-        select4V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select4V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query4P;
     QString select4P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4П' is not null" + rezhim_filter);
         if (!query4P.exec(select4P))
-        //qDebug() << "error: " << query4P.lastError().text();
+        qDebug() << "error: " << query4P.lastError().text();
             query4P.next();
     if(query4P.value(0)==0){
         select4P = "";
     } else {
-        select4P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select4P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query4O;
     QString select4O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4О' is not null" + rezhim_filter);
         if (!query4O.exec(select4O))
-        //qDebug() << "error: " << query4O.lastError().text();
+        qDebug() << "error: " << query4O.lastError().text();
             query4O.next();
     if(query4O.value(0)==0){
         select4O = "";
     } else {
-        select4O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select4O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query5V;
     QString select5V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5В' is not null" + rezhim_filter);
         if (!query5V.exec(select5V))
-        //qDebug() << "error: " << query5V.lastError().text();
+        qDebug() << "error: " << query5V.lastError().text();
             query5V.next();
     if(query5V.value(0)==0){
         select5V = "";
     } else {
-        select5V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select5V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query5P;
     QString select5P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5П' is not null" + rezhim_filter);
         if (!query5P.exec(select5P))
-        //qDebug() << "error: " << query5P.lastError().text();
+        qDebug() << "error: " << query5P.lastError().text();
             query5P.next();
     if(query5P.value(0)==0){
         select5P = "";
     } else {
-        select5P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select5P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query5O;
     QString select5O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5О' is not null" + rezhim_filter);
         if (!query5O.exec(select5O))
-        //qDebug() << "error: " << query5O.lastError().text();
+        qDebug() << "error: " << query5O.lastError().text();
             query5O.next();
     if(query5O.value(0)==0){
         select5O = "";
     } else {
-        select5O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select5O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query6V;
     QString select6V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6В' is not null" + rezhim_filter);
         if (!query6V.exec(select6V))
-        //qDebug() << "error: " << query6V.lastError().text();
+        qDebug() << "error: " << query6V.lastError().text();
             query6V.next();
     if(query6V.value(0)==0){
         select6V = "";
     } else {
-        select6V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select6V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query6P;
     QString select6P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6П' is not null" + rezhim_filter);
         if (!query6P.exec(select6P))
-        //qDebug() << "error: " << query6P.lastError().text();
+        qDebug() << "error: " << query6P.lastError().text();
             query6P.next();
     if(query6P.value(0)==0){
         select6P = "";
     } else {
-        select6P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select6P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query6O;
     QString select6O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6О' is not null" + rezhim_filter);
         if (!query6O.exec(select6O))
-        //qDebug() << "error: " << query6O.lastError().text();
+        qDebug() << "error: " << query6O.lastError().text();
             query6O.next();
     if(query6O.value(0)==0){
         select6O = "";
     } else {
-        select6O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select6O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query7V;
     QString select7V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7В' is not null" + rezhim_filter);
         if (!query7V.exec(select7V))
-        //qDebug() << "error: " << query7V.lastError().text();
+        qDebug() << "error: " << query7V.lastError().text();
             query7V.next();
     if(query7V.value(0)==0){
         select7V = "";
     } else {
-        select7V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select7V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query7P;
     QString select7P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7П' is not null" + rezhim_filter);
         if (!query7P.exec(select7P))
-        //qDebug() << "error: " << query7P.lastError().text();
+        qDebug() << "error: " << query7P.lastError().text();
             query7P.next();
     if(query7P.value(0)==0){
         select7P = "";
     } else {
-        select7P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select7P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query7O;
     QString select7O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7О' is not null" + rezhim_filter);
         if (!query7O.exec(select7O))
-        //qDebug() << "error: " << query7O.lastError().text();
+        qDebug() << "error: " << query7O.lastError().text();
             query7O.next();
     if(query7O.value(0)==0){
         select7O = "";
     } else {
-        select7O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select7O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query8V;
     QString select8V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8В' is not null" + rezhim_filter);
         if (!query8V.exec(select8V))
-        //qDebug() << "error: " << query8V.lastError().text();
+        qDebug() << "error: " << query8V.lastError().text();
             query8V.next();
     if(query8V.value(0)==0){
         select8V = "";
     } else {
-        select8V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select8V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query8P;
     QString select8P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8П' is not null" + rezhim_filter);
         if (!query8P.exec(select8P))
-        //qDebug() << "error: " << query8P.lastError().text();
+        qDebug() << "error: " << query8P.lastError().text();
             query8P.next();
     if(query8P.value(0)==0){
         select8P = "";
     } else {
-        select8P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select8P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query8O;
     QString select8O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8О' is not null" + rezhim_filter);
         if (!query8O.exec(select8O))
-        //qDebug() << "error: " << query8O.lastError().text();
+        qDebug() << "error: " << query8O.lastError().text();
             query8O.next();
     if(query8O.value(0)==0){
         select8O = "";
     } else {
-        select8O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        select8O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
+    QSqlQuery qry;
+    qry.prepare(select1V + select1P + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
+                select4V + select4P + select4O + select5V + select5P + select5O + select6V + select6P +
+                select6O + select7V + select7P + select7O + select8V + select8P + select8O + " order by 5 asc, 6 asc");
+    qry.exec();
+    //this->qry();
 
-    //qDebug() << query1P.value(0);
-    //qDebug() << query1O.value(0);
-    //// Обновление производится SQL-запросом к базе данных
-    //this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.id = "+kks_id+" ");
-    this->setQuery(select1V + select1P
-                   + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
+    qDebug() << "Number of Rows: " << qry.size();
+    //qDebug() << "Number of columns: " << qry.record().count();
+    //Обновление производится SQL-запросом к базе данных
+    this->setQuery(select1V + select1P + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
                    select4V + select4P + select4O + select5V + select5P + select5O + select6V + select6P +
-                   select6O + select7V + select7P + select7O + select8V + select8P + select8O);
-    //qDebug() << this;
+                   select6O + select7V + select7P + select7O + select8V + select8P + select8O + " order by 5 asc, 6 asc");
+    if(this->canFetchMore()){
+        this->fetchMore();
+    }
 }
 
 

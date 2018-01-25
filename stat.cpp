@@ -517,3 +517,64 @@ void Stat::getdate2()
     tipmeh_select = (filter_izmer->property("tipmeh_select")).toString();
 }
 
+ListModelStatIzmerAgr::ListModelStatIzmerAgr(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelStatIzmerAgr::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelStatIzmerAgr::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    roles[kksRole] = "kks";
+    roles[totalRole] = "total";
+    roles[hhRole] = "hh";
+    roles[nomRole] = "nom";
+    roles[rdRole] = "rd";
+    roles[pnrRole] = "pnr";
+    roles[pnrdopRole] = "pnrdop";
+    roles[eksplRole] = "ekspl";
+    roles[ekspldopRole] = "ekspldop";
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelStatIzmerAgr::updateModel()
+{
+    //QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery("select Baza.id, Baza.KKS, (select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id) as total, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1) as hh, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2) as nom, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 3) as rd, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_TipIzmerenia = 1) as pnr, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_TipIzmerenia = 2) as pnrdop, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_TipIzmerenia = 3) as ekspl, "
+                   "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_TipIzmerenia = 4) as ekspldop "
+                   "from Baza where total <> 0 order by 3 desc");
+    //filter_izmer->setProperty("maxkol", this->);
+}
+
+// Получение id из строки в модели представления данных
+int ListModelStatIzmerAgr::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}

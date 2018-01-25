@@ -22,7 +22,7 @@
 #include "copyfile.h"
 #include "stat.h"
 
-static const int LOAD_TIME_MSEC = 5 * 1000;
+static const int LOAD_TIME_MSEC = 3 * 1000;
 static const int PROGRESS_X_PX = 210;
 static const int PROGRESS_Y_PX = 200;
 static const int PROGRESS_WIDTH_PX = 230;
@@ -37,15 +37,16 @@ int main(int argc, char *argv[])
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
 #if defined(Q_OS_WIN)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
-
+QApplication::setStyle("Material");
+QQuickStyle::setStyle("Material");
     QApplication app(argc, argv);
 
-    QQuickStyle::setStyle("Material");
+    //QQuickStyle::setStyle("Material");
 
     QPixmap pix( QDir::currentPath() + "/images/splash.png" );
         QSplashScreen splashScreen( pix );
@@ -201,6 +202,7 @@ ListModelIzmer *model_izmer = new ListModelIzmer(root);
 ListModelIzmerOpenBI *model_openBI = new ListModelIzmerOpenBI(root);
 ListModelKKS *model_kks = new ListModelKKS(root);
 ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
+ListModelStatIzmerAgr *model_stat = new ListModelStatIzmerAgr(root);
 
 ListModel *model0 = new ListModel(root);
 
@@ -212,6 +214,7 @@ ListModel *model0 = new ListModel(root);
                          copy, SLOT(cppSlot2()));
         Stat *statist = new Stat(root);
         QObject::connect(root, SIGNAL(qmlKolAgr()), statist, SLOT(kolagr()));
+        QObject::connect(root, SIGNAL(qmlKolAgr()), model_stat, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlGetDate()), statist, SLOT(getdate()));
         QObject::connect(root, SIGNAL(qmlGetDate2()), statist, SLOT(getdate2()));
         QObject::connect(root, SIGNAL(qmlGetPersonal()), statist, SLOT(getpersonal()));
@@ -238,6 +241,7 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_kks", model_kks);
         engine.rootContext()->setContextProperty("model_norm_creatBI", model_norm_creatBI);
         engine.rootContext()->setContextProperty("model_openBI", model_openBI);
+        engine.rootContext()->setContextProperty("model_stat", model_stat);
 
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);

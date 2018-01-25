@@ -1,22 +1,59 @@
-import QtQuick 2.0
+import QtQuick 2.9
 import QtQuick.Controls 2.3
 import QtCharts 2.2
 import QtQml.Models 2.3
 import QtQuick.Controls.Material 2.2
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.3
 
 Item {
     id: item
-    Component.onCompleted: {
-
-        qmlGetDate()
-        qmlGetTipMeh()
-        qmlGetPersonal()
-        qmlKolAgr()
+    BusyIndicator {
+        id: ind
+        anchors.centerIn: parent
+        width: parent.width/5
+        height: parent.height/5
+        running: true
     }
+//    ProgressBar {
+//        id: progress
+//        objectName: "progress"
+//        anchors.centerIn: parent
+//        width: 1000
+//        height: 50
+//        indeterminate: true
+//    }
+
+    Loader {
+        id: load
+        anchors.fill: parent
+        sourceComponent: comp
+        asynchronous: true
+        visible: status == Loader.Ready
+        onLoaded: {
+            ind.running = false
+        }
+    }
+
+
+Component {
+    id: comp
+
 
     Page {
         id: page
+        property int yy: 0
+//        Binding {
+//            target: progress
+//            property: "value"
+//            value: page.yy
+//        }
+        Component.onCompleted: {
+            qmlGetDate()
+            qmlGetTipMeh()
+            qmlGetPersonal()
+            qmlKolAgr()
+        }
         anchors.fill: parent
         Rectangle {
             id: rec1
@@ -1040,6 +1077,569 @@ Item {
                     axiYagr.max = max
                 }
             }
+            Flickable {
+                id: flick
+                visible: false
+                anchors.top: rec_filter.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+
+                ListView {
+                    id: list
+                    anchors.fill: parent
+                    clip: true
+                    model: model_stat
+                    delegate: delegate
+                    focus: true
+                    headerPositioning: ListView.OverlayHeader
+                    spacing: 2
+                    //currentIndex: -1
+                    //highlight: highlightBar
+                    //highlightFollowsCurrentItem: false
+                    ScrollBar.vertical: ScrollBar { id: vbar;
+                                                hoverEnabled: true
+                                                active: hovered || pressed
+                                                orientation: Qt.Vertical
+                                                //size: frame.height / content.height
+                                                anchors.top: parent.top
+                                                anchors.right: parent.right
+                                                anchors.bottom: parent.bottom
+                                                width: 10
+                                    }
+                }
+                Component {
+                    id: delegate
+                    Item {
+                        id: item_table
+                        width: window.width
+                        height: 200
+                        Rectangle {
+                            id: rec_item
+                            width: parent.width
+                            height: parent.height
+                            property var tot: model_stat.data(model_stat.index(1, 0), 1)
+                            property real otstup1: text_tipizmer_ekspl.width
+                            property real otstup2: text_rezhim_rd.width
+                            property real maximum: rec_total.width - text_total1.width - 10
+                            property real maximum1: rec_tipizmer_ekspl.width - text_tipizmer_ekspl.width - text_tipizmer_ekspl1.width - 40
+                            property real maximum2: rec_rezhim_rd.width - text_rezhim_rd.width - text_rezhim_rd1.width - 45
+                            Component.onCompleted: console.log(tot)
+
+                            //color: "lightgrey"
+                            Rectangle {
+                                id: rec_kks
+                                anchors.top: parent.top
+                                anchors.topMargin: 5
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.bottom: parent.bottom
+                                width: parent.width/5
+                                color: "#03a9f5"
+                                Text {
+                                    id: text_kks
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    font.pixelSize: 15
+                                    //color: "white"
+                                    text: kks
+                                }
+                            }
+                            Rectangle {
+                                id: rec_total
+                                anchors.top: parent.top
+                                anchors.left: rec_kks.right
+                                height: parent.height/5
+                                anchors.right: parent.right
+                                color: "white"
+                                Rectangle {
+                                    id: rec_total1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: parent.left
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    //width: rec_item.tot/total*rec_item.maximum//parent.width - text_total1.width - 10
+                                    color: "#03a9f5"
+                                }
+                                Text {
+                                    id: text_total1
+                                    //property string tot1: tota
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_total1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text:  "всего " + total
+                                }
+                            }
+                            Rectangle {
+                                id: rec_tipizmer_ekspl
+                                anchors.top: rec_total.bottom
+                                anchors.left: rec_kks.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "lightblue"
+                                Text {
+                                    id: text_tipizmer_ekspl
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "Эксплуатация:"
+                                }
+                                Rectangle {
+                                    id: rec_tipizmer_ekspl1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_tipizmer_ekspl.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: ekspl/total*rec_item.maximum1//parent.width - text_tipizmer_ekspl.width - text_tipizmer_ekspl1.width - 20
+                                    color: "lightgreen"
+                                }
+                                Text {
+                                    id: text_tipizmer_ekspl1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_tipizmer_ekspl1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: ekspl + " (" + (ekspl/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_tipizmer_pnr
+                                anchors.top: rec_tipizmer_ekspl.bottom
+                                anchors.left: rec_kks.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "lightblue"
+                                Text {
+                                    id: text_tipizmer_pnr
+                                    width: rec_item.otstup1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "ПНР:"
+                                }
+                                Rectangle {
+                                    id: rec_tipizmer_pnr1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_tipizmer_pnr.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: pnr/total*rec_item.maximum1
+                                    color: "lightgreen"
+                                }
+                                Text {
+                                    id: text_tipizmer_pnr1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_tipizmer_pnr1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: pnr + " (" + (pnr/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_tipizmer_ekspldop
+                                anchors.top: rec_tipizmer_pnr.bottom
+                                anchors.left: rec_kks.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "lightblue"
+                                Text {
+                                    id: text_tipizmer_ekspldop
+                                    width: rec_item.otstup1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "Экспл. доп.:"
+                                }
+                                Rectangle {
+                                    id: rec_tipizmer_ekspldop1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_tipizmer_ekspldop.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: ekspldop/total*rec_item.maximum1
+                                    color: "lightgreen"
+                                }
+                                Text {
+                                    id: text_tipizmer_ekspldop1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_tipizmer_ekspldop1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: ekspldop + " (" + (ekspldop/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_tipizmer_pnrdop
+                                anchors.top: rec_tipizmer_ekspldop.bottom
+                                anchors.left: rec_kks.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "lightblue"
+                                Text {
+                                    id: text_tipizmer_pnrdop
+                                    width: rec_item.otstup1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "ПНР доп.:"
+                                }
+                                Rectangle {
+                                    id: rec_tipizmer_pnrdop1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_tipizmer_pnrdop.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: pnrdop/total*rec_item.maximum1
+                                    color: "lightgreen"
+                                }
+                                Text {
+                                    id: text_tipizmer_pnrdop1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_tipizmer_pnrdop1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: pnrdop + " (" + (pnrdop/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_rezhim_nom
+                                anchors.top: rec_total.bottom
+                                anchors.left: rec_tipizmer_ekspl.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "tomato"
+                                Text {
+                                    id: text_rezhim_nom
+                                    width: rec_item.otstup2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "Номинальный:"
+                                }
+                                Rectangle {
+                                    id: rec_rezhim_nom1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_rezhim_nom.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: nom/total*rec_item.maximum2
+                                    color: "LightSkyBlue"
+                                }
+                                Text {
+                                    id: text_rezhim_nom1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_rezhim_nom1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: nom + " (" + (nom/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_rezhim_rd
+                                anchors.top: rec_rezhim_nom.bottom
+                                anchors.left: rec_tipizmer_ekspl.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "tomato"
+                                Text {
+                                    id: text_rezhim_rd
+                                    //width: rec_item.otstup1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "Раб. диапазон:"
+                                }
+                                Rectangle {
+                                    id: rec_rezhim_rd1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_rezhim_rd.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: rd/total*rec_item.maximum2
+                                    color: "LightSkyBlue"
+                                }
+                                Text {
+                                    id: text_rezhim_rd1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_rezhim_rd1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: rd + " (" + (rd/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                            Rectangle {
+                                id: rec_rezhim_hh
+                                anchors.top: rec_rezhim_rd.bottom
+                                anchors.left: rec_tipizmer_ekspl.right
+                                height: parent.height/5
+                                width: parent.width*2/5
+                                //color: "tomato"
+                                Text {
+                                    id: text_rezhim_hh
+                                    width: rec_item.otstup2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: "Холостой ход:"
+                                }
+                                Rectangle {
+                                    id: rec_rezhim_hh1
+                                    anchors.top: parent.top
+                                    anchors.topMargin: 5
+                                    anchors.left: text_rezhim_hh.right
+                                    anchors.leftMargin: 5
+                                    anchors.bottom: parent.bottom
+                                    anchors.bottomMargin: 5
+                                    width: hh/total*rec_item.maximum2
+                                    color: "LightSkyBlue"
+                                }
+                                Text {
+                                    id: text_rezhim_hh1
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: rec_rezhim_hh1.right
+                                    anchors.leftMargin: 5
+                                    font.pixelSize: 15
+                                    text: hh + " (" + (hh/total*100).toFixed(1) + "%)"
+                                }
+                            }
+                        }
+                    }
+                }
+
+//                        property int number: index
+//                        property var col: ListView.isCurrentItem ? "#03a9f5" : "lightblue"
+
+//                        Rectangle {
+//                            id: rec1
+//                            anchors.top: parent.top
+//                            anchors.left: parent.left
+//                            anchors.leftMargin: 5
+//                            width: parent.width/20
+//                            height: flick.h//text1.height*2
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+//                            //border.color: Qt.lighter(color, 1.1)
+//                            //color: "lightblue"
+
+
+
+//                            RowLayout {
+//                                id: lay1
+//                                anchors.fill: parent
+//                                Text {
+//                                    id: text1
+//                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: parent.width
+//                                    wrapMode: Text.WordWrap
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: number+1
+//                                }
+//                            }
+//                        }
+//                        Rectangle {
+//                            id: rec2
+//                            anchors.top: parent.top
+//                            anchors.left: rec1.right
+//                            anchors.leftMargin: 5
+//                            width: rec_kks.width
+//                            height: flick.h
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+
+//                            RowLayout {
+//                                id: lay2
+//                                anchors.fill: parent
+//                                Text {
+//                                    id: text2
+//                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: parent.width
+//                                    wrapMode: Text.WordWrap
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: Bazakks
+//                                }
+//                            }
+//                        }
+//                        Rectangle {
+//                            id: rec3
+//                            anchors.top: parent.top
+//                            anchors.left: rec2.right
+//                            anchors.leftMargin: 5
+//                            width: rec_ceh.width
+//                            height: flick.h
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+//                            RowLayout {
+//                                id: lay3
+//                                anchors.fill: parent
+//                                Text {
+//                                    id: text3
+//                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: parent.width
+//                                    wrapMode: Text.WordWrap
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: Cehname
+//                                }
+//                            }
+//                        }
+//                        Rectangle {
+//                            id: rec4
+//                            anchors.top: parent.top
+//                            anchors.left: rec3.right
+//                            anchors.leftMargin: 5
+//                            width: rec_zd.width
+//                            height: flick.h
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+//                            RowLayout {
+//                                id: lay4
+//                                anchors.fill: parent
+//                                Text {
+//                                    id: text4
+//                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: parent.width
+//                                    wrapMode: Text.WordWrap
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: Bazazd
+//                                }
+//                            }
+//                        }
+//                        Rectangle {
+//                            id: rec5
+//                            anchors.top: parent.top
+//                            anchors.left: rec4.right
+//                            anchors.leftMargin: 5
+//                            width: rec_pom.width
+//                            height: flick.h
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+//                            RowLayout {
+//                                id: lay5
+//                                anchors.fill: parent
+//                                Text {
+//                                    id: text5
+//                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: parent.width
+//                                    wrapMode: Text.WordWrap
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: Bazapom
+//                                }
+//                            }
+//                        }
+//                        Rectangle {
+//                            id: rec6
+//                            anchors.top: parent.top
+//                            anchors.left: rec5.right
+//                            anchors.leftMargin: 5
+//                            width: rec_name.width
+//                            height: flick.h
+//                            border.color: "#3E65FF"
+//                            radius: 10
+//                            opacity: 0.8
+//                            color: item_table.col
+
+//                                Text {
+//                                    id: text6
+////                                    anchors.horizontalCenter: parent.horizontalCenter
+//                                    anchors.verticalCenter: parent.verticalCenter
+//                                    width: rec_name.width-10
+//                                    anchors.left: parent.left
+//                                    anchors.leftMargin: 5
+//                                    anchors.right: parent.right
+//                                    anchors.rightMargin: 5
+//                                    wrapMode: Text.WordWrap
+//                                    maximumLineCount: 2
+//                                    font.pixelSize: 15
+//                                    color: "#2e2efb"//"#3E65FF"
+//                                    text: Bazaopis
+//                                }
+
+//                            Component.onCompleted: {
+////                                flick.h = Math.max(text1.height*2,text2.height,text3.height,text4.height,text5.height,text6.height)
+////                                console.log("flick.h = ", flick.h)
+//                                flick.h = text1.height*2
+//                            }
+//                        }
+//                        MouseArea {
+//                            id: mouse
+//                            anchors.fill: parent
+//                            onClicked: list.currentIndex = model.index//model0.index()
+//                            onDoubleClicked: {
+//                                list.currentIndex = model.index
+//                                window.index = list.currentIndex
+//                                stackView.baza_id = model0.getId(list.currentIndex)
+//                                console.log("id= ", stackView.baza_id)
+//                                qmlSignal_baza_id()
+//                                    stackView.replace(openBO)
+//                                    tool_left.visible = false
+//                                    tool_left1.visible = true
+//                                }
+//                        }
+//                    }//item_table
+//                }//delegate
+//                Component {
+//                    id: highlightBar
+//                    Rectangle {
+//                        id: hl1
+//                        z: -1
+//                        anchors.left: parent.left
+//                        anchors.leftMargin: 5
+//                        anchors.right: parent.right
+//                        anchors.rightMargin: 5
+//                        //width: window.width-10
+//                        height: flick.h
+//                        color: "lightgrey"
+//                        border.color: "transparent"
+//                        radius: 10
+//                        x: list.currentItem.x
+//                        y: list.currentItem.y
+//                        //Behavior on y { SpringAnimation { spring: 100; damping: 1 } }
+
+//                        //NumberAnimation on x { from: 5; to: 10; duration: 500}
+//                    }
+//                }
+
+            }
         }//end rec1
         Rectangle {
             id: rec2
@@ -1047,8 +1647,6 @@ Item {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.bottom: parent.bottom
-            //color: "tomato"
-            //z: -100
             PathView {
                 id: path
                     anchors.fill: parent
@@ -1062,6 +1660,7 @@ Item {
                         Keys.onRightPressed: incrementCurrentIndex()
                     onMovementEnded: {
                         if(path.indexAt(path.width/2, path.height/2) === 0){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerPersonal.visible = false
@@ -1076,6 +1675,7 @@ Item {
                             chartKolAgr.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 1){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
@@ -1090,6 +1690,7 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 2){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
@@ -1104,6 +1705,7 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 3){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerHh.visible = false
@@ -1118,6 +1720,7 @@ Item {
                             but_personal.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 4){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerMes.visible = false
@@ -1132,6 +1735,7 @@ Item {
                             chartIzmerHh.visible = false
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 5){
+                            flick.visible = false
                             chartIzmerAgr.visible = false
                             rec_filter.tipmeh_visible = false
                             chartIzmerMes.visible = false
@@ -1146,8 +1750,24 @@ Item {
                             chartIzmerHh.visible = true
                         }
                         if(path.indexAt(path.width/2, path.height/2) === 6){
+                            flick.visible = false
                             chartIzmerAgr.visible = true
                             rec_filter.tipmeh_visible = true
+                            chartIzmerMes.visible = false
+                            chartKolAgr.visible = false
+                            chartIzmerDay.visible = false
+                            chartIzmerTime.visible = false
+                            chartIzmerPersonal.visible = false
+                            rec_filter.visible = true
+                            text_personal.visible = false
+                            combo_personal.visible = false
+                            but_personal.visible = false
+                            chartIzmerHh.visible = false
+                        }
+                        if(path.indexAt(path.width/2, path.height/2) === 7){
+                            flick.visible = true
+                            chartIzmerAgr.visible = false
+                            rec_filter.tipmeh_visible = false
                             chartIzmerMes.visible = false
                             chartKolAgr.visible = false
                             chartIzmerDay.visible = false
@@ -2011,4 +2631,5 @@ Item {
                 }
         }
     }
+}
 }

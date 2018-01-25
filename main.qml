@@ -204,7 +204,6 @@ ApplicationWindow {
                 text: model.title
                 highlighted: ListView.isCurrentItem
                 onClicked: {
-
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
                         stackView.replace(bo)
@@ -221,8 +220,6 @@ ApplicationWindow {
                         //qmlKolAgr()
                         stackView.replace(stat)
                     }
-
-
                     drawer.close()
                 }
             }

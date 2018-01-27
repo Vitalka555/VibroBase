@@ -1,4 +1,5 @@
 #include "stat.h"
+#include "database.h"
 
 Stat::Stat(QObject *parent) : QObject(parent)
 {
@@ -7,15 +8,22 @@ Stat::Stat(QObject *parent) : QObject(parent)
 void Stat::getdate()
 {
     QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery querydate1("SELECT min(Дата) FROM BazaIzmereni where Дата is not null");
     while (querydate1.next()) {
         date_begin =  querydate1.value(0).toString();
         //qDebug()<<"date_begin"<<date_begin;
     }
+
     QSqlQuery querydate2("SELECT max(Дата) FROM BazaIzmereni where Дата is not null");
     while (querydate2.next()) {
         date_end =  querydate2.value(0).toString();
         //qDebug()<<"date_end"<<date_end;
+    }
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
     }
     personal_select = "";
     filter_izmer->setProperty("date_begin", date_begin);
@@ -25,12 +33,18 @@ void Stat::getpersonal()
 {
     QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
     int i = 0;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery querypers("SELECT Фамилия FROM LAES ORDER BY Фамилия");
     while (querypers.next()) {
         personal.append(querypers.value(0).toString());
         i++;
     }
     razmer_personal = i;
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
     filter_izmer->setProperty("personal", personal);
     filter_izmer->setProperty("razmer", razmer_personal);
 }
@@ -39,12 +53,18 @@ void Stat::gettipmeh()
 {
     QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
     int i = 0;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery querytipmeh("SELECT Наименование FROM TipMehanizma ORDER BY Наименование");
     while (querytipmeh.next()) {
         tipmehanizmov.append(querytipmeh.value(0).toString());
         i++;
     }
     razmer_tipmeh = i;
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
     filter_izmer->setProperty("tipmeh", tipmehanizmov);
     filter_izmer->setProperty("razmer_tipmeh", razmer_tipmeh);
 }
@@ -53,12 +73,15 @@ void Stat::kolagr()
 {
     QObject* chartKolAgr = this->parent()->findChild<QObject*>("chartKolAgr");
     int razmer;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery query0("SELECT COUNT(TipMehanizma.id) FROM TipMehanizma");
     while (query0.next()) {
         razmer = query0.value(0).toInt();
     }
     QStringList list1;
     QStringList list2;
+
     QSqlQuery query("SELECT TipMehanizma.Наименование FROM TipMehanizma");
     int i = 0;
     while (query.next()) {
@@ -67,12 +90,14 @@ void Stat::kolagr()
     }
 int k;
 for(k = 0; k<i; k++){
+
     QSqlQuery query("SELECT COUNT(Baza.id) FROM Baza WHERE Baza.id_TipMehanizma = (SELECT TipMehanizma.id "
                     "FROM TipMehanizma WHERE TipMehanizma.Наименование = '" + list1.value(k) + "')");
     while (query.next()) {
         list2.append(query.value(0).toString());
     }
 }
+
 chartKolAgr->setProperty("array_nameagr", list1);
 chartKolAgr->setProperty("array_kolagr", list2);
 chartKolAgr->setProperty("razmer", razmer);
@@ -86,7 +111,7 @@ if(personal_select == ""){
 QObject* chartIzmerPersonal = this->parent()->findChild<QObject*>("chartIzmerPersonal");
 QStringList personal2;
 int kol_k;
-for(kol_k = 0; kol_k<razmer_personal; kol_k++){
+for(kol_k = 0; kol_k<razmer_personal; kol_k++){    
 QSqlQuery querypersonal_kol("SELECT COUNT(Дата) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
                             "' and Дата <='" + date_end + "' and BazaIzmereni.'ЛАЭС-2' LIKE '%" + personal[kol_k] + "%' ");
 while (querypersonal_kol.next()) {
@@ -99,6 +124,7 @@ chartIzmerPersonal->setProperty("array_kolpersonal", personal2);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerMes = this->parent()->findChild<QObject*>("chartIzmerMes");
 int razmer1;
+
 QSqlQuery query1("SELECT strftime('%m-%Y', Дата), COUNT(1) FROM BazaIzmereni where Дата is not null and Дата >='" + date_begin +
                 "' and Дата <='" + date_end + "' " + pers + " GROUP BY strftime('%Y-%m', Дата)");
 QStringList list3;
@@ -117,6 +143,7 @@ chartIzmerMes->setProperty("razmer", razmer1);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerDay = this->parent()->findChild<QObject*>("chartIzmerDay");
 int razmer2;
+
 QSqlQuery query2("select case cast (strftime('%w', Дата) as integer) when 0 then 'Вс' when 1 then 'Пн' when 2 then 'Вт' "
                  "when 3 then 'Ср' when 4 then 'Чт' when 5 then 'Пт' else 'Сб' end as servdayofweek, (CASE WHEN COUNT(1) > 0 THEN COUNT(1) ELSE 0 END) "
                  "from BazaIzmereni where Дата is not null and Дата >='" + date_begin +
@@ -137,121 +164,145 @@ chartIzmerDay->setProperty("razmer", razmer2);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerTime = this->parent()->findChild<QObject*>("chartIzmerTime");
 QStringList list7;
+
 QSqlQuery query3("select count(Время) from BazaIzmereni where Время like '%00:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query3.next()) {
     list7.append(query3.value(0).toString());
 }
+
 QSqlQuery query4("select count(Время) from BazaIzmereni where Время like '%01:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query4.next()) {
     list7.append(query4.value(0).toString());
 }
+
 QSqlQuery query5("select count(Время) from BazaIzmereni where Время like '%02:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query5.next()) {
     list7.append(query5.value(0).toString());
 }
+
 QSqlQuery query6("select count(Время) from BazaIzmereni where Время like '%03:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query6.next()) {
     list7.append(query6.value(0).toString());
 }
+
 QSqlQuery query7("select count(Время) from BazaIzmereni where Время like '%04:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query7.next()) {
     list7.append(query7.value(0).toString());
 }
+
 QSqlQuery query8("select count(Время) from BazaIzmereni where Время like '%05:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query8.next()) {
     list7.append(query8.value(0).toString());
 }
+
 QSqlQuery query9("select count(Время) from BazaIzmereni where Время like '%06:%' and Дата >='" + date_begin +
                  "' and Дата <='" + date_end + "' " + pers + "");
 while (query9.next()) {
     list7.append(query9.value(0).toString());
 }
+
 QSqlQuery query10("select count(Время) from BazaIzmereni where Время like '%07:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query10.next()) {
     list7.append(query10.value(0).toString());
 }
+
 QSqlQuery query11("select count(Время) from BazaIzmereni where Время like '%08:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query11.next()) {
     list7.append(query11.value(0).toString());
 }
+
 QSqlQuery query12("select count(Время) from BazaIzmereni where Время like '%09:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query12.next()) {
     list7.append(query12.value(0).toString());
 }
+
 QSqlQuery query13("select count(Время) from BazaIzmereni where Время like '%10:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query13.next()) {
     list7.append(query13.value(0).toString());
 }
+
 QSqlQuery query14("select count(Время) from BazaIzmereni where Время like '%11:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query14.next()) {
     list7.append(query14.value(0).toString());
 }
+
 QSqlQuery query15("select count(Время) from BazaIzmereni where Время like '%12:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query15.next()) {
     list7.append(query15.value(0).toString());
 }
+
 QSqlQuery query16("select count(Время) from BazaIzmereni where Время like '%13:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query16.next()) {
     list7.append(query16.value(0).toString());
 }
+
 QSqlQuery query17("select count(Время) from BazaIzmereni where Время like '%14:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query17.next()) {
     list7.append(query17.value(0).toString());
 }
+
 QSqlQuery query18("select count(Время) from BazaIzmereni where Время like '%15:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query18.next()) {
     list7.append(query18.value(0).toString());
 }
+
 QSqlQuery query19("select count(Время) from BazaIzmereni where Время like '%16:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query19.next()) {
     list7.append(query19.value(0).toString());
 }
+
 QSqlQuery query20("select count(Время) from BazaIzmereni where Время like '%17:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query20.next()) {
     list7.append(query20.value(0).toString());
 }
+
 QSqlQuery query21("select count(Время) from BazaIzmereni where Время like '%18:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query21.next()) {
     list7.append(query21.value(0).toString());
 }
+
 QSqlQuery query22("select count(Время) from BazaIzmereni where Время like '%19:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query22.next()) {
     list7.append(query22.value(0).toString());
 }
+
 QSqlQuery query23("select count(Время) from BazaIzmereni where Время like '%20:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query23.next()) {
     list7.append(query23.value(0).toString());
 }
+
 QSqlQuery query24("select count(Время) from BazaIzmereni where Время like '%21:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query24.next()) {
     list7.append(query24.value(0).toString());
 }
+
 QSqlQuery query25("select count(Время) from BazaIzmereni where Время like '%22:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query25.next()) {
     list7.append(query25.value(0).toString());
 }
+
 QSqlQuery query26("select count(Время) from BazaIzmereni where Время like '%23:%' and Дата >='" + date_begin +
                   "' and Дата <='" + date_end + "' " + pers + "");
 while (query26.next()) {
@@ -261,6 +312,7 @@ while (query26.next()) {
 chartIzmerTime->setProperty("array_koltime", list7);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 QObject* chartIzmerHh = this->parent()->findChild<QObject*>("chartIzmerHh");
+
 QSqlQuery querycount("select count(Дата) from BazaIzmereni where BazaIzmereni.id_Rezhim = 1 and BazaIzmereni.НормаЭлДв is not null and BazaIzmereni.НормаЭлДв < 12"
                      " and BazaIzmereni.id_TipIzmerenia <> 2 and "
                   "BazaIzmereni.id_TipIzmerenia <> 4 ORDER BY Дата, Время, id");
@@ -269,6 +321,7 @@ while (querycount.next()) {
     count = querycount.value(0).toInt();
 }
 //qDebug()<<"Количество измерений на х/х = "<<count;
+
 QSqlQuery querydatas("select Дата, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza), "
                      "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
                      "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0)) "
@@ -385,6 +438,7 @@ if(tipmeh_select == ""){
                     "(select TipMehanizma.id from TipMehanizma where TipMehanizma.Наименование = '" + tipmeh_select + "'))";
     qDebug()<<"filter_tipmeh = "<<filter_tipmeh;
 }
+
 QSqlQuery querycountizm("select count(Дата) from BazaIzmereni where BazaIzmereni.id_Rezhim <> 1 and BazaIzmereni.НормаЭлДв is not null "
                         "and BazaIzmereni.Норма is not null and BazaIzmereni.НормаЭлДв <> 57"
                      " and BazaIzmereni.id_TipIzmerenia <> 2 and "
@@ -394,6 +448,7 @@ while (querycountizm.next()) {
     countizm = querycountizm.value(0).toInt();
 }
 qDebug()<<"Количество измерений в сборе = "<<countizm;
+
 QSqlQuery queryagr("select Дата, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza), "
                      "(SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
                      "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
@@ -425,6 +480,10 @@ while (queryagr.next()) {
     agr_kks.append(queryagr.value(1).toString());
     agr_value.append(queryagr.value(2).toString());
     agr_norm.append(queryagr.value(3).toString());
+}
+db.commit();
+if(!db.commit()){
+db.rollback();
 }
 qDebug()<<"Массив дат в сборе = "<<agr_date;
 qDebug()<<"Массив kks в сборе = "<<agr_kks;
@@ -561,6 +620,8 @@ void ListModelStatIzmerAgr::updateModel()
 {
     //QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
     // Обновление производится SQL-запросом к базе данных
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     this->setQuery("select Baza.id, Baza.KKS, (select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id) as total, "
                    "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1) as hh, "
                    "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2) as nom, "
@@ -571,6 +632,14 @@ void ListModelStatIzmerAgr::updateModel()
                    "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_TipIzmerenia = 4) as ekspldop "
                    "from Baza where total <> 0 order by 3 desc");
     //filter_izmer->setProperty("maxkol", this->);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных

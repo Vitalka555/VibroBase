@@ -98,10 +98,24 @@ void ListModel::updateModel()
     if(id_tipmeh == ""){
         tipmeh_filter = "";
     }
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT Baza.id, " baza_kks ", (SELECT " ceh_name " FROM " ceh " where Ceh.id=Baza.id_Ceh ), "
                    baza_zd ", " baza_pom ", " baza_opis " FROM " baza " WHERE Baza.KKS LIKE '%"+kks+"%' "
                    " AND COALESCE(Baza.Здание,'') LIKE '%"+zd+"%'" + ceh_filter + tipmeh_filter + " ORDER BY " baza_kks);
+//    QSqlQuery querymodel;
+//    querymodel.exec("SELECT Baza.id, " baza_kks ", (SELECT " ceh_name " FROM " ceh " where Ceh.id=Baza.id_Ceh ), "
+//                    baza_zd ", " baza_pom ", " baza_opis " FROM " baza " WHERE Baza.KKS LIKE '%"+kks+"%' "
+//                    "AND COALESCE(Baza.Здание,'') LIKE '%"+zd+"%'" + ceh_filter + tipmeh_filter + " ORDER BY " baza_kks);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -151,11 +165,30 @@ void ListModelKKS::updateModel()
     QString combo_kks=(stack->property("combo_kks")).toString();
     qDebug()<<"combo kks = "<<combo_kks;
     if(combo_kks == ""){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
         this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza ORDER BY Baza.KKS ");
+        while(this->canFetchMore()){
+            this->fetchMore();
+        }
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
     } else {
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
         this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.KKS LIKE '%"+combo_kks+"%' ORDER BY Baza.KKS ");
+        while(this->canFetchMore()){
+            this->fetchMore();
+        }
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
     }
 
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
 }
 
 // Получение id из строки в модели представления данных
@@ -202,8 +235,18 @@ QHash<int, QByteArray> ListModelCeh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelCeh::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT Ceh.id, " ceh_name " FROM " ceh " ORDER BY " ceh_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -250,8 +293,18 @@ QHash<int, QByteArray> ListModelProgram::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelProgram::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT BazaProgram.id, " bazaprogram_nomer ", BazaProgram.'Название_программы' FROM " bazaprogram " ORDER BY " bazaprogram_nomer );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -297,8 +350,18 @@ QHash<int, QByteArray> ListModelFio::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelFio::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT FIO.id, " fio_fio " FROM " fio " ORDER BY " fio_fio );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -344,8 +407,18 @@ QHash<int, QByteArray> ListModelProizved::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelProizved::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT ProizvodElPriv.id, " proizved_name " FROM " proizved " ORDER BY " proizved_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -391,8 +464,18 @@ QHash<int, QByteArray> ListModelTippermeh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelTippermeh::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT TipPeredatochnogoMehanizma.id, " tippermeh_name " FROM " tippermeh);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -438,8 +521,18 @@ QHash<int, QByteArray> ListModelTipper::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelTipper::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT TipPeredachi.id, " tipper_name " FROM " tipper);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -485,8 +578,18 @@ QHash<int, QByteArray> ListModelTipmeh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelTipmeh::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT TipMehanizma.id, " tipmeh_name " FROM " tipmeh " ORDER BY " tipmeh_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -532,8 +635,18 @@ QHash<int, QByteArray> ListModelPolozhenie::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelPolozhenie::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT Polozhenie.id, " polozhenie_name " FROM " polozhenie " ORDER BY " polozhenie_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -579,8 +692,18 @@ QHash<int, QByteArray> ListModelTipopory::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelTipopory::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT TipOpory.id, " tipopory_name " FROM " tipopory " ORDER BY " tipopory_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -626,8 +749,18 @@ QHash<int, QByteArray> ListModelProizvmeh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelProizvmeh::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT ProizvodIspMeh.id, " proizvmeh_name " FROM " proizvmeh " ORDER BY " proizvmeh_name );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -673,8 +806,18 @@ QHash<int, QByteArray> ListModelNormhh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormhh::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT NormHh.id, " normhh_zn " FROM " normhh " ORDER BY " normhh_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -720,8 +863,18 @@ QHash<int, QByteArray> ListModelNormnomed::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormnomed::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT NormNomED.id, " normnomed_zn " FROM " normnomed " ORDER BY " normnomed_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -767,8 +920,18 @@ QHash<int, QByteArray> ListModelNormnom::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormnom::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT NormNom.id, " normnom_zn " FROM " normnom " ORDER BY " normnom_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -814,8 +977,18 @@ QHash<int, QByteArray> ListModelOgrnomed::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOgrnomed::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OgrNomED.id, " ogrnomed_zn " FROM " ogrnomed " ORDER BY " ogrnomed_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -861,8 +1034,18 @@ QHash<int, QByteArray> ListModelOgrnom::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOgrnom::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OgrNom.id, " ogrnom_zn " FROM " ogrnom " ORDER BY " ogrnom_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -908,8 +1091,18 @@ QHash<int, QByteArray> ListModelOtkaznomed::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOtkaznomed::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OtkazNomED.id, " otkaznomed_zn " FROM " otkaznomed " ORDER BY " otkaznomed_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -955,8 +1148,18 @@ QHash<int, QByteArray> ListModelOtkaznom::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOtkaznom::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OtkazNom.id, " otkaznom_zn " FROM " otkaznom " ORDER BY " otkaznom_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1002,8 +1205,18 @@ QHash<int, QByteArray> ListModelNormrded::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormrded::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT NormRdED.id, " normrded_zn " FROM " normrded " ORDER BY " normrded_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1049,8 +1262,18 @@ QHash<int, QByteArray> ListModelNormrd::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormrd::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT NormRd.id, " normrd_zn " FROM " normrd " ORDER BY " normrd_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1096,8 +1319,18 @@ QHash<int, QByteArray> ListModelOgrrded::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOgrrded::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OgrRdED.id, " ogrrded_zn " FROM " ogrrded " ORDER BY " ogrrded_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1143,8 +1376,18 @@ QHash<int, QByteArray> ListModelOgrrd::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOgrrd::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OgrRd.id, " ogrrd_zn " FROM " ogrrd " ORDER BY " ogrrd_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1190,8 +1433,18 @@ QHash<int, QByteArray> ListModelOtkazrded::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOtkazrded::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OtkazRdED.id, " otkazrded_zn " FROM " otkazrded " ORDER BY " otkazrded_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1237,8 +1490,18 @@ QHash<int, QByteArray> ListModelOtkazrd::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelOtkazrd::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT OtkazRd.id, " otkazrd_zn " FROM " otkazrd " ORDER BY " otkazrd_zn );
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1288,6 +1551,8 @@ void ListModelOpenBO::updateModel()
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     //qDebug() << stack->property("baza_id");
     QString kks_id=(stack->property("baza_id")).toString();
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     //this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.id = "+kks_id+" ");
     this->setQuery(" SELECT Baza.id, Baza.KKS, (SELECT Ceh.Наименование FROM Ceh WHERE Ceh.id = Baza.id_Ceh), Baza.Здание, Baza.Помещение, Baza.'Описание системы',"
@@ -1317,6 +1582,14 @@ void ListModelOpenBO::updateModel()
                    "(SELECT OtkazRd.Значение FROM OtkazRd WHERE OtkazRd.id = Baza.id_OtkazRd),"
                    "Baza.TotkazED, Baza.TotkazRed, Baza.TotkazIspMeh, Baza.'Документы на нормы', "
                    "Baza.'Параметры центровки и прилегания' FROM Baza WHERE Baza.id = " + kks_id);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 //void ListModelOpenBO::updateModel2()
@@ -1383,8 +1656,11 @@ void ListModel1V::updateModel()
         rezhim_filter = "";
     }
     qDebug() << rezhim_id;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery query1V;
     QString select1V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1В' is not null" + rezhim_filter);
+
     if (!query1V.exec(select1V)){
         qDebug() << "ошибка: " << query1V.lastError().text();
     }
@@ -1396,7 +1672,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query1P;
     QString select1P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1П' is not null" + rezhim_filter);
-        if (!query1P.exec(select1P))
+
+    if (!query1P.exec(select1P))
         qDebug() << "error: " << query1P.lastError().text();
             query1P.next();
     if(query1P.value(0)==0){
@@ -1406,7 +1683,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query1O;
     QString select1O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'1О' is not null" + rezhim_filter);
-        if (!query1O.exec(select1O))
+
+    if (!query1O.exec(select1O))
         qDebug() << "error: " << query1O.lastError().text();
             query1O.next();
     if(query1O.value(0)==0){
@@ -1416,7 +1694,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query2V;
     QString select2V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2В' is not null" + rezhim_filter);
-        if (!query2V.exec(select2V))
+
+    if (!query2V.exec(select2V))
         qDebug() << "error: " << query2V.lastError().text();
             query2V.next();
     if(query2V.value(0)==0){
@@ -1426,7 +1705,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query2P;
     QString select2P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2П' is not null" + rezhim_filter);
-        if (!query2P.exec(select2P))
+
+    if (!query2P.exec(select2P))
         qDebug() << "error: " << query2P.lastError().text();
             query2P.next();
     if(query2P.value(0)==0){
@@ -1436,7 +1716,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query2O;
     QString select2O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'2О' is not null" + rezhim_filter);
-        if (!query2O.exec(select2O))
+
+    if (!query2O.exec(select2O))
         qDebug() << "error: " << query2O.lastError().text();
             query2O.next();
     if(query2O.value(0)==0){
@@ -1446,7 +1727,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query3V;
     QString select3V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3В' is not null" + rezhim_filter);
-        if (!query3V.exec(select3V))
+
+    if (!query3V.exec(select3V))
         qDebug() << "error: " << query3V.lastError().text();
             query3V.next();
     if(query3V.value(0)==0){
@@ -1456,7 +1738,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query3P;
     QString select3P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3П' is not null" + rezhim_filter);
-        if (!query3P.exec(select3P))
+
+    if (!query3P.exec(select3P))
         qDebug() << "error: " << query3P.lastError().text();
             query3P.next();
     if(query3P.value(0)==0){
@@ -1466,7 +1749,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query3O;
     QString select3O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'3О' is not null" + rezhim_filter);
-        if (!query3O.exec(select3O))
+
+    if (!query3O.exec(select3O))
         qDebug() << "error: " << query3O.lastError().text();
             query3O.next();
     if(query3O.value(0)==0){
@@ -1476,7 +1760,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query4V;
     QString select4V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4В' is not null" + rezhim_filter);
-        if (!query4V.exec(select4V))
+
+    if (!query4V.exec(select4V))
         qDebug() << "error: " << query4V.lastError().text();
             query4V.next();
     if(query4V.value(0)==0){
@@ -1486,7 +1771,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query4P;
     QString select4P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4П' is not null" + rezhim_filter);
-        if (!query4P.exec(select4P))
+
+    if (!query4P.exec(select4P))
         qDebug() << "error: " << query4P.lastError().text();
             query4P.next();
     if(query4P.value(0)==0){
@@ -1496,7 +1782,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query4O;
     QString select4O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'4О' is not null" + rezhim_filter);
-        if (!query4O.exec(select4O))
+
+    if (!query4O.exec(select4O))
         qDebug() << "error: " << query4O.lastError().text();
             query4O.next();
     if(query4O.value(0)==0){
@@ -1506,7 +1793,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query5V;
     QString select5V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5В' is not null" + rezhim_filter);
-        if (!query5V.exec(select5V))
+
+    if (!query5V.exec(select5V))
         qDebug() << "error: " << query5V.lastError().text();
             query5V.next();
     if(query5V.value(0)==0){
@@ -1516,7 +1804,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query5P;
     QString select5P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5П' is not null" + rezhim_filter);
-        if (!query5P.exec(select5P))
+
+    if (!query5P.exec(select5P))
         qDebug() << "error: " << query5P.lastError().text();
             query5P.next();
     if(query5P.value(0)==0){
@@ -1526,7 +1815,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query5O;
     QString select5O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'5О' is not null" + rezhim_filter);
-        if (!query5O.exec(select5O))
+
+    if (!query5O.exec(select5O))
         qDebug() << "error: " << query5O.lastError().text();
             query5O.next();
     if(query5O.value(0)==0){
@@ -1536,7 +1826,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query6V;
     QString select6V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6В' is not null" + rezhim_filter);
-        if (!query6V.exec(select6V))
+
+    if (!query6V.exec(select6V))
         qDebug() << "error: " << query6V.lastError().text();
             query6V.next();
     if(query6V.value(0)==0){
@@ -1546,7 +1837,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query6P;
     QString select6P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6П' is not null" + rezhim_filter);
-        if (!query6P.exec(select6P))
+
+    if (!query6P.exec(select6P))
         qDebug() << "error: " << query6P.lastError().text();
             query6P.next();
     if(query6P.value(0)==0){
@@ -1556,7 +1848,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query6O;
     QString select6O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'6О' is not null" + rezhim_filter);
-        if (!query6O.exec(select6O))
+
+    if (!query6O.exec(select6O))
         qDebug() << "error: " << query6O.lastError().text();
             query6O.next();
     if(query6O.value(0)==0){
@@ -1566,7 +1859,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query7V;
     QString select7V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7В' is not null" + rezhim_filter);
-        if (!query7V.exec(select7V))
+
+    if (!query7V.exec(select7V))
         qDebug() << "error: " << query7V.lastError().text();
             query7V.next();
     if(query7V.value(0)==0){
@@ -1576,7 +1870,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query7P;
     QString select7P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7П' is not null" + rezhim_filter);
-        if (!query7P.exec(select7P))
+
+    if (!query7P.exec(select7P))
         qDebug() << "error: " << query7P.lastError().text();
             query7P.next();
     if(query7P.value(0)==0){
@@ -1586,7 +1881,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query7O;
     QString select7O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'7О' is not null" + rezhim_filter);
-        if (!query7O.exec(select7O))
+
+    if (!query7O.exec(select7O))
         qDebug() << "error: " << query7O.lastError().text();
             query7O.next();
     if(query7O.value(0)==0){
@@ -1596,7 +1892,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query8V;
     QString select8V = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8В' is not null" + rezhim_filter);
-        if (!query8V.exec(select8V))
+
+    if (!query8V.exec(select8V))
         qDebug() << "error: " << query8V.lastError().text();
             query8V.next();
     if(query8V.value(0)==0){
@@ -1606,7 +1903,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query8P;
     QString select8P = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8П' is not null" + rezhim_filter);
-        if (!query8P.exec(select8P))
+
+    if (!query8P.exec(select8P))
         qDebug() << "error: " << query8P.lastError().text();
             query8P.next();
     if(query8P.value(0)==0){
@@ -1616,7 +1914,8 @@ void ListModel1V::updateModel()
     };
     QSqlQuery query8O;
     QString select8O = QString ("SELECT COUNT(BazaIzmereni.id) FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + " and BazaIzmereni.'8О' is not null" + rezhim_filter);
-        if (!query8O.exec(select8O))
+
+    if (!query8O.exec(select8O))
         qDebug() << "error: " << query8O.lastError().text();
             query8O.next();
     if(query8O.value(0)==0){
@@ -1624,21 +1923,29 @@ void ListModel1V::updateModel()
     } else {
         select8O = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8О', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8О', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
-    QSqlQuery qry;
-    qry.prepare(select1V + select1P + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
-                select4V + select4P + select4O + select5V + select5P + select5O + select6V + select6P +
-                select6O + select7V + select7P + select7O + select8V + select8P + select8O + " order by 5 asc, 6 asc");
-    qry.exec();
+//    QSqlQuery qry;
+//    QSqlDatabase db = QSqlDatabase::database();
+//    db.transaction();
+//    qry.prepare(select1V + select1P + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
+//                select4V + select4P + select4O + select5V + select5P + select5O + select6V + select6P +
+//                select6O + select7V + select7P + select7O + select8V + select8P + select8O + " order by 5 asc, 6 asc");
+//    qry.exec();
     //this->qry();
 
-    qDebug() << "Number of Rows: " << qry.size();
+    //qDebug() << "Number of Rows: " << qry.size();
     //qDebug() << "Number of columns: " << qry.record().count();
     //Обновление производится SQL-запросом к базе данных
+
     this->setQuery(select1V + select1P + select1O + select2V + select2P + select2O + select3V + select3P + select3O +
                    select4V + select4P + select4O + select5V + select5P + select5O + select6V + select6P +
                    select6O + select7V + select7P + select7O + select8V + select8P + select8O + " order by 5 asc, 6 asc");
-    if(this->canFetchMore()){
+    while(this->canFetchMore()){
         this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
     }
 }
 
@@ -1686,8 +1993,18 @@ QHash<int, QByteArray> ListModelRezhim::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelRezhim::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT Rezhim.id, Rezhim.Наименование FROM Rezhim ORDER BY Rezhim.id");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -1718,6 +2035,8 @@ void ListModelMaxLevel::updateModel()
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     QSqlQuery query1v(" SELECT MAX(BazaIzmereni.'1В') FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter);
     QSqlQuery query1p(" SELECT MAX(BazaIzmereni.'1П') FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter);
@@ -1838,6 +2157,10 @@ void ListModelMaxLevel::updateModel()
         max = query8o.value(0).toDouble();
     }
     QString maxlevel = QString::number(max);
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 
     stack->setProperty("maxlevel", maxlevel);
 
@@ -1852,7 +2175,8 @@ void ListModelMaxLevel::updateModel2()
     if(rezhim_id == ""){
         rezhim_filter = "";
     }
-
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QSqlQuery query1v0(" SELECT BazaIzmereni.'1В' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter + " AND BazaIzmereni.id = " + bazaizm_id);
     QSqlQuery query1p0(" SELECT BazaIzmereni.'1П' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter + " AND BazaIzmereni.id = " + bazaizm_id);
     QSqlQuery query1o0(" SELECT BazaIzmereni.'1О' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter + " AND BazaIzmereni.id = " + bazaizm_id);
@@ -2336,6 +2660,10 @@ void ListModelMaxLevel::updateModel2()
     qDebug() << "max0 = " << max0;
     qDebug() << "col_max = " << col_max;
     QString max_col_izm = QString::number(col_max);
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
     qDebug() << "max_col_izm = " << max_col_izm;
 
     stack->setProperty("maxcolizm", max_col_izm);
@@ -2526,6 +2854,8 @@ void ListModelIzmer::updateModel()
         tipmeh_filter_BI = "";
     }
     if(neispravnoe == "true"){ //если включена опция "Не испраны", то переопределяем запрос
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
         this->setQuery("select * from (select bi_id, date_time, max_value, sost, v1, p1, o1, v2, p2, o2, v3, p3, o3, v4, p4, o4, v5, p5, o5, "
                        "v6, p6, o6, v7, p7, o7, v8, p8, o8, t1, t2, t3, t4, t5, t6, t7, t8, rezhim, tip_izmer, norm_ed, norm, q, p, laes2, ate, "
                        "prim, kks, bi_id_baza, time_, date_, biidrezhim from (select BazaIzmereni.id as bi_id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0) as date_time, "
@@ -2669,7 +2999,17 @@ void ListModelIzmer::updateModel()
                        "IFNULL(base_rd.p7,0), IFNULL(base_rd.o7,0), IFNULL(base_rd.v8,0), IFNULL(base_rd.p8,0), IFNULL(base_rd.o8,0))) > base_rd.norm or "
                        "(SELECT MAX(IFNULL(base_rd.v1,0), IFNULL(base_rd.p1,0), IFNULL(base_rd.o1,0), IFNULL(base_rd.v2,0), IFNULL(base_rd.p2,0), "
                        "IFNULL(base_rd.o2,0))) > base_rd.norm_ed) order by base_rd.date_ DESC, base_rd.time_ DESC) order by 49 DESC, 48 DESC");
+        while(this->canFetchMore()){
+            this->fetchMore();
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
     } else {
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), "
          "(SELECT MAX(IFNULL(BazaIzmereni.'1В', 0), IFNULL(BazaIzmereni.'1П', 0), IFNULL(BazaIzmereni.'1О', 0),"
@@ -2711,6 +3051,14 @@ void ListModelIzmer::updateModel()
                    "BazaIzmereni.'Время'"
          " FROM BazaIzmereni WHERE BazaIzmereni.id LIKE '%%' " + kks_filter + rezhim_filter + bazaizm_id_filter + kks_filter_BI + tipmeh_filter_BI +
          " ORDER BY BazaIzmereni.'Дата' DESC, BazaIzmereni.'Время' DESC");
+        while(this->canFetchMore()){
+            this->fetchMore();
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
     }
 }
 
@@ -2758,8 +3106,18 @@ QHash<int, QByteArray> ListModelTipIzmer::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelTipIzmer::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT TipIzmerenia.id, TipIzmerenia.Наименование FROM TipIzmerenia ORDER BY TipIzmerenia.id");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -2805,6 +3163,8 @@ QHash<int, QByteArray> ListModelNormCreatBI::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelNormCreatBI::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString idbaza=(stack->property("baza_id_for_norm_creatBI")).toString();
     // Обновление производится SQL-запросом к базе данных
@@ -2813,6 +3173,14 @@ void ListModelNormCreatBI::updateModel()
                    " (SELECT NormNom.Значение FROM NormNom WHERE NormNom.id = Baza.id_NormNom),"
                    " (SELECT NormRdED.Значение FROM NormRdED WHERE NormRdED.id = Baza.id_NormRdED),"
                    " (SELECT NormRd.Значение FROM NormRd WHERE NormRd.id = Baza.id_NormRd) FROM Baza WHERE Baza.id = " + idbaza);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
     qDebug() << "id базы в c++" << idbaza;
 }
 
@@ -2859,8 +3227,18 @@ QHash<int, QByteArray> ListModelLAES::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelLAES::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT LAES.id, LAES.Фамилия FROM LAES ORDER BY LAES.Фамилия");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -2903,8 +3281,18 @@ QHash<int, QByteArray> ListModelATE::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelATE::updateModel()
 {
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery(" SELECT ATE.id, ATE.Фамилия FROM ATE ORDER BY ATE.Фамилия");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных
@@ -2952,7 +3340,8 @@ void ListModelIzmerOpenBI::updateModel()
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString bazaizm_id=(stack->property("bazaizm_id")).toString();
     QString bazaizm_id_filter = " WHERE BazaIzmereni.id = " + bazaizm_id;
-
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BazaIzmereni.id, (SELECT Baza.KKS FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza ), "
                    "strftime('%d-%m-%Y', Дата), IFNULL(BazaIzmereni.'Время', 0), "
@@ -2971,6 +3360,14 @@ void ListModelIzmerOpenBI::updateModel()
                    "BazaIzmereni.'T5', BazaIzmereni.'T6', BazaIzmereni.'T7', BazaIzmereni.'T8', "
                    "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания, BazaIzmereni.id_Baza "
          " FROM BazaIzmereni " + bazaizm_id_filter);
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
 }
 
 // Получение id из строки в модели представления данных

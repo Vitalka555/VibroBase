@@ -184,6 +184,8 @@ void DataBase::closeDataBase()
  * */
 bool DataBase::insertIntoTable0(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
+   db.transaction();
    QSqlQuery query;
    query.prepare("INSERT INTO " baza " (KKS) "
                  "VALUES (:baza_kks)");
@@ -195,7 +197,11 @@ bool DataBase::insertIntoTable0(const QVariantList &data)
    } else {
        return true;
    }
-   return false;
+   query.clear();
+   if(!db.commit()){
+   db.rollback();
+   }
+   return false;   
 }
 
 bool DataBase::insertIntoTable0(const QString &bazakks){
@@ -209,6 +215,8 @@ bool DataBase::insertIntoTable0(const QString &bazakks){
 
 bool DataBase::insertIntoTable(const QVariantList &data)
 {
+//    QSqlDatabase db = QSqlDatabase::database();
+//    db.transaction();
     /* Запрос SQL формируется из QVariantList,
      * в который передаются данные для вставки в таблицу.
      * */
@@ -292,8 +300,16 @@ bool DataBase::insertIntoTable(const QVariantList &data)
         qDebug() << querys.lastError().text();
         return false;
     } else {
+//        QSqlDatabase::database().commit();
+//        querys.clear();
+//        qDebug() << "db.commit() = "<<db.commit();
+//        if(!db.commit()){
+//        db.rollback();
+//        }
         return true;
     }
+
+
     return false;
 }
 
@@ -375,6 +391,7 @@ bool DataBase::insertIntoTable(const QString &Bazakks, const QString &Cehid, con
 
 bool DataBase::editTableBaza(const QVariantList &data)
 {
+    db.transaction();
     /* Запрос SQL формируется из QVariantList,
      * в который передаются данные для вставки в таблицу.
      * */
@@ -454,6 +471,11 @@ bool DataBase::editTableBaza(const QVariantList &data)
         return false;
     } else {
         return true;
+    }
+
+    querys.clear();
+    if(!db.commit()){
+    db.rollback();
     }
     return false;
 }
@@ -536,6 +558,7 @@ bool DataBase::editTableBaza(const QString &Bazakks, const QString &Cehid, const
 
 bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO BazaIzmereni (id_Baza, Дата, Время, id_Rezhim, id_TipIzmerenia, НормаЭлДв, Норма, 'ЛАЭС-2', АТЭ, "
                 "'1В', '1П', '1О', '2В', '2П', '2О', '3В', '3П', '3О', '4В', '4П', '4О', '5В', '5П', '5О', "
@@ -595,6 +618,11 @@ bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -660,6 +688,7 @@ bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date
 
 bool DataBase::editTableBazaIzmereni(const QVariantList &data)
 {
+    db.transaction();
     qDebug() << "data[44].toString()"<< data[44].toString();
    QSqlQuery quer;
    quer.prepare("update BazaIzmereni set id_Baza = :idbaza, Дата = :date, Время = :time, id_Rezhim = :idrezhim, id_TipIzmerenia = :idtipizmer, "
@@ -723,6 +752,11 @@ bool DataBase::editTableBazaIzmereni(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -789,6 +823,7 @@ bool DataBase::editTableBazaIzmereni(const QString &idbaza, const QString &date,
 
 bool DataBase::insertIntoCeh(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO Ceh (Наименование) "
                  "VALUES (:cehname)");
@@ -802,6 +837,11 @@ qDebug()<<"data[0].toString()"<<data[0].toString();
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -817,6 +857,7 @@ bool DataBase::insertIntoCeh(const QString &cehname){
 
 bool DataBase::insertIntoTipMehanizma(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipMehanizma (Наименование) "
                  "VALUES (:tipmehname)");
@@ -827,6 +868,11 @@ bool DataBase::insertIntoTipMehanizma(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -842,6 +888,7 @@ bool DataBase::insertIntoTipMehanizma(const QString &tipmehname){
 
 bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipPeredatochnogoMehanizma (Наименование) "
                  "VALUES (:tippermehname)");
@@ -852,6 +899,11 @@ bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -867,6 +919,7 @@ bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QString &tippermehname
 
 bool DataBase::insertIntoTipPeredachi(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipPeredachi (Наименование) "
                  "VALUES (:tippername)");
@@ -877,6 +930,11 @@ bool DataBase::insertIntoTipPeredachi(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -892,6 +950,7 @@ bool DataBase::insertIntoTipPeredachi(const QString &tippername){
 
 bool DataBase::insertIntoBazaProgram(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO BazaProgram (№КАТЭ, Название_программы) "
                  "VALUES (:programmnumber, :programmname)");
@@ -903,6 +962,11 @@ bool DataBase::insertIntoBazaProgram(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -919,6 +983,7 @@ bool DataBase::insertIntoBazaProgram(const QString &programmnumber, const QStrin
 
 bool DataBase::insertIntoProizvodElPriv(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ProizvodElPriv (Наименование) "
                  "VALUES (:proizvedname)");
@@ -929,6 +994,11 @@ bool DataBase::insertIntoProizvodElPriv(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -944,6 +1014,7 @@ bool DataBase::insertIntoProizvodElPriv(const QString &proizvedname){
 
 bool DataBase::insertIntoProizvodIspMeh(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ProizvodIspMeh (Наименование) "
                  "VALUES (:proizvname)");
@@ -954,6 +1025,11 @@ bool DataBase::insertIntoProizvodIspMeh(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -969,6 +1045,7 @@ bool DataBase::insertIntoProizvodIspMeh(const QString &proizvname){
 
 bool DataBase::insertIntoLAES(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO LAES (Фамилия) "
                  "VALUES (:laesfam)");
@@ -979,6 +1056,11 @@ bool DataBase::insertIntoLAES(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -994,6 +1076,7 @@ bool DataBase::insertIntoLAES(const QString &laesfam){
 
 bool DataBase::insertIntoATE(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ATE (Фамилия) "
                  "VALUES (:atefam)");
@@ -1004,6 +1087,11 @@ bool DataBase::insertIntoATE(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1019,6 +1107,7 @@ bool DataBase::insertIntoATE(const QString &atefam){
 
 bool DataBase::insertIntoFIO(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO FIO (ФИО) "
                  "VALUES (:fiofio)");
@@ -1029,6 +1118,11 @@ bool DataBase::insertIntoFIO(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1044,6 +1138,7 @@ bool DataBase::insertIntoFIO(const QString &fiofio){
 
 bool DataBase::insertIntoNormHh(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormHh (Значение) "
                  "VALUES (:norm_hh)");
@@ -1054,6 +1149,11 @@ bool DataBase::insertIntoNormHh(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1069,6 +1169,7 @@ bool DataBase::insertIntoNormHh(const QString &norm_hh){
 
 bool DataBase::insertIntoNormNomED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormNomED (Значение) "
                  "VALUES (:norm_nomed)");
@@ -1079,6 +1180,11 @@ bool DataBase::insertIntoNormNomED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1094,6 +1200,7 @@ bool DataBase::insertIntoNormNomED(const QString &norm_nomed){
 
 bool DataBase::insertIntoNormNom(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormNom (Значение) "
                  "VALUES (:norm_nom)");
@@ -1104,6 +1211,11 @@ bool DataBase::insertIntoNormNom(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1119,6 +1231,7 @@ bool DataBase::insertIntoNormNom(const QString &norm_nom){
 
 bool DataBase::insertIntoNormRdED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormRdED (Значение) "
                  "VALUES (:norm_rded)");
@@ -1129,6 +1242,11 @@ bool DataBase::insertIntoNormRdED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1144,6 +1262,7 @@ bool DataBase::insertIntoNormRdED(const QString &norm_rded){
 
 bool DataBase::insertIntoNormRd(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormRd (Значение) "
                  "VALUES (:norm_rd)");
@@ -1154,6 +1273,11 @@ bool DataBase::insertIntoNormRd(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1169,6 +1293,7 @@ bool DataBase::insertIntoNormRd(const QString &norm_rd){
 
 bool DataBase::insertIntoOgrNomED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrNomED (Значение) "
                  "VALUES (:ogr_nomed)");
@@ -1179,6 +1304,11 @@ bool DataBase::insertIntoOgrNomED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1194,6 +1324,7 @@ bool DataBase::insertIntoOgrNomED(const QString &ogr_nomed){
 
 bool DataBase::insertIntoOgrNom(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrNom (Значение) "
                  "VALUES (:ogr_nom)");
@@ -1204,6 +1335,11 @@ bool DataBase::insertIntoOgrNom(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1219,6 +1355,7 @@ bool DataBase::insertIntoOgrNom(const QString &ogr_nom){
 
 bool DataBase::insertIntoOgrRdED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrRdED (Значение) "
                  "VALUES (:ogr_rded)");
@@ -1229,6 +1366,11 @@ bool DataBase::insertIntoOgrRdED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1244,6 +1386,7 @@ bool DataBase::insertIntoOgrRdED(const QString &ogr_rded){
 
 bool DataBase::insertIntoOgrRd(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrRd (Значение) "
                  "VALUES (:ogr_rd)");
@@ -1254,6 +1397,11 @@ bool DataBase::insertIntoOgrRd(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1269,6 +1417,7 @@ bool DataBase::insertIntoOgrRd(const QString &ogr_rd){
 
 bool DataBase::insertIntoOtkazNomED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazNomED (Значение) "
                  "VALUES (:otkaz_nomed)");
@@ -1279,6 +1428,11 @@ bool DataBase::insertIntoOtkazNomED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1294,6 +1448,7 @@ bool DataBase::insertIntoOtkazNomED(const QString &otkaz_nomed){
 
 bool DataBase::insertIntoOtkazNom(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazNom (Значение) "
                  "VALUES (:otkaz_nom)");
@@ -1304,6 +1459,11 @@ bool DataBase::insertIntoOtkazNom(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1319,6 +1479,7 @@ bool DataBase::insertIntoOtkazNom(const QString &otkaz_nom){
 
 bool DataBase::insertIntoOtkazRdED(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazRdED (Значение) "
                  "VALUES (:otkaz_rded)");
@@ -1329,6 +1490,11 @@ bool DataBase::insertIntoOtkazRdED(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1344,6 +1510,7 @@ bool DataBase::insertIntoOtkazRdED(const QString &otkaz_rded){
 
 bool DataBase::insertIntoOtkazRd(const QVariantList &data)
 {
+    db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazRd (Значение) "
                  "VALUES (:otkaz_rd)");
@@ -1354,6 +1521,11 @@ bool DataBase::insertIntoOtkazRd(const QVariantList &data)
        return false;
    } else {
        return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
    }
    return false;
 }
@@ -1371,6 +1543,7 @@ bool DataBase::insertIntoOtkazRd(const QString &otkaz_rd){
  * */
 bool DataBase::removeRecord(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1386,6 +1559,11 @@ bool DataBase::removeRecord(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1393,6 +1571,7 @@ bool DataBase::removeRecord(const int id)
  * */
 bool DataBase::removeRecordBI(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1408,6 +1587,11 @@ bool DataBase::removeRecordBI(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1415,6 +1599,7 @@ bool DataBase::removeRecordBI(const int id)
  * */
 bool DataBase::removeRecordCeh(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1430,6 +1615,11 @@ bool DataBase::removeRecordCeh(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1437,6 +1627,7 @@ bool DataBase::removeRecordCeh(const int id)
  * */
 bool DataBase::removeRecordTipMehanizma(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1452,6 +1643,11 @@ bool DataBase::removeRecordTipMehanizma(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1459,6 +1655,7 @@ bool DataBase::removeRecordTipMehanizma(const int id)
  * */
 bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1474,6 +1671,11 @@ bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1481,6 +1683,7 @@ bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
  * */
 bool DataBase::removeRecordTipPeredachi(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1496,6 +1699,11 @@ bool DataBase::removeRecordTipPeredachi(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1503,6 +1711,7 @@ bool DataBase::removeRecordTipPeredachi(const int id)
  * */
 bool DataBase::removeRecordBazaProgram(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1518,6 +1727,11 @@ bool DataBase::removeRecordBazaProgram(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1525,6 +1739,7 @@ bool DataBase::removeRecordBazaProgram(const int id)
  * */
 bool DataBase::removeRecordProizvodElPriv(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1540,6 +1755,11 @@ bool DataBase::removeRecordProizvodElPriv(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1547,6 +1767,7 @@ bool DataBase::removeRecordProizvodElPriv(const int id)
  * */
 bool DataBase::removeRecordProizvodIspMeh(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1562,6 +1783,11 @@ bool DataBase::removeRecordProizvodIspMeh(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1569,6 +1795,7 @@ bool DataBase::removeRecordProizvodIspMeh(const int id)
  * */
 bool DataBase::removeRecordLAES(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1584,6 +1811,11 @@ bool DataBase::removeRecordLAES(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1591,6 +1823,7 @@ bool DataBase::removeRecordLAES(const int id)
  * */
 bool DataBase::removeRecordATE(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1606,6 +1839,11 @@ bool DataBase::removeRecordATE(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
@@ -1613,6 +1851,7 @@ bool DataBase::removeRecordATE(const int id)
  * */
 bool DataBase::removeRecordFIO(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1628,11 +1867,17 @@ bool DataBase::removeRecordFIO(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordNormHh(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1648,11 +1893,17 @@ bool DataBase::removeRecordNormHh(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordNormNomED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1668,11 +1919,17 @@ bool DataBase::removeRecordNormNomED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordNormNom(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1688,11 +1945,17 @@ bool DataBase::removeRecordNormNom(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordNormRdED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1708,11 +1971,17 @@ bool DataBase::removeRecordNormRdED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordNormRd(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1728,11 +1997,17 @@ bool DataBase::removeRecordNormRd(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOgrNomED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1748,11 +2023,17 @@ bool DataBase::removeRecordOgrNomED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOgrNom(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1768,11 +2049,17 @@ bool DataBase::removeRecordOgrNom(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOgrRdED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1788,11 +2075,17 @@ bool DataBase::removeRecordOgrRdED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOgrRd(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1808,11 +2101,17 @@ bool DataBase::removeRecordOgrRd(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOtkazNomED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1828,11 +2127,17 @@ bool DataBase::removeRecordOtkazNomED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOtkazNom(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1848,11 +2153,17 @@ bool DataBase::removeRecordOtkazNom(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOtkazRdED(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1868,11 +2179,17 @@ bool DataBase::removeRecordOtkazRdED(const int id)
     } else {
         return true;
     }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
     return false;
 }
 
 bool DataBase::removeRecordOtkazRd(const int id)
 {
+    db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
 
@@ -1887,6 +2204,11 @@ bool DataBase::removeRecordOtkazRd(const int id)
         return false;
     } else {
         return true;
+    }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
     }
     return false;
 }

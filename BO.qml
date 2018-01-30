@@ -669,6 +669,7 @@ footer:    ToolBar {
 
                 ListView {
                     id: list
+                    //property var current
                     anchors.fill: parent
                     clip: true
                     model: model0
@@ -676,6 +677,7 @@ footer:    ToolBar {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
+                    //currentSection: current
                     currentIndex: window.index
                     //highlight: highlightBar
                     //highlightFollowsCurrentItem: false
@@ -688,7 +690,8 @@ footer:    ToolBar {
                                                 anchors.right: parent.right
                                                 anchors.bottom: parent.bottom
                                                 width: 10
-                                    }                    
+                                    }
+
                 }
                 Component {
                     id: delegate
@@ -873,7 +876,10 @@ footer:    ToolBar {
                         MouseArea {
                             id: mouse
                             anchors.fill: parent
-                            onClicked: list.currentIndex = model.index//model0.index()
+                            onClicked: {
+                                list.currentIndex = model.index//model0.index()
+                                list.current = list.currentSection
+                            }
                             onDoubleClicked: {
                                 list.currentIndex = model.index
                                 window.index = list.currentIndex

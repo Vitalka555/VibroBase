@@ -1087,6 +1087,8 @@ Component {
 
                 ListView {
                     id: list
+                    objectName: "list_stat"
+                    property string tot
                     anchors.fill: parent
                     clip: true
                     model: model_stat
@@ -1118,13 +1120,13 @@ Component {
                             id: rec_item
                             width: parent.width
                             height: parent.height
-                            property var tot: model_stat.data(model_stat.index(1, 0), 1)
+                            //property var tot: model_stat.data(model_stat.index(1, 0), total)
                             property real otstup1: text_tipizmer_ekspl.width
                             property real otstup2: text_rezhim_rd.width
                             property real maximum: rec_total.width - text_total1.width - 10
                             property real maximum1: rec_tipizmer_ekspl.width - text_tipizmer_ekspl.width - text_tipizmer_ekspl1.width - 40
                             property real maximum2: rec_rezhim_rd.width - text_rezhim_rd.width - text_rezhim_rd1.width - 45
-                            Component.onCompleted: console.log(tot)
+                            Component.onCompleted: console.log("tot", list.tot)
 
                             //color: "lightgrey"
                             Rectangle {
@@ -1159,7 +1161,7 @@ Component {
                                     anchors.left: parent.left
                                     anchors.bottom: parent.bottom
                                     anchors.bottomMargin: 5
-                                    //width: rec_item.tot/total*rec_item.maximum//parent.width - text_total1.width - 10
+                                    width: total/list.tot*rec_item.maximum//parent.width - text_total1.width - 10
                                     color: "#03a9f5"
                                 }
                                 Text {

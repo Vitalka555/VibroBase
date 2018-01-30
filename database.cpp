@@ -215,8 +215,8 @@ bool DataBase::insertIntoTable0(const QString &bazakks){
 
 bool DataBase::insertIntoTable(const QVariantList &data)
 {
-//    QSqlDatabase db = QSqlDatabase::database();
-//    db.transaction();
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
     /* Запрос SQL формируется из QVariantList,
      * в который передаются данные для вставки в таблицу.
      * */
@@ -292,24 +292,19 @@ bool DataBase::insertIntoTable(const QVariantList &data)
     querys.bindValue(":Bazapar",       data[46].toString()=="" ? QVariant(QVariant::String):data[46].toString());
     qDebug()<<data[0].toString();
 
-
-
     // После чего выполняется запросом методом exec()
     if(!querys.exec()){
         qDebug() << "error insert into ";
         qDebug() << querys.lastError().text();
         return false;
     } else {
-//        QSqlDatabase::database().commit();
-//        querys.clear();
-//        qDebug() << "db.commit() = "<<db.commit();
-//        if(!db.commit()){
-//        db.rollback();
-//        }
+        querys.clear();
+        qDebug() << "db.commit() = "<<db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
         return true;
     }
-
-
     return false;
 }
 
@@ -391,6 +386,7 @@ bool DataBase::insertIntoTable(const QString &Bazakks, const QString &Cehid, con
 
 bool DataBase::editTableBaza(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     /* Запрос SQL формируется из QVariantList,
      * в который передаются данные для вставки в таблицу.
@@ -558,6 +554,7 @@ bool DataBase::editTableBaza(const QString &Bazakks, const QString &Cehid, const
 
 bool DataBase::insertIntoBazaIzmereni(const QVariantList &data2)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO BazaIzmereni (id_Baza, Дата, Время, id_Rezhim, id_TipIzmerenia, НормаЭлДв, Норма, 'ЛАЭС-2', АТЭ, "
@@ -688,6 +685,7 @@ bool DataBase::insertIntoBazaIzmereni(const QString &idbaza, const QString &date
 
 bool DataBase::editTableBazaIzmereni(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     qDebug() << "data[44].toString()"<< data[44].toString();
    QSqlQuery quer;
@@ -823,6 +821,7 @@ bool DataBase::editTableBazaIzmereni(const QString &idbaza, const QString &date,
 
 bool DataBase::insertIntoCeh(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO Ceh (Наименование) "
@@ -857,6 +856,7 @@ bool DataBase::insertIntoCeh(const QString &cehname){
 
 bool DataBase::insertIntoTipMehanizma(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipMehanizma (Наименование) "
@@ -888,6 +888,7 @@ bool DataBase::insertIntoTipMehanizma(const QString &tipmehname){
 
 bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipPeredatochnogoMehanizma (Наименование) "
@@ -919,6 +920,7 @@ bool DataBase::insertIntoTipPeredatochnogoMehanizma(const QString &tippermehname
 
 bool DataBase::insertIntoTipPeredachi(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO TipPeredachi (Наименование) "
@@ -950,6 +952,7 @@ bool DataBase::insertIntoTipPeredachi(const QString &tippername){
 
 bool DataBase::insertIntoBazaProgram(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO BazaProgram (№КАТЭ, Название_программы) "
@@ -983,6 +986,7 @@ bool DataBase::insertIntoBazaProgram(const QString &programmnumber, const QStrin
 
 bool DataBase::insertIntoProizvodElPriv(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ProizvodElPriv (Наименование) "
@@ -1014,6 +1018,7 @@ bool DataBase::insertIntoProizvodElPriv(const QString &proizvedname){
 
 bool DataBase::insertIntoProizvodIspMeh(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ProizvodIspMeh (Наименование) "
@@ -1045,6 +1050,7 @@ bool DataBase::insertIntoProizvodIspMeh(const QString &proizvname){
 
 bool DataBase::insertIntoLAES(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO LAES (Фамилия) "
@@ -1076,6 +1082,7 @@ bool DataBase::insertIntoLAES(const QString &laesfam){
 
 bool DataBase::insertIntoATE(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO ATE (Фамилия) "
@@ -1107,6 +1114,7 @@ bool DataBase::insertIntoATE(const QString &atefam){
 
 bool DataBase::insertIntoFIO(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO FIO (ФИО) "
@@ -1138,6 +1146,7 @@ bool DataBase::insertIntoFIO(const QString &fiofio){
 
 bool DataBase::insertIntoNormHh(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormHh (Значение) "
@@ -1169,6 +1178,7 @@ bool DataBase::insertIntoNormHh(const QString &norm_hh){
 
 bool DataBase::insertIntoNormNomED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormNomED (Значение) "
@@ -1200,6 +1210,7 @@ bool DataBase::insertIntoNormNomED(const QString &norm_nomed){
 
 bool DataBase::insertIntoNormNom(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormNom (Значение) "
@@ -1231,6 +1242,7 @@ bool DataBase::insertIntoNormNom(const QString &norm_nom){
 
 bool DataBase::insertIntoNormRdED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormRdED (Значение) "
@@ -1262,6 +1274,7 @@ bool DataBase::insertIntoNormRdED(const QString &norm_rded){
 
 bool DataBase::insertIntoNormRd(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO NormRd (Значение) "
@@ -1293,6 +1306,7 @@ bool DataBase::insertIntoNormRd(const QString &norm_rd){
 
 bool DataBase::insertIntoOgrNomED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrNomED (Значение) "
@@ -1324,6 +1338,7 @@ bool DataBase::insertIntoOgrNomED(const QString &ogr_nomed){
 
 bool DataBase::insertIntoOgrNom(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrNom (Значение) "
@@ -1355,6 +1370,7 @@ bool DataBase::insertIntoOgrNom(const QString &ogr_nom){
 
 bool DataBase::insertIntoOgrRdED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrRdED (Значение) "
@@ -1386,6 +1402,7 @@ bool DataBase::insertIntoOgrRdED(const QString &ogr_rded){
 
 bool DataBase::insertIntoOgrRd(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OgrRd (Значение) "
@@ -1417,6 +1434,7 @@ bool DataBase::insertIntoOgrRd(const QString &ogr_rd){
 
 bool DataBase::insertIntoOtkazNomED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazNomED (Значение) "
@@ -1448,6 +1466,7 @@ bool DataBase::insertIntoOtkazNomED(const QString &otkaz_nomed){
 
 bool DataBase::insertIntoOtkazNom(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazNom (Значение) "
@@ -1479,6 +1498,7 @@ bool DataBase::insertIntoOtkazNom(const QString &otkaz_nom){
 
 bool DataBase::insertIntoOtkazRdED(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazRdED (Значение) "
@@ -1510,6 +1530,7 @@ bool DataBase::insertIntoOtkazRdED(const QString &otkaz_rded){
 
 bool DataBase::insertIntoOtkazRd(const QVariantList &data)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
    QSqlQuery quer;
    quer.prepare("INSERT INTO OtkazRd (Значение) "
@@ -1543,6 +1564,7 @@ bool DataBase::insertIntoOtkazRd(const QString &otkaz_rd){
  * */
 bool DataBase::removeRecord(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1571,6 +1593,7 @@ bool DataBase::removeRecord(const int id)
  * */
 bool DataBase::removeRecordBI(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1599,6 +1622,7 @@ bool DataBase::removeRecordBI(const int id)
  * */
 bool DataBase::removeRecordCeh(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1627,6 +1651,7 @@ bool DataBase::removeRecordCeh(const int id)
  * */
 bool DataBase::removeRecordTipMehanizma(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1655,6 +1680,7 @@ bool DataBase::removeRecordTipMehanizma(const int id)
  * */
 bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1683,6 +1709,7 @@ bool DataBase::removeRecordTipPeredatochnogoMehanizma(const int id)
  * */
 bool DataBase::removeRecordTipPeredachi(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1711,6 +1738,7 @@ bool DataBase::removeRecordTipPeredachi(const int id)
  * */
 bool DataBase::removeRecordBazaProgram(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1739,6 +1767,7 @@ bool DataBase::removeRecordBazaProgram(const int id)
  * */
 bool DataBase::removeRecordProizvodElPriv(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1767,6 +1796,7 @@ bool DataBase::removeRecordProizvodElPriv(const int id)
  * */
 bool DataBase::removeRecordProizvodIspMeh(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1795,6 +1825,7 @@ bool DataBase::removeRecordProizvodIspMeh(const int id)
  * */
 bool DataBase::removeRecordLAES(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1823,6 +1854,7 @@ bool DataBase::removeRecordLAES(const int id)
  * */
 bool DataBase::removeRecordATE(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1851,6 +1883,7 @@ bool DataBase::removeRecordATE(const int id)
  * */
 bool DataBase::removeRecordFIO(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1877,6 +1910,7 @@ bool DataBase::removeRecordFIO(const int id)
 
 bool DataBase::removeRecordNormHh(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1903,6 +1937,7 @@ bool DataBase::removeRecordNormHh(const int id)
 
 bool DataBase::removeRecordNormNomED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1929,6 +1964,7 @@ bool DataBase::removeRecordNormNomED(const int id)
 
 bool DataBase::removeRecordNormNom(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1955,6 +1991,7 @@ bool DataBase::removeRecordNormNom(const int id)
 
 bool DataBase::removeRecordNormRdED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -1981,6 +2018,7 @@ bool DataBase::removeRecordNormRdED(const int id)
 
 bool DataBase::removeRecordNormRd(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2007,6 +2045,7 @@ bool DataBase::removeRecordNormRd(const int id)
 
 bool DataBase::removeRecordOgrNomED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2033,6 +2072,7 @@ bool DataBase::removeRecordOgrNomED(const int id)
 
 bool DataBase::removeRecordOgrNom(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2059,6 +2099,7 @@ bool DataBase::removeRecordOgrNom(const int id)
 
 bool DataBase::removeRecordOgrRdED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2085,6 +2126,7 @@ bool DataBase::removeRecordOgrRdED(const int id)
 
 bool DataBase::removeRecordOgrRd(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2111,6 +2153,7 @@ bool DataBase::removeRecordOgrRd(const int id)
 
 bool DataBase::removeRecordOtkazNomED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2137,6 +2180,7 @@ bool DataBase::removeRecordOtkazNomED(const int id)
 
 bool DataBase::removeRecordOtkazNom(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2163,6 +2207,7 @@ bool DataBase::removeRecordOtkazNom(const int id)
 
 bool DataBase::removeRecordOtkazRdED(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;
@@ -2189,6 +2234,7 @@ bool DataBase::removeRecordOtkazRdED(const int id)
 
 bool DataBase::removeRecordOtkazRd(const int id)
 {
+    QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
     QSqlQuery query;

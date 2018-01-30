@@ -565,6 +565,15 @@ chartIzmerAgr->setProperty("array_valueY", agr_middle);
 chartIzmerAgr->setProperty("array_valueY1", agr_middle_norm);
 chartIzmerAgr->setProperty("array_valueY2", agr_middle_perv);
 chartIzmerAgr->setProperty("count", countizm);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+QObject* list_stat = this->parent()->findChild<QObject*>("list_stat");
+// Обновление производится SQL-запросом к базе данных
+QString maxtotal;
+QSqlQuery querymaxtotal("select count(BazaIzmereni.id_Baza) from BazaIzmereni group by id_Baza order by 1 desc limit 1");
+while (querymaxtotal.next()) {
+    maxtotal = querymaxtotal.value(0).toString();
+}
+list_stat->setProperty("tot", maxtotal);
 }
 
 void Stat::getdate2()
@@ -618,10 +627,9 @@ QHash<int, QByteArray> ListModelStatIzmerAgr::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelStatIzmerAgr::updateModel()
 {
-    //QObject* filter_izmer = this->parent()->findChild<QObject*>("filter_izmer");
-    // Обновление производится SQL-запросом к базе данных
+
     QSqlDatabase db = QSqlDatabase::database();
-    db.transaction();
+    db.transaction();    
     this->setQuery("select Baza.id, Baza.KKS, (select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id) as total, "
                    "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 1) as hh, "
                    "(select count(*) from BazaIzmereni where BazaIzmereni.id_Baza = Baza.id and BazaIzmereni.id_Rezhim = 2) as nom, "
@@ -640,6 +648,7 @@ void ListModelStatIzmerAgr::updateModel()
     if(!db.commit()){
     db.rollback();
     }
+
 }
 
 // Получение id из строки в модели представления данных

@@ -4,15 +4,85 @@ import QtQuick.Controls 2.2
 import QtQuick.LocalStorage 2.0
 import QtQuick.Controls.Material 2.2
 import QtQuick.Controls.Styles 1.4
-
-
 Item {
     id: item
 //    Component.onCompleted: {
 //        mapper.updateData(list.currentIndex)
 //    }
     Page {
-        anchors.fill: parent        
+        anchors.fill: parent
+        //Component.onCompleted: dialog.open()
+        Timer {
+            id: timer
+            interval: 5000
+            repeat: true
+            running: true
+            onTriggered: {
+                model0.updateModel()
+                model_izmer.updateModel()
+                console.log("timer")
+            }
+        }
+        Dialog {
+            id: dialog
+            x: (parent.width - width) / 2
+            y: (parent.height - height) / 2
+            width: parent.width/2
+            height: row1.height + row2.height + 80
+            modal: Qt.WindowModal
+            closePolicy: Popup.NoAutoClose
+            title: "Предупреждение!"
+            Row {
+                id: row1
+                anchors.top: parent.top
+                width: parent.width
+                height: text_del.height
+                Text {
+                    id: text_del
+                    width: parent.width
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: 15
+                    text: "Удаление оборудования уничтожит все связанные с ним данные. Продолжить?"
+                }
+            }
+            RowLayout {
+                id: row2
+                anchors.top: row1.bottom
+                anchors.topMargin: 10
+                width: parent.width
+                layoutDirection: Qt.LeftToRight
+                spacing: 10
+                Button {
+                    id: but1
+                    anchors.right: but2.left
+                    anchors.rightMargin: 10
+                    highlighted: true
+                    Material.accent: Material.LightBlue
+                    text: "Отмена"
+                    onClicked: {
+                        dialog.close()
+                        timer.running = true
+                    }
+                }
+                Button {
+                    id: but2
+                    anchors.right: parent.right
+                    anchors.rightMargin: 10
+                    highlighted: true
+                    Material.accent: Material.LightBlue
+                    text: "Подтвердить"
+                    onClicked: {
+                        database.removeRecord(model0.getId(list.currentIndex))
+                        model0.updateModel()
+                        dialog.close()
+                        timer.running = true
+                    }
+                }
+            }
+            onOpened: {
+                timer.running = false
+            }
+        }
         Rectangle {
             id: rec_0
             anchors.top: parent.top
@@ -520,8 +590,9 @@ footer:    ToolBar {
 //            Material.accent: Material.LightBlue
             text: "Удалить"
             onClicked: {
-                database.removeRecord(model0.getId(list.currentIndex))
-                model0.updateModel()
+                dialog.open()
+//                database.removeRecord(model0.getId(list.currentIndex))
+//                model0.updateModel()
             }
         }
     }
@@ -693,6 +764,7 @@ footer:    ToolBar {
                                     }
 
                 }
+
                 Component {
                     id: delegate
 
@@ -878,7 +950,7 @@ footer:    ToolBar {
                             anchors.fill: parent
                             onClicked: {
                                 list.currentIndex = model.index//model0.index()
-                                list.current = list.currentSection
+                                //list.current = list.currentSection
                             }
                             onDoubleClicked: {
                                 list.currentIndex = model.index

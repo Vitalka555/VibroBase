@@ -53,16 +53,7 @@ ApplicationWindow {
         stackView.yy = window.y
         qmlSignalWriteWindow()
     }
-    Timer {
-        interval: 30000
-        repeat: true
-        running: true
-        onTriggered: {
-            model0.updateModel()
-            model_izmer.updateModel()
-            console.log("timer")
-        }
-    }
+
 
     header: ToolBar {
         id: toolBar

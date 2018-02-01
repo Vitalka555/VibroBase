@@ -17,11 +17,17 @@ void DataBase::writeSettings()
     QString pathToBas=(stack->property("pathToBase")).toString();
     QString pathToPhot=(stack->property("pathToPhoto")).toString();
     QString pathToShem=(stack->property("pathToShema")).toString();
+    QString update=(stack->property("running")).toString();
+    QString timeInterval=(stack->property("time_interval")).toString();
     QSettings settings(path, QSettings::IniFormat);
     settings.beginGroup("PathToFiles");
     settings.setValue("PathToBase", pathToBas);
     settings.setValue("PathToPhoto", pathToPhot);
-    settings.setValue("PathToShema", pathToShem);
+    settings.setValue("PathToShema", pathToShem);    
+    settings.endGroup();
+    settings.beginGroup("UpdateTables");
+    settings.setValue("Update", update);
+    settings.setValue("TimeInterval", timeInterval);
     settings.endGroup();
     openDataBase();
 }
@@ -46,6 +52,14 @@ void DataBase::readSettings2()
     stack->setProperty("pathToBaseRead", pathToBase);
     stack->setProperty("pathToPhotoRead", pathToPhoto);
     stack->setProperty("pathToShemaRead", pathToShema);
+    settings.beginGroup("UpdateTables");
+    bool update = settings.value("Update").toBool();
+    QString timeInterval = settings.value("TimeInterval").toString();
+    settings.endGroup();
+    stack->setProperty("running", update);
+    stack->setProperty("time_interval", timeInterval);
+    qDebug()<<"aaa "<<update;
+    qDebug()<<"bbb "<<timeInterval;
 }
 
 void DataBase::writeSettingsWindow()

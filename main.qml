@@ -44,7 +44,7 @@ ApplicationWindow {
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
-    property int newindex: -1
+    property int newindex: -1    
 
     onClosing: {
         stackView.wwidth = window.width
@@ -273,6 +273,8 @@ ApplicationWindow {
         property string hheight
         property string xx
         property string yy
+        property bool running
+        property string time_interval
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

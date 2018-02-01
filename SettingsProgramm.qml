@@ -10,6 +10,8 @@ Item {
         pathToFile.text = stackView.pathToBaseRead
         pathToPhoto.text = stackView.pathToPhotoRead
         pathToShema.text = stackView.pathToShemaRead
+        sw1.checked = stackView.running
+        spin.value = stackView.time_interval
     }
     Page {
     anchors.fill: parent
@@ -160,9 +162,47 @@ Item {
             loadPath2.open()
         }
     }
+    Text {
+        id: text_interval
+        anchors.top: pathToShema.bottom
+        anchors.topMargin: 5
+        anchors.left: parent.left
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+        text: "Автообновление таблиц:"
+    }
+    Switch{
+        id: sw1
+        anchors.verticalCenter: text_interval.verticalCenter
+        anchors.left: text_interval.right
+        anchors.leftMargin: 5
+        checked: false
+        Material.accent: Material.LightBlue
+    }
+    Text {
+        id: text_interval2
+        visible: sw1.checked
+        anchors.verticalCenter: text_interval.verticalCenter
+        anchors.left: sw1.right
+        anchors.leftMargin: 5
+        font.pixelSize: 15
+        text: "Интервал в секундах (от 5 до 3600):"
+    }
+    SpinBox {
+        id: spin
+        anchors.verticalCenter: text_interval.verticalCenter
+        anchors.left: text_interval2.right
+        anchors.leftMargin: 5
+        visible: sw1.checked
+        from: 5
+        to: 3600
+        value: 60
+        editable: true
+    }
+
     Button {
         id: but_save
-        anchors.top: text_path2.bottom
+        anchors.top: text_interval.bottom
         anchors.topMargin: 5
         anchors.left: parent.left
         anchors.leftMargin: 5
@@ -181,6 +221,8 @@ Item {
             stackView.pathToBase = pathToFile.text
             stackView.pathToPhoto = pathToPhoto.text
             stackView.pathToShema = pathToShema.text
+            stackView.running = sw1.checked
+            stackView.time_interval = spin.value
             qmlSignalWritePath()
             model0.updateModel()
             model_1V.updateModel()

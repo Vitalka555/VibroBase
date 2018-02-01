@@ -6,17 +6,24 @@ import QtQuick.Controls.Material 2.2
 import QtQuick.Controls.Styles 1.4
 Item {
     id: item
-//    Component.onCompleted: {
-//        mapper.updateData(list.currentIndex)
-//    }
+    Timer{
+        interval: 1
+        repeat: false
+        running: true
+        onTriggered: {
+            qmlSignalReadPath()
+                    console.log("run = ", stackView.running);
+                    console.log("interval = ", stackView.time_interval);
+        }
+    }
     Page {
         anchors.fill: parent
         //Component.onCompleted: dialog.open()
         Timer {
             id: timer
-            interval: 5000
+            interval: stackView.time_interval*1000
             repeat: true
-            running: true
+            running: stackView.running
             onTriggered: {
                 model0.updateModel()
                 model_izmer.updateModel()
@@ -61,7 +68,7 @@ Item {
                     text: "Отмена"
                     onClicked: {
                         dialog.close()
-                        timer.running = true
+                        timer.running = stackView.running
                     }
                 }
                 Button {
@@ -75,7 +82,7 @@ Item {
                         database.removeRecord(model0.getId(list.currentIndex))
                         model0.updateModel()
                         dialog.close()
-                        timer.running = true
+                        timer.running = stackView.running
                     }
                 }
             }

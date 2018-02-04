@@ -334,6 +334,7 @@ Rectangle {
     anchors.left: rec_1.right
     anchors.right: parent.right
     height: rec00.height+rec10.height+rec20.height+rec30.height+rec40.height+tf_rashod.height+45
+    property string id_polozhenie
     Rectangle{
         id: rec00
         anchors.top: parent.top
@@ -495,7 +496,7 @@ Rectangle {
             anchors.centerIn: parent
             font.pixelSize: 20
             color: "white"
-            text: "В"
+            text: rec_6.id_polozhenie == "2" ? "R1" : "В"
         }
     }
     Rectangle{
@@ -513,7 +514,7 @@ Rectangle {
             anchors.centerIn: parent
             font.pixelSize: 20
             color: "white"
-            text: "П"
+            text: rec_6.id_polozhenie == "2" ? "R2" : "П"
         }
     }
     Rectangle{
@@ -1395,6 +1396,7 @@ Rectangle {
                 mapper_openBI.addMapping(tf_rashod, (0x0100+43), "tex1")
                 mapper_openBI.addMapping(tf_davl, (0x0100+44), "tex1")
                 mapper_openBI.addMapping(textArea_prim, (0x0100+45), "text")
+                mapper_openBI.addMapping(rec_6, (0x0100+47), "id_polozhenie")
                 //mapper_openBI.addMapping(combo_kks, (0x0100+46), "id")
                 tf_norm_ed.text = tf_norm_ed.text.replace(".",",")
                 tf_norm_meh.text = tf_norm_meh.text.replace(".",",")

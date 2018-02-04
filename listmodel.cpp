@@ -2818,6 +2818,7 @@ void ListModelIzmer::updateModel()
     QString id_tipmeh_filter_BI = (stack->property("id_tipmeh_filter_BI")).toString();
     QString tipmeh_filter_BI = " and BazaIzmereni.id_Baza = (select Baza.id from Baza where  Baza.id_TipMehanizma = "+id_tipmeh_filter_BI+" and Baza.id = BazaIzmereni.id_Baza)";
     QString neispravnoe = (stack->property("neispravnoe")).toString();
+    qDebug()<<"kks_id = "<<kks_id<<"kks_text_filter_BI = "<<kks_text_filter_BI;
 //    QString neispravnoe_hh;
 //    QString neispravnoe_nom;
 //    QString neispravnoe_rd;
@@ -3412,7 +3413,7 @@ void ListModelIzmerOpenBI::updateModel()
                    "BazaIzmereni.'8В', BazaIzmereni.'8П', BazaIzmereni.'8О', "
                    "BazaIzmereni.'T1', BazaIzmereni.'T2', BazaIzmereni.'T3', BazaIzmereni.'T4', "
                    "BazaIzmereni.'T5', BazaIzmereni.'T6', BazaIzmereni.'T7', BazaIzmereni.'T8', "
-                   "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания, BazaIzmereni.id_Baza "
+                   "BazaIzmereni.Q, BazaIzmereni.P, BazaIzmereni.Примечания, BazaIzmereni.id_Baza, (SELECT Baza.id_Polozhenie FROM Baza WHERE Baza.id = BazaIzmereni.id_Baza ) "
          " FROM BazaIzmereni " + bazaizm_id_filter);
     while(this->canFetchMore()){
         this->fetchMore();

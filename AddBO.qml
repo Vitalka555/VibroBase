@@ -2855,11 +2855,13 @@ footer: ToolBar {
                                          combo_norm_nom.id, combo_ogr_nomed.id, combo_ogr_nom.id, combo_otkaz_nomed.id,
                                          combo_otkaz_nom.id, combo_norm_rded.id, combo_norm_rd.id, combo_ogr_rded.id,
                                          combo_ogr_rd.id, combo_otkaz_rded.id, combo_otkaz_rd.id, tf_foto.tex,
-                                         tf_shema.tex, textArea_doc.text, textArea_par.text, stackView.baza_id)
+                                         tf_shema.tex, textArea_doc.text, textArea_par.text, stackView.baza_id)                
                 model0.updateModel()
                 stackView.replace(bo)
                 tool_left.visible = true
                 tool_left1.visible = false
+                stackView.baza_id = ""
+                qmlSignal_baza_id()
             }
         }
         ToolButton {

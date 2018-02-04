@@ -21,19 +21,5 @@ public slots:
     bool cppSlot2();
 };
 
-//class MyImageProvider : public QQuickImageProvider
-//{
-//public:
-//    MyImageProvider() :QQuickImageProvider(QQuickImageProvider::Image){}
-
-//    QImage requestImage(const QString &id, QSize *size, const QSize &requestedSize)
-//    {
-//        QImage image(requestedSize, QImage::Format::Format_RGBA8888);
-
-//        // ここでimageに対し処理を行う
-
-//        return image;
-//    }
-//};
 
 #endif // COPYFILE_H

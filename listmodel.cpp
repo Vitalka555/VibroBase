@@ -1651,6 +1651,12 @@ void ListModel1V::updateModel()
     QString kks_id=(stack->property("baza_id")).toString();
     QString rezhim_id=(stack->property("rezhim_id")).toString();
     QString rezhim_filter = " and BazaIzmereni.id_Rezhim = " + rezhim_id;
+    QString id_Polozhenie;
+    QSqlQuery query0("SELECT Baza.id_Polozhenie FROM Baza WHERE Baza.id = " + kks_id);
+    while (query0.next()) {
+        id_Polozhenie = query0.value(0).toString();
+    }
+    qDebug()<<"id_Polozhenie = "<<id_Polozhenie;
 
     if(rezhim_id == ""){
         rezhim_filter = "";
@@ -1668,6 +1674,9 @@ void ListModel1V::updateModel()
     if(query1V.value(0)==0){
         select1V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select1V = " SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select1V = " SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query1P;
@@ -1679,6 +1688,9 @@ void ListModel1V::updateModel()
     if(query1P.value(0)==0){
         select1P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select1P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select1P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'1П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '1П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query1O;
@@ -1701,6 +1713,9 @@ void ListModel1V::updateModel()
     if(query2V.value(0)==0){
         select2V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select2V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select2V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query2P;
@@ -1712,6 +1727,9 @@ void ListModel1V::updateModel()
     if(query2P.value(0)==0){
         select2P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select2P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select2P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'2П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '2П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query2O;
@@ -1734,6 +1752,9 @@ void ListModel1V::updateModel()
     if(query3V.value(0)==0){
         select3V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select3V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select3V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query3P;
@@ -1745,6 +1766,9 @@ void ListModel1V::updateModel()
     if(query3P.value(0)==0){
         select3P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select3P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select3P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'3П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '3П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query3O;
@@ -1767,6 +1791,9 @@ void ListModel1V::updateModel()
     if(query4V.value(0)==0){
         select4V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select4V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select4V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query4P;
@@ -1778,6 +1805,9 @@ void ListModel1V::updateModel()
     if(query4P.value(0)==0){
         select4P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select4P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select4P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'4П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '4П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query4O;
@@ -1800,6 +1830,9 @@ void ListModel1V::updateModel()
     if(query5V.value(0)==0){
         select5V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select5V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select5V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query5P;
@@ -1811,6 +1844,9 @@ void ListModel1V::updateModel()
     if(query5P.value(0)==0){
         select5P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select5P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select5P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'5П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '5П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query5O;
@@ -1833,6 +1869,9 @@ void ListModel1V::updateModel()
     if(query6V.value(0)==0){
         select6V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select6V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select6V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query6P;
@@ -1844,6 +1883,9 @@ void ListModel1V::updateModel()
     if(query6P.value(0)==0){
         select6P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select6P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select6P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'6П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '6П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query6O;
@@ -1866,6 +1908,9 @@ void ListModel1V::updateModel()
     if(query7V.value(0)==0){
         select7V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select7V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select7V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query7P;
@@ -1877,6 +1922,9 @@ void ListModel1V::updateModel()
     if(query7P.value(0)==0){
         select7P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select7P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select7P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'7П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '7П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query7O;
@@ -1899,6 +1947,9 @@ void ListModel1V::updateModel()
     if(query8V.value(0)==0){
         select8V = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select8V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8R1', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select8V = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8В', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8В', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query8P;
@@ -1910,6 +1961,9 @@ void ListModel1V::updateModel()
     if(query8P.value(0)==0){
         select8P = "";
     } else {
+        if(id_Polozhenie == "2"){
+            select8P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8R2', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
+        } else
         select8P = " UNION ALL SELECT BazaIzmereni.id, IFNULL(BazaIzmereni.'8П', 0), strftime('%d-%m-%Y', Дата)||' '||IFNULL(BazaIzmereni.'Время', 0), '8П', BazaIzmereni.Дата, BazaIzmereni.'Время' FROM BazaIzmereni WHERE BazaIzmereni.id_Baza = " + kks_id + rezhim_filter;
     };
     QSqlQuery query8O;

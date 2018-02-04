@@ -2869,7 +2869,7 @@ Item {
                                     wrapMode: Text.WordWrap
                                     font.pixelSize: 15
                                     color: "white"//"#3E65FF"
-                                    text: "В"
+                                    text: text_isp.text == "Вертикальное" ? "R1" : "В"
                                 }
                             }
                         }
@@ -3110,7 +3110,7 @@ Item {
                                     wrapMode: Text.WordWrap
                                     font.pixelSize: 15
                                     color: "white"//"#3E65FF"
-                                    text: "П"
+                                    text: text_isp.text == "Вертикальное" ? "R2" : "П"
                                 }
                             }
                         }

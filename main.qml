@@ -41,6 +41,7 @@ ApplicationWindow {
     signal qmlGetDate2()
     signal qmlGetPersonal()
     signal qmlGetTipMeh()
+    signal qmlBackup()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -52,6 +53,7 @@ ApplicationWindow {
         stackView.xx = window.x
         stackView.yy = window.y
         qmlSignalWriteWindow()
+        qmlBackup()
     }
 
 

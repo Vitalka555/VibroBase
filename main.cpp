@@ -212,6 +212,8 @@ ListModel *model0 = new ListModel(root);
                          copy, SLOT(cppSlot()));
         QObject::connect(root, SIGNAL(qmlSignal2()),
                          copy, SLOT(cppSlot2()));
+        QObject::connect(root, SIGNAL(qmlBackup()),
+                         copy, SLOT(backupBase()));
         Stat *statist = new Stat(root);
         QObject::connect(root, SIGNAL(qmlKolAgr()), statist, SLOT(kolagr()));
         QObject::connect(root, SIGNAL(qmlKolAgr()), model_stat, SLOT(updateModel()));

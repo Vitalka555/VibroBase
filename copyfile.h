@@ -5,6 +5,8 @@
 #include <QObject>
 #include <QVariant>
 #include <QQuickImageProvider>
+#include <QSettings>
+#include <QDateTime>
 
 
 class copyfile : public QObject
@@ -19,6 +21,7 @@ signals:
 public slots:
     bool cppSlot();
     bool cppSlot2();
+    bool backupBase();
 };
 
 

@@ -37,3 +37,19 @@ bool copyfile::cppSlot2()
     tf_shema->setProperty("text", fileInfo.fileName());
     return result;
 }
+
+bool copyfile::backupBase()
+{
+    QDir dir(QDir::currentPath() + QString("/backup"));
+    if (!dir.exists()) {
+        dir.mkpath(QDir::currentPath() + QString("/backup"));
+    }
+    QString path = QDir::currentPath()+"/settings.ini";
+    QSettings settings(path, QSettings::IniFormat);
+    settings.beginGroup("PathToFiles");
+    QString pathToBase = settings.value("PathToBase", (QDir::currentPath() + QString("/base/sqlite.db"))).toString();
+    settings.endGroup();
+    QString pathToBackupBase = QDir::currentPath() + QString("/backup/") + QDateTime::currentDateTime().toString("'data_'dd_MM_yyyy_HH-mm-ss'.db'");
+    bool result = QFile::copy(pathToBase, pathToBackupBase);
+    return result;
+}

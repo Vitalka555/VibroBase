@@ -42,6 +42,7 @@ ApplicationWindow {
     signal qmlGetPersonal()
     signal qmlGetTipMeh()
     signal qmlBackup()
+    signal qmlPodsh()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -376,6 +377,12 @@ Component.onCompleted: {
             id: vibrationSettings
             VibrationSettings {
                 id: vibrationSettings_0
+            }
+        }
+        Component {
+            id: bearingSettings
+            BearingSettings {
+                id: bearingSettings_0
             }
         }
     }

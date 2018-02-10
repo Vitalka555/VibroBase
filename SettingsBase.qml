@@ -107,6 +107,31 @@ Item {
                 tool_left3.visible = true
             }
         }
+        Button {
+            id: but_bearing
+            anchors.top: but_norms.bottom
+            anchors.topMargin: 20
+            anchors.horizontalCenter: parent.horizontalCenter
+            width: but_common.width
+            height: but_common.height
+            highlighted: true
+            Material.accent: Material.LightBlue
+            Text {
+                id: text_bearing
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.horizontalCenter: parent.horizontalCenter
+                font.pixelSize: 20
+                color: "white"
+                text: "Подшипники"
+            }
+            onClicked: {
+                stackView.replace(bearingSettings)
+                tool_left.visible = false
+                tool_left1.visible = false
+                tool_left2.visible = false
+                tool_left3.visible = true
+            }
+        }
     }
 
 }

@@ -3430,3 +3430,87 @@ int ListModelIzmerOpenBI::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelPodsh::ListModelPodsh
+/// \param parent
+///
+ListModelPodsh::ListModelPodsh(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelPodsh::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelPodsh::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    roles[podsh_obRURole] = "podsh_obRU";
+    roles[podsh_obENRole] = "podsh_obEN";
+    roles[podsh_dvnRole] = "podsh_dvn";
+    roles[podsh_dnarRole] = "podsh_dnar";
+    roles[podsh_bRole] = "podsh_b";
+    roles[podsh_dtkRole] = "podsh_dtk";
+    roles[podsh_ztkRole] = "podsh_ztk";
+    roles[podsh_aRole] = "podsh_a";
+    roles[podsh_massaRole] = "podsh_massa";
+    roles[podsh_staticRole] = "podsh_static";
+    roles[podsh_dinamicRole] = "podsh_dinamic";
+    roles[podsh_nameRole] = "podsh_name";
+
+    return roles;
+}
+
+// Метод обновления таблицы в модели представления данных
+void ListModelPodsh::updateModel()
+{
+//    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+//    QString kks=(stack->property("kks")).toString();
+//    QString id_ceh=(stack->property("id_ceh")).toString();
+//    QString zd=(stack->property("zd")).toString();
+//    QString id_tipmeh=(stack->property("id_tipmeh")).toString();
+//    QString ceh_filter = " and Baza.id_Ceh = " + id_ceh;
+//    QString tipmeh_filter = " and Baza.id_TipMehanizma = " + id_tipmeh;
+//    if(id_ceh == ""){
+//        ceh_filter = "";
+//    }
+//    if(id_tipmeh == ""){
+//        tipmeh_filter = "";
+//    }
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery("SELECT BasePodsh.id, BasePodsh.Oboznachenie, BasePodsh.OboznachenieEN, BasePodsh.dvnutr, BasePodsh.Dnaruzh, BasePodsh.B, "
+                   "BasePodsh.dtk, BasePodsh.ztk, BasePodsh.Ugol, BasePodsh.Massa, BasePodsh.Static, BasePodsh.Dinamic, BasePodsh.Name "
+                   "FROM BasePodsh ORDER BY BasePodsh.Oboznachenie");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
+}
+
+// Получение id из строки в модели представления данных
+int ListModelPodsh::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}

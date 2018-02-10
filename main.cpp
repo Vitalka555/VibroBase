@@ -203,6 +203,7 @@ ListModelIzmerOpenBI *model_openBI = new ListModelIzmerOpenBI(root);
 ListModelKKS *model_kks = new ListModelKKS(root);
 ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
 ListModelStatIzmerAgr *model_stat = new ListModelStatIzmerAgr(root);
+ListModelPodsh *model_podsh = new ListModelPodsh(root);
 
 ListModel *model0 = new ListModel(root);
 
@@ -235,6 +236,7 @@ DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));//запись в settings.ini
         QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));//чтение из settings.ini
         QObject::connect(root, SIGNAL(qmlSignalWriteWindow()), datab, SLOT(writeSettingsWindow()));//запись геометрии окна в ini
+        QObject::connect(root, SIGNAL(qmlPodsh()), model_podsh, SLOT(updateModel()));//запись геометрии окна в ini
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);
@@ -244,6 +246,7 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_norm_creatBI", model_norm_creatBI);
         engine.rootContext()->setContextProperty("model_openBI", model_openBI);
         engine.rootContext()->setContextProperty("model_stat", model_stat);
+        engine.rootContext()->setContextProperty("model_podsh", model_podsh);
 
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);

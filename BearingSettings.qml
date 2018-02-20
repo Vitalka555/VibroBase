@@ -358,9 +358,9 @@ footer:    ToolBar {
             //Material.accent: Material.LightBlue
             text: "Создать"
             onClicked: {
-                stackView.replace(creatBO)
-                tool_left.visible = false
-                tool_left1.visible = true
+                stackView.replace(creatBearing)
+                tool_left3.visible = false
+                tool_left4.visible = true
             }
         }
         ToolButton {

@@ -2272,3 +2272,60 @@ bool DataBase::removeRecordOtkazRd(const int id)
     }
     return false;
 }
+
+bool DataBase::insertIntoBearing(const QVariantList &data)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO BasePodsh (Name, Oboznachenie, OboznachenieEN, dvnutr, Dnaruzh, B, dtk, ztk, Ugol, "
+                "Massa, Static, Dinamic) "
+                 "VALUES (:name, :obRU, :obEN, :d, :D, :B, :dtk, :z, :u, :m, :stat, :dinam)");
+   quer.bindValue(":name",       data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   quer.bindValue(":obRU",       data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   quer.bindValue(":obEN",       data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+   quer.bindValue(":d",          data[3].toString()=="" ? QVariant(QVariant::String):data[3].toReal());
+   quer.bindValue(":D",          data[4].toString()=="" ? QVariant(QVariant::String):data[4].toReal());
+   quer.bindValue(":B",          data[5].toString()=="" ? QVariant(QVariant::String):data[5].toReal());
+   quer.bindValue(":dtk",        data[6].toString()=="" ? QVariant(QVariant::String):data[6].toReal());
+   quer.bindValue(":z",          data[7].toString()=="" ? QVariant(QVariant::String):data[7].toInt());
+   quer.bindValue(":u",          data[8].toString()=="" ? QVariant(QVariant::String):data[8].toReal());
+   quer.bindValue(":m",          data[9].toString()=="" ? QVariant(QVariant::String):data[9].toReal());
+   quer.bindValue(":stat",       data[10].toString()=="" ? QVariant(QVariant::String):data[10].toInt());
+   quer.bindValue(":dinam",      data[11].toString()=="" ? QVariant(QVariant::String):data[11].toInt());
+   if(!quer.exec()){
+       qDebug() << "error insert into " << bazaizm;
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
+   }
+   return false;
+}
+
+bool DataBase::insertIntoBearing(const QString &name, const QString &obRU, const QString &obEN, const QString &d,
+                                      const QString &D, const QString &B, const QString &dtk, const QString &z, const QString &u,
+                                      const QString &m, const QString &stat, const QString &dinam){
+    QVariantList data;
+    data.append(name);
+    data.append(obRU);
+    data.append(obEN);
+    data.append(d);
+    data.append(D);
+    data.append(B);
+    data.append(dtk);
+    data.append(z);
+    data.append(u);
+    data.append(m);
+    data.append(stat);
+    data.append(dinam);
+    if(insertIntoBearing(data))
+        return true;
+    else
+        return false;
+}

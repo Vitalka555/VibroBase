@@ -90,6 +90,7 @@ ApplicationWindow {
                     tool_left1.visible = false
                     tool_left2.visible = false
                     tool_left3.visible = false
+                    tool_left4.visible = false
                 }
                 Text {
                     id: tool_text
@@ -111,6 +112,7 @@ ApplicationWindow {
                     tool_left1.visible = false
                     tool_left2.visible = false
                     tool_left3.visible = false
+                    tool_left4.visible = false
                 }
                 Text {
                     id: tool_text2
@@ -129,9 +131,29 @@ ApplicationWindow {
                     tool_left1.visible = true
                     tool_left2.visible = false
                     tool_left3.visible = false
+                    tool_left4.visible = false
                 }
                 Text {
                     id: tool_text3
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.verticalCenter: parent.verticalCenter
+                    font.pixelSize: 30
+                    text: qsTr("<")
+                }
+            }
+            ToolButton {
+                id: tool_left4
+                visible: false
+                onClicked: {
+                        stackView.replace(bearingSettings)
+                    tool_left.visible = false
+                    tool_left1.visible = false
+                    tool_left2.visible = false
+                    tool_left3.visible = true
+                    tool_left4.visible = false
+                }
+                Text {
+                    id: tool_text4
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     font.pixelSize: 30
@@ -387,6 +409,12 @@ Component.onCompleted: {
             id: bearingSettings
             BearingSettings {
                 id: bearingSettings_0
+            }
+        }
+        Component {
+            id: creatBearing
+            CreatBearing {
+                id: creatBearing_0
             }
         }
     }

@@ -2695,7 +2695,338 @@ Item {
             } //item2
             Item {
                 id: item3
+                Text {
+                    id: text_kolopor
+                    anchors.verticalCenter: inputkolopor.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    font.pixelSize: 15
+                    text: qsTr("Количество опор:")
+                }
+                ComboBox {
+                    id: inputkolopor
+                    anchors.top: parent.top
+                    anchors.topMargin: 5
+                    anchors.left: text_kolopor.right
+                    anchors.leftMargin: 5
+                    width: 60
+                    model: ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+                    editable: true
+                        validator: IntValidator {
+                            top: 8
+                            bottom: 0
+                        }
+                }
+                Button {
+                    id: buttonNext1
+                    visible: false
+                    anchors.verticalCenter: inputkolopor.verticalCenter
+                    anchors.left: inputkolopor.right
+                    anchors.leftMargin: 5
+                    highlighted: true
+                    Material.accent: Material.LightBlue
+                    text: "Далее"
+                    onClicked: {
+                        name0.visible = true
+                        rec01_01.visible = true
+                        text01_01.visible = true
+                        rec02_01.visible = true
+                        text02_01.visible = true
+                        rec03_01.visible = true
+                        text03_01.visible = true
+                        rec04_01.visible = true
+                        text04_01.visible = true
+                        rec05_01.visible = true
+                        text05_01.visible = true
+                        rec06_01.visible = true
+                        text06_01.visible = true
+//                        h0 = name0.height + 5
+//                        h1 = rec01_01.height + 5
+//                        buttonToMethodPP1.visible = true
+//                        for(var i=0; i<inputNumberOfSupports.currentText; i++){
+//                            array_points[i]= []//new Array()
+//                            for(var j=0; j<3; j++){
+//                                array_points[i][j] = null
+//                                console.log(i,j)
+//                            }
+//                        }
+//                        console.log(array_points[0][0])
+
+                        //s = inputNumberOfSupports.currentText
+                        //list.model = s
+
+                    }
             }
+                Text {
+                    id: name0
+                    //visible: false
+                    anchors.top: buttonNext1.bottom
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    font.pixelSize: 15
+                    //color: "white"
+                    text: "Ввод подшипников"
+                }
+                Rectangle {
+                    id: rec01_01
+                    //visible: false
+                    anchors.top: name0.bottom
+                    anchors.topMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    height: text02_01.height*2+10
+                    width: parent.width/20-35/20
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text01_01
+//                        anchors.left: parent.left
+//                        anchors.leftMargin: 5
+//                        anchors.right: parent.right
+//                        anchors.rightMargin: 5
+
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Номер опоры")
+                    }
+                }
+                Rectangle {
+                    id: rec02_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec01_01.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/20-35/20
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text02_01
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Количество")
+                    }
+                }
+                Rectangle {
+                    id: rec03_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec02_01.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/4-35/4
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text03_01
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("ОбозначениеRU")
+                    }
+                }
+                Rectangle {
+                    id: rec04_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec03_01.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/4-35/4
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text04_01
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("ОбозначениеEN")
+                    }
+                }
+                Rectangle {
+                    id: rec05_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec04_01.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/5-35/5
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text05_01
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Расположение")
+                    }
+                }
+                Rectangle {
+                    id: rec06_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec05_01.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/5-35/5
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text06_01
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Тип подшипника")
+                    }
+                }
+                ListView {
+                    id: list
+                    //visible: false
+                    anchors.top: rec01_01.bottom
+                    anchors.topMargin: 5
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    //anchors.bottom: parent.bottom
+                    height: (rec02_01.height+5)*list.model
+                    model: inputkolopor.currentText
+                    spacing: 5
+                    delegate: component
+                    Component.onCompleted: {
+                        console.log(list.height)
+                        console.log(list.model)
+                    }
+                }
+                        Component {
+                            id: component
+                            Item {
+                                id: item0
+            //                    anchors.top: parent.top
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                height: rec01_02.height
+
+                Rectangle {
+                    id: rec01_02
+                    //visible: false
+            //        anchors.top: parent.top
+            //        anchors.topMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/4-25/4
+                    color: "lightblue"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                    Text {
+                        id: text01_02
+            //            anchors.left: parent.left
+            //            anchors.leftMargin: 5
+            //            anchors.right: parent.right
+            //            anchors.rightMargin: 5
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        //visible: false
+                        font.pixelSize: 15
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: index+1
+                        //model: ["О", "Z"]
+                    }
+                }
+                Rectangle {
+                    id: rec02_02
+                    //visible: false
+                    anchors.top: rec01_02.top
+                    //anchors.topMargin: 5
+                    anchors.left: rec01_02.right
+                    anchors.leftMargin: 5
+                    height: text02_01.height
+                    width: parent.width/4-25/4
+                    color: "lightblue"
+                    border.width: 1
+                    border.color: "white"
+                    radius: 5
+                }
+                    Rectangle {
+                        id: rec03_02
+                        //visible: false
+                        anchors.top: rec01_02.top
+                        //anchors.topMargin: 5
+                        anchors.left: rec02_02.right
+                        anchors.leftMargin: 5
+                        height: text02_01.height
+                        width: parent.width/4-25/4
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                    }
+                    Rectangle {
+                        id: rec04_02
+                        //visible: false
+                        anchors.top: rec01_02.top
+                        //anchors.topMargin: 5
+                        anchors.left: rec03_02.right
+                        anchors.leftMargin: 5
+                        height: text02_01.height
+                        width: parent.width/4-25/4
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                    }
+                            }
+                        }
+            }
+
 
 //            CreatBO2 {
 //                id: creatBO2
@@ -2718,18 +3049,18 @@ Item {
             if(tabBar.currentIndex==0){
                 but1.color = "white"
                 but2.color = "lightblue"
-                //but3.color = "lightblue"
+                but3.color = "lightblue"
             }
             if(tabBar.currentIndex==1){
                 but1.color = "lightblue"
                 but2.color = "white"
-                //but3.color = "lightblue"
+                but3.color = "lightblue"
             }
-//            if(tabBar.currentIndex==2){
-//                but1.color = "lightblue"
-//                but2.color = "lightblue"
-//                but3.color = "white"
-//            }
+            if(tabBar.currentIndex==2){
+                but1.color = "lightblue"
+                but2.color = "lightblue"
+                but3.color = "white"
+            }
         }
 
         TabButton {
@@ -2764,22 +3095,22 @@ Item {
 //                but3.color = "lightblue"
 //            }
         }
-//        TabButton {
-//            text: qsTr("Подшипники")
-//            font.pixelSize: 15
-//            //font.family: "Arial"
-//            font.bold: true
-//            background: Rectangle {
-//                id: but3
-//                border.color: "white"
-//                color: "lightblue"
-//            }
+        TabButton {
+            text: qsTr("Подшипники")
+            font.pixelSize: 15
+            //font.family: "Arial"
+            font.bold: true
+            background: Rectangle {
+                id: but3
+                border.color: "white"
+                color: "lightblue"
+            }
 ////            onClicked: {
 ////                but1.color = "lightblue"
 ////                but2.color = "lightblue"
 ////                but3.color = "white"
 ////            }
-//        }
+        }
     }
 
 

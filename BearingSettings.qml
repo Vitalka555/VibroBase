@@ -11,7 +11,6 @@ Item {
         Component.onCompleted: {
             qmlPodsh()
         }
-
         Dialog {
             id: dialog
             x: (parent.width - width) / 2
@@ -50,7 +49,6 @@ Item {
                     text: "Отмена"
                     onClicked: {
                         dialog.close()
-                        timer.running = stackView.running
                     }
                 }
                 Button {
@@ -61,15 +59,11 @@ Item {
                     Material.accent: Material.LightBlue
                     text: "Подтвердить"
                     onClicked: {
-                        database.removeRecord(model0.getId(list.currentIndex))
-                        model0.updateModel()
+                        database.removeRecord(model_podsh.getId(list.currentIndex))
+                        model_podsh.updateModel()
                         dialog.close()
-                        timer.running = stackView.running
                     }
                 }
-            }
-            onOpened: {
-                timer.running = false
             }
         }
         Rectangle {
@@ -167,25 +161,15 @@ Item {
         anchors.right: parent.right
         height: 55
         Component.onCompleted: {
-            filter_kks.text = stackView.kks
-            filter_combo_ceh.currentIndex = stackView.ceh_index
-            filter_zd.text = stackView.zd
-            filter_combo_tipagr.currentIndex = stackView.tipmeh_index
-            if(filter_kks.text!==""){
+            filter_obRU.text = stackView.obRU
+            filter_obEN.text = stackView.obEN
+            if(filter_obRU.text!==""){
                 rec_filter.y = 50
-            }
-            if(filter_combo_ceh.currentIndex!==-1){
-                rec_filter.y = 50
-            }
-            if(filter_zd.text!==""){
-                rec_filter.y = 50
-            }
-            if(filter_combo_tipagr.currentIndex!==-1){
+            }            
+            if(filter_obEN.text!==""){
                 rec_filter.y = 50
             }
         }
-
-        //color: "lightblue"
         Rectangle {
             id: recf1
             anchors.top: parent.top
@@ -197,23 +181,23 @@ Item {
             border.color: "#03a9f5"
             color: "#03a9f5"
             radius: 10
-            width: 220
+            width: 300
             Text {
-                id: f_kks
+                id: f_obRU
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
                 anchors.leftMargin: 5
                 font.pixelSize: 15
                 color: "white"
-                text: "KKS:"
+                text: "ОбозначениеRU:"
             }
             TextField {
-                id: filter_kks
+                id: filter_obRU
                 Material.theme: Material.Dark
                 Material.accent: "white"
                 anchors.top: parent.top
                 anchors.topMargin: 5
-                anchors.left: f_kks.right
+                anchors.left: f_obRU.right
                 anchors.leftMargin: 5
                 color: "white"
                 width: 170
@@ -233,35 +217,34 @@ Item {
                     acceptedButtons: Qt.RightButton
                     anchors.fill: parent
                     onClicked: {
-                        contextMenu_filter_kks.x = mouseX
-                        contextMenu_filter_kks.y = mouseY
-                        contextMenu_filter_kks.open()
+                        contextMenu_filter_obRU.x = mouseX
+                        contextMenu_filter_obRU.y = mouseY
+                        contextMenu_filter_obRU.open()
                     }
                 }
                 Menu {
-                    id: contextMenu_filter_kks
+                    id: contextMenu_filter_obRU
 
                     MenuItem {
                         text: qsTr("Копировать")
-                        enabled: filter_kks.selectedText
-                        onTriggered: filter_kks.copy()
+                        enabled: filter_obRU.selectedText
+                        onTriggered: filter_obRU.copy()
                     }
                     MenuItem {
                         text: qsTr("Вырезать")
-                        enabled: filter_kks.selectedText
-                        onTriggered: filter_kks.cut()
+                        enabled: filter_obRU.selectedText
+                        onTriggered: filter_obRU.cut()
                     }
                     MenuItem {
                         text: qsTr("Вставить")
-                        enabled: filter_kks.canPaste
-                        onTriggered: filter_kks.paste()
+                        enabled: filter_obRU.canPaste
+                        onTriggered: filter_obRU.paste()
                     }
                 }
             }
-
-        }
+        }        
         Rectangle {
-            id: recf2
+            id: recf3
             anchors.top: parent.top
             anchors.topMargin: 5
             anchors.left: recf1.right
@@ -271,104 +254,25 @@ Item {
             border.color: "#03a9f5"
             color: "#03a9f5"
             radius: 10
-            width: 200//220
-            Text {
-                id: f_ceh
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.left: parent.left
-                anchors.leftMargin: 5
-                font.pixelSize: 15
-                color: "white"
-                text: "Цех:"
-            }
-            ComboBox {
-                id: filter_combo_ceh
-                //visible: false
-                property string id: ""
-                currentIndex: -1
-                anchors.verticalCenter: parent.verticalCenter
-                Material.foreground: Material.LightBlue
-                anchors.left: f_ceh.right
-                anchors.leftMargin: 5
-                model: model_ceh
-                textRole: 'Cehname'
-                width: 100
-                //textColor: "white"
-                delegate: ItemDelegate {
-                    Material.foreground: Material.LightBlue
-                    Material.background: Material.LightBlue
-                    width: filter_combo_ceh.width
-                    text: filter_combo_ceh.textRole ? (Array.isArray(filter_combo_ceh.model) ? modelData[filter_combo_ceh.textRole] : model[filter_combo_ceh.textRole]) : modelData
-                    highlighted: filter_combo_ceh.highlightedIndex === index
-                }
-                onCurrentTextChanged: {
-                    stackView.ceh_index = filter_combo_ceh.currentIndex
-                    if(currentIndex==-1){
-                        filter_combo_ceh.id = ""
-                    } else {
-                    filter_combo_ceh.id = model_ceh.getId(currentIndex)
-                    }
-                    but_poisk.clicked()
-                }
-            }
-            Button {
-                id: but_filter_combo_ceh
-                //visible: false
-                anchors.left: filter_combo_ceh.right
-                anchors.leftMargin: 5
-                anchors.verticalCenter: parent.verticalCenter
-                width: height
-                highlighted: true
-                Material.accent: Material.LightBlue
-                Text {
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.pixelSize: 20
-                    color: "white"
-                    text: "X"
-
-                }
-                onClicked: {
-                    filter_combo_ceh.currentIndex = -1
-                    stackView.ceh_index = -1
-                    but_poisk.clicked()
-                }
-            }
-
-        }
-        Rectangle {
-            id: recf3
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.left: recf2.right
-            anchors.leftMargin: 5
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
-            border.color: "#03a9f5"
-            color: "#03a9f5"
-            radius: 10
-            width: 170
+            width: 300
         Text {
-            id: f_zd
+            id: f_obEN
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: 5
             font.pixelSize: 15
             color: "white"
-            text: "Здание:"
+            text: "ОбозначениеEN:"
         }
         TextField {
-            id: filter_zd
+            id: filter_obEN
             Material.theme: Material.Dark
             Material.accent: "white"
             anchors.top: parent.top
             anchors.topMargin: 5
-            anchors.left: f_zd.right
+            anchors.left: f_obEN.right
             anchors.leftMargin: 5
-            width: 100
-            //highlighted: true
-            //Material.accent: Material.LightBlue
-            //placeholderText: "Введите KKS оборудования"
+            width: 170
             focus: true
             selectByMouse: true
             persistentSelection: true
@@ -385,115 +289,35 @@ Item {
                 acceptedButtons: Qt.RightButton
                 anchors.fill: parent
                 onClicked: {
-                    contextMenu_filter_zd.x = mouseX
-                    contextMenu_filter_zd.y = mouseY
-                    contextMenu_filter_zd.open()
+                    contextMenu_filter_obEN.x = mouseX
+                    contextMenu_filter_obEN.y = mouseY
+                    contextMenu_filter_obEN.open()
                 }
             }
             Menu {
-                id: contextMenu_filter_zd
+                id: contextMenu_filter_obEN
 
                 MenuItem {
                     text: qsTr("Копировать")
-                    enabled: filter_zd.selectedText
-                    onTriggered: filter_zd.copy()
+                    enabled: filter_obEN.selectedText
+                    onTriggered: filter_obEN.copy()
                 }
                 MenuItem {
                     text: qsTr("Вырезать")
-                    enabled: filter_zd.selectedText
-                    onTriggered: filter_zd.cut()
+                    enabled: filter_obEN.selectedText
+                    onTriggered: filter_obEN.cut()
                 }
                 MenuItem {
                     text: qsTr("Вставить")
-                    enabled: filter_zd.canPaste
-                    onTriggered: filter_zd.paste()
+                    enabled: filter_obEN.canPaste
+                    onTriggered: filter_obEN.paste()
                 }
-
-               // MenuSeparator {}
-
             }
         }
-    }
-        Rectangle {
-            id: recf4
-            anchors.top: parent.top
-            anchors.topMargin: 5
-            anchors.left: recf3.right
-            anchors.leftMargin: 5
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 5
-            border.color: "#03a9f5"
-            color: "#03a9f5"
-            radius: 10
-            width: 355//220
-        Text {
-            id: f_tipagr
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: 5
-            font.pixelSize: 15
-            color: "white"
-            text: "Тип агрегата:"
-        }
-        ComboBox {
-            id: filter_combo_tipagr
-            property string id: ""
-            currentIndex: -1
-            anchors.verticalCenter: parent.verticalCenter
-            Material.foreground: Material.LightBlue
-            anchors.topMargin: 5
-            anchors.left: f_tipagr.right
-            anchors.leftMargin: 5
-            //displayText:  "Выберите цех"
-            width: 190
-            //Material.background: Material.LightBlue
-            model: model_tipmeh
-            textRole: 'Tipmehname'
-            delegate: ItemDelegate {
-                //id: fdel
-                //Material.foreground: Material.LightBlue
-                Material.foreground: Material.LightBlue
-                Material.background: Material.LightBlue
-                width: filter_combo_tipagr.width
-                text: filter_combo_tipagr.textRole ? (Array.isArray(filter_combo_tipagr.model) ? modelData[filter_combo_tipagr.textRole] : model[filter_combo_tipagr.textRole]) : modelData
-                highlighted: filter_combo_tipagr.highlightedIndex === index
-            }
-            onCurrentTextChanged: {
-                stackView.tipmeh_index = filter_combo_tipagr.currentIndex
-                if(currentIndex==-1){
-                    filter_combo_tipagr.id = ""
-                } else {
-                filter_combo_tipagr.id = model_tipmeh.getId(currentIndex)
-                }
-                but_poisk.clicked()
-            }
-        }
-        Button {
-            id: but_filter_combo_tipagr
-            anchors.left: filter_combo_tipagr.right
-            anchors.leftMargin: 5
-            anchors.verticalCenter: parent.verticalCenter
-            width: height
-            highlighted: true
-            Material.accent: Material.LightBlue
-            Text {
-                anchors.verticalCenter: parent.verticalCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 20
-                color: "white"
-                text: "X"
-
-            }
-            onClicked: {
-                filter_combo_tipagr.currentIndex = -1
-                stackView.tipmeh_index = -1
-                but_poisk.clicked()
-            }
-        }
-        }
+    }        
         Button {
             id: but_poisk
-            anchors.left: recf4.right
+            anchors.left: recf3.right
             anchors.leftMargin: 5
             anchors.verticalCenter: parent.verticalCenter
             height: parent.height
@@ -507,19 +331,9 @@ Item {
                 source: "file:./Images/poisk.png"
             }
             onClicked: {
-                stackView.kks = filter_kks.text
-                stackView.zd = filter_zd.text
-                if(filter_combo_ceh.currentIndex == -1){
-                    stackView.id_ceh = ""
-                } else {
-                    stackView.id_ceh = filter_combo_ceh.id
-                }
-                if(filter_combo_tipagr.currentIndex == -1){
-                    stackView.id_tipmeh = ""
-                } else {
-                    stackView.id_tipmeh = filter_combo_tipagr.id
-                }
-                qmlFilterBO()
+                stackView.obRU = filter_obRU.text
+                stackView.obEN = filter_obEN.text
+                qmlFilterBearing()
             }
         }
 

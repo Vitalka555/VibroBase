@@ -43,6 +43,7 @@ ApplicationWindow {
     signal qmlGetTipMeh()
     signal qmlBackup()
     signal qmlPodsh()
+    signal qmlFilterBearing()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -278,6 +279,9 @@ ApplicationWindow {
         property string yy
         property bool running
         property string time_interval
+        //фильтр подшипников
+        property string obRU: ""
+        property string obEN: ""
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

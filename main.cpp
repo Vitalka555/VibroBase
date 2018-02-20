@@ -236,7 +236,8 @@ DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlSignalWritePath()), datab, SLOT(writeSettings()));//запись в settings.ini
         QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));//чтение из settings.ini
         QObject::connect(root, SIGNAL(qmlSignalWriteWindow()), datab, SLOT(writeSettingsWindow()));//запись геометрии окна в ini
-        QObject::connect(root, SIGNAL(qmlPodsh()), model_podsh, SLOT(updateModel()));//запись геометрии окна в ini
+        QObject::connect(root, SIGNAL(qmlPodsh()), model_podsh, SLOT(updateModel()));//загрузка в таблицу подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing()), model_podsh, SLOT(updateModel()));//фильтр в таблице подшипников
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);

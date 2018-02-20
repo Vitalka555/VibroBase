@@ -3480,25 +3480,16 @@ QHash<int, QByteArray> ListModelPodsh::roleNames() const {
 // Метод обновления таблицы в модели представления данных
 void ListModelPodsh::updateModel()
 {
-//    QObject* stack = this->parent()->findChild<QObject*>("stackView");
-//    QString kks=(stack->property("kks")).toString();
-//    QString id_ceh=(stack->property("id_ceh")).toString();
-//    QString zd=(stack->property("zd")).toString();
-//    QString id_tipmeh=(stack->property("id_tipmeh")).toString();
-//    QString ceh_filter = " and Baza.id_Ceh = " + id_ceh;
-//    QString tipmeh_filter = " and Baza.id_TipMehanizma = " + id_tipmeh;
-//    if(id_ceh == ""){
-//        ceh_filter = "";
-//    }
-//    if(id_tipmeh == ""){
-//        tipmeh_filter = "";
-//    }
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString obRU=(stack->property("obRU")).toString();
+    QString obEN=(stack->property("obEN")).toString();
     QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BasePodsh.id, BasePodsh.Oboznachenie, BasePodsh.OboznachenieEN, BasePodsh.dvnutr, BasePodsh.Dnaruzh, BasePodsh.B, "
                    "BasePodsh.dtk, BasePodsh.ztk, BasePodsh.Ugol, BasePodsh.Massa, BasePodsh.Static, BasePodsh.Dinamic, BasePodsh.Name "
-                   "FROM BasePodsh ORDER BY BasePodsh.Oboznachenie");
+                   "FROM BasePodsh WHERE BasePodsh.Oboznachenie LIKE '%"+obRU+"%' and BasePodsh.OboznachenieEN LIKE '%"+obEN+"%' "
+                   "ORDER BY BasePodsh.Oboznachenie");
     while(this->canFetchMore()){
         this->fetchMore();
     }

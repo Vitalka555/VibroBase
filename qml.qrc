@@ -36,5 +36,6 @@
         <file>VibrationSettings.qml</file>
         <file>BearingSettings.qml</file>
         <file>CreatBearing.qml</file>
+        <file>AddBearing.qml</file>
     </qresource>
 </RCC>

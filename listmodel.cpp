@@ -3505,3 +3505,62 @@ int ListModelPodsh::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// \brief ListModelOpenPodsh::updateModel
+///
+ListModelOpenPodsh::ListModelOpenPodsh(QObject *parent) :
+    QSqlQueryModel(parent)
+{
+    this->updateModel();
+}
+
+// Метод для получения данных из модели
+QVariant ListModelOpenPodsh::data(const QModelIndex & index, int role) const {
+
+    // Определяем номер колонки, адрес так сказать, по номеру роли
+    int columnId = role - Qt::UserRole - 1;
+    // Создаём индекс с помощью новоиспечённого ID колонки
+    QModelIndex modelIndex = this->index(index.row(), columnId);
+
+    /* И с помощью уже метода data() базового класса
+     * вытаскиваем данные для таблицы из модели
+     * */
+    return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
+}
+
+// Метод для получения имен ролей через хешированную таблицу.
+QHash<int, QByteArray> ListModelOpenPodsh::roleNames() const {
+    /* То есть сохраняем в хеш-таблицу названия ролей
+     * по их номеру
+     * */
+    QHash<int, QByteArray> roles;
+    roles[IdRole] = "id";
+    return roles;
+}
+
+void ListModelOpenPodsh::updateModel()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString bearing_id=(stack->property("bearing_id")).toString();
+    QString bearing_id_filter = " WHERE BasePodsh.id = " + bearing_id;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    // Обновление производится SQL-запросом к базе данных
+    this->setQuery("SELECT BasePodsh.id, BasePodsh.Name, BasePodsh.Oboznachenie, BasePodsh.OboznachenieEN, BasePodsh.dvnutr, BasePodsh.Dnaruzh, BasePodsh.B, "
+                   "BasePodsh.dtk, BasePodsh.ztk, BasePodsh.Ugol, BasePodsh.Massa, BasePodsh.Static, BasePodsh.Dinamic "
+                   "FROM BasePodsh " + bearing_id_filter + " ORDER BY BasePodsh.Oboznachenie");
+    while(this->canFetchMore()){
+        this->fetchMore();
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
+}
+
+// Получение id из строки в модели представления данных
+int ListModelOpenPodsh::getId(int row)
+{
+    return this->data(this->index(row, 0), IdRole).toInt();
+}

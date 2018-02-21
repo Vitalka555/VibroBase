@@ -59,7 +59,7 @@ Item {
                     Material.accent: Material.LightBlue
                     text: "Подтвердить"
                     onClicked: {
-                        database.removeRecord(model_podsh.getId(list.currentIndex))
+                        database.removeRecordBearing(model_podsh.getId(list.currentIndex))
                         model_podsh.updateModel()
                         dialog.close()
                     }
@@ -374,13 +374,13 @@ footer:    ToolBar {
             text: "Редактировать"
             onClicked: {
                 //list.currentIndex = model.index
-                window.index = list.currentIndex
-                stackView.baza_id = model0.getId(list.currentIndex)
-                console.log("id= ", stackView.baza_id)
-                qmlSignal_baza_id()
-                    stackView.replace(addBO)
-                    tool_left.visible = false
-                    tool_left1.visible = true
+                window.index_bearing = list.currentIndex
+                stackView.bearing_id = model_podsh.getId(list.currentIndex)
+                console.log("bearing_id= ", stackView.bearing_id)
+                qmlSignal_bearing_id()
+                    stackView.replace(addBearing)
+                    tool_left3.visible = false
+                    tool_left4.visible = true
             }
         }
         ToolButton {
@@ -646,10 +646,7 @@ footer:    ToolBar {
                     focus: true
                     headerPositioning: ListView.OverlayHeader
                     spacing: 2
-                    //currentSection: current
-                    currentIndex: window.index
-                    //highlight: highlightBar
-                    //highlightFollowsCurrentItem: false
+                    currentIndex: window.index_bearing
                     ScrollBar.vertical: ScrollBar { id: vbar;
                                                 hoverEnabled: true
                                                 active: hovered || pressed
@@ -660,9 +657,7 @@ footer:    ToolBar {
                                                 anchors.bottom: parent.bottom
                                                 width: 10
                                     }
-
                 }
-
                 Component {
                     id: delegate
 
@@ -684,11 +679,6 @@ footer:    ToolBar {
                             radius: 10
                             opacity: 0.8
                             color: item_table.col
-                            //border.color: Qt.lighter(color, 1.1)
-                            //color: "lightblue"
-
-
-
                             RowLayout {
                                 id: lay1
                                 anchors.fill: parent
@@ -715,7 +705,6 @@ footer:    ToolBar {
                             radius: 10
                             opacity: 0.8
                             color: item_table.col
-
                             RowLayout {
                                 id: lay2
                                 anchors.fill: parent
@@ -780,6 +769,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_dvn
+                                    Component.onCompleted: text4.text = text4.text.replace(".", ",")
                                 }
                             }
                         }
@@ -806,6 +796,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_dnar
+                                    Component.onCompleted: text5.text = text5.text.replace(".", ",")
                                 }
                             }
                         }
@@ -832,6 +823,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_b
+                                    Component.onCompleted: text6.text = text6.text.replace(".", ",")
                                 }
                             }
                         }
@@ -858,6 +850,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_dtk
+                                    Component.onCompleted: text7.text = text7.text.replace(".", ",")
                                 }
                             }
                         }
@@ -910,6 +903,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_a
+                                    Component.onCompleted: text9.text = text9.text.replace(".", ",")
                                 }
                             }
                         }
@@ -936,6 +930,7 @@ footer:    ToolBar {
                                     font.pixelSize: 15
                                     color: "#2e2efb"//"#3E65FF"
                                     text: podsh_massa
+                                    Component.onCompleted: text10.text = text10.text.replace(".", ",")
                                 }
                             }
                         }
@@ -978,18 +973,19 @@ footer:    ToolBar {
                             anchors.fill: parent
                             onClicked: {
                                 list.currentIndex = model.index//model0.index()
-                                //list.current = list.currentSection
+                                window.index_bearing = list.currentIndex
+                                stackView.bearing_id = model_podsh.getId(list.currentIndex)
                             }
-                            onDoubleClicked: {
-                                list.currentIndex = model.index
-                                window.index = list.currentIndex
-                                stackView.baza_id = model0.getId(list.currentIndex)
-                                console.log("id= ", stackView.baza_id)
-                                qmlSignal_baza_id()
-                                    stackView.replace(openBO)
-                                    tool_left.visible = false
-                                    tool_left1.visible = true
-                                }
+//                            onDoubleClicked: {
+//                                list.currentIndex = model.index
+//                                window.index = list.currentIndex
+//                                stackView.baza_id = model0.getId(list.currentIndex)
+//                                console.log("id= ", stackView.baza_id)
+//                                qmlSignal_baza_id()
+//                                    stackView.replace(openBO)
+//                                    tool_left.visible = false
+//                                    tool_left1.visible = true
+//                                }
                         }
                     }//item_table
                 }//delegate

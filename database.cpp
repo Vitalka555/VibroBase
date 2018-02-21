@@ -2329,3 +2329,87 @@ bool DataBase::insertIntoBearing(const QString &name, const QString &obRU, const
     else
         return false;
 }
+
+bool DataBase::editBearing(const QVariantList &data)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+   QSqlQuery quer;
+   quer.prepare("update BasePodsh set Name = :name, Oboznachenie = :obRU, OboznachenieEN = :obEN, dvnutr = :d, Dnaruzh = :D, "
+                "B = :B, dtk = :dtk, ztk = :z, Ugol = :u, "
+                "Massa = :m, Static = :stat, Dinamic = :dinam where BasePodsh.id = :id");
+   quer.bindValue(":name",       data[0].toString()=="" ? QVariant(QVariant::String):data[0].toString());
+   quer.bindValue(":obRU",       data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   quer.bindValue(":obEN",       data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+   quer.bindValue(":d",          data[3].toString()=="" ? QVariant(QVariant::String):data[3].toReal());
+   quer.bindValue(":D",          data[4].toString()=="" ? QVariant(QVariant::String):data[4].toReal());
+   quer.bindValue(":B",          data[5].toString()=="" ? QVariant(QVariant::String):data[5].toReal());
+   quer.bindValue(":dtk",        data[6].toString()=="" ? QVariant(QVariant::String):data[6].toReal());
+   quer.bindValue(":z",          data[7].toString()=="" ? QVariant(QVariant::String):data[7].toInt());
+   quer.bindValue(":u",          data[8].toString()=="" ? QVariant(QVariant::String):data[8].toReal());
+   quer.bindValue(":m",          data[9].toString()=="" ? QVariant(QVariant::String):data[9].toReal());
+   quer.bindValue(":stat",       data[10].toString()=="" ? QVariant(QVariant::String):data[10].toInt());
+   quer.bindValue(":dinam",      data[11].toString()=="" ? QVariant(QVariant::String):data[11].toInt());
+   quer.bindValue(":id",         data[12].toString()=="" ? QVariant(QVariant::String):data[12].toInt());
+
+   if(!quer.exec()){
+       return false;
+   } else {
+       return true;
+   }
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
+   }
+   return false;
+}
+
+bool DataBase::editBearing(const QString &name, const QString &obRU, const QString &obEN, const QString &d,
+                           const QString &D, const QString &B, const QString &dtk, const QString &z, const QString &u,
+                           const QString &m, const QString &stat, const QString &dinam, const QString &id){
+    QVariantList data;
+    data.append(name);
+    data.append(obRU);
+    data.append(obEN);
+    data.append(d);
+    data.append(D);
+    data.append(B);
+    data.append(dtk);
+    data.append(z);
+    data.append(u);
+    data.append(m);
+    data.append(stat);
+    data.append(dinam);
+    data.append(id);
+    if(editBearing(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::removeRecordBearing(const int id)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM BasePodsh WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << otkazrd;
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
+    return false;
+}

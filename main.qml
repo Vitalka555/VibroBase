@@ -44,10 +44,12 @@ ApplicationWindow {
     signal qmlBackup()
     signal qmlPodsh()
     signal qmlFilterBearing()
+    signal qmlSignal_bearing_id()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
-    property int newindex: -1    
+    property int newindex: -1
+    property int index_bearing: 0
 
     onClosing: {
         stackView.wwidth = window.width
@@ -304,6 +306,7 @@ ApplicationWindow {
         //фильтр подшипников
         property string obRU: ""
         property string obEN: ""
+        property string bearing_id: ""
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)
@@ -415,6 +418,12 @@ Component.onCompleted: {
             id: creatBearing
             CreatBearing {
                 id: creatBearing_0
+            }
+        }
+        Component {
+            id: addBearing
+            AddBearing {
+                id: addBearing_0
             }
         }
     }

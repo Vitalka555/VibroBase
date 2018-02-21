@@ -131,6 +131,7 @@ QQuickStyle::setStyle("Material");
     DataMapper *mapper_izmer = new DataMapper();
     DataMapper *mapper_openBI = new DataMapper();
     DataMapper *mapper_norm_creatBI = new DataMapper();
+    DataMapper *mapper_open_podsh = new DataMapper();
 
     // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
     //engine.rootContext()->setContextProperty("model0", model0);
@@ -170,6 +171,7 @@ QQuickStyle::setStyle("Material");
     engine.rootContext()->setContextProperty("mapper_izmer", mapper_izmer);
     engine.rootContext()->setContextProperty("mapper_openBI", mapper_openBI);
     engine.rootContext()->setContextProperty("mapper_norm_creatBI", mapper_norm_creatBI);
+    engine.rootContext()->setContextProperty("mapper_open_podsh", mapper_open_podsh);
     engine.rootContext()->setContextProperty("database", &database);
     //engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
     //engine.setOfflineStoragePath("D:\\Projects\\build-V3_0-Desktop_Qt_5_10_0_MinGW_32bit4-Debug\\debug\\sqlite.db");
@@ -204,6 +206,7 @@ ListModelKKS *model_kks = new ListModelKKS(root);
 ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
 ListModelStatIzmerAgr *model_stat = new ListModelStatIzmerAgr(root);
 ListModelPodsh *model_podsh = new ListModelPodsh(root);
+ListModelOpenPodsh *model_open_podsh = new ListModelOpenPodsh(root);
 
 ListModel *model0 = new ListModel(root);
 
@@ -238,6 +241,7 @@ DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlSignalWriteWindow()), datab, SLOT(writeSettingsWindow()));//запись геометрии окна в ini
         QObject::connect(root, SIGNAL(qmlPodsh()), model_podsh, SLOT(updateModel()));//загрузка в таблицу подшипников
         QObject::connect(root, SIGNAL(qmlFilterBearing()), model_podsh, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlSignal_bearing_id()), model_open_podsh, SLOT(updateModel()));//вытаскиваем данные конкретного подшипника
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);
@@ -248,11 +252,13 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_openBI", model_openBI);
         engine.rootContext()->setContextProperty("model_stat", model_stat);
         engine.rootContext()->setContextProperty("model_podsh", model_podsh);
+        engine.rootContext()->setContextProperty("model_open_podsh", model_open_podsh);
 
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);
 mapper_openBI->setModel(model_openBI);
 mapper_norm_creatBI->setModel(model_norm_creatBI);
+mapper_open_podsh->setModel(model_open_podsh);
 
 //mapper_maxlevel->setModel(model_maxlevel);
 //mapper_1V->setModel(model_1V);

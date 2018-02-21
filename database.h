@@ -360,6 +360,11 @@ public slots:
     bool insertIntoBearing(const QString &name, const QString &obRU, const QString &obEN, const QString &d,
                            const QString &D, const QString &B, const QString &dtk, const QString &z, const QString &u,
                            const QString &m, const QString &stat, const QString &dinam);
+    bool editBearing(const QVariantList &data);
+    bool editBearing(const QString &name, const QString &obRU, const QString &obEN, const QString &d,
+                     const QString &D, const QString &B, const QString &dtk, const QString &z, const QString &u,
+                     const QString &m, const QString &stat, const QString &dinam, const QString &id);
+    bool removeRecordBearing(const int id);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id

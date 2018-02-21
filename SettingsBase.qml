@@ -5,6 +5,9 @@ import QtQuick.Controls.Material 2.2
 Item {
     id: item
     Rectangle {
+        id: page
+        anchors.fill: parent
+    Rectangle {
         id: rec_buttons
         anchors.centerIn: parent
         width: text_common.width
@@ -133,5 +136,5 @@ Item {
             }
         }
     }
-
+}
 }

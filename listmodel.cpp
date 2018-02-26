@@ -3076,8 +3076,9 @@ void ListModelIzmer::updateModel()
          " IFNULL(BazaIzmereni.'7В', 0), IFNULL(BazaIzmereni.'7П', 0), IFNULL(BazaIzmereni.'7О', 0),"
          " IFNULL(BazaIzmereni.'8В', 0), IFNULL(BazaIzmereni.'8П', 0), IFNULL(BazaIzmereni.'8О', 0))"
          " FROM BazaIzmereni Bz WHERE Bz.id= BazaIzmereni.id), "
-         " (SELECT (CASE WHEN (SELECT MAX(IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
-         "IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
+         " (SELECT (CASE WHEN (SELECT MAX("
+                   //"IFNULL(BazaIzmereni.'1В',0), IFNULL(BazaIzmereni.'1П',0), IFNULL(BazaIzmereni.'1О',0), "
+         //"IFNULL(BazaIzmereni.'2В',0), IFNULL(BazaIzmereni.'2П',0), IFNULL(BazaIzmereni.'2О',0), "
          "IFNULL(BazaIzmereni.'3В',0), IFNULL(BazaIzmereni.'3П',0), IFNULL(BazaIzmereni.'3О',0), "
          "IFNULL(BazaIzmereni.'4В',0), IFNULL(BazaIzmereni.'4П',0), IFNULL(BazaIzmereni.'4О',0), "
          "IFNULL(BazaIzmereni.'5В',0), IFNULL(BazaIzmereni.'5П',0), IFNULL(BazaIzmereni.'5О',0), "
@@ -3435,7 +3436,7 @@ int ListModelIzmerOpenBI::getId(int row)
 /// \param parent
 ///
 ListModelPodsh::ListModelPodsh(QObject *parent) :
-    QSqlQueryModel(parent)
+    BaseClass(parent)
 {
     this->updateModel();
 }

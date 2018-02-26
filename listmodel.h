@@ -1255,6 +1255,8 @@ public slots:
 
 class ListModelPodsh : public QSqlQueryModel
 {
+    using BaseClass = QSqlQueryModel;
+
     Q_OBJECT
 public:
     /* Перечисляем все роли, которые будут использоваться в TableView

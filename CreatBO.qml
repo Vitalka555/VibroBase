@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.3
 import QtQuick.Layouts 1.3
 import QtQuick.Controls.Material 2.2
 import QtQuick.Dialogs 1.2
+import Podsh 1.0
 
 Item {
     id: item
@@ -2740,26 +2741,10 @@ Item {
                         text05_01.visible = true
                         rec06_01.visible = true
                         text06_01.visible = true
-//                        h0 = name0.height + 5
-//                        h1 = rec01_01.height + 5
-//                        buttonToMethodPP1.visible = true
-//                        for(var i=0; i<inputNumberOfSupports.currentText; i++){
-//                            array_points[i]= []//new Array()
-//                            for(var j=0; j<3; j++){
-//                                array_points[i][j] = null
-//                                console.log(i,j)
-//                            }
-//                        }
-//                        console.log(array_points[0][0])
-
-                        //s = inputNumberOfSupports.currentText
-                        //list.model = s
-
                     }
             }
                 Text {
                     id: name0
-                    //visible: false
                     anchors.top: buttonNext1.bottom
                     anchors.left: parent.left
                     anchors.leftMargin: 5
@@ -2774,7 +2759,7 @@ Item {
                     anchors.topMargin: 5
                     anchors.left: parent.left
                     anchors.leftMargin: 5
-                    height: text02_01.height*2+10
+                    height: text01_01.height+10
                     width: parent.width/20-35/20
                     color: "#03a9f5"
                     border.width: 1
@@ -2782,17 +2767,16 @@ Item {
                     radius: 5
                     Text {
                         id: text01_01
-//                        anchors.left: parent.left
-//                        anchors.leftMargin: 5
-//                        anchors.right: parent.right
-//                        anchors.rightMargin: 5
-
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
-                        //visible: false
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
-                        //color: "white"
-                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        wrapMode: Text.Wrap
                         text: qsTr("Номер опоры")
                     }
                 }
@@ -2802,7 +2786,7 @@ Item {
                     anchors.top: rec01_01.top
                     anchors.left: rec01_01.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
+                    height: text01_01.height+10
                     width: parent.width/20-35/20
                     color: "#03a9f5"
                     border.width: 1
@@ -2810,15 +2794,16 @@ Item {
                     radius: 5
                     Text {
                         id: text02_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 5
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        //visible: false
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
-                        //color: "white"
-                        wrapMode: Text.WordWrap
+                        maximumLineCount: 2
+                        wrapMode: Text.Wrap
                         text: qsTr("Количество")
                     }
                 }
@@ -2828,7 +2813,7 @@ Item {
                     anchors.top: rec01_01.top
                     anchors.left: rec02_01.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
+                    height: text01_01.height+10
                     width: parent.width/4-35/4
                     color: "#03a9f5"
                     border.width: 1
@@ -2836,12 +2821,13 @@ Item {
                     radius: 5
                     Text {
                         id: text03_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 5
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        //visible: false
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
                         //color: "white"
                         wrapMode: Text.WordWrap
@@ -2854,7 +2840,7 @@ Item {
                     anchors.top: rec01_01.top
                     anchors.left: rec03_01.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
+                    height: text01_01.height+10
                     width: parent.width/4-35/4
                     color: "#03a9f5"
                     border.width: 1
@@ -2862,12 +2848,13 @@ Item {
                     radius: 5
                     Text {
                         id: text04_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 5
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        //visible: false
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
                         //color: "white"
                         wrapMode: Text.WordWrap
@@ -2880,7 +2867,7 @@ Item {
                     anchors.top: rec01_01.top
                     anchors.left: rec04_01.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
+                    height: text01_01.height+10
                     width: parent.width/5-35/5
                     color: "#03a9f5"
                     border.width: 1
@@ -2888,12 +2875,13 @@ Item {
                     radius: 5
                     Text {
                         id: text05_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 5
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        //visible: false
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
                         //color: "white"
                         wrapMode: Text.WordWrap
@@ -2906,7 +2894,7 @@ Item {
                     anchors.top: rec01_01.top
                     anchors.left: rec05_01.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
+                    height: text01_01.height+10
                     width: parent.width/5-35/5
                     color: "#03a9f5"
                     border.width: 1
@@ -2914,86 +2902,64 @@ Item {
                     radius: 5
                     Text {
                         id: text06_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.horizontalCenter: parent.horizontalCenter
                         anchors.left: parent.left
                         anchors.leftMargin: 5
                         anchors.right: parent.right
                         anchors.rightMargin: 5
-                        anchors.verticalCenter: parent.verticalCenter
-                        //visible: false
+                        horizontalAlignment: TextInput.AlignHCenter
                         font.pixelSize: 15
                         //color: "white"
                         wrapMode: Text.WordWrap
                         text: qsTr("Тип подшипника")
                     }
                 }
-                ListView {
-                    id: list
-                    //visible: false
-                    anchors.top: rec01_01.bottom
-                    anchors.topMargin: 5
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    //anchors.bottom: parent.bottom
-                    height: (rec02_01.height+5)*list.model
-                    model: inputkolopor.currentText
-                    spacing: 5
-                    delegate: component
-                    Component.onCompleted: {
-                        console.log(list.height)
-                        console.log(list.model)
-                    }
-                }
-                        Component {
-                            id: component
-                            Item {
-                                id: item0
-            //                    anchors.top: parent.top
-                                anchors.left: parent.left
-                                anchors.right: parent.right
-                                height: rec01_02.height
-
                 Rectangle {
                     id: rec01_02
-                    //visible: false
-            //        anchors.top: parent.top
-            //        anchors.topMargin: 5
                     anchors.left: parent.left
                     anchors.leftMargin: 5
-                    height: text02_01.height
-                    width: parent.width/4-25/4
+                    anchors.top: rec01_01.bottom
+                    anchors.topMargin: 5
+                    height: combo_kol_podsh.height+10
+                    width: rec01_01.width
                     color: "lightblue"
                     border.width: 1
                     border.color: "white"
                     radius: 5
                     Text {
                         id: text01_02
-            //            anchors.left: parent.left
-            //            anchors.leftMargin: 5
-            //            anchors.right: parent.right
-            //            anchors.rightMargin: 5
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
                         //visible: false
                         font.pixelSize: 15
-                        //color: "white"
                         wrapMode: Text.WordWrap
-                        text: index+1
-                        //model: ["О", "Z"]
+                        text: "1"
                     }
                 }
                 Rectangle {
                     id: rec02_02
-                    //visible: false
                     anchors.top: rec01_02.top
-                    //anchors.topMargin: 5
                     anchors.left: rec01_02.right
                     anchors.leftMargin: 5
-                    height: text02_01.height
-                    width: parent.width/4-25/4
+                    height: combo_kol_podsh.height+10
+                    width: rec02_01.width
                     color: "lightblue"
                     border.width: 1
                     border.color: "white"
                     radius: 5
+                    ComboBox {
+                        id: combo_kol_podsh
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width-10
+                        model: ["1", "2"]
+                        editable: true
+                            validator: IntValidator {
+                                top: 2
+                                bottom: 1
+                            }
+                    }
                 }
                     Rectangle {
                         id: rec03_02
@@ -3002,38 +2968,145 @@ Item {
                         //anchors.topMargin: 5
                         anchors.left: rec02_02.right
                         anchors.leftMargin: 5
-                        height: text02_01.height
-                        width: parent.width/4-25/4
+                        height: combo_kol_podsh.height+10
+                        width: rec03_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                        ComboBox {
+                            id: combo_obRU
+                            currentIndex: -1
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width-but_obRU.width-15
+                            editable: true
+                            inputMethodHints: Qt.ImhNoPredictiveText
+                            textRole: 'podsh_obRU'
+                            delegate: ItemDelegate {
+                                width: combo_obRU.width
+                                text: combo_obRU.textRole ? (Array.isArray(combo_obRU.model) ? modelData[combo_obRU.textRole] : model[combo_obRU.textRole]) : modelData
+                                highlighted: combo_obRU.highlightedIndex === index
+                            }
+                            onCurrentTextChanged: {
+                                combo_obEN.currentIndex = combo_obRU.currentIndex
+                                if(currentIndex==-1){
+                                    //combo_obRU.id = ""
+                                } else {
+                                    //combo_obRU.id = newmodel.getId(currentIndex)
+                                }
+                            }
+                        }
+                        Button {
+                            id: but_obRU
+                            anchors.top: combo_obRU.top
+                            anchors.left: combo_obRU.right
+                            anchors.leftMargin: 5
+                            width: height - 10
+                            highlighted: true
+                            Material.accent: Material.LightBlue
+                            Image {
+                                id: im_poisk
+                                anchors.fill: parent
+                                fillMode: Image.PreserveAspectFit
+                                source: "file:./Images/poisk.png"
+                            }
+                            onClicked: {
+                                stackView.obRU = combo_obRU.editText
+                                stackView.obEN = ""
+                                qmlFilterBearing()
+                                combo_obRU.model = model_podsh
+                                combo_obEN.model = model_podsh
+                                combo_obRU.popup.visible = true
+                            }
+                        }
+                    }
+                    Rectangle {
+                        id: rec04_02
+                        anchors.top: rec01_02.top
+                        anchors.left: rec03_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh.height+10
+                        width: rec04_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                        ComboBox {
+                            id: combo_obEN
+                            currentIndex: -1
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width-but_obEN.width-15
+                            editable: true
+                            inputMethodHints: Qt.ImhNoPredictiveText
+                            textRole: 'podsh_obEN'
+                            delegate: ItemDelegate {
+                                //Material.foreground: Material.LightBlue
+                                width: combo_obEN.width
+                                text: combo_obEN.textRole ? (Array.isArray(combo_obEN.model) ? modelData[combo_obEN.textRole] : model[combo_obEN.textRole]) : modelData
+                                highlighted: combo_obEN.highlightedIndex === index
+                            }
+                            onCurrentTextChanged: {
+                                combo_obRU.currentIndex = combo_obEN.currentIndex
+                                if(currentIndex==-1){
+                                    //combo_obRU.id = ""
+                                } else {
+                                    //combo_obRU.id = newmodel.getId(currentIndex)
+                                }
+                            }
+                        }
+                        Button {
+                            id: but_obEN
+                            anchors.top: combo_obEN.top
+                            anchors.left: combo_obEN.right
+                            anchors.leftMargin: 5
+                            width: height - 10
+                            highlighted: true
+                            Material.accent: Material.LightBlue
+                            Image {
+                                id: im_poiskEN
+                                anchors.fill: parent
+                                fillMode: Image.PreserveAspectFit
+                                source: "file:./Images/poisk.png"
+                            }
+                            onClicked: {
+                                stackView.obEN = combo_obEN.editText
+                                stackView.obRU = ""
+                                qmlFilterBearing()
+                                combo_obEN.model = model_podsh
+                                combo_obRU.model = model_podsh
+                                combo_obEN.popup.visible = true
+                            }
+                        }
+                    }
+                    Rectangle {
+                        id: rec05_02
+                        anchors.top: rec01_02.top
+                        anchors.left: rec04_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh.height+10
+                        width: rec05_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
                     }
                     Rectangle {
-                        id: rec04_02
-                        //visible: false
+                        id: rec06_02
                         anchors.top: rec01_02.top
-                        //anchors.topMargin: 5
-                        anchors.left: rec03_02.right
+                        anchors.left: rec05_02.right
                         anchors.leftMargin: 5
-                        height: text02_01.height
-                        width: parent.width/4-25/4
+                        height: combo_kol_podsh.height+10
+                        width: rec06_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
                     }
                             }
-                        }
-            }
-
-
-//            CreatBO2 {
-//                id: creatBO2
-//            }
-//            CreatBO3 {
-//                id: сreatBO3
-//            }
         }
         TabBar {
         id: tabBar

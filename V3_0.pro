@@ -17,7 +17,9 @@ SOURCES += main.cpp \
     listmodel.cpp \
     datamapper.cpp \
     copyfile.cpp \
-    stat.cpp
+    stat.cpp \
+    modelpodsh.cpp \
+    filterproxymodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -37,6 +39,8 @@ HEADERS += \
     listmodel.h \
     datamapper.h \
     copyfile.h \
-    stat.h
+    stat.h \
+    modelpodsh.h \
+    filterproxymodel.h
 QT_QUICK_CONTROLS_STYLE=material ./app
 

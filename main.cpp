@@ -21,6 +21,8 @@
 #include "datamapper.h"
 #include "copyfile.h"
 #include "stat.h"
+#include "modelpodsh.h"
+#include "filterproxymodel.h"
 
 static const int LOAD_TIME_MSEC = 3 * 1000;
 static const int PROGRESS_X_PX = 210;
@@ -32,7 +34,7 @@ static const int PROGRESS_HEIGHT_PX = 28;
 
 int main(int argc, char *argv[])
 {
-    //QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
+    QCoreApplication::setAttribute(Qt::AA_UseSoftwareOpenGL);
     //QLocale::setDefault(QLocale::C);
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
@@ -40,7 +42,7 @@ int main(int argc, char *argv[])
     //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 QApplication::setStyle("Material");
 QQuickStyle::setStyle("Material");
@@ -119,9 +121,7 @@ QQuickStyle::setStyle("Material");
     ListModelTipIzmer *model_tipizmer = new ListModelTipIzmer();
     ListModelLAES *model_laes = new ListModelLAES();
     ListModelATE *model_ate = new ListModelATE();
-    //ListModelKKSfull *model_kksfull = new ListModelKKSfull();
 
-    //ListModel1V *model_1V = new ListModel1V();
 
 
     //ListModel0 *model0 = new ListModel0();
@@ -179,7 +179,7 @@ QQuickStyle::setStyle("Material");
 
 
 
-
+qmlRegisterType<ModelPodsh>("Podsh", 1, 0, "ModelPodsh");
     engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 //применяем настройки окна из ini
     QString path = QDir::currentPath()+"/settings.ini"; //путь хранения ini файла
@@ -253,6 +253,10 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_stat", model_stat);
         engine.rootContext()->setContextProperty("model_podsh", model_podsh);
         engine.rootContext()->setContextProperty("model_open_podsh", model_open_podsh);
+
+
+
+//qmlRegisterType<model_podsh>("SQLHelper", 1, 0, "ListModelPodsh");
 
 mapper->setModel(model_openBO);
 mapper_izmer->setModel(model_izmer);

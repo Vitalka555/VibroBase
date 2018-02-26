@@ -121,7 +121,6 @@ Rectangle{
             width: 200
             editable: true
             inputMethodHints: Qt.ImhNone
-
             textRole: 'kksname'
             delegate: ItemDelegate {
                 //Material.foreground: Material.LightBlue

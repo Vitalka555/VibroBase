@@ -1894,6 +1894,19 @@ Item {
                                     qmlSignal_baza_id()
                                     list1.currentIndex = -1
                                     station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
+                                    if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))<=1){
+                                        middleGradient.color = "LimeGreen"
+                                        finishGradient.color = "LimeGreen"
+                                        finishGradient0.color = "LimeGreen"
+                                        console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                    } else {
+                                        middleGradient.position = Number.parseFloat(text_normagr_nom.text.replace(",", "."))/Number.parseFloat(stackView.maxlevel)
+                                        middleGradient.color = "yellow"
+                                        finishGradient.color = "tomato"
+                                        finishGradient0.color = "tomato"
+                                        console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                        console.log("middleGradient.position", middleGradient.position)
+                                    }
                                 }
                             }
                             NumberAnimation {
@@ -1926,6 +1939,19 @@ Item {
                                     qmlSignal_baza_id()
                                     list1.currentIndex = -1
                                     station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
+                                    if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))<=1){
+                                        middleGradient.color = "LimeGreen"
+                                        finishGradient.color = "LimeGreen"
+                                        finishGradient0.color = "LimeGreen"
+                                        console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                    } else {
+                                        middleGradient.position = Number.parseFloat(text_normagr_nom.text.replace(",", "."))/Number.parseFloat(stackView.maxlevel)
+                                        middleGradient.color = "yellow"
+                                        finishGradient.color = "tomato"
+                                        finishGradient0.color = "tomato"
+                                        console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                        console.log("middleGradient.position", middleGradient.position)
+                                    }
                                 }
                             }
                             NumberAnimation {
@@ -1992,20 +2018,33 @@ Item {
                             stackView.rezhim_id = combo_rezhim.id
                             stackView.bazaizm_id = ""
                             qmlSignal_baza_id()
-                            console.log("maxlevel in stack = ", stackView.maxlevel)
+//                            console.log("maxlevel in stack = ", stackView.maxlevel)
+//                            console.log("max/norm_hh = ", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))
                             if(combo_rezhim.currentIndex == 0){                                
                                 list1.currentIndex = -1
                                 station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
-                            if((stackView.maxlevel/text_norm_hh.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_norm_hh.text)>1){
-                                middleGradient.position = text_norm_hh.text/stackView.maxlevel
-                                finishGradient.position = 1
-                                middleGradient.color = "yellow"
-                                finishGradient.color = "red"
-                            }
+                                if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text.replace(",", ".")))<=1){
+                                    middleGradient.color = "LimeGreen"
+                                    finishGradient.color = "LimeGreen"
+                                    finishGradient0.color = "LimeGreen"
+                                    console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text.replace(",", ".")))
+                                } else {
+                                    middleGradient.position = Number.parseFloat(text_norm_hh.text.replace(",", "."))/Number.parseFloat(stackView.maxlevel)
+                                    middleGradient.color = "yellow"
+                                    finishGradient.color = "tomato"
+                                    finishGradient0.color = "tomato"
+                                    console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text.replace(",", ".")))
+                                }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                            }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))>1){
+//                                middleGradient.position = text_norm_hh.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
                             // при выборе холостого хода убираем из интерфейса норму на агрегат
                             t_normagr.visible = false
                             text_normagr.visible = false
@@ -2016,16 +2055,30 @@ Item {
                             if(combo_rezhim.currentIndex == 1){                                
                                 list1.currentIndex = -1
                                 station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
-                            if((stackView.maxlevel/text_normagr_nom.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_normagr_nom.text)>1){
-                                middleGradient.position = text_normagr_nom.text/stackView.maxlevel
-                                finishGradient.position = 1
-                                middleGradient.color = "yellow"
-                                finishGradient.color = "red"
-                            }
+                                if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))<=1){
+                                    middleGradient.color = "LimeGreen"
+                                    finishGradient.color = "LimeGreen"
+                                    finishGradient0.color = "LimeGreen"
+                                    console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                    console.log(stackView.maxlevel)
+                                } else {
+                                    middleGradient.position = Number.parseFloat(text_normagr_nom.text.replace(",", "."))/Number.parseFloat(stackView.maxlevel)
+                                    middleGradient.color = "yellow"
+                                    finishGradient.color = "tomato"
+                                    finishGradient0.color = "tomato"
+                                    console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                    console.log(stackView.maxlevel)
+                                }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text))<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                            }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text))>1){
+//                                middleGradient.position = text_normagr_nom.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
                             t_normagr.visible = true
                             text_normagr.visible = true
                             tabl.anchors.top = t_normagr.bottom
@@ -2035,22 +2088,34 @@ Item {
                             if(combo_rezhim.currentIndex == 2){                                
                                 list1.currentIndex = -1
                                 station1.selectedBar = Qt.point(stackView.maxcolizm, list1.count -1 - list1.currentIndex)
-                            if((stackView.maxlevel/text_normagr_rd.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_normagr_rd.text)>1){
-                                middleGradient.position = text_normagr_rd.text/stackView.maxlevel
-                                finishGradient.position = 1
-                                middleGradient.color = "yellow"
-                                finishGradient.color = "red"
-                            }
+                                if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_rd.text.replace(",", ".")))<=1){
+                                    middleGradient.color = "LimeGreen"
+                                    finishGradient.color = "LimeGreen"
+                                    finishGradient0.color = "LimeGreen"
+                                    console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_rd.text.replace(",", ".")))
+                                } else {
+                                    middleGradient.position = Number.parseFloat(text_normagr_rd.text)/Number.parseFloat(stackView.maxlevel)
+                                    middleGradient.color = "yellow"
+                                    finishGradient.color = "tomato"
+                                    finishGradient0.color = "tomato"
+                                    console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_rd.text.replace(",", ".")))
+                                }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_rd.text))<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                            }
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_rd.text))>1){
+//                                middleGradient.position = text_normagr_rd.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
 
                             t_normagr.visible = true
                             text_normagr.visible = true
                             tabl.anchors.top = t_normagr.bottom
                             //rec_prim_izmer.visible = false
-                            console.log("middle = ", middleGradient.position)
+                            //console.log("middle = ", middleGradient.position)
                             }
 
                         }
@@ -2127,7 +2192,7 @@ Item {
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 15
-                            text: qsTr("Состояние")
+                            text: qsTr("Режим")
                         }
                     }
                     Flickable {
@@ -2273,13 +2338,15 @@ Item {
                                         anchors.fill: parent
                                         Text {
                                             id: text4
+                                            property string tex: Bazaizmersost
                                             anchors.horizontalCenter: parent.horizontalCenter
                                             anchors.verticalCenter: parent.verticalCenter
                                             width: parent.width
                                             wrapMode: Text.WordWrap
                                             font.pixelSize: 15
                                             color: "#2e2efb"//"#3E65FF"
-                                            text: Bazaizmersost
+                                            //text: Bazaizmersost
+                                            text: Bazaizmerrezhim
                                         }
                                     }
                                 }
@@ -2310,13 +2377,13 @@ Item {
                                     }
                                 }
                                 Component.onCompleted: {
-                                    if(text4.text=="Норма"){
+                                    if(text4.tex=="Норма"){
                                         rec1.color = "lightgreen"
                                         rec2.color = "lightgreen"
                                         rec3.color = "lightgreen"
                                         rec4.color = "lightgreen"
                                     }
-                                    if(text4.text=="Превышение"){
+                                    if(text4.tex=="Превышение"){
                                         rec1.color = "lightcoral"
                                         rec2.color = "lightcoral"
                                         rec3.color = "lightcoral"
@@ -2411,9 +2478,11 @@ Item {
 
                     ColorGradient {
                         id: surfaceGradient
-                        ColorGradientStop { id: startGradient; position: 0.0; color: "green" }
+                        ColorGradientStop { id: startGradient; position: 0.0; color: "LimeGreen" }
+                        ColorGradientStop { id: startGradient0; position: middleGradient.position*0.95; color: "LimeGreen" }
                         ColorGradientStop { id: middleGradient; position: 0.75; color: "yellow" }
-                        ColorGradientStop { id: finishGradient; position: 1.0; color: "red" }
+                        ColorGradientStop { id: finishGradient0; position: middleGradient.position*1.05; color: "tomato" }
+                        ColorGradientStop { id: finishGradient; position: 1.0; color: "tomato" }
                     }
                     Bars3D {
                         id: barGraph
@@ -2468,45 +2537,71 @@ Item {
                             } else {
                                 barGraph.seriesList[0].meshSmooth = true
                             }
-                            if(combo_rezhim.currentIndex == 0){
-                            if((stackView.maxlevel/text_norm_hh.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_norm_hh.text)>1){
-                                middleGradient.position = text_norm_hh.text/stackView.maxlevel
-                                finishGradient.position = 1
+                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))<=1){
+                                middleGradient.color = "LimeGreen"
+                                finishGradient.color = "LimeGreen"
+                                finishGradient0.color = "LimeGreen"
+                                console.log("<=1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                console.log("stackView.maxlevel", stackView.maxlevel)
+                            } else {
+                                middleGradient.position = Number.parseFloat(text_normagr_nom.text.replace(",", "."))/Number.parseFloat(stackView.maxlevel)
                                 middleGradient.color = "yellow"
-                                finishGradient.color = "red"
+                                finishGradient.color = "tomato"
+                                finishGradient0.color = "tomato"
+                                console.log(">1", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
+                                console.log("middleGradient.position", middleGradient.position)
+                                console.log("stackView.maxlevel", stackView.maxlevel)
+                                console.log("Number.parseFloat(text_normagr_nom.text)", Number.parseFloat(text_normagr_nom.text.replace(",", ".")))
                             }
-                            console.log("middle = ", middleGradient.position)
-                            }
-                            if(combo_rezhim.currentIndex == 1){
-                            if((stackView.maxlevel/text_normagr_nom.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_normagr_nom.text)>1){
-                                middleGradient.position = text_normagr_nom.text/stackView.maxlevel
-                                finishGradient.position = 1
-                                middleGradient.color = "yellow"
-                                finishGradient.color = "red"
-                            }
-                            console.log("middle = ", middleGradient.position)
-                            }
-                            if(combo_rezhim.currentIndex == 2){
-                            if((stackView.maxlevel/text_normagr_rd.text)<1){
-                                middleGradient.color = "green"
-                                finishGradient.color = "green"
-                            }
-                            if((stackView.maxlevel/text_normagr_rd.text)>1){
-                                middleGradient.position = text_normagr_rd.text/stackView.maxlevel
-                                finishGradient.position = 1
-                                middleGradient.color = "yellow"
-                                finishGradient.color = "red"
-                            }
-                            console.log("middle = ", middleGradient.position)
-                            }
+
+//                            if(stackView.rezhim_id === ""){
+//                                console.log("kuku")
+//                            }
+//                            if(stackView.rezhim_id === 1){
+//                                console.log("kukareku")
+//                            }
+
+//                            if(combo_rezhim.currentIndex == 0){
+//                            if((Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                                //console.log("max/norm_hh = ", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))
+//                            }
+//                            if((stackView.maxlevel/text_norm_hh.text)>1){
+//                                middleGradient.position = text_norm_hh.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
+//                            console.log("max/norm_hh = ", Number.parseFloat(stackView.maxlevel)/Number.parseFloat(text_norm_hh.text))
+//                            console.log("middle = ", middleGradient.position)
+//                            }
+//                            if(combo_rezhim.currentIndex == 1){
+//                            if((stackView.maxlevel/text_normagr_nom.text)<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                            }
+//                            if((stackView.maxlevel/text_normagr_nom.text)>1){
+//                                middleGradient.position = text_normagr_nom.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
+//                            //console.log("middle = ", middleGradient.position)
+//                            }
+//                            if(combo_rezhim.currentIndex == 2){
+//                            if((stackView.maxlevel/text_normagr_rd.text)<1){
+//                                middleGradient.color = "green"
+//                                finishGradient.color = "green"
+//                            }
+//                            if((stackView.maxlevel/text_normagr_rd.text)>1){
+//                                middleGradient.position = text_normagr_rd.text/stackView.maxlevel
+//                                finishGradient.position = 1
+//                                middleGradient.color = "yellow"
+//                                finishGradient.color = "red"
+//                            }
+//                            //console.log("middle = ", middleGradient.position)
+//                            }
                         }
                 }
 

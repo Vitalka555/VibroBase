@@ -39,11 +39,11 @@ int main(int argc, char *argv[])
     //QLocale::setDefault(QLocale::C);
     //setlocale(LC_NUMERIC, "ru_RU.UTF-8");
 #if defined(Q_OS_WIN)
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
     //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
+    QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 QApplication::setStyle("Material");
 QQuickStyle::setStyle("Material");
     QApplication app(argc, argv);
@@ -206,6 +206,16 @@ ListModelKKS *model_kks = new ListModelKKS(root);
 ListModelNormCreatBI *model_norm_creatBI = new ListModelNormCreatBI(root);
 ListModelStatIzmerAgr *model_stat = new ListModelStatIzmerAgr(root);
 ListModelPodsh *model_podsh = new ListModelPodsh(root);
+ListModelPodsh *model_podsh1 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh2 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh3 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh4 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh5 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh6 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh7 = new ListModelPodsh(root);
+ListModelPodsh *model_podsh8 = new ListModelPodsh(root);
+ListModelRaspPodsh *model_rasp_podsh = new ListModelRaspPodsh(root);
+ListModelTipPodsh *model_tip_podsh = new ListModelTipPodsh(root);
 ListModelOpenPodsh *model_open_podsh = new ListModelOpenPodsh(root);
 
 ListModel *model0 = new ListModel(root);
@@ -240,7 +250,14 @@ DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlSignalReadPath()), datab, SLOT(readSettings2()));//чтение из settings.ini
         QObject::connect(root, SIGNAL(qmlSignalWriteWindow()), datab, SLOT(writeSettingsWindow()));//запись геометрии окна в ini
         QObject::connect(root, SIGNAL(qmlPodsh()), model_podsh, SLOT(updateModel()));//загрузка в таблицу подшипников
-        QObject::connect(root, SIGNAL(qmlFilterBearing()), model_podsh, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing1()), model_podsh1, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing2()), model_podsh2, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing3()), model_podsh3, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing4()), model_podsh4, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing5()), model_podsh5, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing6()), model_podsh6, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing7()), model_podsh7, SLOT(updateModel()));//фильтр в таблице подшипников
+        QObject::connect(root, SIGNAL(qmlFilterBearing8()), model_podsh8, SLOT(updateModel()));//фильтр в таблице подшипников
         QObject::connect(root, SIGNAL(qmlSignal_bearing_id()), model_open_podsh, SLOT(updateModel()));//вытаскиваем данные конкретного подшипника
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
@@ -252,6 +269,16 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_openBI", model_openBI);
         engine.rootContext()->setContextProperty("model_stat", model_stat);
         engine.rootContext()->setContextProperty("model_podsh", model_podsh);
+        engine.rootContext()->setContextProperty("model_podsh1", model_podsh1);
+        engine.rootContext()->setContextProperty("model_podsh2", model_podsh2);
+        engine.rootContext()->setContextProperty("model_podsh3", model_podsh3);
+        engine.rootContext()->setContextProperty("model_podsh4", model_podsh4);
+        engine.rootContext()->setContextProperty("model_podsh5", model_podsh5);
+        engine.rootContext()->setContextProperty("model_podsh6", model_podsh6);
+        engine.rootContext()->setContextProperty("model_podsh7", model_podsh7);
+        engine.rootContext()->setContextProperty("model_podsh8", model_podsh8);
+        engine.rootContext()->setContextProperty("model_rasp_podsh", model_rasp_podsh);
+        engine.rootContext()->setContextProperty("model_tip_podsh", model_tip_podsh);
         engine.rootContext()->setContextProperty("model_open_podsh", model_open_podsh);
 
 

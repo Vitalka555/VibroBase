@@ -960,6 +960,8 @@ footer:    ToolBar {
                                 //list.current = list.currentSection
                             }
                             onDoubleClicked: {
+//                                stackView.kks_filter_BI_variable = stackView.kks_filter_BI
+//                                stackView.kks_filter_BI = ""
                                 list.currentIndex = model.index
                                 window.index = list.currentIndex
                                 stackView.baza_id = model0.getId(list.currentIndex)

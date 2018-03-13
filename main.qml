@@ -43,7 +43,14 @@ ApplicationWindow {
     signal qmlGetTipMeh()
     signal qmlBackup()
     signal qmlPodsh()
-    signal qmlFilterBearing()
+    signal qmlFilterBearing1()
+    signal qmlFilterBearing2()
+    signal qmlFilterBearing3()
+    signal qmlFilterBearing4()
+    signal qmlFilterBearing5()
+    signal qmlFilterBearing6()
+    signal qmlFilterBearing7()
+    signal qmlFilterBearing8()
     signal qmlSignal_bearing_id()
     property string baza_id: ""
     property int index: 0
@@ -282,6 +289,7 @@ ApplicationWindow {
         property var maxcolizm
         //данные фильтра базы измерений
         property string kks_filter_BI: ""
+        //property string kks_filter_BI_variable: ""
         property string id_tipmeh_filter_BI: ""
         property bool neispravnoe: false
         property string tipmehBI_index: "-1"

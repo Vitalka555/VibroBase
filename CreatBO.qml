@@ -2890,7 +2890,6 @@ Item {
                 }
                 Rectangle {
                     id: rec06_01
-                    //visible: false
                     anchors.top: rec01_01.top
                     anchors.left: rec05_01.right
                     anchors.leftMargin: 5
@@ -2917,11 +2916,12 @@ Item {
                 }
                 Rectangle {
                     id: rec01_02
+                    visible: text01_02.text <= inputkolopor.currentText
                     anchors.left: parent.left
                     anchors.leftMargin: 5
                     anchors.top: rec01_01.bottom
                     anchors.topMargin: 5
-                    height: combo_kol_podsh.height+10
+                    height: text01_02.text <= inputkolopor.currentText ? combo_kol_podsh02.height+10 : 0
                     width: rec01_01.width
                     color: "lightblue"
                     border.width: 1
@@ -2929,6 +2929,7 @@ Item {
                     radius: 5
                     Text {
                         id: text01_02
+                        visible: text01_02.text <= inputkolopor.currentText
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.horizontalCenter: parent.horizontalCenter
                         //visible: false
@@ -2939,17 +2940,20 @@ Item {
                 }
                 Rectangle {
                     id: rec02_02
+                    visible: text01_02.text <= inputkolopor.currentText
                     anchors.top: rec01_02.top
                     anchors.left: rec01_02.right
                     anchors.leftMargin: 5
-                    height: combo_kol_podsh.height+10
+                    height: combo_kol_podsh02.height+10
                     width: rec02_01.width
                     color: "lightblue"
                     border.width: 1
                     border.color: "white"
                     radius: 5
                     ComboBox {
-                        id: combo_kol_podsh
+                        id: combo_kol_podsh02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        enabled: text01_02.text <= inputkolopor.currentText
                         anchors.horizontalCenter: parent.horizontalCenter
                         anchors.verticalCenter: parent.verticalCenter
                         width: parent.width-10
@@ -2963,34 +2967,39 @@ Item {
                 }
                     Rectangle {
                         id: rec03_02
-                        //visible: false
+                        visible: text01_02.text <= inputkolopor.currentText
                         anchors.top: rec01_02.top
                         //anchors.topMargin: 5
                         anchors.left: rec02_02.right
                         anchors.leftMargin: 5
-                        height: combo_kol_podsh.height+10
+                        height: combo_kol_podsh02.height+10
                         width: rec03_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
                         ComboBox {
-                            id: combo_obRU
+                            id: combo_obRU02
+                            property int id
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
                             anchors.left: parent.left
                             anchors.leftMargin: 5
                             anchors.verticalCenter: parent.verticalCenter
-                            width: parent.width-but_obRU.width-15
+                            width: parent.width-but_obRU02.width-15
                             editable: true
                             inputMethodHints: Qt.ImhNoPredictiveText
                             textRole: 'podsh_obRU'
                             delegate: ItemDelegate {
-                                width: combo_obRU.width
-                                text: combo_obRU.textRole ? (Array.isArray(combo_obRU.model) ? modelData[combo_obRU.textRole] : model[combo_obRU.textRole]) : modelData
-                                highlighted: combo_obRU.highlightedIndex === index
+                                width: combo_obRU02.width
+                                text: combo_obRU02.textRole ? (Array.isArray(combo_obRU02.model) ? modelData[combo_obRU02.textRole] : model[combo_obRU02.textRole]) : modelData
+                                highlighted: combo_obRU02.highlightedIndex === index
                             }
                             onCurrentTextChanged: {
-                                combo_obEN.currentIndex = combo_obRU.currentIndex
+                                combo_obEN02.currentIndex = combo_obRU02.currentIndex
+                                combo_obRU02.id = model_podsh1.getId(currentIndex)
+                                console.log(combo_obRU02.id)
                                 if(currentIndex==-1){
                                     //combo_obRU.id = ""
                                 } else {
@@ -2999,58 +3008,67 @@ Item {
                             }
                         }
                         Button {
-                            id: but_obRU
-                            anchors.top: combo_obRU.top
-                            anchors.left: combo_obRU.right
+                            id: but_obRU02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.top: combo_obRU02.top
+                            anchors.left: combo_obRU02.right
                             anchors.leftMargin: 5
                             width: height - 10
                             highlighted: true
                             Material.accent: Material.LightBlue
                             Image {
-                                id: im_poisk
+                                id: im_poisk02
+                                visible: text01_02.text <= inputkolopor.currentText
+                                enabled: text01_02.text <= inputkolopor.currentText
                                 anchors.fill: parent
                                 fillMode: Image.PreserveAspectFit
                                 source: "file:./Images/poisk.png"
                             }
                             onClicked: {
-                                stackView.obRU = combo_obRU.editText
+                                stackView.obRU = combo_obRU02.editText
                                 stackView.obEN = ""
-                                qmlFilterBearing()
-                                combo_obRU.model = model_podsh
-                                combo_obEN.model = model_podsh
-                                combo_obRU.popup.visible = true
+                                qmlFilterBearing1()
+                                combo_obRU02.model = model_podsh1
+                                combo_obEN02.model = model_podsh1
+                                combo_obRU02.popup.visible = true
                             }
                         }
                     }
                     Rectangle {
                         id: rec04_02
+                        visible: text01_02.text <= inputkolopor.currentText
                         anchors.top: rec01_02.top
                         anchors.left: rec03_02.right
                         anchors.leftMargin: 5
-                        height: combo_kol_podsh.height+10
+                        height: combo_kol_podsh02.height+10
                         width: rec04_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
                         ComboBox {
-                            id: combo_obEN
+                            id: combo_obEN02
+                            property int id
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
                             anchors.left: parent.left
                             anchors.leftMargin: 5
                             anchors.verticalCenter: parent.verticalCenter
-                            width: parent.width-but_obEN.width-15
+                            width: parent.width-but_obEN02.width-15
                             editable: true
                             inputMethodHints: Qt.ImhNoPredictiveText
                             textRole: 'podsh_obEN'
                             delegate: ItemDelegate {
                                 //Material.foreground: Material.LightBlue
-                                width: combo_obEN.width
-                                text: combo_obEN.textRole ? (Array.isArray(combo_obEN.model) ? modelData[combo_obEN.textRole] : model[combo_obEN.textRole]) : modelData
-                                highlighted: combo_obEN.highlightedIndex === index
+                                width: combo_obEN02.width
+                                text: combo_obEN02.textRole ? (Array.isArray(combo_obEN02.model) ? modelData[combo_obEN02.textRole] : model[combo_obEN02.textRole]) : modelData
+                                highlighted: combo_obEN02.highlightedIndex === index
                             }
                             onCurrentTextChanged: {
-                                combo_obRU.currentIndex = combo_obEN.currentIndex
+                                combo_obRU02.currentIndex = combo_obEN02.currentIndex
+                                combo_obEN02.id = model_podsh1.getId(currentIndex)
                                 if(currentIndex==-1){
                                     //combo_obRU.id = ""
                                 } else {
@@ -3059,53 +3077,1862 @@ Item {
                             }
                         }
                         Button {
-                            id: but_obEN
-                            anchors.top: combo_obEN.top
-                            anchors.left: combo_obEN.right
+                            id: but_obEN02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.top: combo_obEN02.top
+                            anchors.left: combo_obEN02.right
                             anchors.leftMargin: 5
                             width: height - 10
                             highlighted: true
                             Material.accent: Material.LightBlue
                             Image {
-                                id: im_poiskEN
+                                id: im_poiskEN02
+                                visible: text01_02.text <= inputkolopor.currentText
+                                enabled: text01_02.text <= inputkolopor.currentText
                                 anchors.fill: parent
                                 fillMode: Image.PreserveAspectFit
                                 source: "file:./Images/poisk.png"
                             }
                             onClicked: {
-                                stackView.obEN = combo_obEN.editText
+                                stackView.obEN = combo_obEN02.editText
                                 stackView.obRU = ""
-                                qmlFilterBearing()
-                                combo_obEN.model = model_podsh
-                                combo_obRU.model = model_podsh
-                                combo_obEN.popup.visible = true
+                                qmlFilterBearing1()
+                                combo_obEN02.model = model_podsh1
+                                combo_obRU02.model = model_podsh1
+                                combo_obEN02.popup.visible = true
                             }
                         }
                     }
                     Rectangle {
                         id: rec05_02
+                        visible: text01_02.text <= inputkolopor.currentText
                         anchors.top: rec01_02.top
                         anchors.left: rec04_02.right
                         anchors.leftMargin: 5
-                        height: combo_kol_podsh.height+10
+                        height: combo_kol_podsh02.height+10
                         width: rec05_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
+                        ComboBox {
+                            id: combo_rasp02
+                            property int id
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            currentIndex: -1
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            anchors.verticalCenter: parent.verticalCenter
+                            editable: true
+                            textRole: 'rasp_podsh'
+                            model: model_rasp_podsh
+                            onCurrentTextChanged: {
+                                combo_rasp02.id = model_rasp_podsh.getId(currentIndex)
+                                console.log(combo_rasp02.id)
+                            }
+                        }
                     }
                     Rectangle {
                         id: rec06_02
+                        visible: text01_02.text <= inputkolopor.currentText
                         anchors.top: rec01_02.top
                         anchors.left: rec05_02.right
                         anchors.leftMargin: 5
-                        height: combo_kol_podsh.height+10
+                        height: combo_kol_podsh02.height+10
                         width: rec06_01.width
                         color: "lightblue"
                         border.width: 1
                         border.color: "white"
                         radius: 5
+                        ComboBox {
+                            id: combo_tip02
+                            property int id
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            currentIndex: -1
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            anchors.verticalCenter: parent.verticalCenter
+                            editable: true
+                            textRole: 'tip_podsh'
+                            model: model_tip_podsh
+                            onCurrentTextChanged: {
+                                combo_tip02.id = model_tip_podsh.getId(currentIndex)
+                            }
+                        }
                     }
+                    Rectangle {
+                        id: rec01_03
+                        visible: text01_03.text <= inputkolopor.currentText
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.top: rec01_02.bottom
+                        anchors.topMargin: 5
+                        height: text01_03.text <= inputkolopor.currentText ? combo_kol_podsh03.height+10 : 0
+                        width: rec01_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                        Text {
+                            id: text01_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            enabled: text01_03.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            //visible: false
+                            font.pixelSize: 15
+                            wrapMode: Text.WordWrap
+                            text: "2"
+                        }
+                    }
+                    Rectangle {
+                        id: rec02_03
+                        visible: text01_03.text <= inputkolopor.currentText
+                        anchors.top: rec01_03.top
+                        anchors.left: rec01_03.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh03.height+10
+                        width: rec02_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "white"
+                        radius: 5
+                        ComboBox {
+                            id: combo_kol_podsh03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            enabled: text01_03.text <= inputkolopor.currentText
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            anchors.verticalCenter: parent.verticalCenter
+                            width: parent.width-10
+                            model: ["1", "2"]
+                            editable: true
+                                validator: IntValidator {
+                                    top: 2
+                                    bottom: 1
+                                }
+                        }
+                    }
+                        Rectangle {
+                            id: rec03_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            //anchors.topMargin: 5
+                            anchors.left: rec02_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+10
+                            width: rec03_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            ComboBox {
+                                id: combo_obRU03
+                                property int id
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                currentIndex: -1
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: parent.width-but_obRU03.width-15
+                                editable: true
+                                inputMethodHints: Qt.ImhNoPredictiveText
+                                textRole: 'podsh_obRU'
+                                delegate: ItemDelegate {
+                                    width: combo_obRU03.width
+                                    text: combo_obRU03.textRole ? (Array.isArray(combo_obRU03.model) ? modelData[combo_obRU03.textRole] : model[combo_obRU03.textRole]) : modelData
+                                    highlighted: combo_obRU03.highlightedIndex === index
+                                }
+                                onCurrentTextChanged: {
+                                    combo_obEN03.currentIndex = combo_obRU03.currentIndex
+                                    combo_obRU03.id = model_podsh2.getId(currentIndex)
+                                    if(currentIndex==-1){
+                                        //combo_obRU.id = ""
+                                    } else {
+                                        //combo_obRU.id = newmodel.getId(currentIndex)
+                                    }
+                                }
+                            }
+                            Button {
+                                id: but_obRU03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.top: combo_obRU03.top
+                                anchors.left: combo_obRU03.right
+                                anchors.leftMargin: 5
+                                width: height - 10
+                                highlighted: true
+                                Material.accent: Material.LightBlue
+                                Image {
+                                    id: im_poisk03
+                                    visible: text01_03.text <= inputkolopor.currentText
+                                    enabled: text01_03.text <= inputkolopor.currentText
+                                    anchors.fill: parent
+                                    fillMode: Image.PreserveAspectFit
+                                    source: "file:./Images/poisk.png"
+                                }
+                                onClicked: {
+                                    stackView.obRU = combo_obRU03.editText
+                                    stackView.obEN = ""
+                                    qmlFilterBearing2()
+                                    combo_obRU03.model = model_podsh2
+                                    combo_obEN03.model = model_podsh2
+                                    combo_obRU03.popup.visible = true
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec04_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec03_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+10
+                            width: rec04_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            ComboBox {
+                                id: combo_obEN03
+                                property int id
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                currentIndex: -1
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: parent.width-but_obEN03.width-15
+                                editable: true
+                                inputMethodHints: Qt.ImhNoPredictiveText
+                                textRole: 'podsh_obEN'
+                                delegate: ItemDelegate {
+                                    //Material.foreground: Material.LightBlue
+                                    width: combo_obEN03.width
+                                    text: combo_obEN03.textRole ? (Array.isArray(combo_obEN03.model) ? modelData[combo_obEN03.textRole] : model[combo_obEN03.textRole]) : modelData
+                                    highlighted: combo_obEN03.highlightedIndex === index
+                                }
+                                onCurrentTextChanged: {
+                                    combo_obRU03.currentIndex = combo_obEN03.currentIndex
+                                    combo_obEN03.id = model_podsh2.getId(currentIndex)
+                                    if(currentIndex==-1){
+                                        //combo_obRU.id = ""
+                                    } else {
+                                        //combo_obRU.id = newmodel.getId(currentIndex)
+                                    }
+                                }
+                            }
+                            Button {
+                                id: but_obEN03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.top: combo_obEN03.top
+                                anchors.left: combo_obEN03.right
+                                anchors.leftMargin: 5
+                                width: height - 10
+                                highlighted: true
+                                Material.accent: Material.LightBlue
+                                Image {
+                                    id: im_poiskEN03
+                                    visible: text01_03.text <= inputkolopor.currentText
+                                    enabled: text01_03.text <= inputkolopor.currentText
+                                    anchors.fill: parent
+                                    fillMode: Image.PreserveAspectFit
+                                    source: "file:./Images/poisk.png"
+                                }
+                                onClicked: {
+                                    stackView.obEN = combo_obEN03.editText
+                                    stackView.obRU = ""
+                                    qmlFilterBearing2()
+                                    combo_obEN03.model = model_podsh2
+                                    combo_obRU03.model = model_podsh2
+                                    combo_obEN03.popup.visible = true
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec05_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec04_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+10
+                            width: rec05_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            ComboBox {
+                                id: combo_rasp03
+                                property int id
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                currentIndex: -1
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                anchors.verticalCenter: parent.verticalCenter
+                                editable: true
+                                textRole: 'rasp_podsh'
+                                model: model_rasp_podsh
+                                onCurrentTextChanged: {
+                                    combo_rasp03.id = model_rasp_podsh.getId(currentIndex)
+                                    console.log(combo_rasp03.id)
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec06_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec05_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+10
+                            width: rec06_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            ComboBox {
+                                id: combo_tip03
+                                property int id
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                currentIndex: -1
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                anchors.verticalCenter: parent.verticalCenter
+                                editable: true
+                                textRole: 'tip_podsh'
+                                model: model_tip_podsh
+                                onCurrentTextChanged: {
+                                    combo_tip03.id = model_tip_podsh.getId(currentIndex)
+                                }
+                            }
+                        }
+                        Rectangle {
+                            id: rec01_04
+                            visible: text01_04.text <= inputkolopor.currentText
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.top: rec01_03.bottom
+                            anchors.topMargin: 5
+                            height: text01_04.text <= inputkolopor.currentText ? combo_kol_podsh04.height+10 : 0
+                            width: rec01_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            Text {
+                                id: text01_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                enabled: text01_04.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                //visible: false
+                                font.pixelSize: 15
+                                wrapMode: Text.WordWrap
+                                text: "3"
+                            }
+                        }
+                        Rectangle {
+                            id: rec02_04
+                            visible: text01_04.text <= inputkolopor.currentText
+                            anchors.top: rec01_04.top
+                            anchors.left: rec01_04.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh04.height+10
+                            width: rec02_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "white"
+                            radius: 5
+                            ComboBox {
+                                id: combo_kol_podsh04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                enabled: text01_04.text <= inputkolopor.currentText
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                anchors.verticalCenter: parent.verticalCenter
+                                width: parent.width-10
+                                model: ["1", "2"]
+                                editable: true
+                                    validator: IntValidator {
+                                        top: 2
+                                        bottom: 1
+                                    }
+                            }
+                        }
+                            Rectangle {
+                                id: rec03_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                //anchors.topMargin: 5
+                                anchors.left: rec02_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+10
+                                width: rec03_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                ComboBox {
+                                    id: combo_obRU04
+                                    property int id
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    currentIndex: -1
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: parent.width-but_obRU04.width-15
+                                    editable: true
+                                    inputMethodHints: Qt.ImhNoPredictiveText
+                                    textRole: 'podsh_obRU'
+                                    delegate: ItemDelegate {
+                                        width: combo_obRU04.width
+                                        text: combo_obRU04.textRole ? (Array.isArray(combo_obRU04.model) ? modelData[combo_obRU04.textRole] : model[combo_obRU04.textRole]) : modelData
+                                        highlighted: combo_obRU04.highlightedIndex === index
+                                    }
+                                    onCurrentTextChanged: {
+                                        combo_obEN04.currentIndex = combo_obRU04.currentIndex
+                                        combo_obRU04.id = model_podsh3.getId(currentIndex)
+                                        if(currentIndex==-1){
+                                            //combo_obRU.id = ""
+                                        } else {
+                                            //combo_obRU.id = newmodel.getId(currentIndex)
+                                        }
+                                    }
+                                }
+                                Button {
+                                    id: but_obRU04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.top: combo_obRU04.top
+                                    anchors.left: combo_obRU04.right
+                                    anchors.leftMargin: 5
+                                    width: height - 10
+                                    highlighted: true
+                                    Material.accent: Material.LightBlue
+                                    Image {
+                                        id: im_poisk04
+                                        visible: text01_04.text <= inputkolopor.currentText
+                                        enabled: text01_04.text <= inputkolopor.currentText
+                                        anchors.fill: parent
+                                        fillMode: Image.PreserveAspectFit
+                                        source: "file:./Images/poisk.png"
+                                    }
+                                    onClicked: {
+                                        stackView.obRU = combo_obRU04.editText
+                                        stackView.obEN = ""
+                                        qmlFilterBearing3()
+                                        combo_obRU04.model = model_podsh3
+                                        combo_obEN04.model = model_podsh3
+                                        combo_obRU04.popup.visible = true
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                id: rec04_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec03_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+10
+                                width: rec04_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                ComboBox {
+                                    id: combo_obEN04
+                                    property int id
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    currentIndex: -1
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: parent.width-but_obEN04.width-15
+                                    editable: true
+                                    inputMethodHints: Qt.ImhNoPredictiveText
+                                    textRole: 'podsh_obEN'
+                                    delegate: ItemDelegate {
+                                        //Material.foreground: Material.LightBlue
+                                        width: combo_obEN04.width
+                                        text: combo_obEN04.textRole ? (Array.isArray(combo_obEN04.model) ? modelData[combo_obEN04.textRole] : model[combo_obEN04.textRole]) : modelData
+                                        highlighted: combo_obEN04.highlightedIndex === index
+                                    }
+                                    onCurrentTextChanged: {
+                                        combo_obRU04.currentIndex = combo_obEN04.currentIndex
+                                        combo_obEN04.id = model_podsh3.getId(currentIndex)
+                                        if(currentIndex==-1){
+                                            //combo_obRU.id = ""
+                                        } else {
+                                            //combo_obRU.id = newmodel.getId(currentIndex)
+                                        }
+                                    }
+                                }
+                                Button {
+                                    id: but_obEN04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.top: combo_obEN04.top
+                                    anchors.left: combo_obEN04.right
+                                    anchors.leftMargin: 5
+                                    width: height - 10
+                                    highlighted: true
+                                    Material.accent: Material.LightBlue
+                                    Image {
+                                        id: im_poiskEN04
+                                        visible: text01_04.text <= inputkolopor.currentText
+                                        enabled: text01_04.text <= inputkolopor.currentText
+                                        anchors.fill: parent
+                                        fillMode: Image.PreserveAspectFit
+                                        source: "file:./Images/poisk.png"
+                                    }
+                                    onClicked: {
+                                        stackView.obEN = combo_obEN04.editText
+                                        stackView.obRU = ""
+                                        qmlFilterBearing3()
+                                        combo_obEN04.model = model_podsh3
+                                        combo_obRU04.model = model_podsh3
+                                        combo_obEN04.popup.visible = true
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                id: rec05_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec04_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+10
+                                width: rec05_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                ComboBox {
+                                    id: combo_rasp04
+                                    property int id
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    currentIndex: -1
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    editable: true
+                                    textRole: 'rasp_podsh'
+                                    model: model_rasp_podsh
+                                    onCurrentTextChanged: {
+                                        combo_rasp04.id = model_rasp_podsh.getId(currentIndex)
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                id: rec06_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec05_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+10
+                                width: rec06_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                ComboBox {
+                                    id: combo_tip04
+                                    property int id
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    currentIndex: -1
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    editable: true
+                                    textRole: 'tip_podsh'
+                                    model: model_tip_podsh
+                                    onCurrentTextChanged: {
+                                        combo_tip04.id = model_tip_podsh.getId(currentIndex)
+                                    }
+                                }
+                            }
+                            Rectangle {
+                                id: rec01_05
+                                visible: text01_05.text <= inputkolopor.currentText
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.top: rec01_04.bottom
+                                anchors.topMargin: 5
+                                height: text01_05.text <= inputkolopor.currentText ? combo_kol_podsh05.height+10 : 0
+                                width: rec01_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                Text {
+                                    id: text01_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    enabled: text01_05.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    //visible: false
+                                    font.pixelSize: 15
+                                    wrapMode: Text.WordWrap
+                                    text: "4"
+                                }
+                            }
+                            Rectangle {
+                                id: rec02_05
+                                visible: text01_05.text <= inputkolopor.currentText
+                                anchors.top: rec01_05.top
+                                anchors.left: rec01_05.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh05.height+10
+                                width: rec02_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "white"
+                                radius: 5
+                                ComboBox {
+                                    id: combo_kol_podsh05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    enabled: text01_05.text <= inputkolopor.currentText
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    width: parent.width-10
+                                    model: ["1", "2"]
+                                    editable: true
+                                        validator: IntValidator {
+                                            top: 2
+                                            bottom: 1
+                                        }
+                                }
+                            }
+                                Rectangle {
+                                    id: rec03_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    //anchors.topMargin: 5
+                                    anchors.left: rec02_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+10
+                                    width: rec03_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    ComboBox {
+                                        id: combo_obRU05
+                                        property int id
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        currentIndex: -1
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        width: parent.width-but_obRU05.width-15
+                                        editable: true
+                                        inputMethodHints: Qt.ImhNoPredictiveText
+                                        textRole: 'podsh_obRU'
+                                        delegate: ItemDelegate {
+                                            width: combo_obRU05.width
+                                            text: combo_obRU05.textRole ? (Array.isArray(combo_obRU05.model) ? modelData[combo_obRU05.textRole] : model[combo_obRU05.textRole]) : modelData
+                                            highlighted: combo_obRU05.highlightedIndex === index
+                                        }
+                                        onCurrentTextChanged: {
+                                            combo_obEN05.currentIndex = combo_obRU05.currentIndex
+                                            combo_obRU05.id = model_podsh4.getId(currentIndex)
+                                            if(currentIndex==-1){
+                                                //combo_obRU.id = ""
+                                            } else {
+                                                //combo_obRU.id = newmodel.getId(currentIndex)
+                                            }
+                                        }
+                                    }
+                                    Button {
+                                        id: but_obRU05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.top: combo_obRU05.top
+                                        anchors.left: combo_obRU05.right
+                                        anchors.leftMargin: 5
+                                        width: height - 10
+                                        highlighted: true
+                                        Material.accent: Material.LightBlue
+                                        Image {
+                                            id: im_poisk05
+                                            visible: text01_05.text <= inputkolopor.currentText
+                                            enabled: text01_05.text <= inputkolopor.currentText
+                                            anchors.fill: parent
+                                            fillMode: Image.PreserveAspectFit
+                                            source: "file:./Images/poisk.png"
+                                        }
+                                        onClicked: {
+                                            stackView.obRU = combo_obRU05.editText
+                                            stackView.obEN = ""
+                                            qmlFilterBearing4()
+                                            combo_obRU05.model = model_podsh4
+                                            combo_obEN05.model = model_podsh4
+                                            combo_obRU05.popup.visible = true
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec04_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec03_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+10
+                                    width: rec04_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    ComboBox {
+                                        id: combo_obEN05
+                                        property int id
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        currentIndex: -1
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        width: parent.width-but_obEN05.width-15
+                                        editable: true
+                                        inputMethodHints: Qt.ImhNoPredictiveText
+                                        textRole: 'podsh_obEN'
+                                        delegate: ItemDelegate {
+                                            //Material.foreground: Material.LightBlue
+                                            width: combo_obEN05.width
+                                            text: combo_obEN05.textRole ? (Array.isArray(combo_obEN05.model) ? modelData[combo_obEN05.textRole] : model[combo_obEN05.textRole]) : modelData
+                                            highlighted: combo_obEN05.highlightedIndex === index
+                                        }
+                                        onCurrentTextChanged: {
+                                            combo_obRU05.currentIndex = combo_obEN05.currentIndex
+                                            combo_obEN05.id = model_podsh4.getId(currentIndex)
+                                            if(currentIndex==-1){
+                                                //combo_obRU.id = ""
+                                            } else {
+                                                //combo_obRU.id = newmodel.getId(currentIndex)
+                                            }
+                                        }
+                                    }
+                                    Button {
+                                        id: but_obEN05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.top: combo_obEN05.top
+                                        anchors.left: combo_obEN05.right
+                                        anchors.leftMargin: 5
+                                        width: height - 10
+                                        highlighted: true
+                                        Material.accent: Material.LightBlue
+                                        Image {
+                                            id: im_poiskEN05
+                                            visible: text01_05.text <= inputkolopor.currentText
+                                            enabled: text01_05.text <= inputkolopor.currentText
+                                            anchors.fill: parent
+                                            fillMode: Image.PreserveAspectFit
+                                            source: "file:./Images/poisk.png"
+                                        }
+                                        onClicked: {
+                                            stackView.obEN = combo_obEN05.editText
+                                            stackView.obRU = ""
+                                            qmlFilterBearing4()
+                                            combo_obEN05.model = model_podsh4
+                                            combo_obRU05.model = model_podsh4
+                                            combo_obEN05.popup.visible = true
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec05_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec04_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+10
+                                    width: rec05_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    ComboBox {
+                                        id: combo_rasp05
+                                        property int id
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        currentIndex: -1
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        editable: true
+                                        textRole: 'rasp_podsh'
+                                        model: model_rasp_podsh
+                                        onCurrentTextChanged: {
+                                            combo_rasp05.id = model_rasp_podsh.getId(currentIndex)
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec06_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec05_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+10
+                                    width: rec06_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    ComboBox {
+                                        id: combo_tip05
+                                        property int id
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        currentIndex: -1
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        editable: true
+                                        textRole: 'tip_podsh'
+                                        model: model_tip_podsh
+                                        onCurrentTextChanged: {
+                                            combo_tip05.id = model_tip_podsh.getId(currentIndex)
+                                        }
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec01_06
+                                    visible: text01_06.text <= inputkolopor.currentText
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.top: rec01_05.bottom
+                                    anchors.topMargin: 5
+                                    height: text01_06.text <= inputkolopor.currentText ? combo_kol_podsh06.height+10 : 0
+                                    width: rec01_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    Text {
+                                        id: text01_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        enabled: text01_06.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        //visible: false
+                                        font.pixelSize: 15
+                                        wrapMode: Text.WordWrap
+                                        text: "5"
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec02_06
+                                    visible: text01_06.text <= inputkolopor.currentText
+                                    anchors.top: rec01_06.top
+                                    anchors.left: rec01_06.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh06.height+10
+                                    width: rec02_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "white"
+                                    radius: 5
+                                    ComboBox {
+                                        id: combo_kol_podsh06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        enabled: text01_06.text <= inputkolopor.currentText
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        width: parent.width-10
+                                        model: ["1", "2"]
+                                        editable: true
+                                            validator: IntValidator {
+                                                top: 2
+                                                bottom: 1
+                                            }
+                                    }
+                                }
+                                    Rectangle {
+                                        id: rec03_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        //anchors.topMargin: 5
+                                        anchors.left: rec02_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+10
+                                        width: rec03_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        ComboBox {
+                                            id: combo_obRU06
+                                            property int id
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            currentIndex: -1
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: parent.width-but_obRU06.width-15
+                                            editable: true
+                                            inputMethodHints: Qt.ImhNoPredictiveText
+                                            textRole: 'podsh_obRU'
+                                            delegate: ItemDelegate {
+                                                width: combo_obRU06.width
+                                                text: combo_obRU06.textRole ? (Array.isArray(combo_obRU06.model) ? modelData[combo_obRU06.textRole] : model[combo_obRU06.textRole]) : modelData
+                                                highlighted: combo_obRU06.highlightedIndex === index
+                                            }
+                                            onCurrentTextChanged: {
+                                                combo_obEN06.currentIndex = combo_obRU06.currentIndex
+                                                combo_obRU06.id = model_podsh5.getId(currentIndex)
+                                                if(currentIndex==-1){
+                                                    //combo_obRU.id = ""
+                                                } else {
+                                                    //combo_obRU.id = newmodel.getId(currentIndex)
+                                                }
+                                            }
+                                        }
+                                        Button {
+                                            id: but_obRU06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.top: combo_obRU06.top
+                                            anchors.left: combo_obRU06.right
+                                            anchors.leftMargin: 5
+                                            width: height - 10
+                                            highlighted: true
+                                            Material.accent: Material.LightBlue
+                                            Image {
+                                                id: im_poisk06
+                                                visible: text01_06.text <= inputkolopor.currentText
+                                                enabled: text01_06.text <= inputkolopor.currentText
+                                                anchors.fill: parent
+                                                fillMode: Image.PreserveAspectFit
+                                                source: "file:./Images/poisk.png"
+                                            }
+                                            onClicked: {
+                                                stackView.obRU = combo_obRU06.editText
+                                                stackView.obEN = ""
+                                                qmlFilterBearing5()
+                                                combo_obRU06.model = model_podsh5
+                                                combo_obEN06.model = model_podsh5
+                                                combo_obRU06.popup.visible = true
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec04_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec03_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+10
+                                        width: rec04_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        ComboBox {
+                                            id: combo_obEN06
+                                            property int id
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            currentIndex: -1
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: parent.width-but_obEN06.width-15
+                                            editable: true
+                                            inputMethodHints: Qt.ImhNoPredictiveText
+                                            textRole: 'podsh_obEN'
+                                            delegate: ItemDelegate {
+                                                //Material.foreground: Material.LightBlue
+                                                width: combo_obEN06.width
+                                                text: combo_obEN06.textRole ? (Array.isArray(combo_obEN06.model) ? modelData[combo_obEN06.textRole] : model[combo_obEN06.textRole]) : modelData
+                                                highlighted: combo_obEN06.highlightedIndex === index
+                                            }
+                                            onCurrentTextChanged: {
+                                                combo_obRU06.currentIndex = combo_obEN06.currentIndex
+                                                combo_obEN06.id = model_podsh5.getId(currentIndex)
+                                                if(currentIndex==-1){
+                                                    //combo_obRU.id = ""
+                                                } else {
+                                                    //combo_obRU.id = newmodel.getId(currentIndex)
+                                                }
+                                            }
+                                        }
+                                        Button {
+                                            id: but_obEN06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.top: combo_obEN06.top
+                                            anchors.left: combo_obEN06.right
+                                            anchors.leftMargin: 5
+                                            width: height - 10
+                                            highlighted: true
+                                            Material.accent: Material.LightBlue
+                                            Image {
+                                                id: im_poiskEN06
+                                                visible: text01_06.text <= inputkolopor.currentText
+                                                enabled: text01_06.text <= inputkolopor.currentText
+                                                anchors.fill: parent
+                                                fillMode: Image.PreserveAspectFit
+                                                source: "file:./Images/poisk.png"
+                                            }
+                                            onClicked: {
+                                                stackView.obEN = combo_obEN06.editText
+                                                stackView.obRU = ""
+                                                qmlFilterBearing5()
+                                                combo_obEN06.model = model_podsh5
+                                                combo_obRU06.model = model_podsh5
+                                                combo_obEN06.popup.visible = true
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec05_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec04_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+10
+                                        width: rec05_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        ComboBox {
+                                            id: combo_rasp06
+                                            property int id
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            currentIndex: -1
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            editable: true
+                                            textRole: 'rasp_podsh'
+                                            model: model_rasp_podsh
+                                            onCurrentTextChanged: {
+                                                combo_rasp06.id = model_rasp_podsh.getId(currentIndex)
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec06_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec05_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+10
+                                        width: rec06_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        ComboBox {
+                                            id: combo_tip06
+                                            property int id
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            currentIndex: -1
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            editable: true
+                                            textRole: 'tip_podsh'
+                                            model: model_tip_podsh
+                                            onCurrentTextChanged: {
+                                                combo_tip06.id = model_tip_podsh.getId(currentIndex)
+                                            }
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec01_07
+                                        visible: text01_07.text <= inputkolopor.currentText
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.top: rec01_06.bottom
+                                        anchors.topMargin: 5
+                                        height: text01_07.text <= inputkolopor.currentText ? combo_kol_podsh07.height+10 : 0
+                                        width: rec01_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        Text {
+                                            id: text01_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            enabled: text01_07.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            //visible: false
+                                            font.pixelSize: 15
+                                            wrapMode: Text.WordWrap
+                                            text: "6"
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec02_07
+                                        visible: text01_07.text <= inputkolopor.currentText
+                                        anchors.top: rec01_07.top
+                                        anchors.left: rec01_07.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh07.height+10
+                                        width: rec02_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "white"
+                                        radius: 5
+                                        ComboBox {
+                                            id: combo_kol_podsh07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            enabled: text01_07.text <= inputkolopor.currentText
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            width: parent.width-10
+                                            model: ["1", "2"]
+                                            editable: true
+                                                validator: IntValidator {
+                                                    top: 2
+                                                    bottom: 1
+                                                }
+                                        }
+                                    }
+                                        Rectangle {
+                                            id: rec03_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            //anchors.topMargin: 5
+                                            anchors.left: rec02_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+10
+                                            width: rec03_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            ComboBox {
+                                                id: combo_obRU07
+                                                property int id
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                currentIndex: -1
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width-but_obRU07.width-15
+                                                editable: true
+                                                inputMethodHints: Qt.ImhNoPredictiveText
+                                                textRole: 'podsh_obRU'
+                                                delegate: ItemDelegate {
+                                                    width: combo_obRU07.width
+                                                    text: combo_obRU07.textRole ? (Array.isArray(combo_obRU07.model) ? modelData[combo_obRU07.textRole] : model[combo_obRU07.textRole]) : modelData
+                                                    highlighted: combo_obRU07.highlightedIndex === index
+                                                }
+                                                onCurrentTextChanged: {
+                                                    combo_obEN07.currentIndex = combo_obRU07.currentIndex
+                                                    combo_obRU07.id = model_podsh6.getId(currentIndex)
+                                                    if(currentIndex==-1){
+                                                        //combo_obRU.id = ""
+                                                    } else {
+                                                        //combo_obRU.id = newmodel.getId(currentIndex)
+                                                    }
+                                                }
+                                            }
+                                            Button {
+                                                id: but_obRU07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.top: combo_obRU07.top
+                                                anchors.left: combo_obRU07.right
+                                                anchors.leftMargin: 5
+                                                width: height - 10
+                                                highlighted: true
+                                                Material.accent: Material.LightBlue
+                                                Image {
+                                                    id: im_poisk07
+                                                    visible: text01_07.text <= inputkolopor.currentText
+                                                    enabled: text01_07.text <= inputkolopor.currentText
+                                                    anchors.fill: parent
+                                                    fillMode: Image.PreserveAspectFit
+                                                    source: "file:./Images/poisk.png"
+                                                }
+                                                onClicked: {
+                                                    stackView.obRU = combo_obRU07.editText
+                                                    stackView.obEN = ""
+                                                    qmlFilterBearing6()
+                                                    combo_obRU07.model = model_podsh6
+                                                    combo_obEN07.model = model_podsh6
+                                                    combo_obRU07.popup.visible = true
+                                                }
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec04_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec03_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+10
+                                            width: rec04_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            ComboBox {
+                                                id: combo_obEN07
+                                                property int id
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                currentIndex: -1
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width-but_obEN07.width-15
+                                                editable: true
+                                                inputMethodHints: Qt.ImhNoPredictiveText
+                                                textRole: 'podsh_obEN'
+                                                delegate: ItemDelegate {
+                                                    //Material.foreground: Material.LightBlue
+                                                    width: combo_obEN07.width
+                                                    text: combo_obEN07.textRole ? (Array.isArray(combo_obEN07.model) ? modelData[combo_obEN07.textRole] : model[combo_obEN07.textRole]) : modelData
+                                                    highlighted: combo_obEN07.highlightedIndex === index
+                                                }
+                                                onCurrentTextChanged: {
+                                                    combo_obRU07.currentIndex = combo_obEN07.currentIndex
+                                                    combo_obEN07.id = model_podsh6.getId(currentIndex)
+                                                    if(currentIndex==-1){
+                                                        //combo_obRU.id = ""
+                                                    } else {
+                                                        //combo_obRU.id = newmodel.getId(currentIndex)
+                                                    }
+                                                }
+                                            }
+                                            Button {
+                                                id: but_obEN07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.top: combo_obEN07.top
+                                                anchors.left: combo_obEN07.right
+                                                anchors.leftMargin: 5
+                                                width: height - 10
+                                                highlighted: true
+                                                Material.accent: Material.LightBlue
+                                                Image {
+                                                    id: im_poiskEN07
+                                                    visible: text01_07.text <= inputkolopor.currentText
+                                                    enabled: text01_07.text <= inputkolopor.currentText
+                                                    anchors.fill: parent
+                                                    fillMode: Image.PreserveAspectFit
+                                                    source: "file:./Images/poisk.png"
+                                                }
+                                                onClicked: {
+                                                    stackView.obEN = combo_obEN07.editText
+                                                    stackView.obRU = ""
+                                                    qmlFilterBearing6()
+                                                    combo_obEN07.model = model_podsh6
+                                                    combo_obRU07.model = model_podsh6
+                                                    combo_obEN07.popup.visible = true
+                                                }
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec05_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec04_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+10
+                                            width: rec05_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            ComboBox {
+                                                id: combo_rasp07
+                                                property int id
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                currentIndex: -1
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                editable: true
+                                                textRole: 'rasp_podsh'
+                                                model: model_rasp_podsh
+                                                onCurrentTextChanged: {
+                                                    combo_rasp07.id = model_rasp_podsh.getId(currentIndex)
+                                                }
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec06_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec05_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+10
+                                            width: rec06_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            ComboBox {
+                                                id: combo_tip07
+                                                property int id
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                currentIndex: -1
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                editable: true
+                                                textRole: 'tip_podsh'
+                                                model: model_tip_podsh
+                                                onCurrentTextChanged: {
+                                                    combo_tip07.id = model_tip_podsh.getId(currentIndex)
+                                                }
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec01_08
+                                            visible: text01_08.text <= inputkolopor.currentText
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.top: rec01_07.bottom
+                                            anchors.topMargin: 5
+                                            height: text01_08.text <= inputkolopor.currentText ? combo_kol_podsh08.height+10 : 0
+                                            width: rec01_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            Text {
+                                                id: text01_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                enabled: text01_08.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                //visible: false
+                                                font.pixelSize: 15
+                                                wrapMode: Text.WordWrap
+                                                text: "7"
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec02_08
+                                            visible: text01_08.text <= inputkolopor.currentText
+                                            anchors.top: rec01_08.top
+                                            anchors.left: rec01_08.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh08.height+10
+                                            width: rec02_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "white"
+                                            radius: 5
+                                            ComboBox {
+                                                id: combo_kol_podsh08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                enabled: text01_08.text <= inputkolopor.currentText
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                width: parent.width-10
+                                                model: ["1", "2"]
+                                                editable: true
+                                                    validator: IntValidator {
+                                                        top: 2
+                                                        bottom: 1
+                                                    }
+                                            }
+                                        }
+                                            Rectangle {
+                                                id: rec03_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                //anchors.topMargin: 5
+                                                anchors.left: rec02_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+10
+                                                width: rec03_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                ComboBox {
+                                                    id: combo_obRU08
+                                                    property int id
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    currentIndex: -1
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    width: parent.width-but_obRU08.width-15
+                                                    editable: true
+                                                    inputMethodHints: Qt.ImhNoPredictiveText
+                                                    textRole: 'podsh_obRU'
+                                                    delegate: ItemDelegate {
+                                                        width: combo_obRU08.width
+                                                        text: combo_obRU08.textRole ? (Array.isArray(combo_obRU08.model) ? modelData[combo_obRU08.textRole] : model[combo_obRU08.textRole]) : modelData
+                                                        highlighted: combo_obRU08.highlightedIndex === index
+                                                    }
+                                                    onCurrentTextChanged: {
+                                                        combo_obEN08.currentIndex = combo_obRU08.currentIndex
+                                                        combo_obRU08.id = model_podsh7.getId(currentIndex)
+                                                        if(currentIndex==-1){
+                                                            //combo_obRU.id = ""
+                                                        } else {
+                                                            //combo_obRU.id = newmodel.getId(currentIndex)
+                                                        }
+                                                    }
+                                                }
+                                                Button {
+                                                    id: but_obRU08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.top: combo_obRU08.top
+                                                    anchors.left: combo_obRU08.right
+                                                    anchors.leftMargin: 5
+                                                    width: height - 10
+                                                    highlighted: true
+                                                    Material.accent: Material.LightBlue
+                                                    Image {
+                                                        id: im_poisk08
+                                                        visible: text01_08.text <= inputkolopor.currentText
+                                                        enabled: text01_08.text <= inputkolopor.currentText
+                                                        anchors.fill: parent
+                                                        fillMode: Image.PreserveAspectFit
+                                                        source: "file:./Images/poisk.png"
+                                                    }
+                                                    onClicked: {
+                                                        stackView.obRU = combo_obRU08.editText
+                                                        stackView.obEN = ""
+                                                        qmlFilterBearing7()
+                                                        combo_obRU08.model = model_podsh7
+                                                        combo_obEN08.model = model_podsh7
+                                                        combo_obRU08.popup.visible = true
+                                                    }
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec04_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec03_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+10
+                                                width: rec04_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                ComboBox {
+                                                    id: combo_obEN08
+                                                    property int id
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    currentIndex: -1
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    width: parent.width-but_obEN08.width-15
+                                                    editable: true
+                                                    inputMethodHints: Qt.ImhNoPredictiveText
+                                                    textRole: 'podsh_obEN'
+                                                    delegate: ItemDelegate {
+                                                        //Material.foreground: Material.LightBlue
+                                                        width: combo_obEN08.width
+                                                        text: combo_obEN08.textRole ? (Array.isArray(combo_obEN08.model) ? modelData[combo_obEN08.textRole] : model[combo_obEN08.textRole]) : modelData
+                                                        highlighted: combo_obEN08.highlightedIndex === index
+                                                    }
+                                                    onCurrentTextChanged: {
+                                                        combo_obRU08.currentIndex = combo_obEN08.currentIndex
+                                                        combo_obEN08.id = model_podsh7.getId(currentIndex)
+                                                        if(currentIndex==-1){
+                                                            //combo_obRU.id = ""
+                                                        } else {
+                                                            //combo_obRU.id = newmodel.getId(currentIndex)
+                                                        }
+                                                    }
+                                                }
+                                                Button {
+                                                    id: but_obEN08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.top: combo_obEN08.top
+                                                    anchors.left: combo_obEN08.right
+                                                    anchors.leftMargin: 5
+                                                    width: height - 10
+                                                    highlighted: true
+                                                    Material.accent: Material.LightBlue
+                                                    Image {
+                                                        id: im_poiskEN08
+                                                        visible: text01_08.text <= inputkolopor.currentText
+                                                        enabled: text01_08.text <= inputkolopor.currentText
+                                                        anchors.fill: parent
+                                                        fillMode: Image.PreserveAspectFit
+                                                        source: "file:./Images/poisk.png"
+                                                    }
+                                                    onClicked: {
+                                                        stackView.obEN = combo_obEN08.editText
+                                                        stackView.obRU = ""
+                                                        qmlFilterBearing7()
+                                                        combo_obEN08.model = model_podsh7
+                                                        combo_obRU08.model = model_podsh7
+                                                        combo_obEN08.popup.visible = true
+                                                    }
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec05_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec04_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+10
+                                                width: rec05_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                ComboBox {
+                                                    id: combo_rasp08
+                                                    property int id
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    currentIndex: -1
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    editable: true
+                                                    textRole: 'rasp_podsh'
+                                                    model: model_rasp_podsh
+                                                    onCurrentTextChanged: {
+                                                        combo_rasp08.id = model_rasp_podsh.getId(currentIndex)
+                                                    }
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec06_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec05_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+10
+                                                width: rec06_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                ComboBox {
+                                                    id: combo_tip08
+                                                    property int id
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    currentIndex: -1
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    editable: true
+                                                    textRole: 'tip_podsh'
+                                                    model: model_tip_podsh
+                                                    onCurrentTextChanged: {
+                                                        combo_tip08.id = model_tip_podsh.getId(currentIndex)
+                                                    }
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec01_09
+                                                visible: text01_09.text <= inputkolopor.currentText
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.top: rec01_08.bottom
+                                                anchors.topMargin: 5
+                                                height: text01_09.text <= inputkolopor.currentText ? combo_kol_podsh09.height+10 : 0
+                                                width: rec01_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                Text {
+                                                    id: text01_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.horizontalCenter: parent.horizontalCenter
+                                                    //visible: false
+                                                    font.pixelSize: 15
+                                                    wrapMode: Text.WordWrap
+                                                    text: "8"
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec02_09
+                                                visible: text01_09.text <= inputkolopor.currentText
+                                                anchors.top: rec01_09.top
+                                                anchors.left: rec01_09.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh09.height+10
+                                                width: rec02_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "white"
+                                                radius: 5
+                                                ComboBox {
+                                                    id: combo_kol_podsh09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.horizontalCenter: parent.horizontalCenter
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    width: parent.width-10
+                                                    model: ["1", "2"]
+                                                    editable: true
+                                                        validator: IntValidator {
+                                                            top: 2
+                                                            bottom: 1
+                                                        }
+                                                }
+                                            }
+                                                Rectangle {
+                                                    id: rec03_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    //anchors.topMargin: 5
+                                                    anchors.left: rec02_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+10
+                                                    width: rec03_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "white"
+                                                    radius: 5
+                                                    ComboBox {
+                                                        id: combo_obRU09
+                                                        property int id
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        currentIndex: -1
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        width: parent.width-but_obRU09.width-15
+                                                        editable: true
+                                                        inputMethodHints: Qt.ImhNoPredictiveText
+                                                        textRole: 'podsh_obRU'
+                                                        delegate: ItemDelegate {
+                                                            width: combo_obRU09.width
+                                                            text: combo_obRU09.textRole ? (Array.isArray(combo_obRU09.model) ? modelData[combo_obRU09.textRole] : model[combo_obRU09.textRole]) : modelData
+                                                            highlighted: combo_obRU09.highlightedIndex === index
+                                                        }
+                                                        onCurrentTextChanged: {
+                                                            combo_obEN09.currentIndex = combo_obRU09.currentIndex
+                                                            combo_obRU09.id = model_podsh8.getId(currentIndex)
+                                                            if(currentIndex==-1){
+                                                                //combo_obRU.id = ""
+                                                            } else {
+                                                                //combo_obRU.id = newmodel.getId(currentIndex)
+                                                            }
+                                                        }
+                                                    }
+                                                    Button {
+                                                        id: but_obRU09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.top: combo_obRU09.top
+                                                        anchors.left: combo_obRU09.right
+                                                        anchors.leftMargin: 5
+                                                        width: height - 10
+                                                        highlighted: true
+                                                        Material.accent: Material.LightBlue
+                                                        Image {
+                                                            id: im_poisk09
+                                                            visible: text01_09.text <= inputkolopor.currentText
+                                                            enabled: text01_09.text <= inputkolopor.currentText
+                                                            anchors.fill: parent
+                                                            fillMode: Image.PreserveAspectFit
+                                                            source: "file:./Images/poisk.png"
+                                                        }
+                                                        onClicked: {
+                                                            stackView.obRU = combo_obRU09.editText
+                                                            stackView.obEN = ""
+                                                            qmlFilterBearing8()
+                                                            combo_obRU09.model = model_podsh8
+                                                            combo_obEN09.model = model_podsh8
+                                                            combo_obRU09.popup.visible = true
+                                                        }
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec04_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec03_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+10
+                                                    width: rec04_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "white"
+                                                    radius: 5
+                                                    ComboBox {
+                                                        id: combo_obEN09
+                                                        property int id
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        currentIndex: -1
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        width: parent.width-but_obEN09.width-15
+                                                        editable: true
+                                                        inputMethodHints: Qt.ImhNoPredictiveText
+                                                        textRole: 'podsh_obEN'
+                                                        delegate: ItemDelegate {
+                                                            //Material.foreground: Material.LightBlue
+                                                            width: combo_obEN09.width
+                                                            text: combo_obEN09.textRole ? (Array.isArray(combo_obEN09.model) ? modelData[combo_obEN09.textRole] : model[combo_obEN09.textRole]) : modelData
+                                                            highlighted: combo_obEN09.highlightedIndex === index
+                                                        }
+                                                        onCurrentTextChanged: {
+                                                            combo_obRU09.currentIndex = combo_obEN09.currentIndex
+                                                            combo_obEN09.id = model_podsh8.getId(currentIndex)
+                                                            if(currentIndex==-1){
+                                                                //combo_obRU.id = ""
+                                                            } else {
+                                                                //combo_obRU.id = newmodel.getId(currentIndex)
+                                                            }
+                                                        }
+                                                    }
+                                                    Button {
+                                                        id: but_obEN09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.top: combo_obEN09.top
+                                                        anchors.left: combo_obEN09.right
+                                                        anchors.leftMargin: 5
+                                                        width: height - 10
+                                                        highlighted: true
+                                                        Material.accent: Material.LightBlue
+                                                        Image {
+                                                            id: im_poiskEN09
+                                                            visible: text01_09.text <= inputkolopor.currentText
+                                                            enabled: text01_09.text <= inputkolopor.currentText
+                                                            anchors.fill: parent
+                                                            fillMode: Image.PreserveAspectFit
+                                                            source: "file:./Images/poisk.png"
+                                                        }
+                                                        onClicked: {
+                                                            stackView.obEN = combo_obEN09.editText
+                                                            stackView.obRU = ""
+                                                            qmlFilterBearing8()
+                                                            combo_obEN09.model = model_podsh8
+                                                            combo_obRU09.model = model_podsh8
+                                                            combo_obEN09.popup.visible = true
+                                                        }
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec05_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec04_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+10
+                                                    width: rec05_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "white"
+                                                    radius: 5
+                                                    ComboBox {
+                                                        id: combo_rasp09
+                                                        property int id
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        currentIndex: -1
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        editable: true
+                                                        textRole: 'rasp_podsh'
+                                                        model: model_rasp_podsh
+                                                        onCurrentTextChanged: {
+                                                            combo_rasp09.id = model_rasp_podsh.getId(currentIndex)
+                                                        }
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec06_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec05_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+10
+                                                    width: rec06_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "white"
+                                                    radius: 5
+                                                    ComboBox {
+                                                        id: combo_tip09
+                                                        property int id
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        currentIndex: -1
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        editable: true
+                                                        textRole: 'tip_podsh'
+                                                        model: model_tip_podsh
+                                                        onCurrentTextChanged: {
+                                                            combo_tip09.id = model_tip_podsh.getId(currentIndex)
+                                                        }
+                                                    }
+                                                }
                             }
         }
         TabBar {

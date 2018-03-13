@@ -52,6 +52,7 @@ ApplicationWindow {
     signal qmlFilterBearing7()
     signal qmlFilterBearing8()
     signal qmlSignal_bearing_id()
+    signal qmlidkksForInsertBaseOpor()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -227,9 +228,6 @@ ApplicationWindow {
         id: drawer
         width: Math.min(window.width, window.height) / 3
         height: window.height
-//onClosed: {
-//    window.deleteLater(drawer)
-//}
         ListView {
             id: listView
             focus: true
@@ -245,28 +243,23 @@ ApplicationWindow {
                         stackView.replace(bo)
                     }
                     if (listView.currentIndex==1){
-//                        stackView.baza_id = ""
-//                        qmlSignal_bazaizmer()
                         stackView.replace(bi)
                     }
                     if (listView.currentIndex==2){
                         stackView.replace(bb)
                     }
                     if (listView.currentIndex==3){
-                        //qmlKolAgr()
                         stackView.replace(stat)
                     }
                     drawer.close()
                 }
             }
-
             model: ListModel {
                 ListElement { title: "База оборудования"}
                 ListElement { title: "База измерений"}
                 ListElement { title: "База балансировок"}
                 ListElement { title: "Статистика"}
             }
-
             ScrollIndicator.vertical: ScrollIndicator { }
         }
     }
@@ -315,6 +308,9 @@ ApplicationWindow {
         property string obRU: ""
         property string obEN: ""
         property string bearing_id: ""
+        //
+        property string kksForInsertBaseOpor: ""
+        property string idkksForInsertBaseOpor: ""
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

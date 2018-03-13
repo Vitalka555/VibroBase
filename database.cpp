@@ -2413,3 +2413,47 @@ bool DataBase::removeRecordBearing(const int id)
     }
     return false;
 }
+
+bool DataBase::insertIntoBaseOpor(const QVariantList &data)
+{
+    qDebug()<<"1";
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+   QSqlQuery quer;
+   quer.prepare("INSERT INTO BaseOpor (id_Baza, NomerOpory, KolPodsh, id_TipPodshipnika, id_BasePodsh, id_RaspolozhPodsh) "
+                 "VALUES (:idbaza, :nomeropor, :kolpodsh, :idtippodsh, :idbasepodsh, :idrasppodsh)");
+   quer.bindValue(":idbaza",       data[0].toString());
+   quer.bindValue(":nomeropor",       data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   quer.bindValue(":kolpodsh",       data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+   quer.bindValue(":idtippodsh",       data[3].toString());
+   quer.bindValue(":idbasepodsh",          data[4].toString());
+   quer.bindValue(":idrasppodsh",          data[5].toString());
+   if(!quer.exec()){
+       qDebug() << "error insert into BaseOpor";
+       qDebug() << quer.lastError().text();
+       return false;
+   } else {
+       return true;
+   }
+qDebug()<<"2";
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
+   }
+   return false;
+}
+
+bool DataBase::insertIntoBaseOpor(const QString &idbaza, const QString &nomeropor, const QString &kolpodsh, const QString &idtippodsh,
+                                  const QString &idbasepodsh, const QString &idrasppodsh){
+    QVariantList data;
+    data.append(idbaza);
+    data.append(nomeropor);
+    data.append(kolpodsh);
+    data.append(idtippodsh);
+    data.append(idbasepodsh);
+    data.append(idrasppodsh);
+    if(insertIntoBaseOpor(data))
+        return true;
+    else
+        return false;
+}

@@ -104,10 +104,6 @@ void ListModel::updateModel()
     this->setQuery("SELECT Baza.id, " baza_kks ", (SELECT " ceh_name " FROM " ceh " where Ceh.id=Baza.id_Ceh ), "
                    baza_zd ", " baza_pom ", " baza_opis " FROM " baza " WHERE Baza.KKS LIKE '%"+kks+"%' "
                    " AND COALESCE(Baza.Здание,'') LIKE '%"+zd+"%'" + ceh_filter + tipmeh_filter + " ORDER BY " baza_kks);
-//    QSqlQuery querymodel;
-//    querymodel.exec("SELECT Baza.id, " baza_kks ", (SELECT " ceh_name " FROM " ceh " where Ceh.id=Baza.id_Ceh ), "
-//                    baza_zd ", " baza_pom ", " baza_opis " FROM " baza " WHERE Baza.KKS LIKE '%"+kks+"%' "
-//                    "AND COALESCE(Baza.Здание,'') LIKE '%"+zd+"%'" + ceh_filter + tipmeh_filter + " ORDER BY " baza_kks);
     while(this->canFetchMore()){
         this->fetchMore();
     }
@@ -116,6 +112,23 @@ void ListModel::updateModel()
     if(!db.commit()){
     db.rollback();
     }
+}
+void ListModel::idForBaseOpor()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString kks=(stack->property("kksForInsertBaseOpor")).toString();
+    qDebug()<<"kks = " << kks;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    QSqlQuery query("select Baza.id, Baza.KKS from Baza where Baza.KKS = '" + kks + "'");
+    query.first();
+    QString idkksForInsertBaseOpor = query.value(0).toString();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
+    stack->setProperty("idkksForInsertBaseOpor", idkksForInsertBaseOpor);
+    qDebug()<<"idkksForInsertBaseOpor = " << idkksForInsertBaseOpor;
 }
 
 // Получение id из строки в модели представления данных

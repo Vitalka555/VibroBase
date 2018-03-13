@@ -2999,6 +2999,7 @@ Item {
                             onCurrentTextChanged: {
                                 combo_obEN02.currentIndex = combo_obRU02.currentIndex
                                 combo_obRU02.id = model_podsh1.getId(currentIndex)
+                                combo_obEN02.id = model_podsh1.getId(currentIndex)
                                 console.log(combo_obRU02.id)
                                 if(currentIndex==-1){
                                     //combo_obRU.id = ""
@@ -3069,6 +3070,7 @@ Item {
                             onCurrentTextChanged: {
                                 combo_obRU02.currentIndex = combo_obEN02.currentIndex
                                 combo_obEN02.id = model_podsh1.getId(currentIndex)
+                                combo_obRU02.id = model_podsh1.getId(currentIndex)
                                 if(currentIndex==-1){
                                     //combo_obRU.id = ""
                                 } else {
@@ -3253,6 +3255,7 @@ Item {
                                 onCurrentTextChanged: {
                                     combo_obEN03.currentIndex = combo_obRU03.currentIndex
                                     combo_obRU03.id = model_podsh2.getId(currentIndex)
+                                    combo_obEN03.id = model_podsh2.getId(currentIndex)
                                     if(currentIndex==-1){
                                         //combo_obRU.id = ""
                                     } else {
@@ -3322,6 +3325,7 @@ Item {
                                 onCurrentTextChanged: {
                                     combo_obRU03.currentIndex = combo_obEN03.currentIndex
                                     combo_obEN03.id = model_podsh2.getId(currentIndex)
+                                    combo_obRU03.id = model_podsh2.getId(currentIndex)
                                     if(currentIndex==-1){
                                         //combo_obRU.id = ""
                                     } else {
@@ -3506,6 +3510,7 @@ Item {
                                     onCurrentTextChanged: {
                                         combo_obEN04.currentIndex = combo_obRU04.currentIndex
                                         combo_obRU04.id = model_podsh3.getId(currentIndex)
+                                        combo_obEN04.id = model_podsh3.getId(currentIndex)
                                         if(currentIndex==-1){
                                             //combo_obRU.id = ""
                                         } else {
@@ -3575,6 +3580,7 @@ Item {
                                     onCurrentTextChanged: {
                                         combo_obRU04.currentIndex = combo_obEN04.currentIndex
                                         combo_obEN04.id = model_podsh3.getId(currentIndex)
+                                        combo_obRU04.id = model_podsh3.getId(currentIndex)
                                         if(currentIndex==-1){
                                             //combo_obRU.id = ""
                                         } else {
@@ -3758,6 +3764,7 @@ Item {
                                         onCurrentTextChanged: {
                                             combo_obEN05.currentIndex = combo_obRU05.currentIndex
                                             combo_obRU05.id = model_podsh4.getId(currentIndex)
+                                            combo_obEN05.id = model_podsh4.getId(currentIndex)
                                             if(currentIndex==-1){
                                                 //combo_obRU.id = ""
                                             } else {
@@ -3827,6 +3834,7 @@ Item {
                                         onCurrentTextChanged: {
                                             combo_obRU05.currentIndex = combo_obEN05.currentIndex
                                             combo_obEN05.id = model_podsh4.getId(currentIndex)
+                                            combo_obRU05.id = model_podsh4.getId(currentIndex)
                                             if(currentIndex==-1){
                                                 //combo_obRU.id = ""
                                             } else {
@@ -4010,6 +4018,7 @@ Item {
                                             onCurrentTextChanged: {
                                                 combo_obEN06.currentIndex = combo_obRU06.currentIndex
                                                 combo_obRU06.id = model_podsh5.getId(currentIndex)
+                                                combo_obEN06.id = model_podsh5.getId(currentIndex)
                                                 if(currentIndex==-1){
                                                     //combo_obRU.id = ""
                                                 } else {
@@ -4079,6 +4088,7 @@ Item {
                                             onCurrentTextChanged: {
                                                 combo_obRU06.currentIndex = combo_obEN06.currentIndex
                                                 combo_obEN06.id = model_podsh5.getId(currentIndex)
+                                                combo_obRU06.id = model_podsh5.getId(currentIndex)
                                                 if(currentIndex==-1){
                                                     //combo_obRU.id = ""
                                                 } else {
@@ -4262,6 +4272,7 @@ Item {
                                                 onCurrentTextChanged: {
                                                     combo_obEN07.currentIndex = combo_obRU07.currentIndex
                                                     combo_obRU07.id = model_podsh6.getId(currentIndex)
+                                                    combo_obEN07.id = model_podsh6.getId(currentIndex)
                                                     if(currentIndex==-1){
                                                         //combo_obRU.id = ""
                                                     } else {
@@ -4331,6 +4342,7 @@ Item {
                                                 onCurrentTextChanged: {
                                                     combo_obRU07.currentIndex = combo_obEN07.currentIndex
                                                     combo_obEN07.id = model_podsh6.getId(currentIndex)
+                                                    combo_obRU07.id = model_podsh6.getId(currentIndex)
                                                     if(currentIndex==-1){
                                                         //combo_obRU.id = ""
                                                     } else {
@@ -4514,6 +4526,7 @@ Item {
                                                     onCurrentTextChanged: {
                                                         combo_obEN08.currentIndex = combo_obRU08.currentIndex
                                                         combo_obRU08.id = model_podsh7.getId(currentIndex)
+                                                        combo_obEN08.id = model_podsh7.getId(currentIndex)
                                                         if(currentIndex==-1){
                                                             //combo_obRU.id = ""
                                                         } else {
@@ -4583,6 +4596,7 @@ Item {
                                                     onCurrentTextChanged: {
                                                         combo_obRU08.currentIndex = combo_obEN08.currentIndex
                                                         combo_obEN08.id = model_podsh7.getId(currentIndex)
+                                                        combo_obRU08.id = model_podsh7.getId(currentIndex)
                                                         if(currentIndex==-1){
                                                             //combo_obRU.id = ""
                                                         } else {
@@ -4766,6 +4780,7 @@ Item {
                                                         onCurrentTextChanged: {
                                                             combo_obEN09.currentIndex = combo_obRU09.currentIndex
                                                             combo_obRU09.id = model_podsh8.getId(currentIndex)
+                                                            combo_obEN09.id = model_podsh8.getId(currentIndex)
                                                             if(currentIndex==-1){
                                                                 //combo_obRU.id = ""
                                                             } else {
@@ -4835,6 +4850,7 @@ Item {
                                                         onCurrentTextChanged: {
                                                             combo_obRU09.currentIndex = combo_obEN09.currentIndex
                                                             combo_obEN09.id = model_podsh8.getId(currentIndex)
+                                                            combo_obRU09.id = model_podsh8.getId(currentIndex)
                                                             if(currentIndex==-1){
                                                                 //combo_obRU.id = ""
                                                             } else {
@@ -5044,6 +5060,34 @@ footer: ToolBar {
                                          combo_otkaz_nom.id, combo_norm_rded.id, combo_norm_rd.id, combo_ogr_rded.id,
                                          combo_ogr_rd.id, combo_otkaz_rded.id, combo_otkaz_rd.id, tf_foto.tex,
                                          tf_shema.tex, textArea_doc.text, textArea_par.text)
+                stackView.kksForInsertBaseOpor = tf_kks.text
+                console.log("stackView.idkksForInsertBaseOpor", stackView.idkksForInsertBaseOpor)
+                qmlidkksForInsertBaseOpor()
+                if(text01_02.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_02.text, combo_kol_podsh02.currentText, combo_tip02.id, combo_obRU02.id, combo_rasp02.id)
+                }
+                if(text01_03.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_03.text, combo_kol_podsh03.currentText, combo_tip03.id, combo_obRU03.id, combo_rasp03.id)
+                }
+                if(text01_04.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_04.text, combo_kol_podsh04.currentText, combo_tip04.id, combo_obRU04.id, combo_rasp04.id)
+                }
+                if(text01_05.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_05.text, combo_kol_podsh05.currentText, combo_tip05.id, combo_obRU05.id, combo_rasp05.id)
+                }
+                if(text01_06.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_06.text, combo_kol_podsh06.currentText, combo_tip06.id, combo_obRU06.id, combo_rasp06.id)
+                }
+                if(text01_07.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_07.text, combo_kol_podsh07.currentText, combo_tip07.id, combo_obRU07.id, combo_rasp07.id)
+                }
+                if(text01_08.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_08.text, combo_kol_podsh08.currentText, combo_tip08.id, combo_obRU08.id, combo_rasp08.id)
+                }
+                if(text01_09.text <= inputkolopor.currentText){
+                    database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_09.text, combo_kol_podsh09.currentText, combo_tip09.id, combo_obRU09.id, combo_rasp09.id)
+                }
+
                 model0.updateModel()
                 stackView.replace(bo)
                 tool_left.visible = true

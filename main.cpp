@@ -259,6 +259,7 @@ DataBase *datab = new DataBase(root);
         QObject::connect(root, SIGNAL(qmlFilterBearing7()), model_podsh7, SLOT(updateModel()));//фильтр в таблице подшипников
         QObject::connect(root, SIGNAL(qmlFilterBearing8()), model_podsh8, SLOT(updateModel()));//фильтр в таблице подшипников
         QObject::connect(root, SIGNAL(qmlSignal_bearing_id()), model_open_podsh, SLOT(updateModel()));//вытаскиваем данные конкретного подшипника
+        QObject::connect(root, SIGNAL(qmlidkksForInsertBaseOpor()), model0, SLOT(idForBaseOpor()));//узнать id создаваемого агрегата для базы опор
         engine.rootContext()->setContextProperty("model0", model0);
         engine.rootContext()->setContextProperty("model_openBO", model_openBO);
         engine.rootContext()->setContextProperty("model_1V", model_1V);

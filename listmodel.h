@@ -89,6 +89,7 @@ signals:
 
 public slots:
     void updateModel();
+    void idForBaseOpor();
     int getId(int row);
 };
 

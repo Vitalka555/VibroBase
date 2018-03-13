@@ -13,13 +13,6 @@ Item {
     Component.onDestruction: {
         im_foto.source=""
         im_shema.source=""
-        //stackView.kks_filter_BI = stackView.kks_filter_BI_variable
-//        im_foto.deleteLater()
-//        im_shema.deleteLater()
-        //mapper.updateData()
-        //mapper.
-        //stackView. (openBO)
-        //openBO.deleteLater()
     }
 
     Page {

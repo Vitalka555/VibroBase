@@ -2980,7 +2980,7 @@ Item {
                         radius: 5
                         ComboBox {
                             id: combo_obRU02
-                            property int id
+                            property string id: ""
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
@@ -3050,7 +3050,7 @@ Item {
                         radius: 5
                         ComboBox {
                             id: combo_obEN02
-                            property int id
+                            property string id: ""
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
@@ -3120,7 +3120,7 @@ Item {
                         radius: 5
                         ComboBox {
                             id: combo_rasp02
-                            property int id
+                            property string id: ""
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
@@ -3152,7 +3152,7 @@ Item {
                         radius: 5
                         ComboBox {
                             id: combo_tip02
-                            property int id
+                            property string id: ""
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
@@ -3236,7 +3236,7 @@ Item {
                             radius: 5
                             ComboBox {
                                 id: combo_obRU03
-                                property int id
+                                property string id: ""
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
                                 currentIndex: -1
@@ -3305,7 +3305,7 @@ Item {
                             radius: 5
                             ComboBox {
                                 id: combo_obEN03
-                                property int id
+                                property string id: ""
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
                                 currentIndex: -1
@@ -3375,7 +3375,7 @@ Item {
                             radius: 5
                             ComboBox {
                                 id: combo_rasp03
-                                property int id
+                                property string id: ""
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
                                 currentIndex: -1
@@ -3407,7 +3407,7 @@ Item {
                             radius: 5
                             ComboBox {
                                 id: combo_tip03
-                                property int id
+                                property string id: ""
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
                                 currentIndex: -1
@@ -3491,7 +3491,7 @@ Item {
                                 radius: 5
                                 ComboBox {
                                     id: combo_obRU04
-                                    property int id
+                                    property string id: ""
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
                                     currentIndex: -1
@@ -3560,7 +3560,7 @@ Item {
                                 radius: 5
                                 ComboBox {
                                     id: combo_obEN04
-                                    property int id
+                                    property string id: ""
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
                                     currentIndex: -1
@@ -3630,7 +3630,7 @@ Item {
                                 radius: 5
                                 ComboBox {
                                     id: combo_rasp04
-                                    property int id
+                                    property string id: ""
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
                                     currentIndex: -1
@@ -3661,7 +3661,7 @@ Item {
                                 radius: 5
                                 ComboBox {
                                     id: combo_tip04
-                                    property int id
+                                    property string id: ""
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
                                     currentIndex: -1
@@ -3745,7 +3745,7 @@ Item {
                                     radius: 5
                                     ComboBox {
                                         id: combo_obRU05
-                                        property int id
+                                        property string id: ""
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
                                         currentIndex: -1
@@ -3814,7 +3814,7 @@ Item {
                                     radius: 5
                                     ComboBox {
                                         id: combo_obEN05
-                                        property int id
+                                        property string id: ""
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
                                         currentIndex: -1
@@ -3884,7 +3884,7 @@ Item {
                                     radius: 5
                                     ComboBox {
                                         id: combo_rasp05
-                                        property int id
+                                        property string id: ""
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
                                         currentIndex: -1
@@ -3915,7 +3915,7 @@ Item {
                                     radius: 5
                                     ComboBox {
                                         id: combo_tip05
-                                        property int id
+                                        property string id: ""
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
                                         currentIndex: -1
@@ -3999,7 +3999,7 @@ Item {
                                         radius: 5
                                         ComboBox {
                                             id: combo_obRU06
-                                            property int id
+                                            property string id: ""
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
                                             currentIndex: -1
@@ -4068,7 +4068,7 @@ Item {
                                         radius: 5
                                         ComboBox {
                                             id: combo_obEN06
-                                            property int id
+                                            property string id: ""
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
                                             currentIndex: -1
@@ -4138,7 +4138,7 @@ Item {
                                         radius: 5
                                         ComboBox {
                                             id: combo_rasp06
-                                            property int id
+                                            property string id: ""
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
                                             currentIndex: -1
@@ -4169,7 +4169,7 @@ Item {
                                         radius: 5
                                         ComboBox {
                                             id: combo_tip06
-                                            property int id
+                                            property string id: ""
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
                                             currentIndex: -1
@@ -4253,7 +4253,7 @@ Item {
                                             radius: 5
                                             ComboBox {
                                                 id: combo_obRU07
-                                                property int id
+                                                property string id: ""
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
                                                 currentIndex: -1
@@ -4322,7 +4322,7 @@ Item {
                                             radius: 5
                                             ComboBox {
                                                 id: combo_obEN07
-                                                property int id
+                                                property string id: ""
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
                                                 currentIndex: -1
@@ -4392,7 +4392,7 @@ Item {
                                             radius: 5
                                             ComboBox {
                                                 id: combo_rasp07
-                                                property int id
+                                                property string id: ""
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
                                                 currentIndex: -1
@@ -4423,7 +4423,7 @@ Item {
                                             radius: 5
                                             ComboBox {
                                                 id: combo_tip07
-                                                property int id
+                                                property string id: ""
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
                                                 currentIndex: -1
@@ -4507,7 +4507,7 @@ Item {
                                                 radius: 5
                                                 ComboBox {
                                                     id: combo_obRU08
-                                                    property int id
+                                                    property string id: ""
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
                                                     currentIndex: -1
@@ -4576,7 +4576,7 @@ Item {
                                                 radius: 5
                                                 ComboBox {
                                                     id: combo_obEN08
-                                                    property int id
+                                                    property string id: ""
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
                                                     currentIndex: -1
@@ -4646,7 +4646,7 @@ Item {
                                                 radius: 5
                                                 ComboBox {
                                                     id: combo_rasp08
-                                                    property int id
+                                                    property string id: ""
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
                                                     currentIndex: -1
@@ -4677,7 +4677,7 @@ Item {
                                                 radius: 5
                                                 ComboBox {
                                                     id: combo_tip08
-                                                    property int id
+                                                    property string id: ""
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
                                                     currentIndex: -1
@@ -4761,7 +4761,7 @@ Item {
                                                     radius: 5
                                                     ComboBox {
                                                         id: combo_obRU09
-                                                        property int id
+                                                        property string id: ""
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
                                                         currentIndex: -1
@@ -4830,7 +4830,7 @@ Item {
                                                     radius: 5
                                                     ComboBox {
                                                         id: combo_obEN09
-                                                        property int id
+                                                        property string id: ""
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
                                                         currentIndex: -1
@@ -4900,7 +4900,7 @@ Item {
                                                     radius: 5
                                                     ComboBox {
                                                         id: combo_rasp09
-                                                        property int id
+                                                        property string id: ""
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
                                                         currentIndex: -1
@@ -4932,7 +4932,7 @@ Item {
                                                     radius: 5
                                                     ComboBox {
                                                         id: combo_tip09
-                                                        property int id
+                                                        property string id: ""
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
                                                         currentIndex: -1
@@ -5064,27 +5064,107 @@ footer: ToolBar {
                 console.log("stackView.idkksForInsertBaseOpor", stackView.idkksForInsertBaseOpor)
                 qmlidkksForInsertBaseOpor()
                 if(text01_02.text <= inputkolopor.currentText){
+                    if(combo_tip02.editText == ""){
+                        combo_tip02.id = ""
+                    }
+                    if(combo_obRU02.editText == "" && combo_obEN02.editText == ""){
+                        combo_obRU02.id = ""
+                        combo_obEN02.id = ""
+                    }
+                    if(combo_rasp02.editText == ""){
+                        combo_rasp02.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_02.text, combo_kol_podsh02.currentText, combo_tip02.id, combo_obRU02.id, combo_rasp02.id)
                 }
                 if(text01_03.text <= inputkolopor.currentText){
+                    if(combo_tip03.editText == ""){
+                        combo_tip03.id = ""
+                    }
+                    if(combo_obRU03.editText == "" && combo_obEN03.editText == ""){
+                        combo_obRU03.id = ""
+                        combo_obEN03.id = ""
+                    }
+                    if(combo_rasp03.editText == ""){
+                        combo_rasp03.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_03.text, combo_kol_podsh03.currentText, combo_tip03.id, combo_obRU03.id, combo_rasp03.id)
                 }
                 if(text01_04.text <= inputkolopor.currentText){
+                    if(combo_tip04.editText == ""){
+                        combo_tip04.id = ""
+                    }
+                    if(combo_obRU04.editText == "" && combo_obEN04.editText == ""){
+                        combo_obRU04.id = ""
+                        combo_obEN04.id = ""
+                    }
+                    if(combo_rasp04.editText == ""){
+                        combo_rasp04.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_04.text, combo_kol_podsh04.currentText, combo_tip04.id, combo_obRU04.id, combo_rasp04.id)
                 }
                 if(text01_05.text <= inputkolopor.currentText){
+                    if(combo_tip05.editText == ""){
+                        combo_tip05.id = ""
+                    }
+                    if(combo_obRU05.editText == "" && combo_obEN05.editText == ""){
+                        combo_obRU05.id = ""
+                        combo_obEN05.id = ""
+                    }
+                    if(combo_rasp05.editText == ""){
+                        combo_rasp05.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_05.text, combo_kol_podsh05.currentText, combo_tip05.id, combo_obRU05.id, combo_rasp05.id)
                 }
                 if(text01_06.text <= inputkolopor.currentText){
+                    if(combo_tip06.editText == ""){
+                        combo_tip06.id = ""
+                    }
+                    if(combo_obRU06.editText == "" && combo_obEN06.editText == ""){
+                        combo_obRU06.id = ""
+                        combo_obEN06.id = ""
+                    }
+                    if(combo_rasp06.editText == ""){
+                        combo_rasp06.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_06.text, combo_kol_podsh06.currentText, combo_tip06.id, combo_obRU06.id, combo_rasp06.id)
                 }
                 if(text01_07.text <= inputkolopor.currentText){
+                    if(combo_tip07.editText == ""){
+                        combo_tip07.id = ""
+                    }
+                    if(combo_obRU07.editText == "" && combo_obEN07.editText == ""){
+                        combo_obRU07.id = ""
+                        combo_obEN07.id = ""
+                    }
+                    if(combo_rasp07.editText == ""){
+                        combo_rasp07.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_07.text, combo_kol_podsh07.currentText, combo_tip07.id, combo_obRU07.id, combo_rasp07.id)
                 }
                 if(text01_08.text <= inputkolopor.currentText){
+                    if(combo_tip08.editText == ""){
+                        combo_tip08.id = ""
+                    }
+                    if(combo_obRU08.editText == "" && combo_obEN08.editText == ""){
+                        combo_obRU08.id = ""
+                        combo_obEN08.id = ""
+                    }
+                    if(combo_rasp08.editText == ""){
+                        combo_rasp08.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_08.text, combo_kol_podsh08.currentText, combo_tip08.id, combo_obRU08.id, combo_rasp08.id)
                 }
                 if(text01_09.text <= inputkolopor.currentText){
+                    if(combo_tip09.editText == ""){
+                        combo_tip09.id = ""
+                    }
+                    if(combo_obRU09.editText == "" && combo_obEN09.editText == ""){
+                        combo_obRU09.id = ""
+                        combo_obEN09.id = ""
+                    }
+                    if(combo_rasp09.editText == ""){
+                        combo_rasp09.id = ""
+                    }
                     database.insertIntoBaseOpor(stackView.idkksForInsertBaseOpor, text01_09.text, combo_kol_podsh09.currentText, combo_tip09.id, combo_obRU09.id, combo_rasp09.id)
                 }
 

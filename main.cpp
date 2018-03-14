@@ -43,6 +43,7 @@ int main(int argc, char *argv[])
 #endif
 
     //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    //qputenv(«QSG_RENDER_LOOP», «basic»);
     QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 QApplication::setStyle("Material");
 QQuickStyle::setStyle("Material");
@@ -297,8 +298,8 @@ mapper_open_podsh->setModel(model_open_podsh);
 
 
 
-//    if (engine.rootObjects().isEmpty())
-//        return -1;
+    if (engine.rootObjects().isEmpty())
+        return -1;
 
     return app.exec();
 }

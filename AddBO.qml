@@ -5185,6 +5185,8 @@ footer: ToolBar {
         mapper.addMapping(combo_otkaz_rd, (0x0100+43), "currentIndex0")
         mapper.addMapping(textArea_doc, (0x0100+47), "text")
         mapper.addMapping(textArea_par, (0x0100+48), "text")
+        mapper.addMapping(inputkolopor, (0x0100+49), "currentIndex")
+        console.log("inputkolopor.currentIndex ", inputkolopor.currentIndex)
         tf_mosch.text = tf_mosch.text.replace(".", ",")
     }
 

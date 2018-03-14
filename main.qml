@@ -43,6 +43,7 @@ ApplicationWindow {
     signal qmlGetTipMeh()
     signal qmlBackup()
     signal qmlPodsh()
+    signal qmlFilterBearing()
     signal qmlFilterBearing1()
     signal qmlFilterBearing2()
     signal qmlFilterBearing3()

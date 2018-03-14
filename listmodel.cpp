@@ -1594,7 +1594,7 @@ void ListModelOpenBO::updateModel()
                    "(SELECT OtkazRdED.Значение FROM OtkazRdED WHERE OtkazRdED.id = Baza.id_OtkazRdED), "
                    "(SELECT OtkazRd.Значение FROM OtkazRd WHERE OtkazRd.id = Baza.id_OtkazRd),"
                    "Baza.TotkazED, Baza.TotkazRed, Baza.TotkazIspMeh, Baza.'Документы на нормы', "
-                   "Baza.'Параметры центровки и прилегания' FROM Baza WHERE Baza.id = " + kks_id);
+                   "Baza.'Параметры центровки и прилегания', (select count(BaseOpor.id) from BaseOpor where BaseOpor.id_Baza = Baza.id) FROM Baza WHERE Baza.id = " + kks_id);
     while(this->canFetchMore()){
         this->fetchMore();
     }

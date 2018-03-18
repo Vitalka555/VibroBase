@@ -368,7 +368,10 @@ public slots:
     bool insertIntoBaseOpor(const QVariantList &data);
     bool insertIntoBaseOpor(const QString &idbaza, const QString &nomeropor, const QString &kolpodsh, const QString &idtippodsh,
                            const QString &idbasepodsh, const QString &idrasppodsh);
-    //bool removeRecordBaseOpor(const int id);
+    bool editBaseOpor(const QVariantList &data);
+    bool editBaseOpor(const QString &idbaza, const QString &nomeropor, const QString &kolpodsh, const QString &idtippodsh,
+                           const QString &idbasepodsh, const QString &idrasppodsh, const QString &id);
+    bool removeRecordBaseOpor(const int id);
 
     bool removeRecord(const int id); // Удаление записи из таблицы "База оборудования" по её id
     bool removeRecordBI(const int id); // Удаление записи из таблицы "База измерений" по её id

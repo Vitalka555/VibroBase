@@ -54,6 +54,7 @@ ApplicationWindow {
     signal qmlFilterBearing8()
     signal qmlSignal_bearing_id()
     signal qmlidkksForInsertBaseOpor()
+    signal qmlOpenBOpodsh()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -102,6 +103,7 @@ ApplicationWindow {
                     tool_left2.visible = false
                     tool_left3.visible = false
                     tool_left4.visible = false
+                    console.log("count =", mapper_podsh.count)
                 }
                 Text {
                     id: tool_text
@@ -242,6 +244,7 @@ ApplicationWindow {
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
                         stackView.replace(bo)
+                        console.log("count =", mapper_podsh.count)
                     }
                     if (listView.currentIndex==1){
                         stackView.replace(bi)
@@ -309,6 +312,7 @@ ApplicationWindow {
         property string obRU: ""
         property string obEN: ""
         property string bearing_id: ""
+        property bool like: true
         //
         property string kksForInsertBaseOpor: ""
         property string idkksForInsertBaseOpor: ""

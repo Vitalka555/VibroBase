@@ -1554,6 +1554,10 @@ QHash<int, QByteArray> ListModelOpenBO::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
     roles[baza_kksRole] = "Bazakks";
+    roles[ceh_nameRole] = "ceh_name";
+    roles[baza_zdRole] = "baza_zd";
+    roles[baza_pomRole] = "baza_pom";
+    roles[baza_opisRole] = "baza_opis";
     return roles;
 }
 
@@ -1594,7 +1598,7 @@ void ListModelOpenBO::updateModel()
                    "(SELECT OtkazRdED.Значение FROM OtkazRdED WHERE OtkazRdED.id = Baza.id_OtkazRdED), "
                    "(SELECT OtkazRd.Значение FROM OtkazRd WHERE OtkazRd.id = Baza.id_OtkazRd),"
                    "Baza.TotkazED, Baza.TotkazRed, Baza.TotkazIspMeh, Baza.'Документы на нормы', "
-                   "Baza.'Параметры центровки и прилегания', (select count(BaseOpor.id) from BaseOpor where BaseOpor.id_Baza = Baza.id) FROM Baza WHERE Baza.id = " + kks_id);
+                   "Baza.'Параметры центровки и прилегания' FROM Baza WHERE Baza.id = " + kks_id);
     while(this->canFetchMore()){
         this->fetchMore();
     }
@@ -1604,22 +1608,217 @@ void ListModelOpenBO::updateModel()
     db.rollback();
     }
 }
-
-//void ListModelOpenBO::updateModel2()
-//{
-//    //QString kks_id;
-//    QObject* window = this->parent()->findChild<QObject*>("window");
-//    QString kks_id=(window->property("baza_id")).toString();
-//    qDebug() << kks_id;
-//    // Обновление производится SQL-запросом к базе данных
-//    this->setQuery(" SELECT Baza.id, Baza.KKS FROM Baza WHERE Baza.id = "+kks_id+" ");
-//}
-
+void ListModelOpenBO::updateModel2()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QObject* addBO = this->parent()->findChild<QObject*>("addBO");
+    QString kks_id=(stack->property("baza_id")).toString();
+    QStringList data;
+    QStringList data1;
+    QStringList data2;
+    QStringList data3;
+    QStringList data4;
+    QStringList data5;
+    QStringList data6;
+    QStringList data7;
+    QStringList data8;
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    QSqlQuery query("select BaseOpor.id, count(BaseOpor.id) "
+                   "FROM BaseOpor WHERE BaseOpor.id_Baza = " + kks_id);
+    while (query.next()) {
+        data.append(query.value(0).toString());
+        data.append(query.value(1).toString());
+    }
+    qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+    db.commit();
+    if(!db.commit()){
+    db.rollback();
+    }
+    addBO->setProperty("data_podsh", data);
+    if(1 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query1("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '1' and BaseOpor.id_Baza = " + kks_id);
+        while (query1.next()) {
+            data1.append(query1.value(0).toString());
+            data1.append(query1.value(1).toString());
+            data1.append(query1.value(2).toString());
+            data1.append(query1.value(3).toString());
+            data1.append(query1.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh1", data1);
+    }
+    if(2 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query2("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '2' and BaseOpor.id_Baza = " + kks_id);
+        while (query2.next()) {
+            data2.append(query2.value(0).toString());
+            data2.append(query2.value(1).toString());
+            data2.append(query2.value(2).toString());
+            data2.append(query2.value(3).toString());
+            data2.append(query2.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh2", data2);
+    }
+    if(3 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query3("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '3' and BaseOpor.id_Baza = " + kks_id);
+        while (query3.next()) {
+            data3.append(query3.value(0).toString());
+            data3.append(query3.value(1).toString());
+            data3.append(query3.value(2).toString());
+            data3.append(query3.value(3).toString());
+            data3.append(query3.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh3", data3);
+    }
+    if(4 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query4("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '4' and BaseOpor.id_Baza = " + kks_id);
+        while (query4.next()) {
+            data4.append(query4.value(0).toString());
+            data4.append(query4.value(1).toString());
+            data4.append(query4.value(2).toString());
+            data4.append(query4.value(3).toString());
+            data4.append(query4.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh4", data4);
+    }
+    if(5 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query5("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '5' and BaseOpor.id_Baza = " + kks_id);
+        while (query5.next()) {
+            data5.append(query5.value(0).toString());
+            data5.append(query5.value(1).toString());
+            data5.append(query5.value(2).toString());
+            data5.append(query5.value(3).toString());
+            data5.append(query5.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh5", data5);
+    }
+    if(6 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query6("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '6' and BaseOpor.id_Baza = " + kks_id);
+        while (query6.next()) {
+            data6.append(query6.value(0).toString());
+            data6.append(query6.value(1).toString());
+            data6.append(query6.value(2).toString());
+            data6.append(query6.value(3).toString());
+            data6.append(query6.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh6", data6);
+    }
+    if(7 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query7("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '7' and BaseOpor.id_Baza = " + kks_id);
+        while (query7.next()) {
+            data7.append(query7.value(0).toString());
+            data7.append(query7.value(1).toString());
+            data7.append(query7.value(2).toString());
+            data7.append(query7.value(3).toString());
+            data7.append(query7.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh7", data7);
+    }
+    if(8 <= data[1]){
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query8("select BaseOpor.id, BaseOpor.KolPodsh, "
+                       "(select BasePodsh.Oboznachenie from BasePodsh where BasePodsh.id = BaseOpor.id_BasePodsh), "
+                       "(select RaspolozhPodsh.Узел from RaspolozhPodsh where RaspolozhPodsh.id = BaseOpor.id_RaspolozhPodsh), "
+                       "(select TipPodshipnika.'Тип подшипника' from TipPodshipnika where TipPodshipnika.id = BaseOpor.id_TipPodshipnika) "
+                       "FROM BaseOpor WHERE BaseOpor.NomerOpory = '8' and BaseOpor.id_Baza = " + kks_id);
+        while (query8.next()) {
+            data8.append(query8.value(0).toString());
+            data8.append(query8.value(1).toString());
+            data8.append(query8.value(2).toString());
+            data8.append(query8.value(3).toString());
+            data8.append(query8.value(4).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        addBO->setProperty("data_podsh8", data8);
+    }
+}
 // Получение id из строки в модели представления данных
 int ListModelOpenBO::getId(int row)
 {
     return this->data(this->index(row, 0), IdRole).toInt();
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// \brief ListModel1V::ListModel1V
 /// \param parent
@@ -3497,12 +3696,20 @@ void ListModelPodsh::updateModel()
     QObject* stack = this->parent()->findChild<QObject*>("stackView");
     QString obRU=(stack->property("obRU")).toString();
     QString obEN=(stack->property("obEN")).toString();
+    bool like=(stack->property("like")).toBool();
+    QString filter;
+    if(like==true){
+        filter = " BasePodsh.Oboznachenie LIKE '%"+obRU+"%' and BasePodsh.OboznachenieEN LIKE '%"+obEN+"%' ";
+    }
+    if(like==false){
+        filter = " BasePodsh.Oboznachenie = '" + obRU + "' ";
+    }
     QSqlDatabase db = QSqlDatabase::database();
     db.transaction();
     // Обновление производится SQL-запросом к базе данных
     this->setQuery("SELECT BasePodsh.id, BasePodsh.Oboznachenie, BasePodsh.OboznachenieEN, BasePodsh.dvnutr, BasePodsh.Dnaruzh, BasePodsh.B, "
                    "BasePodsh.dtk, BasePodsh.ztk, BasePodsh.Ugol, BasePodsh.Massa, BasePodsh.Static, BasePodsh.Dinamic, BasePodsh.Name "
-                   "FROM BasePodsh WHERE BasePodsh.Oboznachenie LIKE '%"+obRU+"%' and BasePodsh.OboznachenieEN LIKE '%"+obEN+"%' "
+                   "FROM BasePodsh WHERE  " + filter +
                    "ORDER BY BasePodsh.Oboznachenie");
     while(this->canFetchMore()){
         this->fetchMore();

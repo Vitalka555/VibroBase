@@ -901,7 +901,11 @@ public:
      * */
     enum Roles {
         IdRole = Qt::UserRole + 1,      // id
-        baza_kksRole
+        baza_kksRole,
+        ceh_nameRole,
+        baza_zdRole,
+        baza_pomRole,
+        baza_opisRole,
     };
 
     // объявляем конструктор класса
@@ -921,7 +925,7 @@ signals:
 
 public slots:
     void updateModel();
-    //void updateModel2();
+    void updateModel2();
     int getId(int row);
 };
 

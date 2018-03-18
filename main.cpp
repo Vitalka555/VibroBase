@@ -42,9 +42,9 @@ int main(int argc, char *argv[])
     //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
 
-    //QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     //qputenv(«QSG_RENDER_LOOP», «basic»);
-    QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
+    //QCoreApplication::setAttribute(Qt::AA_UseOpenGLES);
 QApplication::setStyle("Material");
 QQuickStyle::setStyle("Material");
     QApplication app(argc, argv);
@@ -126,13 +126,7 @@ QQuickStyle::setStyle("Material");
 
 
     //ListModel0 *model0 = new ListModel0();
-    DataMapper *mapper = new DataMapper();
-    DataMapper *mapper_maxlevel = new DataMapper();
-    //mapper->setModel(model_openBO);
-    DataMapper *mapper_izmer = new DataMapper();
-    DataMapper *mapper_openBI = new DataMapper();
-    DataMapper *mapper_norm_creatBI = new DataMapper();
-    DataMapper *mapper_open_podsh = new DataMapper();
+
 
     // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
     //engine.rootContext()->setContextProperty("model0", model0);
@@ -167,13 +161,7 @@ QQuickStyle::setStyle("Material");
 
     //engine.rootContext()->setContextProperty("model_openBO", model_openBO);
     //engine.rootContext()->setContextProperty("model01", model0);
-    engine.rootContext()->setContextProperty("mapper", mapper);
-    engine.rootContext()->setContextProperty("mapper_maxlevel", mapper_maxlevel);
-    engine.rootContext()->setContextProperty("mapper_izmer", mapper_izmer);
-    engine.rootContext()->setContextProperty("mapper_openBI", mapper_openBI);
-    engine.rootContext()->setContextProperty("mapper_norm_creatBI", mapper_norm_creatBI);
-    engine.rootContext()->setContextProperty("mapper_open_podsh", mapper_open_podsh);
-    engine.rootContext()->setContextProperty("database", &database);
+
     //engine.rootContext()->setContextProperty("applicationDirPath", QGuiApplication::applicationDirPath());
     //engine.setOfflineStoragePath("D:\\Projects\\build-V3_0-Desktop_Qt_5_10_0_MinGW_32bit4-Debug\\debug\\sqlite.db");
     //engine.addImageProvider(QLatin1String("imageprovider"), new MyImageProvider);
@@ -239,6 +227,7 @@ ListModel *model0 = new ListModel(root);
 QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));                        //Загрузка в табл. "База оборудования" и фильтр по ней
 QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
+QObject::connect(root, SIGNAL(qmlOpenBOpodsh()), model_openBO, SLOT(updateModel2()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_1V, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_maxlevel, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer()), model_maxlevel, SLOT(updateModel2()));
@@ -284,6 +273,17 @@ DataBase *datab = new DataBase(root);
         engine.rootContext()->setContextProperty("model_tip_podsh", model_tip_podsh);
         engine.rootContext()->setContextProperty("model_open_podsh", model_open_podsh);
 
+        DataMapper *mapper = new DataMapper();
+        //DataMapper *mapper_podsh = new DataMapper;
+        DataMapper *mapper_maxlevel = new DataMapper();
+        //mapper->setModel(model_openBO);
+        DataMapper *mapper_izmer = new DataMapper();
+        DataMapper *mapper_openBI = new DataMapper();
+        DataMapper *mapper_norm_creatBI = new DataMapper();
+        DataMapper *mapper_open_podsh = new DataMapper();
+
+
+
 
 
 //qmlRegisterType<model_podsh>("SQLHelper", 1, 0, "ListModelPodsh");
@@ -294,6 +294,14 @@ mapper_openBI->setModel(model_openBI);
 mapper_norm_creatBI->setModel(model_norm_creatBI);
 mapper_open_podsh->setModel(model_open_podsh);
 
+engine.rootContext()->setContextProperty("mapper", mapper);
+//engine.rootContext()->setContextProperty("mapper_podsh", mapper_podsh);
+engine.rootContext()->setContextProperty("mapper_maxlevel", mapper_maxlevel);
+engine.rootContext()->setContextProperty("mapper_izmer", mapper_izmer);
+engine.rootContext()->setContextProperty("mapper_openBI", mapper_openBI);
+engine.rootContext()->setContextProperty("mapper_norm_creatBI", mapper_norm_creatBI);
+engine.rootContext()->setContextProperty("mapper_open_podsh", mapper_open_podsh);
+engine.rootContext()->setContextProperty("database", &database);
 //mapper_maxlevel->setModel(model_maxlevel);
 //mapper_1V->setModel(model_1V);
 

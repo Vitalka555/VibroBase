@@ -2457,3 +2457,73 @@ bool DataBase::insertIntoBaseOpor(const QString &idbaza, const QString &nomeropo
     else
         return false;
 }
+
+bool DataBase::editBaseOpor(const QVariantList &data)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+   QSqlQuery quer;
+   quer.prepare("update BaseOpor set id_Baza = :idbaza, NomerOpory = :nomeropor, KolPodsh = :kolpodsh, id_TipPodshipnika = :idtippodsh, "
+                "id_BasePodsh = :idbasepodsh, id_RaspolozhPodsh = :idrasppodsh where BaseOpor.id = :id");
+   quer.bindValue(":idbaza",       data[0].toString());
+   quer.bindValue(":nomeropor",       data[1].toString()=="" ? QVariant(QVariant::String):data[1].toString());
+   quer.bindValue(":kolpodsh",       data[2].toString()=="" ? QVariant(QVariant::String):data[2].toString());
+   quer.bindValue(":idtippodsh",          data[3].toString());
+   quer.bindValue(":idbasepodsh",          data[4].toString());
+   quer.bindValue(":idrasppodsh",          data[5].toString());
+   quer.bindValue(":id",          data[6].toString());
+
+   if(!quer.exec()){
+       return false;
+   } else {
+       return true;
+   }
+   quer.clear();
+   if(!db.commit()){
+   db.rollback();
+   }
+   return false;
+}
+
+bool DataBase::editBaseOpor(const QString &idbaza, const QString &nomeropor, const QString &kolpodsh, const QString &idtippodsh,
+                           const QString &idbasepodsh, const QString &idrasppodsh, const QString &id){
+    QVariantList data;
+    data.append(idbaza);
+    data.append(nomeropor);
+    data.append(kolpodsh);
+    data.append(idtippodsh);
+    data.append(idbasepodsh);
+    data.append(idrasppodsh);
+    data.append(id);
+    if(editBaseOpor(data))
+        return true;
+    else
+        return false;
+}
+
+bool DataBase::removeRecordBaseOpor(const int id)
+{
+    QSqlDatabase db = QSqlDatabase::database();
+    db.transaction();
+    // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+    QSqlQuery query;
+
+    // Удаление производим по id записи, который передается в качестве аргумента функции
+    query.prepare("DELETE FROM BaseOpor WHERE id= :ID ;");
+    query.bindValue(":ID", id);
+
+    // Выполняем удаление
+    if(!query.exec()){
+        qDebug() << "error delete row " << "BaseOpor";
+        qDebug() << query.lastError().text();
+        return false;
+    } else {
+        return true;
+    }
+
+    query.clear();
+    if(!db.commit()){
+    db.rollback();
+    }
+    return false;
+}

@@ -7,25 +7,24 @@ import QtQuick.Dialogs 1.2
 
 Item {
     id: item
-//    TextField {
-//        id: tf_kks
-//        anchors.top: parent.top
-//        anchors.left: parent.left
-//        text: ""
-//    }
-//    Button {
-//        id: but_save
-//        anchors.top: tf_kks.bottom
-//        anchors.topMargin: 5
-//        anchors.left: parent.left
-//        height: 100
-//        width: 100
-//        text: "Save"
-//        onClicked: {
-//            database.editTableBaza(stackView.baza_id, tf_kks.text)
-//            model0.updateModel()
-//        }
-//    }
+    objectName: "addBO"
+    property var data_podsh: [0]
+    property var data_podsh1: [0]
+    property var data_podsh2: [0]
+    property var data_podsh3: [0]
+    property var data_podsh4: [0]
+    property var data_podsh5: [0]
+    property var data_podsh6: [0]
+    property var data_podsh7: [0]
+    property var data_podsh8: [0]
+    property string id1
+    property string id2
+    property string id3
+    property string id4
+    property string id5
+    property string id6
+    property string id7
+    property string id8
     Page {
         id: creat
         anchors.fill: parent
@@ -2748,6 +2747,8 @@ Item {
                 }
                 ComboBox {
                     id: inputkolopor
+                    property string currentIndex0: "0"
+                    currentIndex: currentIndex0
                     anchors.top: parent.top
                     anchors.topMargin: 5
                     anchors.left: text_kolopor.right
@@ -2759,6 +2760,7 @@ Item {
                             top: 8
                             bottom: 0
                         }
+                    onCurrentTextChanged: console.log("currentIndex0", currentIndex0)
                 }
                 Button {//?????????????????????????????????????????????????????????????????????????????????????????????????
                     id: buttonNext1
@@ -2994,6 +2996,8 @@ Item {
                     radius: 5
                     ComboBox {
                         id: combo_kol_podsh02
+                        property string currentIndex0: "0"
+                        currentIndex: currentIndex0 - 1
                         visible: text01_02.text <= inputkolopor.currentText
                         enabled: text01_02.text <= inputkolopor.currentText
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -3023,9 +3027,11 @@ Item {
                         ComboBox {
                             id: combo_obRU02
                             property string id: ""
+                            property string currentIndex0: ""
+                            //model: model_podsh1
+                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                             visible: text01_02.text <= inputkolopor.currentText
-                            enabled: text01_02.text <= inputkolopor.currentText
-                            currentIndex: -1
+                            enabled: text01_02.text <= inputkolopor.currentText                            
                             anchors.left: parent.left
                             anchors.leftMargin: 5
                             anchors.verticalCenter: parent.verticalCenter
@@ -3038,16 +3044,17 @@ Item {
                                 text: combo_obRU02.textRole ? (Array.isArray(combo_obRU02.model) ? modelData[combo_obRU02.textRole] : model[combo_obRU02.textRole]) : modelData
                                 highlighted: combo_obRU02.highlightedIndex === index
                             }
+                            onEditTextChanged: {
+                                if(editText==""){
+                                console.log("изменен")
+                                    model=0
+                                }
+                            }
                             onCurrentTextChanged: {
                                 combo_obEN02.currentIndex = combo_obRU02.currentIndex
                                 combo_obRU02.id = model_podsh1.getId(currentIndex)
                                 combo_obEN02.id = model_podsh1.getId(currentIndex)
                                 console.log(combo_obRU02.id)
-                                if(currentIndex==-1){
-                                    //combo_obRU.id = ""
-                                } else {
-                                    //combo_obRU.id = newmodel.getId(currentIndex)
-                                }
                             }
                         }
                         Button {
@@ -3093,6 +3100,7 @@ Item {
                         ComboBox {
                             id: combo_obEN02
                             property string id: ""
+                            //model: model_podsh1
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
                             currentIndex: -1
@@ -3109,15 +3117,16 @@ Item {
                                 text: combo_obEN02.textRole ? (Array.isArray(combo_obEN02.model) ? modelData[combo_obEN02.textRole] : model[combo_obEN02.textRole]) : modelData
                                 highlighted: combo_obEN02.highlightedIndex === index
                             }
+                            onEditTextChanged: {
+                                if(editText==""){
+                                console.log("изменен")
+                                    model=0
+                                }
+                            }
                             onCurrentTextChanged: {
                                 combo_obRU02.currentIndex = combo_obEN02.currentIndex
                                 combo_obEN02.id = model_podsh1.getId(currentIndex)
                                 combo_obRU02.id = model_podsh1.getId(currentIndex)
-                                if(currentIndex==-1){
-                                    //combo_obRU.id = ""
-                                } else {
-                                    //combo_obRU.id = newmodel.getId(currentIndex)
-                                }
                             }
                         }
                         Button {
@@ -3163,9 +3172,10 @@ Item {
                         ComboBox {
                             id: combo_rasp02
                             property string id: ""
+                            property string currentIndex0: ""
+                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
-                            currentIndex: -1
                             anchors.left: parent.left
                             anchors.leftMargin: 5
                             anchors.right: parent.right
@@ -3195,9 +3205,10 @@ Item {
                         ComboBox {
                             id: combo_tip02
                             property string id: ""
+                            property string currentIndex0: ""
+                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                             visible: text01_02.text <= inputkolopor.currentText
                             enabled: text01_02.text <= inputkolopor.currentText
-                            currentIndex: -1
                             anchors.left: parent.left
                             anchors.leftMargin: 5
                             anchors.right: parent.right
@@ -3250,6 +3261,8 @@ Item {
                         radius: 5
                         ComboBox {
                             id: combo_kol_podsh03
+                            property string currentIndex0: "0"
+                            currentIndex: currentIndex0 - 1
                             visible: text01_03.text <= inputkolopor.currentText
                             enabled: text01_03.text <= inputkolopor.currentText
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -3279,9 +3292,11 @@ Item {
                             ComboBox {
                                 id: combo_obRU03
                                 property string id: ""
+                                property string currentIndex0: ""
+                                //model: model_podsh2
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
-                                currentIndex: -1
+                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                 anchors.left: parent.left
                                 anchors.leftMargin: 5
                                 anchors.verticalCenter: parent.verticalCenter
@@ -3294,15 +3309,16 @@ Item {
                                     text: combo_obRU03.textRole ? (Array.isArray(combo_obRU03.model) ? modelData[combo_obRU03.textRole] : model[combo_obRU03.textRole]) : modelData
                                     highlighted: combo_obRU03.highlightedIndex === index
                                 }
+                                onEditTextChanged: {
+                                    if(editText==""){
+                                    console.log("изменен")
+                                        model=0
+                                    }
+                                }
                                 onCurrentTextChanged: {
                                     combo_obEN03.currentIndex = combo_obRU03.currentIndex
                                     combo_obRU03.id = model_podsh2.getId(currentIndex)
                                     combo_obEN03.id = model_podsh2.getId(currentIndex)
-                                    if(currentIndex==-1){
-                                        //combo_obRU.id = ""
-                                    } else {
-                                        //combo_obRU.id = newmodel.getId(currentIndex)
-                                    }
                                 }
                             }
                             Button {
@@ -3348,6 +3364,7 @@ Item {
                             ComboBox {
                                 id: combo_obEN03
                                 property string id: ""
+                                //model: model_podsh2
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
                                 currentIndex: -1
@@ -3364,15 +3381,16 @@ Item {
                                     text: combo_obEN03.textRole ? (Array.isArray(combo_obEN03.model) ? modelData[combo_obEN03.textRole] : model[combo_obEN03.textRole]) : modelData
                                     highlighted: combo_obEN03.highlightedIndex === index
                                 }
+                                onEditTextChanged: {
+                                    if(editText==""){
+                                    console.log("изменен")
+                                        model=0
+                                    }
+                                }
                                 onCurrentTextChanged: {
                                     combo_obRU03.currentIndex = combo_obEN03.currentIndex
                                     combo_obEN03.id = model_podsh2.getId(currentIndex)
                                     combo_obRU03.id = model_podsh2.getId(currentIndex)
-                                    if(currentIndex==-1){
-                                        //combo_obRU.id = ""
-                                    } else {
-                                        //combo_obRU.id = newmodel.getId(currentIndex)
-                                    }
                                 }
                             }
                             Button {
@@ -3418,9 +3436,10 @@ Item {
                             ComboBox {
                                 id: combo_rasp03
                                 property string id: ""
+                                property string currentIndex0: ""
+                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
-                                currentIndex: -1
                                 anchors.left: parent.left
                                 anchors.leftMargin: 5
                                 anchors.right: parent.right
@@ -3450,9 +3469,10 @@ Item {
                             ComboBox {
                                 id: combo_tip03
                                 property string id: ""
+                                property string currentIndex0: ""
+                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                 visible: text01_03.text <= inputkolopor.currentText
                                 enabled: text01_03.text <= inputkolopor.currentText
-                                currentIndex: -1
                                 anchors.left: parent.left
                                 anchors.leftMargin: 5
                                 anchors.right: parent.right
@@ -3505,6 +3525,8 @@ Item {
                             radius: 5
                             ComboBox {
                                 id: combo_kol_podsh04
+                                property string currentIndex0: "0"
+                                currentIndex: currentIndex0 - 1
                                 visible: text01_04.text <= inputkolopor.currentText
                                 enabled: text01_04.text <= inputkolopor.currentText
                                 anchors.horizontalCenter: parent.horizontalCenter
@@ -3534,9 +3556,11 @@ Item {
                                 ComboBox {
                                     id: combo_obRU04
                                     property string id: ""
+                                    property string currentIndex0: ""
+                                    //model: model_podsh3
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
-                                    currentIndex: -1
+                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                     anchors.left: parent.left
                                     anchors.leftMargin: 5
                                     anchors.verticalCenter: parent.verticalCenter
@@ -3549,15 +3573,16 @@ Item {
                                         text: combo_obRU04.textRole ? (Array.isArray(combo_obRU04.model) ? modelData[combo_obRU04.textRole] : model[combo_obRU04.textRole]) : modelData
                                         highlighted: combo_obRU04.highlightedIndex === index
                                     }
+                                    onEditTextChanged: {
+                                        if(editText==""){
+                                        console.log("изменен")
+                                            model=0
+                                        }
+                                    }
                                     onCurrentTextChanged: {
                                         combo_obEN04.currentIndex = combo_obRU04.currentIndex
                                         combo_obRU04.id = model_podsh3.getId(currentIndex)
                                         combo_obEN04.id = model_podsh3.getId(currentIndex)
-                                        if(currentIndex==-1){
-                                            //combo_obRU.id = ""
-                                        } else {
-                                            //combo_obRU.id = newmodel.getId(currentIndex)
-                                        }
                                     }
                                 }
                                 Button {
@@ -3603,6 +3628,7 @@ Item {
                                 ComboBox {
                                     id: combo_obEN04
                                     property string id: ""
+                                    //model: model_podsh3
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
                                     currentIndex: -1
@@ -3619,15 +3645,16 @@ Item {
                                         text: combo_obEN04.textRole ? (Array.isArray(combo_obEN04.model) ? modelData[combo_obEN04.textRole] : model[combo_obEN04.textRole]) : modelData
                                         highlighted: combo_obEN04.highlightedIndex === index
                                     }
+                                    onEditTextChanged: {
+                                        if(editText==""){
+                                        console.log("изменен")
+                                            model=0
+                                        }
+                                    }
                                     onCurrentTextChanged: {
                                         combo_obRU04.currentIndex = combo_obEN04.currentIndex
                                         combo_obEN04.id = model_podsh3.getId(currentIndex)
                                         combo_obRU04.id = model_podsh3.getId(currentIndex)
-                                        if(currentIndex==-1){
-                                            //combo_obRU.id = ""
-                                        } else {
-                                            //combo_obRU.id = newmodel.getId(currentIndex)
-                                        }
                                     }
                                 }
                                 Button {
@@ -3673,9 +3700,10 @@ Item {
                                 ComboBox {
                                     id: combo_rasp04
                                     property string id: ""
+                                    property string currentIndex0: ""
+                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
-                                    currentIndex: -1
                                     anchors.left: parent.left
                                     anchors.leftMargin: 5
                                     anchors.right: parent.right
@@ -3704,9 +3732,10 @@ Item {
                                 ComboBox {
                                     id: combo_tip04
                                     property string id: ""
+                                    property string currentIndex0: ""
+                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                     visible: text01_04.text <= inputkolopor.currentText
                                     enabled: text01_04.text <= inputkolopor.currentText
-                                    currentIndex: -1
                                     anchors.left: parent.left
                                     anchors.leftMargin: 5
                                     anchors.right: parent.right
@@ -3759,6 +3788,8 @@ Item {
                                 radius: 5
                                 ComboBox {
                                     id: combo_kol_podsh05
+                                    property string currentIndex0: "0"
+                                    currentIndex: currentIndex0 - 1
                                     visible: text01_05.text <= inputkolopor.currentText
                                     enabled: text01_05.text <= inputkolopor.currentText
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -3788,9 +3819,11 @@ Item {
                                     ComboBox {
                                         id: combo_obRU05
                                         property string id: ""
+                                        property string currentIndex0: ""
+                                        //model: model_podsh4
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
-                                        currentIndex: -1
+                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                         anchors.left: parent.left
                                         anchors.leftMargin: 5
                                         anchors.verticalCenter: parent.verticalCenter
@@ -3803,15 +3836,16 @@ Item {
                                             text: combo_obRU05.textRole ? (Array.isArray(combo_obRU05.model) ? modelData[combo_obRU05.textRole] : model[combo_obRU05.textRole]) : modelData
                                             highlighted: combo_obRU05.highlightedIndex === index
                                         }
+                                        onEditTextChanged: {
+                                            if(editText==""){
+                                            console.log("изменен")
+                                                model=0
+                                            }
+                                        }
                                         onCurrentTextChanged: {
                                             combo_obEN05.currentIndex = combo_obRU05.currentIndex
                                             combo_obRU05.id = model_podsh4.getId(currentIndex)
                                             combo_obEN05.id = model_podsh4.getId(currentIndex)
-                                            if(currentIndex==-1){
-                                                //combo_obRU.id = ""
-                                            } else {
-                                                //combo_obRU.id = newmodel.getId(currentIndex)
-                                            }
                                         }
                                     }
                                     Button {
@@ -3857,6 +3891,7 @@ Item {
                                     ComboBox {
                                         id: combo_obEN05
                                         property string id: ""
+                                        //model: model_podsh4
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
                                         currentIndex: -1
@@ -3873,15 +3908,16 @@ Item {
                                             text: combo_obEN05.textRole ? (Array.isArray(combo_obEN05.model) ? modelData[combo_obEN05.textRole] : model[combo_obEN05.textRole]) : modelData
                                             highlighted: combo_obEN05.highlightedIndex === index
                                         }
+                                        onEditTextChanged: {
+                                            if(editText==""){
+                                            console.log("изменен")
+                                                model=0
+                                            }
+                                        }
                                         onCurrentTextChanged: {
                                             combo_obRU05.currentIndex = combo_obEN05.currentIndex
                                             combo_obEN05.id = model_podsh4.getId(currentIndex)
                                             combo_obRU05.id = model_podsh4.getId(currentIndex)
-                                            if(currentIndex==-1){
-                                                //combo_obRU.id = ""
-                                            } else {
-                                                //combo_obRU.id = newmodel.getId(currentIndex)
-                                            }
                                         }
                                     }
                                     Button {
@@ -3927,9 +3963,10 @@ Item {
                                     ComboBox {
                                         id: combo_rasp05
                                         property string id: ""
+                                        property string currentIndex0: ""
+                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
-                                        currentIndex: -1
                                         anchors.left: parent.left
                                         anchors.leftMargin: 5
                                         anchors.right: parent.right
@@ -3958,9 +3995,10 @@ Item {
                                     ComboBox {
                                         id: combo_tip05
                                         property string id: ""
+                                        property string currentIndex0: ""
+                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                         visible: text01_05.text <= inputkolopor.currentText
                                         enabled: text01_05.text <= inputkolopor.currentText
-                                        currentIndex: -1
                                         anchors.left: parent.left
                                         anchors.leftMargin: 5
                                         anchors.right: parent.right
@@ -4013,6 +4051,8 @@ Item {
                                     radius: 5
                                     ComboBox {
                                         id: combo_kol_podsh06
+                                        property string currentIndex0: "0"
+                                        currentIndex: currentIndex0 - 1
                                         visible: text01_06.text <= inputkolopor.currentText
                                         enabled: text01_06.text <= inputkolopor.currentText
                                         anchors.horizontalCenter: parent.horizontalCenter
@@ -4042,9 +4082,11 @@ Item {
                                         ComboBox {
                                             id: combo_obRU06
                                             property string id: ""
+                                            property string currentIndex0: ""
+                                            //model: model_podsh5
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
-                                            currentIndex: -1
+                                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                                             anchors.left: parent.left
                                             anchors.leftMargin: 5
                                             anchors.verticalCenter: parent.verticalCenter
@@ -4057,15 +4099,16 @@ Item {
                                                 text: combo_obRU06.textRole ? (Array.isArray(combo_obRU06.model) ? modelData[combo_obRU06.textRole] : model[combo_obRU06.textRole]) : modelData
                                                 highlighted: combo_obRU06.highlightedIndex === index
                                             }
+                                            onEditTextChanged: {
+                                                if(editText==""){
+                                                console.log("изменен")
+                                                    model=0
+                                                }
+                                            }
                                             onCurrentTextChanged: {
                                                 combo_obEN06.currentIndex = combo_obRU06.currentIndex
                                                 combo_obRU06.id = model_podsh5.getId(currentIndex)
                                                 combo_obEN06.id = model_podsh5.getId(currentIndex)
-                                                if(currentIndex==-1){
-                                                    //combo_obRU.id = ""
-                                                } else {
-                                                    //combo_obRU.id = newmodel.getId(currentIndex)
-                                                }
                                             }
                                         }
                                         Button {
@@ -4111,6 +4154,7 @@ Item {
                                         ComboBox {
                                             id: combo_obEN06
                                             property string id: ""
+                                            //model: model_podsh5
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
                                             currentIndex: -1
@@ -4127,15 +4171,16 @@ Item {
                                                 text: combo_obEN06.textRole ? (Array.isArray(combo_obEN06.model) ? modelData[combo_obEN06.textRole] : model[combo_obEN06.textRole]) : modelData
                                                 highlighted: combo_obEN06.highlightedIndex === index
                                             }
+                                            onEditTextChanged: {
+                                                if(editText==""){
+                                                console.log("изменен")
+                                                    model=0
+                                                }
+                                            }
                                             onCurrentTextChanged: {
                                                 combo_obRU06.currentIndex = combo_obEN06.currentIndex
                                                 combo_obEN06.id = model_podsh5.getId(currentIndex)
                                                 combo_obRU06.id = model_podsh5.getId(currentIndex)
-                                                if(currentIndex==-1){
-                                                    //combo_obRU.id = ""
-                                                } else {
-                                                    //combo_obRU.id = newmodel.getId(currentIndex)
-                                                }
                                             }
                                         }
                                         Button {
@@ -4181,9 +4226,10 @@ Item {
                                         ComboBox {
                                             id: combo_rasp06
                                             property string id: ""
+                                            property string currentIndex0: ""
+                                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
-                                            currentIndex: -1
                                             anchors.left: parent.left
                                             anchors.leftMargin: 5
                                             anchors.right: parent.right
@@ -4212,9 +4258,10 @@ Item {
                                         ComboBox {
                                             id: combo_tip06
                                             property string id: ""
+                                            property string currentIndex0: ""
+                                            currentIndex: find(currentIndex0, Qt.MatchExactly)
                                             visible: text01_06.text <= inputkolopor.currentText
                                             enabled: text01_06.text <= inputkolopor.currentText
-                                            currentIndex: -1
                                             anchors.left: parent.left
                                             anchors.leftMargin: 5
                                             anchors.right: parent.right
@@ -4267,6 +4314,8 @@ Item {
                                         radius: 5
                                         ComboBox {
                                             id: combo_kol_podsh07
+                                            property string currentIndex0: "0"
+                                            currentIndex: currentIndex0 - 1
                                             visible: text01_07.text <= inputkolopor.currentText
                                             enabled: text01_07.text <= inputkolopor.currentText
                                             anchors.horizontalCenter: parent.horizontalCenter
@@ -4296,9 +4345,11 @@ Item {
                                             ComboBox {
                                                 id: combo_obRU07
                                                 property string id: ""
+                                                property string currentIndex0: ""
+                                                //model: model_podsh6
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
-                                                currentIndex: -1
+                                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                 anchors.left: parent.left
                                                 anchors.leftMargin: 5
                                                 anchors.verticalCenter: parent.verticalCenter
@@ -4311,15 +4362,16 @@ Item {
                                                     text: combo_obRU07.textRole ? (Array.isArray(combo_obRU07.model) ? modelData[combo_obRU07.textRole] : model[combo_obRU07.textRole]) : modelData
                                                     highlighted: combo_obRU07.highlightedIndex === index
                                                 }
+                                                onEditTextChanged: {
+                                                    if(editText==""){
+                                                    console.log("изменен")
+                                                        model=0
+                                                    }
+                                                }
                                                 onCurrentTextChanged: {
                                                     combo_obEN07.currentIndex = combo_obRU07.currentIndex
                                                     combo_obRU07.id = model_podsh6.getId(currentIndex)
                                                     combo_obEN07.id = model_podsh6.getId(currentIndex)
-                                                    if(currentIndex==-1){
-                                                        //combo_obRU.id = ""
-                                                    } else {
-                                                        //combo_obRU.id = newmodel.getId(currentIndex)
-                                                    }
                                                 }
                                             }
                                             Button {
@@ -4365,6 +4417,7 @@ Item {
                                             ComboBox {
                                                 id: combo_obEN07
                                                 property string id: ""
+                                                //model: model_podsh6
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
                                                 currentIndex: -1
@@ -4381,15 +4434,16 @@ Item {
                                                     text: combo_obEN07.textRole ? (Array.isArray(combo_obEN07.model) ? modelData[combo_obEN07.textRole] : model[combo_obEN07.textRole]) : modelData
                                                     highlighted: combo_obEN07.highlightedIndex === index
                                                 }
+                                                onEditTextChanged: {
+                                                    if(editText==""){
+                                                    console.log("изменен")
+                                                        model=0
+                                                    }
+                                                }
                                                 onCurrentTextChanged: {
                                                     combo_obRU07.currentIndex = combo_obEN07.currentIndex
                                                     combo_obEN07.id = model_podsh6.getId(currentIndex)
                                                     combo_obRU07.id = model_podsh6.getId(currentIndex)
-                                                    if(currentIndex==-1){
-                                                        //combo_obRU.id = ""
-                                                    } else {
-                                                        //combo_obRU.id = newmodel.getId(currentIndex)
-                                                    }
                                                 }
                                             }
                                             Button {
@@ -4435,9 +4489,10 @@ Item {
                                             ComboBox {
                                                 id: combo_rasp07
                                                 property string id: ""
+                                                property string currentIndex0: ""
+                                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
-                                                currentIndex: -1
                                                 anchors.left: parent.left
                                                 anchors.leftMargin: 5
                                                 anchors.right: parent.right
@@ -4466,9 +4521,10 @@ Item {
                                             ComboBox {
                                                 id: combo_tip07
                                                 property string id: ""
+                                                property string currentIndex0: ""
+                                                currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                 visible: text01_07.text <= inputkolopor.currentText
                                                 enabled: text01_07.text <= inputkolopor.currentText
-                                                currentIndex: -1
                                                 anchors.left: parent.left
                                                 anchors.leftMargin: 5
                                                 anchors.right: parent.right
@@ -4521,6 +4577,8 @@ Item {
                                             radius: 5
                                             ComboBox {
                                                 id: combo_kol_podsh08
+                                                property string currentIndex0: "0"
+                                                currentIndex: currentIndex0 - 1
                                                 visible: text01_08.text <= inputkolopor.currentText
                                                 enabled: text01_08.text <= inputkolopor.currentText
                                                 anchors.horizontalCenter: parent.horizontalCenter
@@ -4550,9 +4608,11 @@ Item {
                                                 ComboBox {
                                                     id: combo_obRU08
                                                     property string id: ""
+                                                    property string currentIndex0: ""
+                                                    //model: model_podsh7
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
-                                                    currentIndex: -1
+                                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                     anchors.left: parent.left
                                                     anchors.leftMargin: 5
                                                     anchors.verticalCenter: parent.verticalCenter
@@ -4565,15 +4625,16 @@ Item {
                                                         text: combo_obRU08.textRole ? (Array.isArray(combo_obRU08.model) ? modelData[combo_obRU08.textRole] : model[combo_obRU08.textRole]) : modelData
                                                         highlighted: combo_obRU08.highlightedIndex === index
                                                     }
+                                                    onEditTextChanged: {
+                                                        if(editText==""){
+                                                        console.log("изменен")
+                                                            model=0
+                                                        }
+                                                    }
                                                     onCurrentTextChanged: {
                                                         combo_obEN08.currentIndex = combo_obRU08.currentIndex
                                                         combo_obRU08.id = model_podsh7.getId(currentIndex)
                                                         combo_obEN08.id = model_podsh7.getId(currentIndex)
-                                                        if(currentIndex==-1){
-                                                            //combo_obRU.id = ""
-                                                        } else {
-                                                            //combo_obRU.id = newmodel.getId(currentIndex)
-                                                        }
                                                     }
                                                 }
                                                 Button {
@@ -4619,6 +4680,7 @@ Item {
                                                 ComboBox {
                                                     id: combo_obEN08
                                                     property string id: ""
+                                                    //model: model_podsh7
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
                                                     currentIndex: -1
@@ -4635,15 +4697,16 @@ Item {
                                                         text: combo_obEN08.textRole ? (Array.isArray(combo_obEN08.model) ? modelData[combo_obEN08.textRole] : model[combo_obEN08.textRole]) : modelData
                                                         highlighted: combo_obEN08.highlightedIndex === index
                                                     }
+                                                    onEditTextChanged: {
+                                                        if(editText==""){
+                                                        console.log("изменен")
+                                                            model=0
+                                                        }
+                                                    }
                                                     onCurrentTextChanged: {
                                                         combo_obRU08.currentIndex = combo_obEN08.currentIndex
                                                         combo_obEN08.id = model_podsh7.getId(currentIndex)
                                                         combo_obRU08.id = model_podsh7.getId(currentIndex)
-                                                        if(currentIndex==-1){
-                                                            //combo_obRU.id = ""
-                                                        } else {
-                                                            //combo_obRU.id = newmodel.getId(currentIndex)
-                                                        }
                                                     }
                                                 }
                                                 Button {
@@ -4689,9 +4752,10 @@ Item {
                                                 ComboBox {
                                                     id: combo_rasp08
                                                     property string id: ""
+                                                    property string currentIndex0: ""
+                                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
-                                                    currentIndex: -1
                                                     anchors.left: parent.left
                                                     anchors.leftMargin: 5
                                                     anchors.right: parent.right
@@ -4720,9 +4784,10 @@ Item {
                                                 ComboBox {
                                                     id: combo_tip08
                                                     property string id: ""
+                                                    property string currentIndex0: ""
+                                                    currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                     visible: text01_08.text <= inputkolopor.currentText
                                                     enabled: text01_08.text <= inputkolopor.currentText
-                                                    currentIndex: -1
                                                     anchors.left: parent.left
                                                     anchors.leftMargin: 5
                                                     anchors.right: parent.right
@@ -4775,6 +4840,8 @@ Item {
                                                 radius: 5
                                                 ComboBox {
                                                     id: combo_kol_podsh09
+                                                    property string currentIndex0: "0"
+                                                    currentIndex: currentIndex0 - 1
                                                     visible: text01_09.text <= inputkolopor.currentText
                                                     enabled: text01_09.text <= inputkolopor.currentText
                                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -4804,9 +4871,11 @@ Item {
                                                     ComboBox {
                                                         id: combo_obRU09
                                                         property string id: ""
+                                                        property string currentIndex0: ""
+                                                        //model: model_podsh8
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
-                                                        currentIndex: -1
+                                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                         anchors.left: parent.left
                                                         anchors.leftMargin: 5
                                                         anchors.verticalCenter: parent.verticalCenter
@@ -4819,15 +4888,16 @@ Item {
                                                             text: combo_obRU09.textRole ? (Array.isArray(combo_obRU09.model) ? modelData[combo_obRU09.textRole] : model[combo_obRU09.textRole]) : modelData
                                                             highlighted: combo_obRU09.highlightedIndex === index
                                                         }
+                                                        onEditTextChanged: {
+                                                            if(editText==""){
+                                                            console.log("изменен")
+                                                                model=0
+                                                            }
+                                                        }
                                                         onCurrentTextChanged: {
                                                             combo_obEN09.currentIndex = combo_obRU09.currentIndex
                                                             combo_obRU09.id = model_podsh8.getId(currentIndex)
                                                             combo_obEN09.id = model_podsh8.getId(currentIndex)
-                                                            if(currentIndex==-1){
-                                                                //combo_obRU.id = ""
-                                                            } else {
-                                                                //combo_obRU.id = newmodel.getId(currentIndex)
-                                                            }
                                                         }
                                                     }
                                                     Button {
@@ -4873,6 +4943,7 @@ Item {
                                                     ComboBox {
                                                         id: combo_obEN09
                                                         property string id: ""
+                                                        //model: model_podsh8
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
                                                         currentIndex: -1
@@ -4889,15 +4960,16 @@ Item {
                                                             text: combo_obEN09.textRole ? (Array.isArray(combo_obEN09.model) ? modelData[combo_obEN09.textRole] : model[combo_obEN09.textRole]) : modelData
                                                             highlighted: combo_obEN09.highlightedIndex === index
                                                         }
+                                                        onEditTextChanged: {
+                                                            if(editText==""){
+                                                            console.log("изменен")
+                                                                model=0
+                                                            }
+                                                        }
                                                         onCurrentTextChanged: {
                                                             combo_obRU09.currentIndex = combo_obEN09.currentIndex
                                                             combo_obEN09.id = model_podsh8.getId(currentIndex)
                                                             combo_obRU09.id = model_podsh8.getId(currentIndex)
-                                                            if(currentIndex==-1){
-                                                                //combo_obRU.id = ""
-                                                            } else {
-                                                                //combo_obRU.id = newmodel.getId(currentIndex)
-                                                            }
                                                         }
                                                     }
                                                     Button {
@@ -4943,9 +5015,10 @@ Item {
                                                     ComboBox {
                                                         id: combo_rasp09
                                                         property string id: ""
+                                                        property string currentIndex0: ""
+                                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
-                                                        currentIndex: -1
                                                         anchors.left: parent.left
                                                         anchors.leftMargin: 5
                                                         anchors.right: parent.right
@@ -4975,9 +5048,10 @@ Item {
                                                     ComboBox {
                                                         id: combo_tip09
                                                         property string id: ""
+                                                        property string currentIndex0: ""
+                                                        currentIndex: find(currentIndex0, Qt.MatchExactly)
                                                         visible: text01_09.text <= inputkolopor.currentText
                                                         enabled: text01_09.text <= inputkolopor.currentText
-                                                        currentIndex: -1
                                                         anchors.left: parent.left
                                                         anchors.leftMargin: 5
                                                         anchors.right: parent.right
@@ -5108,7 +5182,160 @@ footer: ToolBar {
                                          combo_norm_nom.id, combo_ogr_nomed.id, combo_ogr_nom.id, combo_otkaz_nomed.id,
                                          combo_otkaz_nom.id, combo_norm_rded.id, combo_norm_rd.id, combo_ogr_rded.id,
                                          combo_ogr_rd.id, combo_otkaz_rded.id, combo_otkaz_rd.id, tf_foto.tex,
-                                         tf_shema.tex, textArea_doc.text, textArea_par.text, stackView.baza_id)                
+                                         tf_shema.tex, textArea_doc.text, textArea_par.text, stackView.baza_id)
+                combo_tip02.id = model_tip_podsh.getId(combo_tip02.currentIndex)
+                combo_obRU02.id = model_podsh1.getId(combo_obRU02.currentIndex)
+                combo_rasp02.id = model_rasp_podsh.getId(combo_rasp02.currentIndex)
+                combo_tip03.id = model_tip_podsh.getId(combo_tip03.currentIndex)
+                combo_obRU03.id = model_podsh2.getId(combo_obRU03.currentIndex)
+                combo_rasp03.id = model_rasp_podsh.getId(combo_rasp03.currentIndex)
+                combo_tip04.id = model_tip_podsh.getId(combo_tip04.currentIndex)
+                combo_obRU04.id = model_podsh3.getId(combo_obRU04.currentIndex)
+                combo_rasp04.id = model_rasp_podsh.getId(combo_rasp04.currentIndex)
+                combo_tip05.id = model_tip_podsh.getId(combo_tip05.currentIndex)
+                combo_obRU05.id = model_podsh4.getId(combo_obRU05.currentIndex)
+                combo_rasp05.id = model_rasp_podsh.getId(combo_rasp05.currentIndex)
+                combo_tip06.id = model_tip_podsh.getId(combo_tip06.currentIndex)
+                combo_obRU06.id = model_podsh5.getId(combo_obRU06.currentIndex)
+                combo_rasp06.id = model_rasp_podsh.getId(combo_rasp06.currentIndex)
+                combo_tip07.id = model_tip_podsh.getId(combo_tip07.currentIndex)
+                combo_obRU07.id = model_podsh6.getId(combo_obRU07.currentIndex)
+                combo_rasp07.id = model_rasp_podsh.getId(combo_rasp07.currentIndex)
+                combo_tip08.id = model_tip_podsh.getId(combo_tip08.currentIndex)
+                combo_obRU08.id = model_podsh7.getId(combo_obRU08.currentIndex)
+                combo_rasp08.id = model_rasp_podsh.getId(combo_rasp08.currentIndex)
+                combo_tip09.id = model_tip_podsh.getId(combo_tip09.currentIndex)
+                combo_obRU09.id = model_podsh8.getId(combo_obRU09.currentIndex)
+                combo_rasp09.id = model_rasp_podsh.getId(combo_rasp09.currentIndex)
+                //==1==//
+                if(text01_02.text <= inputkolopor.currentIndex0){
+                    if(text01_02.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_02.text, combo_kol_podsh02.currentText, combo_tip02.id, combo_obRU02.id,
+                                              combo_rasp02.id, id1)
+                    }
+                    if(text01_02.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id1)
+                    }
+                }
+                if(text01_02.text > inputkolopor.currentIndex0){
+                    if(text01_02.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_02.text, combo_kol_podsh02.currentText, combo_tip02.id,
+                                                    combo_obRU02.id, combo_rasp02.id)
+                    }
+                }
+                //==2==//
+                if(text01_03.text <= inputkolopor.currentIndex0){
+                    if(text01_03.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_03.text, combo_kol_podsh03.currentText, combo_tip03.id, combo_obRU03.id,
+                                              combo_rasp03.id, id2)
+                    }
+                    if(text01_03.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id2)
+                    }
+                }
+                if(text01_03.text > inputkolopor.currentIndex0){
+                    if(text01_03.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_03.text, combo_kol_podsh03.currentText, combo_tip03.id,
+                                                    combo_obRU03.id, combo_rasp03.id)
+                    }
+                }
+                //==3==//
+                if(text01_04.text <= inputkolopor.currentIndex0){
+                    if(text01_04.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_04.text, combo_kol_podsh04.currentText, combo_tip04.id, combo_obRU04.id,
+                                              combo_rasp04.id, id3)
+                    }
+                    if(text01_04.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id3)
+                    }
+                }
+                if(text01_04.text > inputkolopor.currentIndex0){
+                    if(text01_04.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_04.text, combo_kol_podsh04.currentText, combo_tip04.id,
+                                                    combo_obRU04.id, combo_rasp04.id)
+                    }
+                }
+                //==4==//
+                if(text01_05.text <= inputkolopor.currentIndex0){
+                    if(text01_05.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_05.text, combo_kol_podsh05.currentText, combo_tip05.id, combo_obRU05.id,
+                                              combo_rasp05.id, id4)
+                    }
+                    if(text01_05.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id4)
+                    }
+                }
+                if(text01_05.text > inputkolopor.currentIndex0){
+                    if(text01_05.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_05.text, combo_kol_podsh05.currentText, combo_tip05.id,
+                                                    combo_obRU05.id, combo_rasp05.id)
+                    }
+                }
+                //==5==//
+                if(text01_06.text <= inputkolopor.currentIndex0){
+                    if(text01_06.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_06.text, combo_kol_podsh06.currentText, combo_tip06.id, combo_obRU06.id,
+                                              combo_rasp06.id, id5)
+                    }
+                    if(text01_06.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id5)
+                    }
+                }
+                if(text01_06.text > inputkolopor.currentIndex0){
+                    if(text01_06.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_06.text, combo_kol_podsh06.currentText, combo_tip06.id,
+                                                    combo_obRU06.id, combo_rasp06.id)
+                    }
+                }
+                //==6==//
+                if(text01_07.text <= inputkolopor.currentIndex0){
+                    if(text01_07.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_07.text, combo_kol_podsh07.currentText, combo_tip07.id, combo_obRU07.id,
+                                              combo_rasp07.id, id6)
+                    }
+                    if(text01_07.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id6)
+                    }
+                }
+                if(text01_07.text > inputkolopor.currentIndex0){
+                    if(text01_07.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_07.text, combo_kol_podsh07.currentText, combo_tip07.id,
+                                                    combo_obRU07.id, combo_rasp07.id)
+                    }
+                }
+                //==7==//
+                if(text01_08.text <= inputkolopor.currentIndex0){
+                    if(text01_08.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_08.text, combo_kol_podsh08.currentText, combo_tip08.id, combo_obRU08.id,
+                                              combo_rasp08.id, id7)
+                    }
+                    if(text01_08.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id7)
+                    }
+                }
+                if(text01_08.text > inputkolopor.currentIndex0){
+                    if(text01_08.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_08.text, combo_kol_podsh08.currentText, combo_tip08.id,
+                                                    combo_obRU08.id, combo_rasp08.id)
+                    }
+                }
+                //==8==//
+                if(text01_09.text <= inputkolopor.currentIndex0){
+                    if(text01_09.text <= inputkolopor.currentIndex){
+                        database.editBaseOpor(stackView.baza_id, text01_09.text, combo_kol_podsh09.currentText, combo_tip09.id, combo_obRU09.id,
+                                              combo_rasp09.id, id8)
+                    }
+                    if(text01_09.text > inputkolopor.currentIndex){
+                        database.removeRecordBaseOpor(id8)
+                    }
+                }
+                if(text01_09.text > inputkolopor.currentIndex0){
+                    if(text01_09.text <= inputkolopor.currentIndex){
+                        database.insertIntoBaseOpor(stackView.baza_id, text01_09.text, combo_kol_podsh09.currentText, combo_tip09.id,
+                                                    combo_obRU09.id, combo_rasp09.id)
+                    }
+                }
+
                 model0.updateModel()
                 stackView.replace(bo)
                 tool_left.visible = true
@@ -5134,7 +5361,10 @@ footer: ToolBar {
     }
 
     }
-    Component.onCompleted: {        
+    Component.onCompleted: {
+        stackView.like = false
+        stackView.obRU = ""
+        stackView.obEN = ""
         qmlSignal_baza_id()
         mapper.addMapping(tf_kks, (0x0100+2), "text")
         mapper.addMapping(combo_ceh, (0x0100+3), "currentIndex0")
@@ -5185,9 +5415,106 @@ footer: ToolBar {
         mapper.addMapping(combo_otkaz_rd, (0x0100+43), "currentIndex0")
         mapper.addMapping(textArea_doc, (0x0100+47), "text")
         mapper.addMapping(textArea_par, (0x0100+48), "text")
-        mapper.addMapping(inputkolopor, (0x0100+49), "currentIndex")
-        console.log("inputkolopor.currentIndex ", inputkolopor.currentIndex)
+        qmlOpenBOpodsh()
+        inputkolopor.currentIndex0 = data_podsh[1]
+        if(1<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh1[2]
+            qmlFilterBearing1()
+        combo_obRU02.model = model_podsh1
+        combo_obEN02.model = model_podsh1
+            id1 = data_podsh1[0]
+        combo_kol_podsh02.currentIndex0 = data_podsh1[1]
+        combo_obRU02.currentIndex0 = data_podsh1[2]
+        combo_rasp02.currentIndex0 = data_podsh1[3]
+        combo_tip02.currentIndex0 = data_podsh1[4]
+        }
+        if(2<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh2[2]
+            qmlFilterBearing2()
+        combo_obRU03.model = model_podsh2
+        combo_obEN03.model = model_podsh2
+            id2 = data_podsh2[0]
+        combo_kol_podsh03.currentIndex0 = data_podsh2[1]
+        combo_obRU03.currentIndex0 = data_podsh2[2]
+        combo_rasp03.currentIndex0 = data_podsh2[3]
+        combo_tip03.currentIndex0 = data_podsh2[4]
+        }
+        if(3<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh3[2]
+            qmlFilterBearing3()
+        combo_obRU04.model = model_podsh3
+        combo_obEN04.model = model_podsh3
+            id3 = data_podsh3[0]
+        combo_kol_podsh04.currentIndex0 = data_podsh3[1]
+        combo_obRU04.currentIndex0 = data_podsh3[2]
+        combo_rasp04.currentIndex0 = data_podsh3[3]
+        combo_tip04.currentIndex0 = data_podsh3[4]
+        }
+        if(4<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh4[2]
+            qmlFilterBearing4()
+        combo_obRU05.model = model_podsh4
+        combo_obEN05.model = model_podsh4
+            id4 = data_podsh4[0]
+        combo_kol_podsh05.currentIndex0 = data_podsh4[1]
+        combo_obRU05.currentIndex0 = data_podsh4[2]
+        combo_rasp05.currentIndex0 = data_podsh4[3]
+        combo_tip05.currentIndex0 = data_podsh4[4]
+        }
+        if(5<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh5[2]
+            qmlFilterBearing5()
+        combo_obRU06.model = model_podsh5
+        combo_obEN06.model = model_podsh5
+            id5 = data_podsh5[0]
+        combo_kol_podsh06.currentIndex0 = data_podsh5[1]
+        combo_obRU06.currentIndex0 = data_podsh5[2]
+        combo_rasp06.currentIndex0 = data_podsh5[3]
+        combo_tip06.currentIndex0 = data_podsh5[4]
+        }
+        if(6<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh6[2]
+            qmlFilterBearing6()
+        combo_obRU07.model = model_podsh6
+        combo_obEN07.model = model_podsh6
+            id6 = data_podsh6[0]
+        combo_kol_podsh07.currentIndex0 = data_podsh6[1]
+        combo_obRU07.currentIndex0 = data_podsh6[2]
+        combo_rasp07.currentIndex0 = data_podsh6[3]
+        combo_tip07.currentIndex0 = data_podsh6[4]
+        }
+        if(7<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh7[2]
+            qmlFilterBearing7()
+        combo_obRU08.model = model_podsh7
+        combo_obEN08.model = model_podsh7
+            id7 = data_podsh7[0]
+        combo_kol_podsh08.currentIndex0 = data_podsh8[1]
+        combo_obRU08.currentIndex0 = data_podsh8[2]
+        combo_rasp08.currentIndex0 = data_podsh8[3]
+        combo_tip08.currentIndex0 = data_podsh8[4]
+        }
+        if(8<=inputkolopor.currentIndex0){
+            stackView.obRU = data_podsh8[2]
+            qmlFilterBearing8()
+        combo_obRU09.model = model_podsh8
+        combo_obEN09.model = model_podsh8
+            id8 = data_podsh8[0]
+        combo_kol_podsh09.currentIndex0 = data_podsh8[1]
+        combo_obRU09.currentIndex0 = data_podsh8[2]
+        combo_rasp09.currentIndex0 = data_podsh8[3]
+        combo_tip09.currentIndex0 = data_podsh8[4]
+        }
+        console.log("inputkolopor.currentIndex0 ", inputkolopor.currentIndex0)
         tf_mosch.text = tf_mosch.text.replace(".", ",")
+        //console.log("count =", mapper_podsh.count)
+        console.log("data_podsh[0] =", data_podsh1[0])
+        console.log("data_podsh[1] =", data_podsh1[1])
+        console.log("data_podsh[2] =", data_podsh1[2])
+        console.log("data_podsh[3] =", data_podsh1[3])
+        console.log("data_podsh[4] =", data_podsh1[4])
+        console.log("data_podsh[5] =", data_podsh1[5])
+        stackView.like = true
     }
 
 }

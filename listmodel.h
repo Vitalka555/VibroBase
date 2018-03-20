@@ -926,6 +926,7 @@ signals:
 public slots:
     void updateModel();
     void updateModel2();
+    void calculate();
     int getId(int row);
 };
 

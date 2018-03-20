@@ -37,5 +37,19 @@
         <file>BearingSettings.qml</file>
         <file>CreatBearing.qml</file>
         <file>AddBearing.qml</file>
+        <file>Calculator.qml</file>
+        <file>Images/podsh.jpg</file>
+        <file>Images/podsh1.jpg</file>
+        <file>Images/ris001.png</file>
+        <file>Images/ris002.png</file>
+        <file>Images/ris003.png</file>
+        <file>Images/ris004.png</file>
+        <file>Images/ris006.png</file>
+        <file>Images/ris007.png</file>
+        <file>Images/ris008.png</file>
+        <file>Images/ris009.png</file>
+        <file>Images/ris010.png</file>
+        <file>Images/ris011.png</file>
+        <file>Images/ris012.png</file>
     </qresource>
 </RCC>

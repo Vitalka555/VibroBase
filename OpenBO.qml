@@ -2199,6 +2199,16 @@ Item {
                             text: "Расчет"
                         }
                         onClicked: {
+                            stackView.podsh_ob = combo_obRU02.text
+                            console.log("stackView.podsh_id", stackView.podsh_ob)
+                            if(combo_rasp02.text === "Привод"){
+                                stackView.chastota = text_chastota_ed.text
+                                console.log("stackView.chastota", stackView.chastota)
+                            }
+                            if(combo_rasp02.text === "Исполнительный механизм"){
+                                stackView.chastota = text_chastota_meh.text
+                            }
+                            stackView.replace(calculator)
                         }
                     }
                     Rectangle {

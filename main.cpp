@@ -228,6 +228,7 @@ QObject::connect(root, SIGNAL(qmlFilterBO()), model0, SLOT(updateModel()));     
 QObject::connect(root, SIGNAL(qmlFilterBI()), model_izmer, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_openBO, SLOT(updateModel()));
 QObject::connect(root, SIGNAL(qmlOpenBOpodsh()), model_openBO, SLOT(updateModel2()));
+QObject::connect(root, SIGNAL(qmlCalculator()), model_openBO, SLOT(calculate()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_1V, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_baza_id()), model_maxlevel, SLOT(updateModel()));
         QObject::connect(root, SIGNAL(qmlSignal_bazaizmer()), model_maxlevel, SLOT(updateModel2()));

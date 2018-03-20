@@ -1828,6 +1828,32 @@ void ListModelOpenBO::updateModel2()
         stack->setProperty("data_podsh8", data8);
     }
 }
+void ListModelOpenBO::calculate()
+{
+    QObject* stack = this->parent()->findChild<QObject*>("stackView");
+    QString podsh_ob=(stack->property("podsh_ob")).toString();
+    QStringList data;
+        QSqlDatabase db = QSqlDatabase::database();
+        db.transaction();
+        QSqlQuery query("select BasePodsh.Oboznachenie, BasePodsh.OboznachenieEN, BasePodsh.Name, BasePodsh.dvnutr, "
+                        "BasePodsh.Dnaruzh, BasePodsh.dtk, BasePodsh.ztk, BasePodsh.Ugol from BasePodsh where BasePodsh.Oboznachenie = '" + podsh_ob + "'");
+        while (query.next()) {
+            data.append(query.value(0).toString());
+            data.append(query.value(1).toString());
+            data.append(query.value(2).toString());
+            data.append(query.value(3).toString());
+            data.append(query.value(4).toString());
+            data.append(query.value(5).toString());
+            data.append(query.value(6).toString());
+            data.append(query.value(7).toString());
+        }
+        qDebug()<<"this->canFetchMore()"<<this->canFetchMore();
+        db.commit();
+        if(!db.commit()){
+        db.rollback();
+        }
+        stack->setProperty("calc_data", data);
+}
 // Получение id из строки в модели представления данных
 int ListModelOpenBO::getId(int row)
 {

@@ -55,6 +55,7 @@ ApplicationWindow {
     signal qmlSignal_bearing_id()
     signal qmlidkksForInsertBaseOpor()
     signal qmlOpenBOpodsh()
+    signal qmlCalculator()
     property string baza_id: ""
     property int index: 0
     property int index_izmer: 0
@@ -335,6 +336,10 @@ ApplicationWindow {
         property string id6
         property string id7
         property string id8
+        //калькулятор
+        property string podsh_ob: ""
+        property var calc_data: [0]
+        property string chastota: ""
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)
@@ -452,6 +457,12 @@ Component.onCompleted: {
             id: addBearing
             AddBearing {
                 id: addBearing_0
+            }
+        }
+        Component {
+            id: calculator
+            Calculator {
+                id: calculator_0
             }
         }
     }

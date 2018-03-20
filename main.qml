@@ -94,6 +94,8 @@ ApplicationWindow {
                 id: tool_left1
                 visible: false                
                 onClicked: {
+//                    stackView.clear(openBO)
+//                    stackView.clear(addBO)
                         stackView.replace(bo)
                     stackView.baza_id = ""
                     stackView.bazaizm_id = ""
@@ -103,7 +105,6 @@ ApplicationWindow {
                     tool_left2.visible = false
                     tool_left3.visible = false
                     tool_left4.visible = false
-                    console.log("count =", mapper_podsh.count)
                 }
                 Text {
                     id: tool_text
@@ -243,10 +244,11 @@ ApplicationWindow {
                 onClicked: {
                     listView.currentIndex = index
                     if (listView.currentIndex==0){
+                        stackView.clear(bi)
                         stackView.replace(bo)
-                        console.log("count =", mapper_podsh.count)
                     }
                     if (listView.currentIndex==1){
+                        stackView.clear(bo)
                         stackView.replace(bi)
                     }
                     if (listView.currentIndex==2){
@@ -316,6 +318,23 @@ ApplicationWindow {
         //
         property string kksForInsertBaseOpor: ""
         property string idkksForInsertBaseOpor: ""
+        property var data_podsh: [0]
+        property var data_podsh1: [0]
+        property var data_podsh2: [0]
+        property var data_podsh3: [0]
+        property var data_podsh4: [0]
+        property var data_podsh5: [0]
+        property var data_podsh6: [0]
+        property var data_podsh7: [0]
+        property var data_podsh8: [0]
+        property string id1
+        property string id2
+        property string id3
+        property string id4
+        property string id5
+        property string id6
+        property string id7
+        property string id8
 Component.onCompleted: {
     qmlFilterBO()
     stackView.push(bo)

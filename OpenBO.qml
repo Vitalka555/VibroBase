@@ -899,14 +899,14 @@ Item {
                         height: text_rezhim.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_rezhim
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "#3E65FF"
                             text: "Режим работы"
                         }
                     }
@@ -920,14 +920,14 @@ Item {
                         height: text_nominal.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_nominal
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "#3E65FF"
                             text: "Номинальный"
                         }
                     }
@@ -941,14 +941,14 @@ Item {
                         height: text_rabdiap.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_rabdiap
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "#3E65FF"
                             text: "Раб. диапазон"
                         }
                     }
@@ -962,14 +962,14 @@ Item {
                         height: text_napor.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_napor
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Напор, м(МПа)"
                         }
                     }
@@ -983,14 +983,14 @@ Item {
                         height: text_napor.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_napor_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1006,14 +1006,14 @@ Item {
                         height: text_napor.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_napor_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1029,14 +1029,14 @@ Item {
                         height: text_rashod.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_rashod
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Расход, м³/ч"
                         }
                     }
@@ -1050,14 +1050,14 @@ Item {
                         height: text_rashod.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_rashod_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1073,14 +1073,14 @@ Item {
                         height: text_rashod.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_rashod_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1096,14 +1096,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_norm_vibr
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Нормы вибрации"
                         }
                     }
@@ -1117,14 +1117,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_ed
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Эл/дв"
                         }
                     }
@@ -1138,14 +1138,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_agr
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Агрегат"
                         }
                     }
@@ -1160,14 +1160,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_hh
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Холостой ход"
                         }
                     }
@@ -1181,14 +1181,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_norm1
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Норма"
                         }
                     }
@@ -1202,14 +1202,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_norm_hh
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1226,14 +1226,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_nom_rezhim
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Номинальный режим"
                         }
                     }
@@ -1247,14 +1247,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_norm2
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Норма"
                         }
                     }
@@ -1268,14 +1268,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_normed_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1291,14 +1291,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_normagr_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1314,14 +1314,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogr1
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Ограничение"
                         }
                     }
@@ -1335,14 +1335,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogred_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1358,14 +1358,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogragr_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1381,14 +1381,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkaz1
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Отказ"
                         }
                     }
@@ -1402,14 +1402,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkazed_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1425,14 +1425,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkazagr_nom
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1449,14 +1449,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_rd_rezhim
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Рабочий диапазон"
                         }
                     }
@@ -1470,14 +1470,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_norm3
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Норма"
                         }
                     }
@@ -1491,14 +1491,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_normed_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1514,14 +1514,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_normagr_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1537,14 +1537,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogr2
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Ограничение"
                         }
                     }
@@ -1558,14 +1558,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogred_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1581,14 +1581,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_ogragr_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1604,14 +1604,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkaz2
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Отказ"
                         }
                     }
@@ -1625,14 +1625,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkazed_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1648,14 +1648,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_otkazagr_rd
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1672,14 +1672,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#3E65FF"
+                        color: "#03a9f5"
                         radius: 10
                         Text {
                             id: text_temp_otkaz
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            //color: "white"
                             text: "Температура отказа"
                         }
                     }
@@ -1693,14 +1693,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_temp_ed
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Электродвигатель"
                         }
                     }
@@ -1714,14 +1714,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_tempotkaz_ed
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1737,14 +1737,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_temp_red
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Редуктор"
                         }
                     }
@@ -1758,14 +1758,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_tempotkaz_red
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1781,14 +1781,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_temp_meh
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             text: "Механизм"
                         }
                     }
@@ -1802,14 +1802,14 @@ Item {
                         height: text_norm_vibr.height + 5
                         border.width: 1
                         border.color: "#3E65FF"
-                        color: "#7995f1"
+                        color: "lightblue"
                         radius: 10
                         Text {
                             id: text_tempotkaz_meh
                             anchors.horizontalCenter: parent.horizontalCenter
                             anchors.verticalCenter: parent.verticalCenter
                             font.pixelSize: 20
-                            color: "white"
+                            color: "#3E65FF"
                             property string tex: "неизвестно"
                             property string tex1: tex !== "" ? tex: "-"
                             text: tex1
@@ -1822,6 +1822,1758 @@ Item {
             } //item2
             Item {
                 id: item3
+                Text {
+                    id: text_kolopor
+                    visible: false
+                    anchors.verticalCenter: inputkolopor.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    font.pixelSize: 15
+                    text: qsTr("Количество опор:")
+                }
+                ComboBox {
+                    id: inputkolopor
+                    visible: false
+                    //enabled: false
+                    property string currentIndex0: "0"
+                    currentIndex: currentIndex0
+                    anchors.top: parent.top
+                    anchors.topMargin: 5
+                    anchors.left: text_kolopor.right
+                    anchors.leftMargin: 5
+                    width: 60
+                    model: ["0", "1", "2", "3", "4", "5", "6", "7", "8"]
+                    editable: true
+                        validator: IntValidator {
+                            top: 8
+                            bottom: 0
+                        }
+                    onCurrentTextChanged: console.log("currentIndex0", currentIndex0)
+                }
+                Rectangle {
+                    id: rec01_01
+                    //visible: false
+                    anchors.top: parent.top
+                    anchors.topMargin: 5
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/10-35/20
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text01_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        font.pixelSize: 20
+                        maximumLineCount: 2
+                        wrapMode: Text.Wrap
+                        text: qsTr("Номер опоры")
+                    }
+                }
+                Rectangle {
+                    id: rec02_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec01_01.right
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/10-35/20
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text02_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        maximumLineCount: 2
+                        font.pixelSize: 20
+                        wrapMode: Text.Wrap
+                        text: qsTr("Количество")
+                    }
+                }
+                Rectangle {
+                    id: rec03_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec02_01.right
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/5-35/4
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text03_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("ОбозначениеRU")
+                    }
+                }
+                Rectangle {
+                    id: rec04_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec03_01.right
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/5-35/4
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text04_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("ОбозначениеEN")
+                    }
+                }
+                Rectangle {
+                    id: rec05_01
+                    //visible: false
+                    anchors.top: rec01_01.top
+                    anchors.left: rec04_01.right
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/5-35/5
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text05_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Расположение")
+                    }
+                }
+                Rectangle {
+                    id: rec06_01
+                    anchors.top: rec01_01.top
+                    anchors.left: rec05_01.right
+                    anchors.leftMargin: 5
+                    height: text01_01.height+10
+                    width: (parent.width-150)/5-35/5
+                    color: "#03a9f5"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text06_01
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        font.pixelSize: 20
+                        //color: "white"
+                        wrapMode: Text.WordWrap
+                        text: qsTr("Тип подшипника")
+                    }
+                }
+                Rectangle {
+                    id: rec01_02
+                    visible: text01_02.text <= inputkolopor.currentText
+                    anchors.left: parent.left
+                    anchors.leftMargin: 5
+                    anchors.top: rec01_01.bottom
+                    anchors.topMargin: 5
+                    height: text01_02.text <= inputkolopor.currentText ? combo_kol_podsh02.height+20 : 0
+                    width: rec01_01.width
+                    color: "lightblue"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: text01_02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        maximumLineCount: 2
+                        font.pixelSize: 20
+                        wrapMode: Text.WordWrap
+                        color: "#3E65FF"
+                        text: "1"
+                    }
+                }
+                Rectangle {
+                    id: rec02_02
+                    visible: text01_02.text <= inputkolopor.currentText
+                    anchors.top: rec01_02.top
+                    anchors.left: rec01_02.right
+                    anchors.leftMargin: 5
+                    height: combo_kol_podsh02.height+20
+                    width: rec02_01.width
+                    color: "lightblue"
+                    border.width: 1
+                    border.color: "#3E65FF"
+                    radius: 5
+                    Text {
+                        id: combo_kol_podsh02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        enabled: text01_02.text <= inputkolopor.currentText
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        horizontalAlignment: TextInput.AlignHCenter
+                        maximumLineCount: 2
+                        font.pixelSize: 20
+                        wrapMode: Text.WordWrap
+                        color: "#3E65FF"
+                        text: ""
+                    }
+                }
+                    Rectangle {
+                        id: rec03_02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        anchors.top: rec01_02.top
+                        //anchors.topMargin: 5
+                        anchors.left: rec02_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh02.height+20
+                        width: rec03_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: combo_obRU02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: ""
+                        }
+                    }
+                    Rectangle {
+                        id: rec04_02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        anchors.top: rec01_02.top
+                        anchors.left: rec03_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh02.height+20
+                        width: rec04_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: combo_obEN02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: ""
+                        }
+                    }
+                    Rectangle {
+                        id: rec05_02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        anchors.top: rec01_02.top
+                        anchors.left: rec04_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh02.height+20
+                        width: rec05_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: combo_rasp02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: ""
+                        }
+                    }
+                    Rectangle {
+                        id: rec06_02
+                        visible: text01_02.text <= inputkolopor.currentText
+                        anchors.top: rec01_02.top
+                        anchors.left: rec05_02.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh02.height+20
+                        width: rec06_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: combo_tip02
+                            visible: text01_02.text <= inputkolopor.currentText
+                            enabled: text01_02.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: ""
+                        }
+                    }
+                    Button {
+                        id: but_calc1
+                        visible: combo_obRU02.text == "" ? false : true
+                        enabled: combo_obRU02.text == "" ? false : true
+                        anchors.left: rec06_02.right
+                        anchors.leftMargin: 5
+                        anchors.right: parent.right
+                        anchors.rightMargin: 5
+                        anchors.verticalCenter: rec01_02.verticalCenter
+                        highlighted: true
+                        Material.accent: Material.LightBlue
+                        Text {
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            font.pixelSize: 20
+                            text: "Расчет"
+                        }
+                        onClicked: {
+                        }
+                    }
+                    Rectangle {
+                        id: rec01_03
+                        visible: text01_03.text <= inputkolopor.currentText
+                        anchors.left: parent.left
+                        anchors.leftMargin: 5
+                        anchors.top: rec01_02.bottom
+                        anchors.topMargin: 5
+                        height: text01_03.text <= inputkolopor.currentText ? combo_kol_podsh03.height+20 : 0
+                        width: rec01_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: text01_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            enabled: text01_03.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: "2"
+                        }
+                    }
+                    Rectangle {
+                        id: rec02_03
+                        visible: text01_03.text <= inputkolopor.currentText
+                        anchors.top: rec01_03.top
+                        anchors.left: rec01_03.right
+                        anchors.leftMargin: 5
+                        height: combo_kol_podsh03.height+20
+                        width: rec02_01.width
+                        color: "lightblue"
+                        border.width: 1
+                        border.color: "#3E65FF"
+                        radius: 5
+                        Text {
+                            id: combo_kol_podsh03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            enabled: text01_03.text <= inputkolopor.currentText
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            horizontalAlignment: TextInput.AlignHCenter
+                            maximumLineCount: 2
+                            font.pixelSize: 20
+                            wrapMode: Text.WordWrap
+                            color: "#3E65FF"
+                            text: ""
+                        }
+                    }
+                        Rectangle {
+                            id: rec03_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            //anchors.topMargin: 5
+                            anchors.left: rec02_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+20
+                            width: rec03_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: combo_obRU03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: ""
+                            }
+                        }
+                        Rectangle {
+                            id: rec04_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec03_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+20
+                            width: rec04_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: combo_obEN03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: ""
+                            }
+                        }
+                        Rectangle {
+                            id: rec05_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec04_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+20
+                            width: rec05_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: combo_rasp03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: ""
+                            }
+                        }
+                        Rectangle {
+                            id: rec06_03
+                            visible: text01_03.text <= inputkolopor.currentText
+                            anchors.top: rec01_03.top
+                            anchors.left: rec05_03.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh03.height+20
+                            width: rec06_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: combo_tip03
+                                visible: text01_03.text <= inputkolopor.currentText
+                                enabled: text01_03.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: ""
+                            }
+                        }
+                        Button {
+                            id: but_calc2
+                            visible: combo_obRU03.text == "" ? false : true
+                            enabled: combo_obRU03.text == "" ? false : true
+                            anchors.left: rec06_03.right
+                            anchors.leftMargin: 5
+                            anchors.right: parent.right
+                            anchors.rightMargin: 5
+                            anchors.verticalCenter: rec01_03.verticalCenter
+                            highlighted: true
+                            Material.accent: Material.LightBlue
+                            Text {
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                font.pixelSize: 20
+                                text: "Расчет"
+                            }
+                            onClicked: {
+                            }
+                        }
+                        Rectangle {
+                            id: rec01_04
+                            visible: text01_04.text <= inputkolopor.currentText
+                            anchors.left: parent.left
+                            anchors.leftMargin: 5
+                            anchors.top: rec01_03.bottom
+                            anchors.topMargin: 5
+                            height: text01_04.text <= inputkolopor.currentText ? combo_kol_podsh04.height+20 : 0
+                            width: rec01_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: text01_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                enabled: text01_04.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: "3"
+                            }
+                        }
+                        Rectangle {
+                            id: rec02_04
+                            visible: text01_04.text <= inputkolopor.currentText
+                            anchors.top: rec01_04.top
+                            anchors.left: rec01_04.right
+                            anchors.leftMargin: 5
+                            height: combo_kol_podsh04.height+20
+                            width: rec02_01.width
+                            color: "lightblue"
+                            border.width: 1
+                            border.color: "#3E65FF"
+                            radius: 5
+                            Text {
+                                id: combo_kol_podsh04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                enabled: text01_04.text <= inputkolopor.currentText
+                                anchors.verticalCenter: parent.verticalCenter
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                horizontalAlignment: TextInput.AlignHCenter
+                                maximumLineCount: 2
+                                font.pixelSize: 20
+                                wrapMode: Text.WordWrap
+                                color: "#3E65FF"
+                                text: ""
+                            }
+                        }
+                            Rectangle {
+                                id: rec03_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                //anchors.topMargin: 5
+                                anchors.left: rec02_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+20
+                                width: rec03_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: combo_obRU04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: ""
+                                }
+                            }
+                            Rectangle {
+                                id: rec04_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec03_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+20
+                                width: rec04_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: combo_obEN04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: ""
+                                }
+                            }
+                            Rectangle {
+                                id: rec05_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec04_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+20
+                                width: rec05_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: combo_rasp04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: ""
+                                }
+                            }
+                            Rectangle {
+                                id: rec06_04
+                                visible: text01_04.text <= inputkolopor.currentText
+                                anchors.top: rec01_04.top
+                                anchors.left: rec05_04.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh04.height+20
+                                width: rec06_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: combo_tip04
+                                    visible: text01_04.text <= inputkolopor.currentText
+                                    enabled: text01_04.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: ""
+                                }
+                            }
+                            Button {
+                                id: but_calc3
+                                visible: combo_obRU04.text == "" ? false : true
+                                enabled: combo_obRU04.text == "" ? false : true
+                                anchors.left: rec06_04.right
+                                anchors.leftMargin: 5
+                                anchors.right: parent.right
+                                anchors.rightMargin: 5
+                                anchors.verticalCenter: rec01_04.verticalCenter
+                                highlighted: true
+                                Material.accent: Material.LightBlue
+                                Text {
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.horizontalCenter: parent.horizontalCenter
+                                    font.pixelSize: 20
+                                    text: "Расчет"
+                                }
+                                onClicked: {
+                                }
+                            }
+                            Rectangle {
+                                id: rec01_05
+                                visible: text01_05.text <= inputkolopor.currentText
+                                anchors.left: parent.left
+                                anchors.leftMargin: 5
+                                anchors.top: rec01_04.bottom
+                                anchors.topMargin: 5
+                                height: text01_05.text <= inputkolopor.currentText ? combo_kol_podsh05.height+20 : 0
+                                width: rec01_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: text01_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    enabled: text01_05.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: "4"
+                                }
+                            }
+                            Rectangle {
+                                id: rec02_05
+                                visible: text01_05.text <= inputkolopor.currentText
+                                anchors.top: rec01_05.top
+                                anchors.left: rec01_05.right
+                                anchors.leftMargin: 5
+                                height: combo_kol_podsh05.height+20
+                                width: rec02_01.width
+                                color: "lightblue"
+                                border.width: 1
+                                border.color: "#3E65FF"
+                                radius: 5
+                                Text {
+                                    id: combo_kol_podsh05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    enabled: text01_05.text <= inputkolopor.currentText
+                                    anchors.verticalCenter: parent.verticalCenter
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    horizontalAlignment: TextInput.AlignHCenter
+                                    maximumLineCount: 2
+                                    font.pixelSize: 20
+                                    wrapMode: Text.WordWrap
+                                    color: "#3E65FF"
+                                    text: ""
+                                }
+                            }
+                                Rectangle {
+                                    id: rec03_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    //anchors.topMargin: 5
+                                    anchors.left: rec02_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+20
+                                    width: rec03_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: combo_obRU05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: ""
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec04_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec03_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+20
+                                    width: rec04_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: combo_obEN05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: ""
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec05_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec04_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+20
+                                    width: rec05_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: combo_rasp05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: ""
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec06_05
+                                    visible: text01_05.text <= inputkolopor.currentText
+                                    anchors.top: rec01_05.top
+                                    anchors.left: rec05_05.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh05.height+20
+                                    width: rec06_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: combo_tip05
+                                        visible: text01_05.text <= inputkolopor.currentText
+                                        enabled: text01_05.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: ""
+                                    }
+                                }
+                                Button {
+                                    id: but_calc4
+                                    visible: combo_obRU05.text == "" ? false : true
+                                    enabled: combo_obRU05.text == "" ? false : true
+                                    anchors.left: rec06_05.right
+                                    anchors.leftMargin: 5
+                                    anchors.right: parent.right
+                                    anchors.rightMargin: 5
+                                    anchors.verticalCenter: rec01_05.verticalCenter
+                                    highlighted: true
+                                    Material.accent: Material.LightBlue
+                                    Text {
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.horizontalCenter: parent.horizontalCenter
+                                        font.pixelSize: 20
+                                        text: "Расчет"
+                                    }
+                                    onClicked: {
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec01_06
+                                    visible: text01_06.text <= inputkolopor.currentText
+                                    anchors.left: parent.left
+                                    anchors.leftMargin: 5
+                                    anchors.top: rec01_05.bottom
+                                    anchors.topMargin: 5
+                                    height: text01_06.text <= inputkolopor.currentText ? combo_kol_podsh06.height+20 : 0
+                                    width: rec01_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: text01_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        enabled: text01_06.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: "5"
+                                    }
+                                }
+                                Rectangle {
+                                    id: rec02_06
+                                    visible: text01_06.text <= inputkolopor.currentText
+                                    anchors.top: rec01_06.top
+                                    anchors.left: rec01_06.right
+                                    anchors.leftMargin: 5
+                                    height: combo_kol_podsh06.height+20
+                                    width: rec02_01.width
+                                    color: "lightblue"
+                                    border.width: 1
+                                    border.color: "#3E65FF"
+                                    radius: 5
+                                    Text {
+                                        id: combo_kol_podsh06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        enabled: text01_06.text <= inputkolopor.currentText
+                                        anchors.verticalCenter: parent.verticalCenter
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        horizontalAlignment: TextInput.AlignHCenter
+                                        maximumLineCount: 2
+                                        font.pixelSize: 20
+                                        wrapMode: Text.WordWrap
+                                        color: "#3E65FF"
+                                        text: ""
+                                    }
+                                }
+                                    Rectangle {
+                                        id: rec03_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        //anchors.topMargin: 5
+                                        anchors.left: rec02_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+20
+                                        width: rec03_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: combo_obRU06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: ""
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec04_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec03_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+20
+                                        width: rec04_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: combo_obEN06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: ""
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec05_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec04_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+20
+                                        width: rec05_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: combo_rasp06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: ""
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec06_06
+                                        visible: text01_06.text <= inputkolopor.currentText
+                                        anchors.top: rec01_06.top
+                                        anchors.left: rec05_06.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh06.height+20
+                                        width: rec06_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: combo_tip06
+                                            visible: text01_06.text <= inputkolopor.currentText
+                                            enabled: text01_06.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: ""
+                                        }
+                                    }
+                                    Button {
+                                        id: but_calc5
+                                        visible: combo_obRU06.text == "" ? false : true
+                                        enabled: combo_obRU06.text == "" ? false : true
+                                        anchors.left: rec06_06.right
+                                        anchors.leftMargin: 5
+                                        anchors.right: parent.right
+                                        anchors.rightMargin: 5
+                                        anchors.verticalCenter: rec01_06.verticalCenter
+                                        highlighted: true
+                                        Material.accent: Material.LightBlue
+                                        Text {
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.horizontalCenter: parent.horizontalCenter
+                                            font.pixelSize: 20
+                                            text: "Расчет"
+                                        }
+                                        onClicked: {
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec01_07
+                                        visible: text01_07.text <= inputkolopor.currentText
+                                        anchors.left: parent.left
+                                        anchors.leftMargin: 5
+                                        anchors.top: rec01_06.bottom
+                                        anchors.topMargin: 5
+                                        height: text01_07.text <= inputkolopor.currentText ? combo_kol_podsh07.height+20 : 0
+                                        width: rec01_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: text01_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            enabled: text01_07.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: "6"
+                                        }
+                                    }
+                                    Rectangle {
+                                        id: rec02_07
+                                        visible: text01_07.text <= inputkolopor.currentText
+                                        anchors.top: rec01_07.top
+                                        anchors.left: rec01_07.right
+                                        anchors.leftMargin: 5
+                                        height: combo_kol_podsh07.height+20
+                                        width: rec02_01.width
+                                        color: "lightblue"
+                                        border.width: 1
+                                        border.color: "#3E65FF"
+                                        radius: 5
+                                        Text {
+                                            id: combo_kol_podsh07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            enabled: text01_07.text <= inputkolopor.currentText
+                                            anchors.verticalCenter: parent.verticalCenter
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            horizontalAlignment: TextInput.AlignHCenter
+                                            maximumLineCount: 2
+                                            font.pixelSize: 20
+                                            wrapMode: Text.WordWrap
+                                            color: "#3E65FF"
+                                            text: ""
+                                        }
+                                    }
+                                        Rectangle {
+                                            id: rec03_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            //anchors.topMargin: 5
+                                            anchors.left: rec02_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+20
+                                            width: rec03_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: combo_obRU07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: ""
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec04_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec03_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+20
+                                            width: rec04_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: combo_obEN07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: ""
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec05_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec04_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+20
+                                            width: rec05_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: combo_rasp07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: ""
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec06_07
+                                            visible: text01_07.text <= inputkolopor.currentText
+                                            anchors.top: rec01_07.top
+                                            anchors.left: rec05_07.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh07.height+20
+                                            width: rec06_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: combo_tip07
+                                                visible: text01_07.text <= inputkolopor.currentText
+                                                enabled: text01_07.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: ""
+                                            }
+                                        }
+                                        Button {
+                                            id: but_calc6
+                                            visible: combo_obRU07.text == "" ? false : true
+                                            enabled: combo_obRU07.text == "" ? false : true
+                                            anchors.left: rec06_07.right
+                                            anchors.leftMargin: 5
+                                            anchors.right: parent.right
+                                            anchors.rightMargin: 5
+                                            anchors.verticalCenter: rec01_07.verticalCenter
+                                            highlighted: true
+                                            Material.accent: Material.LightBlue
+                                            Text {
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.horizontalCenter: parent.horizontalCenter
+                                                font.pixelSize: 20
+                                                text: "Расчет"
+                                            }
+                                            onClicked: {
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec01_08
+                                            visible: text01_08.text <= inputkolopor.currentText
+                                            anchors.left: parent.left
+                                            anchors.leftMargin: 5
+                                            anchors.top: rec01_07.bottom
+                                            anchors.topMargin: 5
+                                            height: text01_08.text <= inputkolopor.currentText ? combo_kol_podsh08.height+20 : 0
+                                            width: rec01_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: text01_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                enabled: text01_08.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: "7"
+                                            }
+                                        }
+                                        Rectangle {
+                                            id: rec02_08
+                                            visible: text01_08.text <= inputkolopor.currentText
+                                            anchors.top: rec01_08.top
+                                            anchors.left: rec01_08.right
+                                            anchors.leftMargin: 5
+                                            height: combo_kol_podsh08.height+20
+                                            width: rec02_01.width
+                                            color: "lightblue"
+                                            border.width: 1
+                                            border.color: "#3E65FF"
+                                            radius: 5
+                                            Text {
+                                                id: combo_kol_podsh08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                enabled: text01_08.text <= inputkolopor.currentText
+                                                anchors.verticalCenter: parent.verticalCenter
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                horizontalAlignment: TextInput.AlignHCenter
+                                                maximumLineCount: 2
+                                                font.pixelSize: 20
+                                                wrapMode: Text.WordWrap
+                                                color: "#3E65FF"
+                                                text: ""
+                                            }
+                                        }
+                                            Rectangle {
+                                                id: rec03_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                //anchors.topMargin: 5
+                                                anchors.left: rec02_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+20
+                                                width: rec03_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: combo_obRU08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: ""
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec04_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec03_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+20
+                                                width: rec04_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: combo_obEN08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: ""
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec05_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec04_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+20
+                                                width: rec05_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: combo_rasp08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: ""
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec06_08
+                                                visible: text01_08.text <= inputkolopor.currentText
+                                                anchors.top: rec01_08.top
+                                                anchors.left: rec05_08.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh08.height+20
+                                                width: rec06_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: combo_tip08
+                                                    visible: text01_08.text <= inputkolopor.currentText
+                                                    enabled: text01_08.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: ""
+                                                }
+                                            }
+                                            Button {
+                                                id: but_calc7
+                                                visible: combo_obRU08.text == "" ? false : true
+                                                enabled: combo_obRU08.text == "" ? false : true
+                                                anchors.left: rec06_08.right
+                                                anchors.leftMargin: 5
+                                                anchors.right: parent.right
+                                                anchors.rightMargin: 5
+                                                anchors.verticalCenter: rec01_08.verticalCenter
+                                                highlighted: true
+                                                Material.accent: Material.LightBlue
+                                                Text {
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.horizontalCenter: parent.horizontalCenter
+                                                    font.pixelSize: 20
+                                                    text: "Расчет"
+                                                }
+                                                onClicked: {
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec01_09
+                                                visible: text01_09.text <= inputkolopor.currentText
+                                                anchors.left: parent.left
+                                                anchors.leftMargin: 5
+                                                anchors.top: rec01_08.bottom
+                                                anchors.topMargin: 5
+                                                height: text01_09.text <= inputkolopor.currentText ? combo_kol_podsh09.height+20 : 0
+                                                width: rec01_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: text01_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: "8"
+                                                }
+                                            }
+                                            Rectangle {
+                                                id: rec02_09
+                                                visible: text01_09.text <= inputkolopor.currentText
+                                                anchors.top: rec01_09.top
+                                                anchors.left: rec01_09.right
+                                                anchors.leftMargin: 5
+                                                height: combo_kol_podsh09.height+20
+                                                width: rec02_01.width
+                                                color: "lightblue"
+                                                border.width: 1
+                                                border.color: "#3E65FF"
+                                                radius: 5
+                                                Text {
+                                                    id: combo_kol_podsh09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.verticalCenter: parent.verticalCenter
+                                                    anchors.left: parent.left
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    horizontalAlignment: TextInput.AlignHCenter
+                                                    maximumLineCount: 2
+                                                    font.pixelSize: 20
+                                                    wrapMode: Text.WordWrap
+                                                    color: "#3E65FF"
+                                                    text: ""
+                                                }
+                                            }
+                                                Rectangle {
+                                                    id: rec03_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    //anchors.topMargin: 5
+                                                    anchors.left: rec02_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+20
+                                                    width: rec03_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "#3E65FF"
+                                                    radius: 5
+                                                    Text {
+                                                        id: combo_obRU09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        horizontalAlignment: TextInput.AlignHCenter
+                                                        maximumLineCount: 2
+                                                        font.pixelSize: 20
+                                                        wrapMode: Text.WordWrap
+                                                        color: "#3E65FF"
+                                                        text: ""
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec04_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec03_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+20
+                                                    width: rec04_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "#3E65FF"
+                                                    radius: 5
+                                                    Text {
+                                                        id: combo_obEN09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        horizontalAlignment: TextInput.AlignHCenter
+                                                        maximumLineCount: 2
+                                                        font.pixelSize: 20
+                                                        wrapMode: Text.WordWrap
+                                                        color: "#3E65FF"
+                                                        text: ""
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec05_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec04_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+20
+                                                    width: rec05_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "#3E65FF"
+                                                    radius: 5
+                                                    Text {
+                                                        id: combo_rasp09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        horizontalAlignment: TextInput.AlignHCenter
+                                                        maximumLineCount: 2
+                                                        font.pixelSize: 20
+                                                        wrapMode: Text.WordWrap
+                                                        color: "#3E65FF"
+                                                        text: ""
+                                                    }
+                                                }
+                                                Rectangle {
+                                                    id: rec06_09
+                                                    visible: text01_09.text <= inputkolopor.currentText
+                                                    enabled: text01_09.text <= inputkolopor.currentText
+                                                    anchors.top: rec01_09.top
+                                                    anchors.left: rec05_09.right
+                                                    anchors.leftMargin: 5
+                                                    height: combo_kol_podsh09.height+20
+                                                    width: rec06_01.width
+                                                    color: "lightblue"
+                                                    border.width: 1
+                                                    border.color: "#3E65FF"
+                                                    radius: 5
+                                                    Text {
+                                                        id: combo_tip09
+                                                        visible: text01_09.text <= inputkolopor.currentText
+                                                        enabled: text01_09.text <= inputkolopor.currentText
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        anchors.left: parent.left
+                                                        anchors.leftMargin: 5
+                                                        anchors.right: parent.right
+                                                        anchors.rightMargin: 5
+                                                        horizontalAlignment: TextInput.AlignHCenter
+                                                        maximumLineCount: 2
+                                                        font.pixelSize: 20
+                                                        wrapMode: Text.WordWrap
+                                                        color: "#3E65FF"
+                                                        text: ""
+                                                    }
+                                                }
+                                                Button {
+                                                    id: but_calc8
+                                                    visible: combo_obRU09.text == "" ? false : true
+                                                    enabled: combo_obRU09.text == "" ? false : true
+                                                    anchors.left: rec06_09.right
+                                                    anchors.leftMargin: 5
+                                                    anchors.right: parent.right
+                                                    anchors.rightMargin: 5
+                                                    anchors.verticalCenter: rec01_09.verticalCenter
+                                                    highlighted: true
+                                                    Material.accent: Material.LightBlue
+                                                    Text {
+                                                        anchors.verticalCenter: parent.verticalCenter
+                                                        anchors.horizontalCenter: parent.horizontalCenter
+                                                        font.pixelSize: 20
+                                                        text: "Расчет"
+                                                    }
+                                                    onClicked: {
+                                                    }
+                                                }
             } //item3
             Item {
                 id: item4
@@ -4664,6 +6416,64 @@ Item {
         text_tempotkaz_ed.tex = text_tempotkaz_ed.tex.replace(".", ",")
         text_tempotkaz_red.tex = text_tempotkaz_red.tex.replace(".", ",")
         text_tempotkaz_meh.tex = text_tempotkaz_meh.tex.replace(".", ",")
+        qmlOpenBOpodsh()
+        inputkolopor.currentIndex0 = stackView.data_podsh[1]
+        if(1<=inputkolopor.currentIndex0){
+        combo_kol_podsh02.text = stackView.data_podsh1[1]
+        combo_obRU02.text = stackView.data_podsh1[2]
+        combo_rasp02.text = stackView.data_podsh1[3]
+        combo_tip02.text = stackView.data_podsh1[4]
+            combo_obEN02.text = stackView.data_podsh1[5]
+        }
+        if(2<=inputkolopor.currentIndex0){
+        combo_kol_podsh03.text = stackView.data_podsh2[1]
+        combo_obRU03.text = stackView.data_podsh2[2]
+        combo_rasp03.text = stackView.data_podsh2[3]
+        combo_tip03.text = stackView.data_podsh2[4]
+            combo_obEN03.text = stackView.data_podsh2[5]
+        }
+        if(3<=inputkolopor.currentIndex0){
+        combo_kol_podsh04.text = stackView.data_podsh3[1]
+        combo_obRU04.text = stackView.data_podsh3[2]
+        combo_rasp04.text = stackView.data_podsh3[3]
+        combo_tip04.text = stackView.data_podsh3[4]
+            combo_obEN04.text = stackView.data_podsh3[5]
+        }
+        if(4<=inputkolopor.currentIndex0){
+        combo_kol_podsh05.text = stackView.data_podsh4[1]
+        combo_obRU05.text = stackView.data_podsh4[2]
+        combo_rasp05.text = stackView.data_podsh4[3]
+        combo_tip05.text = stackView.data_podsh4[4]
+            combo_obEN05.text = stackView.data_podsh4[5]
+        }
+        if(5<=inputkolopor.currentIndex0){
+        combo_kol_podsh06.text = stackView.data_podsh5[1]
+        combo_obRU06.text = stackView.data_podsh5[2]
+        combo_rasp06.text = stackView.data_podsh5[3]
+        combo_tip06.text = stackView.data_podsh5[4]
+            combo_obEN06.text = stackView.data_podsh5[5]
+        }
+        if(6<=inputkolopor.currentIndex0){
+        combo_kol_podsh07.text = stackView.data_podsh6[1]
+        combo_obRU07.text = stackView.data_podsh6[2]
+        combo_rasp07.text = stackView.data_podsh6[3]
+        combo_tip07.text = stackView.data_podsh6[4]
+            combo_obEN07.text = stackView.data_podsh6[5]
+        }
+        if(7<=inputkolopor.currentIndex0){
+        combo_kol_podsh08.text = stackView.data_podsh7[1]
+        combo_obRU08.text = stackView.data_podsh7[2]
+        combo_rasp08.text = stackView.data_podsh7[3]
+        combo_tip08.text = stackView.data_podsh7[4]
+            combo_obEN08.text = stackView.data_podsh7[5]
+        }
+        if(8<=inputkolopor.currentIndex0){
+        combo_kol_podsh09.text = stackView.data_podsh8[1]
+        combo_obRU09.text = stackView.data_podsh8[2]
+        combo_rasp09.text = stackView.data_podsh8[3]
+        combo_tip09.text = stackView.data_podsh8[4]
+            combo_obEN09.text = stackView.data_podsh8[5]
+        }
         //mapper_izmer.addMapping(k2s2, (0x0100+5), "tex")        
     }
 

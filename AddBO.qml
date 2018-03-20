@@ -7,16 +7,6 @@ import QtQuick.Dialogs 1.2
 
 Item {
     id: item
-    objectName: "addBO"
-    property var data_podsh: [0]
-    property var data_podsh1: [0]
-    property var data_podsh2: [0]
-    property var data_podsh3: [0]
-    property var data_podsh4: [0]
-    property var data_podsh5: [0]
-    property var data_podsh6: [0]
-    property var data_podsh7: [0]
-    property var data_podsh8: [0]
     property string id1
     property string id2
     property string id3
@@ -5416,104 +5406,104 @@ footer: ToolBar {
         mapper.addMapping(textArea_doc, (0x0100+47), "text")
         mapper.addMapping(textArea_par, (0x0100+48), "text")
         qmlOpenBOpodsh()
-        inputkolopor.currentIndex0 = data_podsh[1]
+        inputkolopor.currentIndex0 = stackView.data_podsh[1]
         if(1<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh1[2]
+            stackView.obRU = stackView.data_podsh1[2]
             qmlFilterBearing1()
         combo_obRU02.model = model_podsh1
         combo_obEN02.model = model_podsh1
-            id1 = data_podsh1[0]
-        combo_kol_podsh02.currentIndex0 = data_podsh1[1]
-        combo_obRU02.currentIndex0 = data_podsh1[2]
-        combo_rasp02.currentIndex0 = data_podsh1[3]
-        combo_tip02.currentIndex0 = data_podsh1[4]
+            id1 = stackView.data_podsh1[0]
+        combo_kol_podsh02.currentIndex0 = stackView.data_podsh1[1]
+        combo_obRU02.currentIndex0 = stackView.data_podsh1[2]
+        combo_rasp02.currentIndex0 = stackView.data_podsh1[3]
+        combo_tip02.currentIndex0 = stackView.data_podsh1[4]
         }
         if(2<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh2[2]
+            stackView.obRU = stackView.data_podsh2[2]
             qmlFilterBearing2()
         combo_obRU03.model = model_podsh2
         combo_obEN03.model = model_podsh2
-            id2 = data_podsh2[0]
-        combo_kol_podsh03.currentIndex0 = data_podsh2[1]
-        combo_obRU03.currentIndex0 = data_podsh2[2]
-        combo_rasp03.currentIndex0 = data_podsh2[3]
-        combo_tip03.currentIndex0 = data_podsh2[4]
+            id2 = stackView.data_podsh2[0]
+        combo_kol_podsh03.currentIndex0 = stackView.data_podsh2[1]
+        combo_obRU03.currentIndex0 = stackView.data_podsh2[2]
+        combo_rasp03.currentIndex0 = stackView.data_podsh2[3]
+        combo_tip03.currentIndex0 = stackView.data_podsh2[4]
         }
         if(3<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh3[2]
+            stackView.obRU = stackView.data_podsh3[2]
             qmlFilterBearing3()
         combo_obRU04.model = model_podsh3
         combo_obEN04.model = model_podsh3
-            id3 = data_podsh3[0]
-        combo_kol_podsh04.currentIndex0 = data_podsh3[1]
-        combo_obRU04.currentIndex0 = data_podsh3[2]
-        combo_rasp04.currentIndex0 = data_podsh3[3]
-        combo_tip04.currentIndex0 = data_podsh3[4]
+            id3 = stackView.data_podsh3[0]
+        combo_kol_podsh04.currentIndex0 = stackView.data_podsh3[1]
+        combo_obRU04.currentIndex0 = stackView.data_podsh3[2]
+        combo_rasp04.currentIndex0 = stackView.data_podsh3[3]
+        combo_tip04.currentIndex0 = stackView.data_podsh3[4]
         }
         if(4<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh4[2]
+            stackView.obRU = stackView.data_podsh4[2]
             qmlFilterBearing4()
         combo_obRU05.model = model_podsh4
         combo_obEN05.model = model_podsh4
-            id4 = data_podsh4[0]
-        combo_kol_podsh05.currentIndex0 = data_podsh4[1]
-        combo_obRU05.currentIndex0 = data_podsh4[2]
-        combo_rasp05.currentIndex0 = data_podsh4[3]
-        combo_tip05.currentIndex0 = data_podsh4[4]
+            id4 = stackView.data_podsh4[0]
+        combo_kol_podsh05.currentIndex0 = stackView.data_podsh4[1]
+        combo_obRU05.currentIndex0 = stackView.data_podsh4[2]
+        combo_rasp05.currentIndex0 = stackView.data_podsh4[3]
+        combo_tip05.currentIndex0 = stackView.data_podsh4[4]
         }
         if(5<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh5[2]
+            stackView.obRU = stackView.data_podsh5[2]
             qmlFilterBearing5()
         combo_obRU06.model = model_podsh5
         combo_obEN06.model = model_podsh5
-            id5 = data_podsh5[0]
-        combo_kol_podsh06.currentIndex0 = data_podsh5[1]
-        combo_obRU06.currentIndex0 = data_podsh5[2]
-        combo_rasp06.currentIndex0 = data_podsh5[3]
-        combo_tip06.currentIndex0 = data_podsh5[4]
+            id5 = stackView.data_podsh5[0]
+        combo_kol_podsh06.currentIndex0 = stackView.data_podsh5[1]
+        combo_obRU06.currentIndex0 = stackView.data_podsh5[2]
+        combo_rasp06.currentIndex0 = stackView.data_podsh5[3]
+        combo_tip06.currentIndex0 = stackView.data_podsh5[4]
         }
         if(6<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh6[2]
+            stackView.obRU = stackView.data_podsh6[2]
             qmlFilterBearing6()
         combo_obRU07.model = model_podsh6
         combo_obEN07.model = model_podsh6
-            id6 = data_podsh6[0]
-        combo_kol_podsh07.currentIndex0 = data_podsh6[1]
-        combo_obRU07.currentIndex0 = data_podsh6[2]
-        combo_rasp07.currentIndex0 = data_podsh6[3]
-        combo_tip07.currentIndex0 = data_podsh6[4]
+            id6 = stackView.data_podsh6[0]
+        combo_kol_podsh07.currentIndex0 = stackView.data_podsh6[1]
+        combo_obRU07.currentIndex0 = stackView.data_podsh6[2]
+        combo_rasp07.currentIndex0 = stackView.data_podsh6[3]
+        combo_tip07.currentIndex0 = stackView.data_podsh6[4]
         }
         if(7<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh7[2]
+            stackView.obRU = stackView.data_podsh7[2]
             qmlFilterBearing7()
         combo_obRU08.model = model_podsh7
         combo_obEN08.model = model_podsh7
-            id7 = data_podsh7[0]
-        combo_kol_podsh08.currentIndex0 = data_podsh8[1]
-        combo_obRU08.currentIndex0 = data_podsh8[2]
-        combo_rasp08.currentIndex0 = data_podsh8[3]
-        combo_tip08.currentIndex0 = data_podsh8[4]
+            id7 = stackView.data_podsh7[0]
+        combo_kol_podsh08.currentIndex0 = stackView.data_podsh7[1]
+        combo_obRU08.currentIndex0 = stackView.data_podsh7[2]
+        combo_rasp08.currentIndex0 = stackView.data_podsh7[3]
+        combo_tip08.currentIndex0 = stackView.data_podsh7[4]
         }
         if(8<=inputkolopor.currentIndex0){
-            stackView.obRU = data_podsh8[2]
+            stackView.obRU = stackView.data_podsh8[2]
             qmlFilterBearing8()
         combo_obRU09.model = model_podsh8
         combo_obEN09.model = model_podsh8
-            id8 = data_podsh8[0]
-        combo_kol_podsh09.currentIndex0 = data_podsh8[1]
-        combo_obRU09.currentIndex0 = data_podsh8[2]
-        combo_rasp09.currentIndex0 = data_podsh8[3]
-        combo_tip09.currentIndex0 = data_podsh8[4]
+            id8 = stackView.data_podsh8[0]
+        combo_kol_podsh09.currentIndex0 = stackView.data_podsh8[1]
+        combo_obRU09.currentIndex0 = stackView.data_podsh8[2]
+        combo_rasp09.currentIndex0 = stackView.data_podsh8[3]
+        combo_tip09.currentIndex0 = stackView.data_podsh8[4]
         }
         console.log("inputkolopor.currentIndex0 ", inputkolopor.currentIndex0)
         tf_mosch.text = tf_mosch.text.replace(".", ",")
         //console.log("count =", mapper_podsh.count)
-        console.log("data_podsh[0] =", data_podsh1[0])
-        console.log("data_podsh[1] =", data_podsh1[1])
-        console.log("data_podsh[2] =", data_podsh1[2])
-        console.log("data_podsh[3] =", data_podsh1[3])
-        console.log("data_podsh[4] =", data_podsh1[4])
-        console.log("data_podsh[5] =", data_podsh1[5])
+        console.log("stackView.data_podsh[0] =", stackView.data_podsh1[0])
+        console.log("stackView.data_podsh[1] =", stackView.data_podsh1[1])
+        console.log("stackView.data_podsh[2] =", stackView.data_podsh1[2])
+        console.log("stackView.data_podsh[3] =", stackView.data_podsh1[3])
+        console.log("stackView.data_podsh[4] =", stackView.data_podsh1[4])
+        console.log("stackView.data_podsh[5] =", stackView.data_podsh1[5])
         stackView.like = true
     }
 
